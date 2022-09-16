@@ -30,7 +30,6 @@ import fourth.util.WebUtils;
 
 @Controller
 @SessionAttributes(names = {"user"})
-@RequestMapping("/cart")
 public class CartController {
 	
 	@Autowired
@@ -41,7 +40,7 @@ public class CartController {
 	
 	
 	
-	@GetMapping(path = "")
+	@GetMapping(path = "/cart")
 	public String cartList(Model m,HttpServletRequest request) {
 		MemberBean user = (MemberBean)m.getAttribute("user");
 		List<CartItem> cartList = cartService.cartList(user.getuserId());
@@ -52,8 +51,8 @@ public class CartController {
 	}
 
 	
-	@PostMapping(path = "/{courseID}")
-	public String addCart(Model m,@PathVariable("courseID") String courseID) throws SQLException {
+	@PostMapping(path = "/cartadd")
+	public String addCart(Model m, String courseID) throws SQLException {
 		MemberBean user = (MemberBean)m.getAttribute("user");
 		cartService.cartAdd(courseID,user.getuserId());
 		CourseBean cbean = cService.select(WebUtils.paseInt(courseID));
@@ -62,20 +61,20 @@ public class CartController {
 	}
 	
 	
-	@DeleteMapping(path = "{cartID}")
+	@DeleteMapping(path = "/cart/{cartID}")
 	public String deleteCart(@PathVariable("cartID") String cartID) {
 		cartService.cartDelete(cartID);
 		return "redirect:/cart";
 	}
 	
-	@PostMapping(path = "/clearCart")
+	@PostMapping(path = "/cart/clearCart")
 	public String clearCart(Model m) {
 		MemberBean user = (MemberBean)m.getAttribute("user");
 		cartService.cartClear(user.getuserId());
 		return "redirect:/cart";
 	}
 	
-	@GetMapping(path = "cartCount")
+	@GetMapping(path = "/cart/cartCount")
 	@ResponseBody
 	public String cartTotalCountPrice(Model m) throws IOException {
 		CartItem countPriceTotal = new CartItem();

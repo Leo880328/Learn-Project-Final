@@ -357,7 +357,8 @@ CourseBean courseBean = (CourseBean) request.getAttribute("cbean");
 										<!-- 										<div class="quantity"></div> -->
 										<!-- 										<button class="single_add_to_cart_button button">加入購物車</button> -->
 										<!-- 									</div> -->
-										<form action="cart/<%=courseBean.getCourse_id()%>" method="post">
+										<form action="cartadd" method="post">
+										<input type="hidden" name="courseID" value="<%=courseBean.getCourse_id()%>">>
 											<button class="single_add_to_cart_button button">加入購物車</button>
 										</form>
 <%-- 										<form action="cart/addCart/<%=courseBean.getCourse_id()%>>" method="post"> --%>
