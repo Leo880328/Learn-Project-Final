@@ -124,7 +124,8 @@
 
 
 					<div class="user__info" data-toggle="dropdown">
-						<img class="user__img" src="backend/demo/img/profile-pics/8.jpg"
+<%-- 					<img src="${mb.img}" width="150" height="100"> --%>
+						<img class="user__img" src="${sessionScope.user.img }"
 							alt="">
 
 					</div>

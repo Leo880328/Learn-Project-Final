@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,10 +26,10 @@ import fourth.service.MemberService;
 @Controller
 @SessionAttributes(names = { "user" })
 public class MemberController {
+
 	@Autowired
 	private MemberService memberService;
 
-	
 	// 一般會員查詢
 	@RequestMapping(path = "/user.controller", method = RequestMethod.GET)
 	public String userController() {
@@ -48,15 +50,13 @@ public class MemberController {
 		return "Login";
 	}
 
-	// 登入檢查
+	// 登入檢查    //**************************
 	@RequestMapping(path = "/checklogin.controller", method = RequestMethod.POST)
 	public String processAction(@RequestParam("account") String account, @RequestParam("password") String password,
 			Model m, SessionStatus status) {
 		Map<String, String> errors = new HashMap<String, String>();
 
 		m.addAttribute("errors", errors);
-		System.out.println(account);
-		System.out.println(password);
 		if (account == null || account.length() == 0) {
 		}
 		if (password == null || password.length() == 0) {
@@ -64,7 +64,7 @@ public class MemberController {
 		if (errors != null && !errors.isEmpty()) {
 			return "Login";
 		}
-		MemberBean user = memberService.checkLogin(account, password);
+		MemberBean user = memberService.checkLogin(account);
 		System.out.println("執行user");
 		System.out.println(user);
 		m.addAttribute("user", user);
@@ -89,37 +89,42 @@ public class MemberController {
 		return "Register";
 	}
 
-	// 註冊
+	// 註冊   ************************
 	@RequestMapping(path = "/newRegister", method = RequestMethod.POST)
-	public String newRegister(@ModelAttribute("register") MemberBean mb, BindingResult result, Model m, String account,
-			String password, String email) {
+	public String newRegister(@ModelAttribute("register") MemberBean memberBean, BindingResult result, Model m,
+			Object mb) {
 		HashMap<String, String> errors = new HashMap<String, String>();
 		m.addAttribute("errors", errors);
-		MemberBean memberBean = new MemberBean();
-		memberBean.setAccount(mb.getAccount());
-		memberBean.setPassword(mb.getPassword());
-		memberBean.setEmail(mb.getEmail());
+
+//		String bcEncode = new BCryptPasswordEncoder().encode(memberBean.getPassword());
+//		memberBean.setPassword(bcEncode);
 		memberBean.setStatus(1);
-		MemberBean checkRegister = memberService.checkRegister(account, password, email);
-		System.out.println("checkRegister: " + checkRegister);
-		if (checkRegister != null) {
-			errors.put("RegisterError", "<font color=red size=4 >已經註冊!!</font>");
-			return "Register";
-		}else {
-			
+//		memberBean.setImg(images/)
+
+//		MemberBean checkRegister = memberService.checkRegister(memberBean.getAccount(), memberBean.getPassword(),
+//				memberBean.getEmail());
+//		MemberBean checkRegister = memberService.checkRegister(memberBean.getEmail());
+//		System.out.println("checkRegister Email:" + checkRegister.getEmail());
+//		System.out.println("checkRegister Account:" + checkRegister.getAccount());
+//
+//		if (checkRegister.getEmail() != null) {
+//			errors.put("RegisterError", "<font color=red size=4 >信箱已經註冊!!</font>");
+//			return "Register";
+//		} else {
 			memberService.registerUser(memberBean);
-			System.out.println("註冊會員: " + memberBean);
-			m.addAttribute("register", mb);
-			
-		}
+//			m.addAttribute("register", mb);
+//		}
 		return "Login";
 	}
+//		if (checkRegister.getAccount() != null) {
+//			errors.put("RegisterError", "<font color=red size=4 >帳號已經註冊!!</font>");
+//			return "Register";
+//		}
 
 	// 查詢全部
 	@GetMapping("/memberList")
 	public String selectAllMembers(Model m) {
 		List<MemberBean> listMembers = memberService.selectAllMembers();
-		System.out.println("listmembers" + listMembers);
 		m.addAttribute("listMembers", listMembers);
 		return "MemberList";
 
@@ -141,8 +146,8 @@ public class MemberController {
 
 	// 找尋更新會員
 	@GetMapping("/showEditUser")
-	public String showEditUser(String account, Model m) {
-		MemberBean existingUser = memberService.selectUserByAccount(account);
+	public String showEditUser(int userId, Model m) {
+		MemberBean existingUser = memberService.selectUserById(userId);
 		m.addAttribute("mb", existingUser);
 		return "AddNewUser";
 	}
@@ -150,7 +155,6 @@ public class MemberController {
 	// 更新會員
 	@PostMapping("/updateUser")
 	public String updateUser(MemberBean memberBean) {
-		memberBean.setImg("images/" + memberBean.getImg());
 		memberService.updateUser(memberBean);
 		return "redirect:/memberList";
 	}
@@ -174,8 +178,8 @@ public class MemberController {
 
 	// 刪除會員
 	@GetMapping("/deleteUser")
-	public String deleteUser(@RequestParam("account") String account, Model m) {
-		memberService.deleteUser(account);
+	public String deleteUser(int userId) {
+		memberService.deleteUser(userId);
 		return "redirect:/memberList";
 	}
 
