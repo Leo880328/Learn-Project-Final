@@ -52,7 +52,8 @@
 				<p>${errors.RegisterError}</p>
 				<div class="button">
 					<input type="submit" name="signin" id="signin"
-						onclick="matchPassword()" value="註冊">
+						onclick="alert('註冊成功')" value="註冊">
+						
 				</div>
 				<div>
 					<button type="button" class="btn btn-primary " id="correct">一鍵輸入</button>

@@ -5549,7 +5549,7 @@ ul.list-products {
 }
 
 .teamo-contact-info .address .icon::before {
-    content: "\f041"
+    content: "\f073"
 }
 
 .teamo-contact-info .phone .icon::before {
@@ -5563,7 +5563,6 @@ ul.list-products {
 .teamo-contact-info .item .text {
     display: block;
     color: #ddd;
-    text-transform: capitalize;
     font-size: 14px;
     overflow: hidden
 }

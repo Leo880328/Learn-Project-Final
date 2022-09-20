@@ -1,5 +1,7 @@
 package fourth.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +52,7 @@ public class MemberController {
 		return "Login";
 	}
 
-	// 登入檢查    //**************************
+	// 登入檢查 //**************************
 	@RequestMapping(path = "/checklogin.controller", method = RequestMethod.POST)
 	public String processAction(@RequestParam("account") String account, @RequestParam("password") String password,
 			Model m, SessionStatus status) {
@@ -89,37 +91,44 @@ public class MemberController {
 		return "Register";
 	}
 
-	// 註冊   ************************
+	// 註冊 ************************
 	@RequestMapping(path = "/newRegister", method = RequestMethod.POST)
 	public String newRegister(@ModelAttribute("register") MemberBean memberBean, BindingResult result, Model m,
 			Object mb) {
 		HashMap<String, String> errors = new HashMap<String, String>();
 		m.addAttribute("errors", errors);
-
+		 String timeStamp = new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime());
 //		String bcEncode = new BCryptPasswordEncoder().encode(memberBean.getPassword());
 //		memberBean.setPassword(bcEncode);
 		memberBean.setStatus(1);
+		memberBean.setImg("images/user000.png");
+		memberBean.setJoinDate(timeStamp);
 //		memberBean.setImg(images/)
-
 //		MemberBean checkRegister = memberService.checkRegister(memberBean.getAccount(), memberBean.getPassword(),
 //				memberBean.getEmail());
-//		MemberBean checkRegister = memberService.checkRegister(memberBean.getEmail());
+		MemberBean checkRegister = memberService.checkRegister(memberBean.getEmail());
 //		System.out.println("checkRegister Email:" + checkRegister.getEmail());
+//		System.out.println(checkRegister);
 //		System.out.println("checkRegister Account:" + checkRegister.getAccount());
 //
-//		if (checkRegister.getEmail() != null) {
-//			errors.put("RegisterError", "<font color=red size=4 >信箱已經註冊!!</font>");
-//			return "Register";
-//		} else {
-			memberService.registerUser(memberBean);
-//			m.addAttribute("register", mb);
-//		}
-		return "Login";
-	}
-//		if (checkRegister.getAccount() != null) {
+		if (checkRegister != null) {
+
+			if (checkRegister.getEmail() != null) {
+				errors.put("RegisterError", "<font color=red size=4 >信箱已經註冊!!</font>");
+				return "Register";
+
+			}
+//		else if (checkRegister.getAccount() != null) {
 //			errors.put("RegisterError", "<font color=red size=4 >帳號已經註冊!!</font>");
 //			return "Register";
-//		}
+//		} 
+			
+		}
+		memberService.registerUser(memberBean);
+		m.addAttribute("register", mb);
+		
+		return "Login";
+	}
 
 	// 查詢全部
 	@GetMapping("/memberList")
@@ -183,4 +192,12 @@ public class MemberController {
 		return "redirect:/memberList";
 	}
 
+	
+	// 使用者自己更新資料
+	@PostMapping("/updateMyUser")
+	public String updateMyUser(MemberBean memberBean) {
+		memberService.updateUser(memberBean);
+		return "redirect:/user.controller";
+	}
+	
 }

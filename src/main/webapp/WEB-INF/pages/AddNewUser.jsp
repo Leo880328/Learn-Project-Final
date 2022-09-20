@@ -52,10 +52,11 @@
 	<hr>
 	<form action="<%=action%>" method="post"
 		onSubmit="return checkNull(this)">
-		<table class="tb" cellspacing="2" cellpadding="1" border="50" width="60%">
+		<table class="tb" cellspacing="2" cellpadding="1" border="50"
+			width="60%">
 
 			<c:if test="${mb != null}">
-				<input type="hidden" name="user_id" value="${mb.userId}" />
+				<input type="hidden" name="userId" value="${mb.userId}" />
 			</c:if>
 			<tr>
 				<td>暱稱:</td>
@@ -75,6 +76,7 @@
 			<tr>
 				<td>身分:</td>
 				<td><select name="status" title="身分">
+						<option>${mb.status}</option>
 						<option value="1" <c:if test="${mb.status=='1'}"></c:if>>學生</option>
 						<option value="2" <c:if test="${mb.status=='2'}"></c:if>>老師</option>
 						<option value="3" <c:if test="${mb.status=='3'}"></c:if>>管理員</option>
@@ -87,14 +89,15 @@
 			</tr>
 			<tr>
 				<td>大頭貼:</td>
-    <td><img src="${mb.img}'" id ="img" alt="" title="" width="200" height="150">
-     <input id="imgPath" type="hidden" name="img" title="大頭貼" value="${mb.img}">
-        <input onchange="previewImg(this)" type="file" title="大頭貼"> 
-    </td>
+				<td><img src="${mb.img}" id="img" alt="" title="" width="200"
+					height="150"> <input id="imgPath" type="hidden" name="img"
+					title="大頭貼" value="${mb.img}"> <input
+					onchange="previewImg(this)" type="file" title="大頭貼"></td>
 			</tr>
 			<tr>
 				<td>性別:</td>
 				<td><select name="sex">
+						<option>${mb.sex}</option>
 						<option value="男生" <c:if test="${mb.sex=='男生'}"></c:if>>男生</option>
 						<option value="女生" <c:if test="${mb.sex=='女生'}"></c:if>>女生</option>
 				</select></td>
@@ -127,18 +130,18 @@
 		</div>
 	</form>
 	<script>
-function previewImg(element) {
+		function previewImg(element) {
 
-    let file = element.files[0];
-    let img = element.parentElement.querySelector("#img");
-    let imgPath = element.parentElement.querySelector("#imgPath");
-    if (file) {
-     img.src = URL.createObjectURL(file);
-     imgPath.value = "images/"+file.name;
-    }
-   
-}
-</script>
+			let file = element.files[0];
+			let img = element.parentElement.querySelector("#img");
+			let imgPath = element.parentElement.querySelector("#imgPath");
+			if (file) {
+				img.src = URL.createObjectURL(file);
+				imgPath.value = "images/" + file.name;
+			}
+
+		}
+	</script>
 	<script type="text/javascript">
 		function checkNull(form) {
 			for (i = 0; i < form.length; i++) {

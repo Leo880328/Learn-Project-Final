@@ -12,32 +12,9 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" type="image/x-icon"
-	href="assets/images/favicon.png" />
-<link
-	href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="assets/css/font-awesome.min.css">
-<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-<link rel="stylesheet" href="assets/css/animate.min.css">
-<link rel="stylesheet" href="assets/css/jquery-ui.css">
-<link rel="stylesheet" href="assets/css/slick.css">
-<link rel="stylesheet" href="assets/css/chosen.min.css">
-<link rel="stylesheet" href="assets/css/pe-icon-7-stroke.css">
-<link rel="stylesheet" href="assets/css/magnific-popup.min.css">
-<link rel="stylesheet" href="assets/css/lightbox.min.css">
-<link rel="stylesheet"
-	href="assets/js/fancybox/source/jquery.fancybox.css">
-<link rel="stylesheet" href="assets/css/jquery.scrollbar.min.css">
-<link rel="stylesheet" href="assets/css/mobile-menu.css">
-<link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css">
-<link rel="stylesheet" href="assets/css/style.css">
+
 <style>
-.teamo-google-maps {
+#teamo-google-maps {
 	min-height: 360px;
 }
 </style>
@@ -86,9 +63,21 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 							<div class="col-lg-8 no-padding">
 								<div class="form-message">
 									<h2 class="title">我的檔案</h2>
-									<form action="#" class="teamo-contact-fom">
+									<form action="updateMyUser" method="post"
+										class="teamo-contact-fom">
 										<div class="row">
 											<div class="col-sm-6">
+												<%
+												if (memberBean.getNick() == null) {
+													memberBean.setNick("");
+												}
+												if (memberBean.getName() == null) {
+													memberBean.setName("");
+												}
+												if (memberBean.getCellphone() == null) {
+													memberBean.setCellphone("");
+												}
+												%>
 												<p>
 													<span class="form-label">暱稱</span><span
 														class="form-control-wrap "><input title="暱稱"
@@ -149,36 +138,50 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 										</div>
 										<p>
 											<span class="form-label">大頭貼 </span><span
-												class="wpcf7-form-control-wrap "><img id="img_zoom"
-											data-zoom-image="<%=memberBean.getImg()%>"
-											src="<%=memberBean.getImg()%>" alt="img"><a
-											href="#" class="btn-zoom open_qv"><i class="fa fa-search"
-											aria-hidden="true"></i></a></span>
+												class="wpcf7-form-control-wrap "><img id="img"
+												data-zoom-image="<%=memberBean.getImg()%>"
+												src="<%=memberBean.getImg()%>" alt="img" width="250px"
+												height="250px"><a href="#" class="btn-zoom open_qv"><i
+													class="fa fa-search" aria-hidden="true"></i></a><input
+												id="imgPath" type="hidden" name="img" title="大頭貼"
+												value="<%=memberBean.getImg()%>"> <input
+												onchange="previewImg(this)" type="file" title="大頭貼"></span>
 										</p>
+										<input type="hidden" title="密碼" name="password" maxlength="20"
+											value='<%=memberBean.getPassword()%>' />
+											<input type="hidden" name="userId" value="<%=memberBean.getuserId()%>" />
+											<input type="hidden" name="joinDate" value="<%=memberBean.getJoinDate()%>" />
+		
+
+
 										<p>
 											<input type="submit" value="更改資料"
 												class="form-control-submit button-submit">
 										</p>
-									</form>
+										<!-- 									</form> -->
 								</div>
 							</div>
 							<div class="col-lg-4 no-padding">
 								<div class="form-contact-information">
-									<form action="#" class="teamo-contact-info">
+									<div class="teamo-contact-info">
 										<h2 class="title"></h2>
 										<div class="info">
 											<div class="item phone">
-												<span class="icon"></span><span class="text"><%=memberBean.getCellphone()%></span>
+												<span class="icon"></span><span class="text"><input
+													title="cellphone" type="text" name="cellphone" size="40"
+													value='<%=memberBean.getCellphone()%>'></span>
 											</div>
 											<div class="item email">
-												<span class="icon"></span><span class="text"><%=memberBean.getEmail()%></span>
+												<span class="icon"></span><span class="text" id="text"><input
+													title="email" type="text" name="email" size="40"
+													value='<%=memberBean.getEmail()%>'></span>
 											</div>
 											<div class="item address">
 												<span class="icon"></span><span class="text"><%=memberBean.getJoinDate()%></span>
 											</div>
-											
-											
-											
+
+
+
 										</div>
 										<div class="socials">
 											<a href="#" class="social-item" target="_blank"><span
@@ -188,7 +191,8 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 												class="social-item" target="_blank"><span
 												class="icon fa fa-instagram"></span></a>
 										</div>
-									</form>
+										</form>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -197,125 +201,19 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 			</div>
 		</div>
 	</div>
-	<!-- <footer class="footer style7">
-        <div class="container">
-            <div class="container-wapper">
-                <div class="row">
-                    <div class="box-footer col-xs-12 col-sm-4 col-md-4 col-lg-4 hidden-sm hidden-md hidden-lg">
-                        <div class="teamo-newsletter style1">
-                            <div class="newsletter-head">
-                                <h3 class="title">Newsletter</h3>
-                            </div>
-                            <div class="newsletter-form-wrap">
-                                <div class="list">Sign up for our free video course and <br />urban garden inspiration
-                                </div><input type="email" class="input-text email email-newsletter"
-                                    placeholder="Your email letter"><button
-                                    class="button btn-submit submit-newsletter">SUBSCRIBE</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-footer col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                        <div class="teamo-custommenu default">
-                            <h2 class="widgettitle">Quick Menu</h2>
-                            <ul class="menu">
-                                <li class="menu-item"><a href="#">New arrivals</a></li>
-                                <li class="menu-item"><a href="#">Life style</a></li>
-                                <li class="menu-item"><a href="#">Cacti</a></li>
-                                <li class="menu-item"><a href="#">Palms</a></li>
-                                <li class="menu-item"><a href="#">Ferns</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="box-footer col-xs-12 col-sm-4 col-md-4 col-lg-4 hidden-xs">
-                        <div class="teamo-newsletter style1">
-                            <div class="newsletter-head">
-                                <h3 class="title">Newsletter</h3>
-                            </div>
-                            <div class="newsletter-form-wrap">
-                                <div class="list">Sign up for our free video course and <br />urban garden inspiration
-                                </div><input type="email" class="input-text email email-newsletter"
-                                    placeholder="Your email letter"><button
-                                    class="button btn-submit submit-newsletter">SUBSCRIBE</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-footer col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                        <div class="teamo-custommenu default">
-                            <h2 class="widgettitle">Information</h2>
-                            <ul class="menu">
-                                <li class="menu-item"><a href="#">FAQs</a></li>
-                                <li class="menu-item"><a href="#">Track Order</a></li>
-                                <li class="menu-item"><a href="#">Delivery</a></li>
-                                <li class="menu-item"><a href="#">Contact Us</a></li>
-                                <li class="menu-item"><a href="#">Return</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-end">
-                    <div class="row">
-                        <div class="col-sm-12 col-xs-12">
-                            <div class="teamo-socials">
-                                <ul class="socials">
-                                    <li><a href="#" class="social-item" target="_blank"><i
-                                                class="icon fa fa-facebook"></i></a></li>
-                                    <li><a href="#" class="social-item" target="_blank"><i
-                                                class="icon fa fa-twitter"></i></a></li>
-                                    <li><a href="#" class="social-item" target="_blank"><i
-                                                class="icon fa fa-instagram"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="coppyright">Copyright © 2020 <a href="http://www.bootstrapmb.com/">Teamo</a>.
-                                All rights reserved </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer> -->
-	<div class="footer-device-mobile">
-		<div class="wapper">
-			<div class="footer-device-mobile-item device-home">
-				<a href="index.html"><span class="icon"><i
-						class="fa fa-home" aria-hidden="true"></i></span>Home </a>
-			</div>
-			<div class="footer-device-mobile-item device-home device-wishlist">
-				<a href="#"><span class="icon"><i class="fa fa-heart"
-						aria-hidden="true"></i></span>Wishlist </a>
-			</div>
-			<div class="footer-device-mobile-item device-home device-cart">
-				<a href="#"><span class="icon"><i
-						class="fa fa-shopping-basket" aria-hidden="true"></i><span
-						class="count-icon">0 </span></span><span class="text">Cart</span></a>
-			</div>
-			<div class="footer-device-mobile-item device-home device-user">
-				<a href="#"><span class="icon"><i class="fa fa-user"
-						aria-hidden="true"></i></span>Account </a>
-			</div>
-		</div>
-	</div>
-	<a href="#" class="backtotop"><i class="fa fa-angle-double-up"></i></a>
-	<script src="assets/js/jquery-1.12.4.min.js"></script>
-	<script src="assets/js/jquery.plugin-countdown.min.js"></script>
-	<script src="assets/js/jquery-countdown.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/owl.carousel.min.js"></script>
-	<script src="assets/js/magnific-popup.min.js"></script>
-	<script src="assets/js/isotope.min.js"></script>
-	<script src="assets/js/jquery.scrollbar.min.js"></script>
-	<script src="assets/js/jquery-ui.min.js"></script>
-	<script src="assets/js/mobile-menu.js"></script>
-	<script src="assets/js/chosen.min.js"></script>
-	<script src="assets/js/slick.js"></script>
-	<script src="assets/js/jquery.elevateZoom.min.js"></script>
-	<script src="assets/js/jquery.actual.min.js"></script>
-	<script src="assets/js/fancybox/source/jquery.fancybox.js"></script>
-	<script src="assets/js/lightbox.min.js"></script>
-	<script src="assets/js/owl.thumbs.min.js"></script>
-	<script src="assets/js/jquery.scrollbar.min.js"></script>
-	<script
-		src='http://www.google.cn/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script>
-	<script src="assets/js/frontend-plugin.js"></script>
+	<script>
+		function previewImg(element) {
+
+			let file = element.files[0];
+			let img = element.parentElement.querySelector("#img");
+			let imgPath = element.parentElement.querySelector("#imgPath");
+			if (file) {
+				img.src = URL.createObjectURL(file);
+				imgPath.value = "images/" + file.name;
+			}
+
+		}
+	</script>
 </body>
 <jsp:include page="Footer.jsp" />
 </html>

@@ -10,8 +10,9 @@ import fourth.bean.MemberBean;
 
 public interface MemberRepository extends JpaRepository<MemberBean, Integer> {
 
-//	@Query(value = "from MemberBean where account and password and email  ")
+//	@Query(value = "from MemberBean where account =?1 and password =?2 and email=?3  ")
 //	MemberBean checkRegister(String account,String password, String email);
+	
 	MemberBean findByEmail(String email);
 
 	MemberBean findByAccount(String account);
