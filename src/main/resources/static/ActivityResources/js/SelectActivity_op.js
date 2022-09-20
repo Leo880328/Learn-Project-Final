@@ -15,7 +15,6 @@ function selectAll() {
         success: function (res) {
 
             console.log(Array.isArray(res));
-            // activityArray = JSON.parse(res);
             activityArray = res;
             $("#join").empty();
             activityArray.forEach(function (activity, index, array) {

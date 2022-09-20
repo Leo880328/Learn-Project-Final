@@ -8,6 +8,7 @@ let activityBean = {
     imgPath: "",
     base64: ""
 }
+
 $().ready(
     // 取直並將activityBean送出等待回應
     $("#save").click(function () {
