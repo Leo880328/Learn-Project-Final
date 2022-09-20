@@ -17,6 +17,7 @@ import fourth.bean.ExamBean;
 import fourth.bean.ExamSubBean;
 import fourth.dao.ExamDao;
 import fourth.dao.ExamDaoInterface;
+import fourth.dao.ExamQuesRepository;
 import fourth.dao.ExamRepository;
 import fourth.util.ExamUtil;
 
@@ -24,8 +25,9 @@ import fourth.util.ExamUtil;
 @Transactional
 public class ExamService  {
 	
+	
 	@Autowired
-	private ExamDao examDao;
+	private ExamQuesRepository examQuRes;
 	
 	@Autowired
 	private ExamRepository examRes;
@@ -116,9 +118,9 @@ public class ExamService  {
 	public List<ExamQuesBean> selectQu(String subString,String eduString){
 		
 		
-		Integer subIdx = ExamUtil.getSubIdx(subString);
-		Integer eduIdx = ExamUtil.getEduIdx(eduString);
-		return examDao.selectQu(subIdx,eduIdx);
+		List<ExamQuesBean> examQuesList = examQuRes.findQues(1,1);
+
+		return examQuesList;
 		
 	}
 	

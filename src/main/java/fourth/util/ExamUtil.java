@@ -1,6 +1,7 @@
 package fourth.util;
 
 import java.util.Arrays;
+import java.util.Random;
 
 
 public class ExamUtil {
@@ -46,6 +47,35 @@ public class ExamUtil {
 		
 		return true;
 	}
+	
+//	public static void RandList(Integer NumOfRan) {
+//		
+//		int[] nums = new int[NumOfRan];
+//		int lucky;
+//		
+//		for (int i = 0; i < nums.length; i++) {
+//			
+//			do {
+//				lucky = (int) (Math.random() * 7) + 1;
+//			} while (isExist(nums, lucky));
+//			nums[i] = lucky;
+//			
+//		}
+//		
+//		for (int i : nums) {
+//			System.out.print(i + " ");
+//		}
+//		
+//	}
+//	
+//	private static boolean isExist(int[] array, int key) {
+//		for (int i = 0; i < array.length; i++) {
+//			if (array[i] == key) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 		
 	
 //	System.out.println("科目"+ExamData.getSubject()+"程度"+ExamData.getEducation());

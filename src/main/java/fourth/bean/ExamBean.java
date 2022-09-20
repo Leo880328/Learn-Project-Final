@@ -39,9 +39,11 @@ public class ExamBean implements Serializable
 	@Column(name = "examname")
     private String examName;
 
-	@Column(name = "examdate")	
-    private Date examdate;
+	@Column(name = "establishdate")	
+    private Date establishdate;
 	
+	@Column(name = "exampic")	
+	private String examPic;
 	
 	@Override
 	public String toString() {

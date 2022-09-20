@@ -18,4 +18,6 @@ public interface ExamRepository extends JpaRepository<ExamBean, Integer> {
 		
 //	public List<ExamBean> findBySubject_subjectIdAndEducation_educationId(Integer subjectId,Integer educationId);
 	public List<ExamBean> findBySubject_subjectNameAndEducation_educationName(String subName,String eduName);
+	
+
 }

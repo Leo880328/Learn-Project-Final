@@ -12,6 +12,8 @@
 	<jsp:include page="Header.jsp" />
 	<%
 	List<ExamQuesBean> theQuestable =(List<ExamQuesBean>) session.getAttribute("examQuTable");
+	
+// 	String[] answer = new String[7];
 	%>
 
 	<div>
@@ -35,8 +37,12 @@
 						<input type="radio" name="answer<%=i%>" id="" value="D">D.${que.optD}
 	                </td>
 	            </tr>
-	            </c:forEach>
+				
+				
 
+	            </c:forEach>
+				
+				
 	            <tr>
 	                <td>
 	                    <center>

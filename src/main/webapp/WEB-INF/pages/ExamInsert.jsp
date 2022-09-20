@@ -68,6 +68,12 @@
             </tr>
             <tr>
                 <td>
+                    <label>圖片:</label>
+                    <input type="file" name="myfile" id="">
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <center>
                         <input type="submit" name="todo" value="insert" onclick="if( !(confirm('確認新增?') ) ) return false">
                     </center>

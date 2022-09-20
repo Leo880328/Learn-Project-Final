@@ -2,8 +2,11 @@ package fourth.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fourth.bean.ExamBean;
 import fourth.bean.ExamQuesBean;
+import fourth.bean.MemberBean;
 import fourth.dao.ExamDaoInterface;
 import fourth.service.ExamService;
 import fourth.util.ExamUtil;
@@ -24,16 +28,26 @@ import fourth.util.ExamUtil;
 
 //	/ExamMainView
 @Controller
-@SessionAttributes(names = {"examQuTable"})
+@SessionAttributes(names = {"examQuTable","user"})
 public class ExamController {
 	
 	@Autowired
 	private ExamService examService;
 	
 	@GetMapping("/firstExamController")
-	public String entrance() {
-		
-		String nextPage="Exam";
+	public String entrance(Model m) {
+		MemberBean user = (MemberBean)m.getAttribute("user");
+		user.getStatus();
+		String nextPage = "";
+		if (user.getStatus()==3) {
+			
+			nextPage="Exam";
+			
+		}else {
+			
+			nextPage="ExamMember";
+			
+		}
 		
 		return nextPage;
 	}
@@ -44,7 +58,7 @@ public class ExamController {
 			,@RequestParam(defaultValue = "") String quSubject,@RequestParam(defaultValue = "") String quEducation
 			,@RequestParam(defaultValue = "") String subject,@RequestParam(defaultValue = "") String education
 			,@RequestParam(defaultValue = "") String examName,@RequestParam(defaultValue = "") String examDate
-			,@RequestParam(defaultValue = "") String examID) {
+			,@RequestParam(defaultValue = "") String examID,@RequestParam(defaultValue = "") List<String> answerList, HttpServletRequest request) {
 		
 		String nextPage="Exam";
 		List<ExamBean> theExamTable= new ArrayList<ExamBean>();
@@ -118,26 +132,26 @@ public class ExamController {
 				System.err.println("答案為"+m12.get(i).getQuesAnswer());
 			}
 			
-//			int ctCount =0;
-//			//故意多宣告一個陣列長度，讓答案陣列的i與答案參數的i互相相等
-//			String[] guAnswer = new String[11];
-//			
-//			String[] realAnswer = {"0","A","A","A","A","A","A","A","A","A","A"};
-//			//讀取答案
-//			for(int i=1;i<=2;i++) {
-////				guAnswer[i] = request.getParameter("answer"+i);
-//				System.out.println(i+"答案"+guAnswer[i]);
-////				if (guAnswer[i].equals(realAnswer[i]) ) {
-////					ctCount++;
-////				}
-//			}
-//			
-////			System.out.println("答對"+ctCount+"題");
-//			
-//			
-//				
-//			nextPage = "Exam";	
-//			
+
+			int ctCount =0;
+//			//故意多宣告一個陣列長度，讓答案陣列的i與答案參數的i互相相等，後面getParameter比較方便
+			String[] guAnswer = new String[8];
+			
+			//讀取答案
+			for(int i=1;i<= m12.size();i++) {
+				guAnswer[i] = request.getParameter("answer"+i);
+				System.err.println(i+"答案"+guAnswer[i]);
+				if (guAnswer[i].equals(m12.get(i-1).getQuesAnswer()) ) {
+					ctCount++;
+				}
+			}		
+			System.out.println("答對"+ctCount+"題");
+			
+			m.addAttribute("examResult", ctCount);
+			
+			nextPage = "ExamShowScore";	
+			
+			System.out.println(nextPage);
 		}
 
 		
