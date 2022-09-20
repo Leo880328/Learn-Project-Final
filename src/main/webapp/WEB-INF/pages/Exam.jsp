@@ -70,6 +70,7 @@
 				</tr>
 				<tr>
 					<th>項次</th>
+					<th>圖片</th>
 					<th>科目</th>
 					<th>程度</th>
 					<th>名稱</th>
@@ -95,23 +96,20 @@
 			<tr>
 				<%--                 <td><input type="checkbox" name="examTableIndex" value="<%= i %>"></td> --%>
 				<td><%= i+1 %></td>
-<%-- 				<td><%= examTable.get(i).getExamID() %></td> --%>
+				<td><img src="<%=examTable.get(i).getExamPic()%>" alt="" title="" width="150" height="150"></td>
 				<td><%= examTable.get(i).getSubject().getSubjectName() %></td>
 				<td><%= examTable.get(i).getEducation().getEducationName() %></td>
 				<td><%= examTable.get(i).getExamName() %></td>
-<%-- 				<td><%= examTable.get(i).getExamdate() %></td> --%>
 				<td><%= dateToStr %></td>
 				<form action="ExamController" method="post">
 					<input type="hidden" name="examID" value="<%= examTable.get(i).getExamID() %>"> 
 					<input type="hidden" name="subject" value="<%= examTable.get(i).getSubject().getSubjectName() %>">
 					<input type="hidden" name="education" value="<%= examTable.get(i).getEducation().getEducationName() %>"> 
 					<input type="hidden" name="examName" value="<%= examTable.get(i).getExamName()%>"> 
-<%-- 					<input type="hidden" name="examDate" value="<%= examTable.get(i).getExamdate()%>"> --%>
 					<input type="hidden" name="examDate" value="<%= dateToStr%>">
 				<td><input type="submit" name="todo" value="delete" onclick="if( !(confirm('確認刪除?') ) ) return false"></td>
 				<td><input type="submit" name="todo" value="update"> </td>
 				<td><input type="submit" name="todo" value="test"></td>			
-<%-- 				<td><a href="ExamUpdate.jsp?UpIndex=<%= i %>&examID=<%= examTable.get(i).getExamID() %>"><button type="button" value="Update">Update</button></a></td> --%>
 				</form>
 			</tr>
 		</tbody>

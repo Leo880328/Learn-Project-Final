@@ -36,7 +36,8 @@
     <%
 	String warn =(String) request.getAttribute("warn");
 	%>
-    <form action="InsUpController" method="post" onsubmit="return check()">
+    <form action="InsUpController" method="post" enctype="multipart/form-data" onsubmit="return check()">
+    
         <table class="tb">
             <tr>
                 <td>

@@ -1,5 +1,7 @@
 package fourth.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import fourth.bean.ExamBean;
 import fourth.bean.ExamQuesBean;
@@ -55,10 +57,18 @@ public class ExamController {
 	
 	@PostMapping("/ExamController")
 	public String processAction(@RequestParam("todo") String todo, Model m, Model examQuTable
+			
+			//考試相關
 			,@RequestParam(defaultValue = "") String quSubject,@RequestParam(defaultValue = "") String quEducation
+			
+			//考卷相關
 			,@RequestParam(defaultValue = "") String subject,@RequestParam(defaultValue = "") String education
 			,@RequestParam(defaultValue = "") String examName,@RequestParam(defaultValue = "") String examDate
-			,@RequestParam(defaultValue = "") String examID,@RequestParam(defaultValue = "") List<String> answerList, HttpServletRequest request) {
+			,@RequestParam(defaultValue = "") String examID,@RequestParam(defaultValue = "") String examPic
+			
+			//考試答題答案
+			,@RequestParam(defaultValue = "") List<String> answerList, HttpServletRequest request) {
+		
 		
 		String nextPage="Exam";
 		List<ExamBean> theExamTable= new ArrayList<ExamBean>();
@@ -163,7 +173,8 @@ public class ExamController {
 	public String processAction2(@RequestParam("todo") String todo,Model m
 			,@RequestParam(defaultValue = "") String subject,@RequestParam(defaultValue = "") String education
 			,@RequestParam(defaultValue = "") String examName,@RequestParam(defaultValue = "") String examDate
-			,@RequestParam(defaultValue = "") String examID) {
+			,@RequestParam(defaultValue = "") String examID,@RequestParam("myfile") MultipartFile myfile
+			,HttpServletRequest request) throws IllegalStateException, IOException {
 		
 		String nextPage="";
 		List<ExamBean> theExamTable= new ArrayList<ExamBean>();
@@ -180,8 +191,22 @@ public class ExamController {
 				
 			}else {
 				
-				examService.insert(subject, education, examName, examDate);
-				System.err.println("回到controller");
+				
+				//處理儲存路徑
+				String saveFileSubPath = "static/images";
+				String saveFileDir = request.getSession().getServletContext().getRealPath(saveFileSubPath).replaceFirst("webapp", "resources");
+//				System.err.println("saveFileDir"+saveFileDir);
+				
+				String fileName = myfile.getOriginalFilename();
+				
+				String fileLocalPath = "images/"+fileName;
+				File saveFilePath = new File(saveFileDir, fileName);
+//				
+//				
+				myfile.transferTo(saveFilePath);
+				examService.insert(subject, education, examName, examDate, fileLocalPath);
+				
+				
 				nextPage = "Exam";
 			}		
 			

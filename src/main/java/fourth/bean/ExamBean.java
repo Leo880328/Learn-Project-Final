@@ -24,107 +24,112 @@ public class ExamBean implements Serializable
 {		
 
 	@Id
-	@Column(name = "examid")
+	@Column(name = "EXAMID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer examID;
 	
 	@ManyToOne
-	@JoinColumn(name="subjectname")
+	@JoinColumn(name="SUBJECTNAME")
     private ExamSubBean subject;
 	
 	@ManyToOne
-	@JoinColumn(name="educationlevel")
+	@JoinColumn(name="EDUCATIONLEVEL")
     private ExamEduBean education;
 	
-	@Column(name = "examname")
+	@Column(name = "EXAMNAME")
     private String examName;
 
-	@Column(name = "establishdate")	
-    private Date establishdate;
+	@Column(name = "EXAMDATE")	
+    private Date examdate;
 	
-	@Column(name = "exampic")	
+	@Column(name = "EXAMPIC")	
 	private String examPic;
 	
-	@Override
-	public String toString() {
-		return " examID=" + examID +" subject=" + subject + ", education=" + 
-	education + ", examName="+ examName + ", examdate=" + examdate;
+	
+	
+	public ExamBean() {
+		super();
 	}
-	
-	
-	public ExamBean(){
-    }
 
-	
-	
-	public ExamBean(ExamSubBean subject, ExamEduBean education, String examName, Date examdate) {
+	public ExamBean(ExamSubBean subject, ExamEduBean education, String examName, Date examdate, String examPic) {
 		super();
 		this.subject = subject;
 		this.education = education;
 		this.examName = examName;
 		this.examdate = examdate;
+		this.examPic = examPic;
 	}
 
-
-	public ExamBean(Integer examID, ExamSubBean subject, ExamEduBean education, String examName, Date examdate) {
+	public ExamBean(Integer examID, ExamSubBean subject, ExamEduBean education, String examName, Date examdate,
+			String examPic) {
 		super();
 		this.examID = examID;
 		this.subject = subject;
 		this.education = education;
 		this.examName = examName;
 		this.examdate = examdate;
+		this.examPic = examPic;
 	}
 
+	@Override
+	public String toString() {
+		return "ExamBean [examID=" + examID + ", subject=" + subject + ", education=" + education + ", examName="
+				+ examName + ", examdate=" + examdate + ", examPic=" + examPic + "]";
+	}
 
-	
 	public Integer getExamID() {
 		return examID;
 	}
-	
-	
+
 	public void setExamID(Integer examID) {
 		this.examID = examID;
 	}
-
 
 	public ExamSubBean getSubject() {
 		return subject;
 	}
 
-
 	public void setSubject(ExamSubBean subject) {
 		this.subject = subject;
 	}
-
 
 	public ExamEduBean getEducation() {
 		return education;
 	}
 
-
 	public void setEducation(ExamEduBean education) {
 		this.education = education;
 	}
-
 
 	public String getExamName() {
 		return examName;
 	}
 
-
 	public void setExamName(String examName) {
 		this.examName = examName;
 	}
-
 
 	public Date getExamdate() {
 		return examdate;
 	}
 
-
 	public void setExamdate(Date examdate) {
 		this.examdate = examdate;
 	}
+
+	public String getExamPic() {
+		return examPic;
+	}
+
+	public void setExamPic(String examPic) {
+		this.examPic = examPic;
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

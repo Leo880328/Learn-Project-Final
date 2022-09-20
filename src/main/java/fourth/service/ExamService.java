@@ -33,7 +33,7 @@ public class ExamService  {
 	private ExamRepository examRes;
 	
 	//增加
-	public ExamBean insert(String subString,String eduString,String examName,String examDate){
+	public ExamBean insert(String subString,String eduString,String examName,String examDate,String exampic){
 		
 		
 		ExamSubBean subBean = new ExamSubBean(ExamUtil.getSubIdx(subString), subString);
@@ -45,18 +45,12 @@ public class ExamService  {
 		try {
 			
 			Date tDate = new SimpleDateFormat("yyyy-MM-dd").parse(examDate);
-			insBean = new ExamBean(subBean, eduBean, examName, tDate); 
+			insBean = new ExamBean(subBean, eduBean, examName, tDate, exampic); 
 //			insBean.setExamdate(tDate);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		
-		
-//		insBean.setSubject(subBean);
-//		insBean.setEducation(eduBean);
-//		insBean.setExamName(examName);
-		System.err.println("get什麼小");
-		System.err.println(insBean);
 		
 		return examRes.save(insBean);
 		
@@ -74,22 +68,17 @@ public class ExamService  {
 //		System.out.println(ExamUtil.getEduIdx(eduString)+eduString);
 		
 		ExamBean upBean = new ExamBean();
-		
-		try {
-			
-			Date tDate = new SimpleDateFormat("yyyy-MM-dd").parse(examDate);
-//			upBean = new ExamBean(subBean, eduBean, examName, tDate); 
-			upBean = new ExamBean(upId,subBean,eduBean,examName,tDate);
-			upBean.setExamdate(tDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-//		upBean.setExamID(upId);
-//		upBean.setSubject(subBean);
-//		upBean.setEducation(eduBean);
-//		upBean.setExamName(examName);
-//		System.err.println("service內");
-//		System.err.println(upBean);
+//		
+//		try {
+//			
+//			Date tDate = new SimpleDateFormat("yyyy-MM-dd").parse(examDate);
+////			upBean = new ExamBean(subBean, eduBean, examName, tDate); 
+//			upBean = new ExamBean(upId,subBean,eduBean,examName,tDate);
+//			upBean.setExamdate(tDate);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+
 		return examRes.save(upBean);
 		
 	}
@@ -113,7 +102,13 @@ public class ExamService  {
 		examRes.deleteById(examID);
 	}
 	
-	////////////////////考卷////////////////////考卷////////////////////考卷////////////////////考卷
+	
+	
+	
+	
+	
+	
+	////////////////////考試////////////////////考試////////////////////考試////////////////////考試
 	//查詢考試題目
 	public List<ExamQuesBean> selectQu(String subString,String eduString){
 		
@@ -125,6 +120,6 @@ public class ExamService  {
 	}
 	
 	
-	////////////////////考卷////////////////////考卷////////////////////考卷
+	////////////////////考試////////////////////考試////////////////////考試
 	
 }
