@@ -109,9 +109,8 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 											<div class="col-sm-6">
 												<p>
 													<span class="form-label">性別 </span><span
-														class="form-control-wrap "><select name="sex"
-														<%=memberBean.getSex()%>>
-															<option <%=memberBean.getSex()%>></option>
+														class="form-control-wrap "><select name="sex">
+															<option><%=memberBean.getSex()%></option>
 															<option value="男生">男生</option>
 															<option value="女生">女生</option>
 													</select></span>
@@ -122,9 +121,23 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 											<div class="col-sm-6">
 												<p>
 													<span class="form-label">身分</span><span
-														class="form-control-wrap "><input
-														title="your-phone" type="text" name="your-phone"
-														class="form-control form-control-phone"></span>
+														class="form-control-wrap "> <select name="status"
+														title="身分">
+															<c:if test="<%=memberBean.getStatus() == 1%>">
+																<option value="1">學生</option>
+																<option value="2">老師</option>
+															</c:if>
+															<c:if test="<%=memberBean.getStatus() == 2%>">
+																<option value="2">老師</option>
+																<option value="1">學生</option>
+															</c:if>
+															<c:if test="<%=memberBean.getStatus() == 3%>">
+																<option value="3">管理員</option>
+																<option value="2">老師</option>
+																<option value="1">學生</option>
+															</c:if>
+													</select>
+													</span>
 												</p>
 											</div>
 											<div class="col-sm-6">
@@ -148,15 +161,17 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 												onchange="previewImg(this)" type="file" title="大頭貼"></span>
 										</p>
 										<input type="hidden" title="密碼" name="password" maxlength="20"
-											value='<%=memberBean.getPassword()%>' />
-											<input type="hidden" name="userId" value="<%=memberBean.getuserId()%>" />
-											<input type="hidden" name="joinDate" value="<%=memberBean.getJoinDate()%>" />
-		
+											value='<%=memberBean.getPassword()%>' /> <input
+											type="hidden" name="userId"
+											value="<%=memberBean.getuserId()%>" /> <input type="hidden"
+											name="joinDate" value="<%=memberBean.getJoinDate()%>" />
+
 
 
 										<p>
 											<input type="submit" value="更改資料"
-												class="form-control-submit button-submit">
+												class="form-control-submit button-submit"
+												onclick="if( !(confirm('確認更改?') ) ) return false;alert('更改成功')">
 										</p>
 										<!-- 									</form> -->
 								</div>

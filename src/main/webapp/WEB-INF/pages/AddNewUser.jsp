@@ -60,70 +60,90 @@
 			</c:if>
 			<tr>
 				<td>暱稱:</td>
-				<td><input type="text" title="暱稱" name="nick" size="10"
+				<td><input type="text" title="暱稱" name="nick" size="10" id="nick"
 					maxlength="10" value="<c:out value='${mb.nick}' />" />(請輸入0~10個字)</td>
 			</tr>
 			<tr>
 				<td>帳號:</td>
-				<td><input type="text" title="帳號" name="account" maxlength="10"
+				<td><input type="text" title="帳號" name="account" maxlength="10" id="account"
 					value="<c:out value='${mb.account}' />" /></td>
 			</tr>
 			<tr>
 				<td>密碼:</td>
-				<td><input type="text" title="密碼" name="password"
+				<td><input type="text" title="密碼" name="password" id="password"
 					maxlength="20" value="<c:out value='${mb.password}' />" /></td>
 			</tr>
 			<tr>
 				<td>身分:</td>
-				<td><select name="status" title="身分">
-						<option>${mb.status}</option>
-						<option value="1" <c:if test="${mb.status=='1'}"></c:if>>學生</option>
-						<option value="2" <c:if test="${mb.status=='2'}"></c:if>>老師</option>
-						<option value="3" <c:if test="${mb.status=='3'}"></c:if>>管理員</option>
+				<td><select name="status" title="身分" id="status">
+						<c:if test="${mb.status==null}">
+							<option>請選擇</option>
+							<option value="1">學生</option>
+							<option value="2">老師</option>
+							<option value="3">管理員</option>
+						</c:if>
+						<c:if test="${mb.status=='1'}">
+							<option value="1">學生</option>
+							<option value="2">老師</option>
+							<option value="3">管理員</option>
+						</c:if>
+						<c:if test="${mb.status=='2'}">
+							<option value="2">老師</option>
+							<option value="1">學生</option>
+							<option value="3">管理員</option>
+						</c:if>
+						<c:if test="${mb.status=='3'}">
+							<option value="3">管理員</option>
+							<option value="1">學生</option>
+							<option value="2">老師</option>
+						</c:if>
 				</select></td>
 			</tr>
 			<tr>
 				<td>姓名:</td>
-				<td><input type="text" title="姓名" name="name" maxlength="10"
+				<td><input type="text" title="姓名" name="name" maxlength="10" id="name"
 					value="<c:out value='${mb.name}' />" /></td>
 			</tr>
 			<tr>
 				<td>大頭貼:</td>
-				<td><img src="${mb.img}" id="img" alt="" title="" width="200"
+				<td><img src="${mb.img}" id="img" alt="" title="" width="200" 
 					height="150"> <input id="imgPath" type="hidden" name="img"
 					title="大頭貼" value="${mb.img}"> <input
-					onchange="previewImg(this)" type="file" title="大頭貼"></td>
+					onchange="previewImg(this)" type="file" title="大頭貼" id="imgin"></td>
 			</tr>
 			<tr>
 				<td>性別:</td>
-				<td><select name="sex">
-						<option>${mb.sex}</option>
+				<td><select name="sex" id="sex">
+						<option >${mb.sex}</option>
 						<option value="男生" <c:if test="${mb.sex=='男生'}"></c:if>>男生</option>
 						<option value="女生" <c:if test="${mb.sex=='女生'}"></c:if>>女生</option>
 				</select></td>
 			</tr>
 			<tr>
 				<td>生日:</td>
-				<td><input type="date" title="生日" name="birthday"
+				<td><input type="date" title="生日" name="birthday" id="birthday"
 					value="<c:out value='${mb.birthday}' />" /></td>
 			</tr>
 			<tr>
 				<td>聯絡電話:</td>
-				<td><input type="text" title="聯絡電話" name="cellphone" size="20"
+				<td><input type="text" title="聯絡電話" name="cellphone" size="20" id="cellphone"
 					value="<c:out value='${mb.cellphone}' />" /></td>
 			</tr>
 			<tr>
 				<td>電子郵件:</td>
-				<td><input type="text" title="電子郵件" name="email" size="20"
-					maxlength="100" value="<c:out value='${mb.email}' />" /></td>
+				<td><input type="text" title="電子郵件" name="email" size="100" id="email"
+					maxlength="200" value="<c:out value='${mb.email}' />" /></td>
 			</tr>
 			<tr>
 				<td>加入時間:</td>
-				<td><input type="date" title="加入時間" name="joinDate" size="50"
+				<td><input type="date" title="加入時間" name="joinDate" size="50" id="joinDate"
 					maxlength="20" value="<c:out value='${mb.joinDate}' />" /></td>
 			</tr>
 
 		</table>
+		<div align="center">
+			<button type="button" class="btn btn-primary " id="correct">一鍵輸入</button>
+		</div>
 		<br>
 		<div align="center">
 			<input type="submit" value="儲存" />
@@ -142,17 +162,41 @@
 
 		}
 	</script>
-	<script type="text/javascript">
-		function checkNull(form) {
-			for (i = 0; i < form.length; i++) {
-				if (form.elements[i].value == "") {
-					alert("【 " + form.elements[i].title + " 】" + "不能為空!!!");
-					form.elements[i].focus(); //當前元素獲取焦點
-					return false;
-				}
-			}
-		}
+	<script>
+		$(function() {
+			$('#correct').click(function() {
+				$('#nick').val("smalllucy");
+				$('#account').val("lucy");
+				$('#password').val("lucy");
+				$('#status').val("2");
+				$('#name').val("Lucu Wang");
+				$('#imgin').val("images/user000.png");
+				$('#sex').val("女生");
+				$('#birthday').val("1999-03-02");
+				$('#cellphone').val("0922404678");
+				$('#email').val("lucy@gmail.com");
+				$('#joinDate').val("2022-09-21");
+			})
+		})
 	</script>
 
+
+	<script type="text/javascript">
+		function checkNull(form) {
+			if (form.account.value == "") {
+				alert("【 " + form.account.title + " 】" + "不能為空!!!");
+				return false;
+			}
+			if (form.password.value == "") {
+				alert("【 " + form.password.title + " 】" + "不能為空!!!");
+				return false;
+			}
+			if (form.email.value == "") {
+				alert("【 " + form.email.title + " 】" + "不能為空!!!");
+				return false;
+			}
+
+		}
+	</script>
 </body>
 </html>

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import fourth.bean.MemberBean;
 import fourth.dao.MemberRepository;
 //import fourth.exception.UserNotFoundException;
+import fourth.exception.UserNotFoundException;
 
 @Service
 @Transactional
@@ -23,8 +24,7 @@ public class MemberService {
 	@Autowired
 	private MemberRepository memberRepository;
 
-	
-	//註冊驗證
+	// 註冊驗證
 //	public MemberBean checkRegister(String account, String password, String email) {
 //		return memberRepository.checkRegister(account, password, email);
 //	}

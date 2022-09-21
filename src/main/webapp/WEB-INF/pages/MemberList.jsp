@@ -8,6 +8,14 @@
 <head>
 <meta charset="UTF-8">
 <title>會員後台</title>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<script src="https://code.jquery.com/jquery-3.6.1.js"
+	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+	crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
 <link rel="shortcut icon" type="image/x-icon"
 	href="assets/images/smalllogo.png" />
 <style>
@@ -20,6 +28,7 @@
 	table-layout: fixed;
 }
 </style>
+
 </head>
 <body>
 	<jsp:include page="BackendHeader.jsp" />
@@ -43,14 +52,14 @@
 		<form action="queryAccount" method="post">
 			<label> 帳號查詢 : <input type="text" name="keyword_account">
 			</label> <input type="submit" name="query" value="查詢">
-				<p>${errorMsgMap.QueryError}</p>
+			<p>${errorMsgMap.QueryError}</p>
 		</form>
 	</div>
 	<hr>
 	<div>
 		<h3>會員清單</h3>
 	</div>
-	<table class='tb' border='1'>
+	<table class='tb' border='1' id="member">
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -102,6 +111,10 @@
 			</tbody>
 		</c:forEach>
 	</table>
-
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#member').DataTable();
+		});
+	</script>
 </body>
 </html>
