@@ -38,7 +38,7 @@
 	String warn =(String) request.getAttribute("warn");
 	%>
 	<div class="divform">
-    <form action="InsUpController" method="post" onsubmit="return check()">
+    <form action="InsUpController" method="post" enctype="multipart/form-data" onsubmit="return check()">
     
         <table class="tb">
             <tr>
@@ -78,7 +78,16 @@
                 </td>
                 <td>
                 	${memAttribute.examDate}
-                	<span class="alert" id="spExamDate"></span>
+<!--                 	<span class="alert" id="spExamDate"></span> -->
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>圖片:</label>
+                    <input type="file" name="myfile" id="">
+                </td>
+                <td>
+                    ${memAttribute.examPic}
                 </td>
             </tr>
             <tr>

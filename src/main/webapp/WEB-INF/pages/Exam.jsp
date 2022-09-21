@@ -107,6 +107,7 @@
 					<input type="hidden" name="education" value="<%= examTable.get(i).getEducation().getEducationName() %>"> 
 					<input type="hidden" name="examName" value="<%= examTable.get(i).getExamName()%>"> 
 					<input type="hidden" name="examDate" value="<%= dateToStr%>">
+					<input type="hidden" name="examPic" value="<%= examTable.get(i).getExamPic() %>">
 				<td><input type="submit" name="todo" value="delete" onclick="if( !(confirm('確認刪除?') ) ) return false"></td>
 				<td><input type="submit" name="todo" value="update"> </td>
 				<td><input type="submit" name="todo" value="test"></td>			

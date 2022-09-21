@@ -12,7 +12,7 @@ public interface ExamQuesRepository extends JpaRepository<ExamQuesBean, Integer>
 	
 	public List<ExamQuesBean> findBySubject_subjectNameAndEducation_educationName(String subName,String eduName);
 	
-	@Query(value="SELECT TOP 5 FROM Question Orders where subjectname = :subIdx and educationlevel = :eduIdx ORDER BY NEWID()",nativeQuery=true)
+	@Query(value="SELECT TOP 5 * FROM Question where subjectname = :subIdx and educationlevel = :eduIdx ORDER BY NEWID()",nativeQuery=true)
 	
 	public List<ExamQuesBean> findQues(@Param("subIdx") Integer subIdx,@Param("eduIdx") Integer eduIdx);
 	

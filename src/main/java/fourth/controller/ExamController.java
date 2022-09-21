@@ -33,13 +33,14 @@ import fourth.util.ExamUtil;
 @SessionAttributes(names = {"examQuTable","user"})
 public class ExamController {
 	
+	
+	
 	@Autowired
 	private ExamService examService;
 	
 	@GetMapping("/firstExamController")
 	public String entrance(Model m) {
 		MemberBean user = (MemberBean)m.getAttribute("user");
-		user.getStatus();
 		String nextPage = "";
 		if (user.getStatus()==3) {
 			
@@ -52,6 +53,7 @@ public class ExamController {
 		}
 		
 		return nextPage;
+		
 	}
 	
 	
@@ -69,10 +71,13 @@ public class ExamController {
 			//考試答題答案
 			,@RequestParam(defaultValue = "") List<String> answerList, HttpServletRequest request) {
 		
-		
-		String nextPage="Exam";
+		MemberBean user = (MemberBean)m.getAttribute("user");
 		List<ExamBean> theExamTable= new ArrayList<ExamBean>();
 		List<ExamQuesBean> theExamQuTable= new ArrayList<ExamQuesBean>();
+		
+		String nextPage="Exam";
+		String pageStatus = (String) m.getAttribute("pageStatus");
+		nextPage = pageStatus=="3" ? "Exam" : "ExamMember";
 		
 		if (todo.equals("upload")) {
 
@@ -83,65 +88,52 @@ public class ExamController {
 			Map<String, String> memAttribute = new HashMap<String, String>();
 			m.addAttribute("memAttribute", memAttribute);
 			
+			String examPicName = examPic.replace("images/", "");
+			
 			memAttribute.put("examID", examID);
 			memAttribute.put("subject", subject);
 			memAttribute.put("education", education);
 			memAttribute.put("examName", examName);
 			memAttribute.put("examDate", examDate);	
+			memAttribute.put("examPic", examPicName);	
 			
 			nextPage = "ExamUpdate";
 			
 		}else if(todo.equals("delete")) {
 			
-//			System.out.println("examID"+examID);
-			
 			examService.delete(examID);
 			
 			nextPage = "Exam";
 			
-			
 		}else if (todo.equals("query")) {
 			
 			System.out.println(quSubject+quEducation);
-			
 			theExamTable = examService.select(quSubject,quEducation);
-			
 			m.addAttribute("examTable", theExamTable);
 			
-			nextPage = "Exam";
+			nextPage = pageStatus=="3" ? "Exam" : "ExamMember";
 			
 		}else if (todo.equals("queryAll")) {
 			
 			theExamTable = examService.selectAll();
-			
 			m.addAttribute("examTable", theExamTable);
 			
-			nextPage = "Exam";
+			nextPage = pageStatus=="3" ? "Exam" : "ExamMember";
 			
 		}else if (todo.equals("test")) {
 			
-			
-			
 			theExamQuTable = examService.selectQu(subject,education);
-			
-//			System.err.println(theExamQuTable);
-			
 			m.addAttribute("examQuTable", theExamQuTable);
-			
 			nextPage = "ExamPaper";
-	
 			
 		}else if(todo.equals("testSubmit")) {
 		
 			System.err.println(examQuTable);
-			
 			List<ExamQuesBean> m12=(List<ExamQuesBean>) m.getAttribute("examQuTable");
-			
 			
 			for(int i=0; i < m12.size();i++) {
 				System.err.println("答案為"+m12.get(i).getQuesAnswer());
 			}
-			
 
 			int ctCount =0;
 //			//故意多宣告一個陣列長度，讓答案陣列的i與答案參數的i互相相等，後面getParameter比較方便
@@ -154,14 +146,12 @@ public class ExamController {
 				if (guAnswer[i].equals(m12.get(i-1).getQuesAnswer()) ) {
 					ctCount++;
 				}
-			}		
-			System.out.println("答對"+ctCount+"題");
+			}	
 			
+			System.out.println("答對"+ctCount+"題");
 			m.addAttribute("examResult", ctCount);
 			
 			nextPage = "ExamShowScore";	
-			
-			System.out.println(nextPage);
 		}
 
 		
@@ -178,36 +168,32 @@ public class ExamController {
 		
 		String nextPage="";
 		List<ExamBean> theExamTable= new ArrayList<ExamBean>();
+		String pageStatus = (String) m.getAttribute("pageStatus");
+		
+		//處理儲存路徑
+		String saveFileSubPath = "static/images";
+		String saveFileDir = request.getSession().getServletContext().getRealPath(saveFileSubPath).replaceFirst("webapp", "resources");
+		String fileName = myfile.getOriginalFilename();
+		
+		//資料庫中的儲存路徑，給jsp直接呼叫用的
+		String fileLocalPath = "images/"+fileName;
+		File saveFilePath = new File(saveFileDir, fileName);
+		myfile.transferTo(saveFilePath);
 		
 		if (todo.equals("insert")) {
 			
 			if (!ExamUtil.datacheck(examDate)){
 				
 				String warn = "資料錯誤";
-				
 				m.addAttribute("warn", warn);
-				
 				nextPage = "ExamInsert";
 				
 			}else {
 				
-				
-				//處理儲存路徑
-				String saveFileSubPath = "static/images";
-				String saveFileDir = request.getSession().getServletContext().getRealPath(saveFileSubPath).replaceFirst("webapp", "resources");
-//				System.err.println("saveFileDir"+saveFileDir);
-				
-				String fileName = myfile.getOriginalFilename();
-				
-				String fileLocalPath = "images/"+fileName;
-				File saveFilePath = new File(saveFileDir, fileName);
-//				
-//				
-				myfile.transferTo(saveFilePath);
+//				this.getClass().getClassLoader().
 				examService.insert(subject, education, examName, examDate, fileLocalPath);
 				
-				
-				nextPage = "Exam";
+				nextPage = pageStatus=="3" ? "Exam" : "ExamMember";
 			}		
 			
 			
@@ -219,25 +205,18 @@ public class ExamController {
 				
 				String warn = "資料錯誤";
 				m.addAttribute("warn", warn);
-				
 				nextPage = "ExamUpdate";
 				
 			}else {
 				
 				System.err.println(examID+subject+education+examName+examDate);
+				examService.update(examID, subject, education, examName, examDate,fileLocalPath);
 				
-				examService.update(examID, subject, education, examName, examDate);
+				nextPage = pageStatus=="3" ? "Exam" : "ExamMember";
 				
-//				theExamTable = examService.selectAll();
-				
-//				m.addAttribute("examTable", theExamTable);
-				
-				nextPage = "Exam";
 			}	
-				
 			
 		}
-
 		
 		return nextPage;
 	}

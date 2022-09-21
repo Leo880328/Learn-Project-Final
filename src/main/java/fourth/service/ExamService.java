@@ -57,7 +57,7 @@ public class ExamService  {
 	}
 	
 	//修改
-	public ExamBean update(String updateId, String subString,String eduString,String examName,String examDate){
+	public ExamBean update(String updateId, String subString,String eduString,String examName,String examDate,String exampic){
 		
 		
 		Integer upId = Integer.valueOf(updateId);
@@ -69,15 +69,15 @@ public class ExamService  {
 		
 		ExamBean upBean = new ExamBean();
 //		
-//		try {
-//			
-//			Date tDate = new SimpleDateFormat("yyyy-MM-dd").parse(examDate);
-////			upBean = new ExamBean(subBean, eduBean, examName, tDate); 
-//			upBean = new ExamBean(upId,subBean,eduBean,examName,tDate);
-//			upBean.setExamdate(tDate);
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			
+			Date tDate = new SimpleDateFormat("yyyy-MM-dd").parse(examDate);
+//			upBean = new ExamBean(subBean, eduBean, examName, tDate); 
+			upBean = new ExamBean(upId, subBean, eduBean, examName, tDate, exampic);
+			upBean.setExamdate(tDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 
 		return examRes.save(upBean);
 		
