@@ -67,10 +67,10 @@
 
 
 
-					<div id="join">
-
-					</div>
-				</div>
+					
+		
+		<div id="join"></div>
+	</div>
 				<script src="ActivityResources/js/SelectActivity.js"></script>
 			</body>
 

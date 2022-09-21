@@ -14,10 +14,11 @@ function selectAll() {
         dataType: "JSON",
         success: function (res) {
 
-            console.log(Array.isArray(res));
+
             // activityArray = JSON.parse(res);
             activityArray = res;
             $("#join").empty();
+            console.log($("#join"))
             activityArray.forEach(function (activity, index, array) {
 
                 $("#join").append(creatActivity(activity))
@@ -41,8 +42,8 @@ function creatActivity(ActivityBean) {
             </div>
         </div>
 			<br>
-			<input class="activity_start_time" name="start_time" type="datetime-local" value="${ActivityBean.start_time}" readonly/>~
-			<input class="activity_end_time" name="end_time" type="datetime-local" value="${ActivityBean.end_time}"  readonly/>
+			<input class="activity_start_time" name="start_time" type="datetime-local" value="${ActivityBean.startTime}" readonly/>~
+			<input class="activity_end_time" name="end_time" type="datetime-local" value="${ActivityBean.endTime}"  readonly/>
 	</form>
     `);
 

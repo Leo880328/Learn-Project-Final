@@ -44,6 +44,15 @@ public class Base64FileBean {
 		}
 		return false;
 	}
-	
+	public String  getNameAndType() {
+		return this.fileName+"."+this.fileType;
+	}
+
+	@Override
+	public String toString() {
+		return "Base64FileBean [fileType=" + fileType + ", fileName=" + fileName + ", base64=" + base64 + "]";
+	}
+
+
 
 }

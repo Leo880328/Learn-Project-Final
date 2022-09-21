@@ -91,14 +91,14 @@ margin:0px auto;
 			<form >
 			
 					<h2>標題:</h2>
-					<input id="title" name="title" type="text" value="" required>
+					<input id="title" type="text" value="" required>
 					<p>
 					<h3>內文:</h3>
-					<textarea id="content" name="content" oninput="auto_grow(this)" cols="30" required></textarea>
+					<textarea id="content"  oninput="auto_grow(this)" cols="30" required></textarea>
 			<p>
 				<div >
 					<h3>圖片:</h3>
-					<img id="activity_img" id="activity_img"  src="" alt="">
+					<img id="activity_img"   src="" alt="">
 					<br>
 					<label class="uploadImgButton" for="uploadPhotos">上傳照片</label>
 					<input id="uploadImg" class="data" type="file" onchange="previewImg(this)" accept="image/gif, image/jpeg, image/png">
@@ -107,9 +107,9 @@ margin:0px auto;
 			<div>
 			<h3>時間:</h3>
 			<p>
-			活動開始時間:<input id="start_time" name="start_time" type="datetime-local" value="" required/>
+			活動開始時間:<input id="start_time" type="datetime-local" value="" required/>
 			<p>
-			活動結束時間:<input id="end_time" name="end_time" type="datetime-local" value=""  required/>
+			活動結束時間:<input id="end_time"  type="datetime-local" value=""  required/>
 			<p>
 			</div>
 			<hr>

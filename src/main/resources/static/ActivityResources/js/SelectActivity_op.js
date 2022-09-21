@@ -16,10 +16,10 @@ function selectAll() {
 
             console.log(Array.isArray(res));
             activityArray = res;
-            $("#join").empty();
+            $("#hrml_content").empty();
             activityArray.forEach(function (activity, index, array) {
 
-                $("#join").append(creatActivity(activity))
+                $("#hrml_content").append(creatActivity(activity))
             });
             // 
         },
@@ -29,21 +29,24 @@ function selectAll() {
 
 function creatActivity(ActivityBean) {
     let div = $(`
-    <form class="activity_form" >
-        <div class="preview">
-            <div class="img_parent">
-                <input class="data" name="id" type="text" value="${ActivityBean.id}" readonly/>
-                <img class="activity_img" id="activity_img"  src="${ActivityBean.imgPath}" alt="">
-            </div>
-            <div class="activity_text">
-            <input class="title" name="title" type="text" value="${ActivityBean.title}" readonly>
-            <textarea class="introduction" name="content" cols="30" readonly>${ActivityBean.content}</textarea>    
-            </div>
+<form >
+    <div class="preview">
+        <div class="img_parent">
+            <input class="data" name="id" type="text" value="${ActivityBean.id}" /> 
+            <img class="activity_img" id="activity_img" src="${ActivityBean.imgPath}" alt="">
         </div>
-			<br>
-			<input class="activity_start_time" name="start_time" type="datetime-local" value="${ActivityBean.start_time}" readonly/>~
-			<input class="activity_end_time" name="end_time" type="datetime-local" value="${ActivityBean.end_time}"  readonly/>
-	</form>
+        <div class="activity_text">
+            <input class="title" name="title" type="text" value="${ActivityBean.title}" readonly>
+            <textarea class="introduction" name="content" cols="30" required>${ActivityBean.content}</textarea>
+
+        </div>
+        <input class="activity_button" type="submit" name="request" value="修改" /> 
+        <input class="activity_button" type="submit" name="request" onclick="if( !(confirm('確認刪除?') ) ) return false" value="刪除" />
+    </div>
+    <br> 
+    <input class="activity_start_time" name="start_time" type="datetime-local" value="${ActivityBean.startTime}" readonly />~ 
+    <input class="activity_end_time" name="end_time" type="datetime-local" value="${ActivityBean.endTime}" readonly />
+</form>
     `);
 
     return div;
