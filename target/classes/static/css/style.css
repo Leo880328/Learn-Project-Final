@@ -10936,6 +10936,10 @@ iframe {
     margin-right: 20px
 }
 
+.footer .menu-connect li.google a::before {
+    content: "\f1a0"
+}
+
 .footer .menu-connect li.facebook a::before {
     content: "\f082"
 }

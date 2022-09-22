@@ -36,7 +36,8 @@
 					<label for="password"><i class="fa-solid fa-lock"></i> </label><input
 						type="password" name="password" id="password"
 						placeholder="請輸入密碼(大小寫有別)" autocomplete="off" value="pwd">
-					<span id="message1" style="color: red"> </span>
+					<span id="sp5" class="msg"></span> <span id="message1"
+						style="color: red"> </span>
 				</div>
 				<div class=group>
 					<label for="password"><i class="fa-solid fa-lock"></i> </label><input
@@ -47,14 +48,15 @@
 				<div class=group>
 					<label for="email"><i class="fa-solid fa-envelope"></i></label><input
 						type="email" name="email" id="email" placeholder="請輸入電子信箱"
-						autocomplete="off" value="email@gmail.com">
+						autocomplete="off" value="email@gmail.com"><span id="sp4"
+						class="msg"></span>
 				</div>
 				<p>${errors.RegisterError}</p>
 				<p>${errors.RegisterErrorAccount}</p>
 				<div class="button">
 					<input type="submit" name="signin" id="signin"
 						onclick="alert('註冊成功')" value="註冊">
-						
+
 				</div>
 				<div>
 					<button type="button" class="btn btn-primary " id="correct">一鍵輸入</button>
@@ -93,6 +95,7 @@
 				})
 			})
 		</script>
+
 </body>
 
 </html>

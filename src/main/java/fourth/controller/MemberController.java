@@ -101,8 +101,9 @@ public class MemberController {
 		HashMap<String, String> errors = new HashMap<String, String>();
 		m.addAttribute("errors", errors);
 		String timeStamp = new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime());
-//		String bcEncode = new BCryptPasswordEncoder().encode(memberBean.getPassword());
-//		memberBean.setPassword(bcEncode);
+		String bcEncode = new BCryptPasswordEncoder().encode(memberBean.getPassword());
+		System.out.println("bcEncode :" +bcEncode);
+		memberBean.setPassword(bcEncode);
 		memberBean.setStatus(1);
 		memberBean.setImg("images/user000.png");
 		memberBean.setJoinDate(timeStamp);

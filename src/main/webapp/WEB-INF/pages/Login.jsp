@@ -23,7 +23,7 @@ article {
 </style>
 </head>
 <body>
-		<jsp:include page="loginNav.jsp" />
+	<jsp:include page="loginNav.jsp" />
 	<article>
 		<div class="main" align="center">
 			<div class="row">
@@ -39,13 +39,12 @@ article {
 									<div class="social-account">
 										<h6 class="title-social">其他登入方式</h6>
 										<a href="#" class="mxh-item google"><i
-											class="icon fa fa-google-square" aria-hidden="true"></i><span
-											class="text">Google</span></a><a href="#"
+											class="icon fa fa-google" aria-hidden="true"></i><span
+											class="text">Google</span></a> <a href="#"
 											class="mxh-item twitter"><i class="icon fa fa-twitter"
 											aria-hidden="true"></i><span class="text">TWITTER</span></a>
 									</div>
-									<br>
-									<font face="微軟正黑體">或使用快樂學習帳號密碼登入</font>
+									<br> <font face="微軟正黑體">或使用快樂學習帳號密碼登入</font>
 									<div class=group>
 										<label for="account"><i class="fa-solid fa-user"></i>
 										</label> <input type="text" name="account" id="account"
