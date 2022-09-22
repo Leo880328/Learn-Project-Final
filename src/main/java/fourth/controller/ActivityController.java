@@ -31,16 +31,24 @@ public class ActivityController {
 
 	@Autowired
 	private ActivityImageService activityImageService;
+	
+	
+	
+	// Activity_OP_test get
+		@GetMapping("/ActivityTest")
+		public String test() {
+			return "ActivityUpdate";
+		}
 
 	// Activity get
 	@GetMapping("/Activity")
-	public String uerSelect() {
+	public String ActivityUser() {
 		return "Activity_User";
 	}
 
 	// Activity_OP_test get
 	@GetMapping("/Activity_OP")
-	public String test() {
+	public String ActivityOP() {
 		return "Activity_OP";
 	}
 
@@ -102,5 +110,7 @@ public class ActivityController {
 			activityImageService.deleteImg(activityBean.getImgPath());
 		} 
 	}
+
+	
 
 }
