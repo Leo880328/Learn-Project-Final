@@ -129,6 +129,8 @@ public class ExamController {
 			theExamQuTable = examService.selectQu(subject,education,examID);
 			m.addAttribute("examQuTable", theExamQuTable);
 			
+			
+			
 			nextPage = "ExamPaper";
 			
 		}else if(todo.equals("testSubmit")) {

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import fourth.bean.ExamEduBean;
 import fourth.bean.ExamQuesBean;
+import fourth.bean.ExamRecord;
 import fourth.bean.ExamBean;
 import fourth.bean.ExamTest;
 import fourth.bean.ExamTestDetail;
@@ -113,16 +114,23 @@ public class ExamService  {
 	public List<ExamQuesBean> selectQu(String subString,String eduString,String examID){
 		
 		
+		//找出考題
 		List<ExamQuesBean> examQuesList = examQuRes.findQues(1,1);
 		ExamBean examBean = examRes.findById(Integer.valueOf(examID)).get();
-//		Integer totalTestNum = examContentRes.findMaxTestNum();
-		ExamTest examTest = new ExamTest(examBean);
 		
+		//建立考試
+		ExamTest examTest = new ExamTest(examBean);
+		examTestRes.save(examTest);
+		
+		//紀錄是哪個會員考試
+		//會員ID、考試ID、分數、日期
+		
+		//紀錄考卷內容
 		for(int i=0;i<examQuesList.size();i++) {
 			
 			
 			ExamTestDetail examTestDetail = new ExamTestDetail(examTest, examQuesList.get(i));
-			examTestRes.save(examTest);
+			
 			examTestDetailRes.save(examTestDetail);
 			
 		}
@@ -130,6 +138,8 @@ public class ExamService  {
 		return examQuesList;
 		
 	}
+	
+	
 	
 	////////////////////考試////////////////////考試////////////////////考試
 	
