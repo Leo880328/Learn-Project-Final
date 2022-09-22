@@ -33,27 +33,27 @@ import fourth.util.ExamUtil;
 @SessionAttributes(names = {"examQuTable","user"})
 public class ExamController {
 	
-	
-	
 	@Autowired
 	private ExamService examService;
 	
 	@GetMapping("/firstExamController")
-	public String entrance(Model m) {
+	public String entrance(Model m,HttpServletRequest request) {
+		
 		MemberBean user = (MemberBean)m.getAttribute("user");
+//		String pageStatus = (String) m.getAttribute("pageStatus");
+		String pageStatus = (String)request.getSession().getAttribute("pageStatus");
 		String nextPage = "";
+		
 		if (user.getStatus()==3) {
-			
-			nextPage="Exam";
-			
+			if (pageStatus.equals("3") ) {
+				nextPage="Exam";
+			}else {
+				nextPage="ExamMember";
+			}
 		}else {
-			
 			nextPage="ExamMember";
-			
 		}
-		
 		return nextPage;
-		
 	}
 	
 	
@@ -75,9 +75,12 @@ public class ExamController {
 		List<ExamBean> theExamTable= new ArrayList<ExamBean>();
 		List<ExamQuesBean> theExamQuTable= new ArrayList<ExamQuesBean>();
 		
-		String nextPage="Exam";
-		String pageStatus = (String) m.getAttribute("pageStatus");
-		nextPage = pageStatus=="3" ? "Exam" : "ExamMember";
+		//處理分派頁面相關參數
+		String nextPage="";
+		String pageStatus = (String)request.getSession().getAttribute("pageStatus");
+		
+		//若nextPage中間沒設到值，則會給予預設頁面
+		nextPage = nextPageFunction(pageStatus);
 		
 		if (todo.equals("upload")) {
 
@@ -111,42 +114,56 @@ public class ExamController {
 			theExamTable = examService.select(quSubject,quEducation);
 			m.addAttribute("examTable", theExamTable);
 			
-			nextPage = pageStatus=="3" ? "Exam" : "ExamMember";
+			nextPage = nextPageFunction(pageStatus);
 			
 		}else if (todo.equals("queryAll")) {
 			
 			theExamTable = examService.selectAll();
 			m.addAttribute("examTable", theExamTable);
 			
-			nextPage = pageStatus=="3" ? "Exam" : "ExamMember";
+			nextPage = nextPageFunction(pageStatus);
 			
 		}else if (todo.equals("test")) {
 			
-			theExamQuTable = examService.selectQu(subject,education);
+			
+			theExamQuTable = examService.selectQu(subject,education,examID);
 			m.addAttribute("examQuTable", theExamQuTable);
+			
 			nextPage = "ExamPaper";
 			
 		}else if(todo.equals("testSubmit")) {
 		
 			System.err.println(examQuTable);
-			List<ExamQuesBean> m12=(List<ExamQuesBean>) m.getAttribute("examQuTable");
-			
-			for(int i=0; i < m12.size();i++) {
-				System.err.println("答案為"+m12.get(i).getQuesAnswer());
+			List<ExamQuesBean> examQuesList=(List<ExamQuesBean>) m.getAttribute("examQuTable");
+			List<ExamQuesBean> examWrongList= new ArrayList<ExamQuesBean>();
+			for(int i=0; i < examQuesList.size();i++) {
+				System.err.println("答案為"+examQuesList.get(i).getQuesAnswer());
 			}
 
 			int ctCount =0;
 //			//故意多宣告一個陣列長度，讓答案陣列的i與答案參數的i互相相等，後面getParameter比較方便
-			String[] guAnswer = new String[8];
+			String[] chooseAns = new String[8];
 			
 			//讀取答案
-			for(int i=1;i<= m12.size();i++) {
-				guAnswer[i] = request.getParameter("answer"+i);
-				System.err.println(i+"答案"+guAnswer[i]);
-				if (guAnswer[i].equals(m12.get(i-1).getQuesAnswer()) ) {
+			for(int i=1;i<= examQuesList.size();i++) {
+				chooseAns[i] = request.getParameter("answer"+i);
+				System.err.println("第"+i+"題做答"+chooseAns[i]);
+				if (chooseAns[i].equals(examQuesList.get(i-1).getQuesAnswer()) ) {
+					
 					ctCount++;
+					
+				}else {
+					
+					//把錯誤題目加入List
+					examWrongList.add(examQuesList.get(i-1));
+					
+					System.err.println("答錯第"+i+"題"+examQuesList.get(i-1).getQuesContent());
+					System.err.println("examId"+user.getuserId());
 				}
 			}	
+			
+			
+			m.addAttribute("examWrongTable", examWrongList);
 			
 			System.out.println("答對"+ctCount+"題");
 			m.addAttribute("examResult", ctCount);
@@ -166,9 +183,12 @@ public class ExamController {
 			,@RequestParam(defaultValue = "") String examID,@RequestParam("myfile") MultipartFile myfile
 			,HttpServletRequest request) throws IllegalStateException, IOException {
 		
-		String nextPage="";
+		
 		List<ExamBean> theExamTable= new ArrayList<ExamBean>();
-		String pageStatus = (String) m.getAttribute("pageStatus");
+		
+		//處理分派頁面的相關參數
+		String nextPage="";
+		String pageStatus = (String)request.getSession().getAttribute("pageStatus");
 		
 		//處理儲存路徑
 		String saveFileSubPath = "static/images";
@@ -193,7 +213,8 @@ public class ExamController {
 //				this.getClass().getClassLoader().
 				examService.insert(subject, education, examName, examDate, fileLocalPath);
 				
-				nextPage = pageStatus=="3" ? "Exam" : "ExamMember";
+				nextPage = nextPageFunction(pageStatus);
+				
 			}		
 			
 			
@@ -212,13 +233,28 @@ public class ExamController {
 				System.err.println(examID+subject+education+examName+examDate);
 				examService.update(examID, subject, education, examName, examDate,fileLocalPath);
 				
-				nextPage = pageStatus=="3" ? "Exam" : "ExamMember";
+				nextPage = nextPageFunction(pageStatus);
 				
 			}	
 			
 		}
 		
 		return nextPage;
+	}
+	
+	private String nextPageFunction(String pageStatus) {
+		
+		if (pageStatus.equals("3")) {
+			
+			pageStatus = "Exam";
+			
+		} else {
+			
+			pageStatus = "ExamMember";
+			
+		}
+		
+		return pageStatus;
 	}
 	
 }

@@ -1,12 +1,11 @@
 package fourth.service;
 
-import java.awt.image.RescaleOp;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,11 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 import fourth.bean.ExamEduBean;
 import fourth.bean.ExamQuesBean;
 import fourth.bean.ExamBean;
+import fourth.bean.ExamTest;
+import fourth.bean.ExamTestDetail;
 import fourth.bean.ExamSubBean;
-import fourth.dao.ExamDao;
-import fourth.dao.ExamDaoInterface;
 import fourth.dao.ExamQuesRepository;
 import fourth.dao.ExamRepository;
+import fourth.dao.ExamTestDetailRepository;
+import fourth.dao.ExamTestRespository;
 import fourth.util.ExamUtil;
 
 @Service
@@ -32,6 +33,11 @@ public class ExamService  {
 	@Autowired
 	private ExamRepository examRes;
 	
+	@Autowired
+	private ExamTestRespository examTestRes;
+	
+	@Autowired
+	private ExamTestDetailRepository examTestDetailRes;
 	//增加
 	public ExamBean insert(String subString,String eduString,String examName,String examDate,String exampic){
 		
@@ -102,23 +108,28 @@ public class ExamService  {
 		examRes.deleteById(examID);
 	}
 	
-	
-	
-	
-	
-	
-	
 	////////////////////考試////////////////////考試////////////////////考試////////////////////考試
 	//查詢考試題目
-	public List<ExamQuesBean> selectQu(String subString,String eduString){
+	public List<ExamQuesBean> selectQu(String subString,String eduString,String examID){
 		
 		
 		List<ExamQuesBean> examQuesList = examQuRes.findQues(1,1);
-
+		ExamBean examBean = examRes.findById(Integer.valueOf(examID)).get();
+//		Integer totalTestNum = examContentRes.findMaxTestNum();
+		ExamTest examTest = new ExamTest(examBean);
+		
+		for(int i=0;i<examQuesList.size();i++) {
+			
+			
+			ExamTestDetail examTestDetail = new ExamTestDetail(examTest, examQuesList.get(i));
+			examTestRes.save(examTest);
+			examTestDetailRes.save(examTestDetail);
+			
+		}
+		
 		return examQuesList;
 		
 	}
-	
 	
 	////////////////////考試////////////////////考試////////////////////考試
 	

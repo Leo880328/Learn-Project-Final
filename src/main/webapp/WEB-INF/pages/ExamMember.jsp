@@ -70,6 +70,7 @@
 				</tr>
 				<tr>
 					<th>項次</th>
+					<th>圖片</th>
 					<th>科目</th>
 					<th>程度</th>
 					<th>名稱</th>
@@ -93,7 +94,7 @@
 			<tr>
 				<%--                 <td><input type="checkbox" name="examTableIndex" value="<%= i %>"></td> --%>
 				<td><%= i+1 %></td>
-<%-- 				<td><%= examTable.get(i).getExamID() %></td> --%>
+				<td><img src="<%=examTable.get(i).getExamPic()%>" alt="" title="" width="150" height="150"></td>
 				<td><%= examTable.get(i).getSubject().getSubjectName() %></td>
 				<td><%= examTable.get(i).getEducation().getEducationName() %></td>
 				<td><%= examTable.get(i).getExamName() %></td>

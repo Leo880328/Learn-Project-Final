@@ -13,7 +13,6 @@
 	<%
 	List<ExamQuesBean> theQuestable =(List<ExamQuesBean>) session.getAttribute("examQuTable");
 	
-// 	String[] answer = new String[7];
 	%>
 
 	<div>
