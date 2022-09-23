@@ -121,22 +121,18 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 											<div class="col-sm-6">
 												<p>
 													<span class="form-label">身分</span><span
-														class="form-control-wrap "> <select name="status"
-														title="身分">
+														class="form-control-wrap "> 
 															<c:if test="<%=memberBean.getStatus() == 1%>">
-																<option value="1">學生</option>
-																<option value="2">老師</option>
+																<option value="1">學生</option> <button type="submit">
+			<a href="becometeacher.controller">申請成為老師</a>
+		</button>
 															</c:if>
 															<c:if test="<%=memberBean.getStatus() == 2%>">
 																<option value="2">老師</option>
-																<option value="1">學生</option>
 															</c:if>
 															<c:if test="<%=memberBean.getStatus() == 3%>">
 																<option value="3">管理員</option>
-																<option value="2">老師</option>
-																<option value="1">學生</option>
 															</c:if>
-													</select>
 													</span>
 												</p>
 											</div>

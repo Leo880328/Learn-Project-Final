@@ -7,14 +7,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import fourth.bean.MemberBean;
 import fourth.dao.MemberRepository;
-//import fourth.exception.UserNotFoundException;
 import fourth.exception.UserNotFoundException;
 
 @Service
@@ -37,11 +33,25 @@ public class MemberService {
 		return memberRepository.save(newRegister);
 
 	}
+	
+	public MemberBean findByAccountLogin(String account) {
+		Optional<MemberBean> op = memberRepository.findByAccount(account);
+		System.out.println("進入findByAccountLogin");
+		System.out.println("op: " + op);
+		if (op.isEmpty()) {
+			throw new UserNotFoundException("Can't find User");
+		}
+
+		return op.get();
+	}
+	
+	
+	
 
 	// 會員登入
-	public MemberBean checkLogin(String account) {
-		return memberRepository.findByAccount(account);
-	}
+//	public MemberBean checkLogin(String account) {
+//		return memberRepository.findByAccount(account);
+//	}
 
 	// 新增會員
 	public MemberBean insertUser(MemberBean memberBean) {

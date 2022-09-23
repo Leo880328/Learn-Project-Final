@@ -1,5 +1,7 @@
 package fourth.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 
 import fourth.bean.MemberBean;
 import fourth.service.MemberService;
@@ -32,11 +35,19 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
+	//成為老師
+	@RequestMapping(path = "/becometeacher.controller", method = RequestMethod.GET)
+	public String becometeacherController() {
+		return "BecomeTeacher";
+	}
+	
+	
+	
 	// 一般會員查詢
 	@RequestMapping(path = "/user.controller", method = RequestMethod.GET)
 	public String userController(Model m) {
 		MemberBean user = (MemberBean) m.getAttribute("user");
-		MemberBean mem = memberService.checkLogin(user.getAccount());
+		MemberBean mem = memberService.findByAccountLogin(user.getAccount());
 		m.addAttribute("user", mem);
 		return "UserSeting";
 	}
@@ -69,16 +80,16 @@ public class MemberController {
 		if (errors != null && !errors.isEmpty()) {
 			return "Login";
 		}
-		MemberBean user = memberService.checkLogin(account);
+		MemberBean user = memberService.findByAccountLogin(account);
 		System.out.println("執行user");
 		System.out.println(user);
 		m.addAttribute("user", user);
 		if (user != null && user.getPassword().equals(password)) {
 			if (user.getStatus() == 3) {
 
-				return "redirect:/backendIndex";
+				return "BackendIndex";
 			} else {
-				return "redirect:/Index";
+				return "Index";
 			}
 
 		} else {
@@ -101,9 +112,9 @@ public class MemberController {
 		HashMap<String, String> errors = new HashMap<String, String>();
 		m.addAttribute("errors", errors);
 		String timeStamp = new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime());
-		String bcEncode = new BCryptPasswordEncoder().encode(memberBean.getPassword());
-		System.out.println("bcEncode :" +bcEncode);
-		memberBean.setPassword(bcEncode);
+//		String bcEncode = new BCryptPasswordEncoder().encode(memberBean.getPassword());
+//		System.out.println("bcEncode :" +bcEncode);
+//		memberBean.setPassword(bcEncode);
 		memberBean.setStatus(1);
 		memberBean.setImg("images/user000.png");
 		memberBean.setJoinDate(timeStamp);
@@ -164,7 +175,14 @@ public class MemberController {
 
 	// 更新會員
 	@PostMapping("/updateUser")
-	public String updateUser(MemberBean memberBean) {
+	public String updateUser(MemberBean memberBean,MultipartFile mf) throws IllegalStateException, IOException {
+//		String fileName = mf.getOriginalFilename();
+//		String saveFileDir = "D:\\webgit\\teamproject\\HappyLearning\\src\\main\\resources\\static\\images";
+//		File saveFileDirPath = new File(saveFileDir);
+//		saveFileDirPath.mkdirs();
+//
+//		File saveFile = new File(saveFileDirPath, fileName);
+//		mf.transferTo(saveFile);
 		memberService.updateUser(memberBean);
 		return "redirect:/memberList";
 	}

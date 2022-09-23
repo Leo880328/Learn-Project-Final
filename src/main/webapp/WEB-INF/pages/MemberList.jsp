@@ -45,7 +45,9 @@
 	<br>
 	<br>
 	<div align="center">
-		<a href="addNewUser">新增會員</a>
+		<button type="submit">
+			<a href="addNewUser">新增會員</a>
+		</button>
 	</div>
 	<br>
 	<div align="center">

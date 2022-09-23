@@ -144,14 +144,15 @@
 			</tr>
 
 		</table>
-		<div align="center">
-			<button type="button" class="btn btn-primary " id="correct">一鍵輸入</button>
-		</div>
-		<br>
-		<div align="center">
+		<center>
 			<input type="submit" value="儲存" />
-		</div>
+			<button type="button" class="btn btn-primary " id="correct">一鍵輸入</button>
+		</center>
 	</form>
+		<center>
+		<a href="memberList"><input type="submit" name="return"
+			value="返回會員列表"></a>
+	</center>
 	<script>
 		function previewImg(element) {
 
@@ -167,18 +168,18 @@
 	</script>
 	<script>
 		$(function() {
+			
 			$('#correct').click(function() {
 				$('#nick').val("smalllucy");
 				$('#account').val("lucy");
 				$('#password').val("lucy");
-				$('#status').val("2");
+				$('#status').val("1");
 				$('#name').val("Lucu Wang");
-				$('#imgin').val("images/user000.png");
 				$('#sex').val("女生");
 				$('#birthday').val("1999-03-02");
 				$('#cellphone').val("0922404678");
 				$('#email').val("lucy@gmail.com");
-				$('#joinDate').val("2022-09-21");
+				$('#joinDate').val("2022-09-27");
 			})
 		})
 	</script>
@@ -258,7 +259,7 @@
                      var eng =new RegExp("[a-zA-z]"); //要改成有中文不行
                      if(eng.test(password)){
                          if(password.length <=7 || password.length >=17){
-                             var msg="密碼須為8至16字含英文數字";  
+                             var msg="密碼須為6至16字含英文數字";  
                              $('#sp5').text(msg);  
                     return false                    
                             }else{
@@ -267,14 +268,14 @@
                     return true
                             }
                     }else{
-                    var msg ="密碼須為8至16字含英文數字";
+                    var msg ="密碼須為6至16字含英文數字";
                     $('#sp5').text(msg);  
                     return false
                 }
         
             }
         } else{
-            var msg="密碼須為8至16字含英文數字";  
+            var msg="密碼須為6至16字含英文數字";  
             $('#sp5').text(msg);  
                     return false   
         }

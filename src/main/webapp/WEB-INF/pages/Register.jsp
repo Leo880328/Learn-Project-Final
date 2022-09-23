@@ -55,7 +55,7 @@
 				<p>${errors.RegisterErrorAccount}</p>
 				<div class="button">
 					<input type="submit" name="signin" id="signin"
-						onclick="alert('註冊成功')" value="註冊">
+						 value="註冊">
 
 				</div>
 				<div>
