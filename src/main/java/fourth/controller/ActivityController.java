@@ -2,14 +2,11 @@ package fourth.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import fourth.bean.ActivityBean;
 import fourth.bean.ActivityJsonBean;
-import fourth.bean.Base64FileBean;
 import fourth.service.ActivityImageService;
 import fourth.service.ActivityService;
 
@@ -36,10 +32,7 @@ public class ActivityController {
 //	public String test() {
 //		return "ActivityUpdate";
 //	}
-	@GetMapping("/Activityeree")
-	public String testSelect() {
-		return "ActivitySelect";
-	}
+	
 
 	// Activity get
 	@GetMapping("/Activities")
@@ -47,18 +40,13 @@ public class ActivityController {
 		return "ActivityPreviewUser";
 	}
 
-	@GetMapping("Activitye")
-	public String ActivitySelect() {
-		return "ActivitySelect";
-	}
 	@GetMapping("Activitye-{id}")
-	public String ActivitySelectById(@PathVariable("id") Integer id) {
-		System.out.println(id);
+	public String ActivitySelectById() {
 		return "ActivitySelectByID";
 	}
 
 	// Activity_OP_test get
-	@GetMapping("/ActivityPreviewOP")
+	@GetMapping("/ActivitiesOP")
 	public String ActivityPreviewOP() {
 		return "ActivityPreviewOP";
 	}

@@ -3,7 +3,8 @@ $().ready(
     // 取直並將ActivityBean送出等待回應
     function () {
         selectAll()
-    }
+    },
+
 
 )
 function selectAll() {
@@ -16,10 +17,10 @@ function selectAll() {
 
             console.log(Array.isArray(res));
             activityArray = res;
-            $("#hrml_content").empty();
+            $(".u-table-body").empty();
             activityArray.forEach(function (activity, index, array) {
 
-                $("#hrml_content").append(creatActivity(activity))
+                $(".u-table-body").append(creatActivity(activity))
 
             });
 
@@ -35,7 +36,7 @@ function selectAll() {
 
 function creatActivity(ActivityBean) {
     let div = $(`
-    <tr style="height: 75px; " onclick=ActivityPost()>
+    <tr style="height: 75px; " onclick=ActivityUpdate(${ActivityBean.id})>
     <td class="u-border-1 u-border-grey-40 u-table-cell">${ActivityBean.id}</td>
     <td class="u-border-1 u-border-grey-40 u-table-cell">${ActivityBean.title}</td>
     </tr>
@@ -44,7 +45,12 @@ function creatActivity(ActivityBean) {
     return div;
 }
 
-function ActivityPost() {
+function ActivityUpdate(id) {
+    $("body").append($(`<form action="ActivityOPUpdate-${id}" method="post" id="onlyPost"></form>`))
+    $("#onlyPost").submit()
+}
+
+function ActivityInsert() {
     $("body").append($(`<form action="ActivityOPInsert" method="post" id="onlyPost"></form>`))
     $("#onlyPost").submit()
 }
