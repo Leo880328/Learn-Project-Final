@@ -169,10 +169,13 @@
 
 					
 					<li><a href="QueryAll"><i class="zmdi zmdi-collection-text"></i>專欄管理</a></li>
+					
 					<li><a href="Activity_OP"><i class="zmdi zmdi-calendar"></i>活動管理</a></li>
 
 					<li><a href="orderList"><i class="zmdi zmdi-widgets"></i>訂單管理</a></li>
-
+					
+					<li><a href="chart"><i class="zmdi zmdi-trending-up"></i>營收圖表</a></li>
+                            
 				</ul>
 			</div>
 
@@ -191,6 +194,7 @@
 	<script
 		src="backend/vendors/jquery-scrollLock/jquery-scrollLock.min.js"></script>
 	<script src="backend/vendors/flot/jquery.flot.js"></script>
+	<script src="backend/vendors/flot/jquery.flot.pie.js"></script>
 	<script src="backend/vendors/flot/jquery.flot.resize.js"></script>
 	<script src="backend/vendors/flot.curvedlines/curvedLines.js"></script>
 	<script src="backend/vendors/jqvmap/jquery.vmap.min.js"></script>
@@ -205,8 +209,11 @@
 	<script src="backend/demo/js/flot-charts/dynamic.js"></script>
 	<script src="backend/demo/js/flot-charts/line.js"></script>
 	<script src="backend/demo/js/flot-charts/chart-tooltips.js"></script>
+	<script src="backend/demo/js/flot-charts/bar.js"></script>
+	<script src="backend/demo/js/flot-charts/pie.js"></script>
 	<script src="backend/demo/js/other-charts.js"></script>
 	<script src="backend/demo/js/jqvmap.js"></script>
+	<script src="backend/demo/js/demo.js"></script>
 	<!-- App functions and actions -->
 	<script src="backend/js/app.min.js"></script>
 	

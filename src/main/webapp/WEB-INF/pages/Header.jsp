@@ -35,6 +35,7 @@
 }
 </style>
 <title>Header</title>
+<%request.getServletContext().setAttribute("PATH", request.getContextPath()); %>
 <script>
 	function myFunction() {
 		$.getJSON("cart/cartCount", function(data) {

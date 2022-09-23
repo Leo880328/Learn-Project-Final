@@ -211,6 +211,7 @@ CourseBean courseBean = (CourseBean) request.getAttribute("cbean");
 
 <!-- ======= -->
 	<main class="main">
+	<!--  
 		<div class="page-loader">
 			<div class="page-loader__spinner">
 				<svg viewBox="25 25 50 50">
@@ -219,6 +220,7 @@ CourseBean courseBean = (CourseBean) request.getAttribute("cbean");
                 </svg>
 			</div>
 		</div>
+		-->
 		<header class="header">
 			<div class="navigation-trigger hidden-xl-up"
 				data-ma-action="aside-open" data-ma-target=".sidebar">
@@ -357,10 +359,10 @@ CourseBean courseBean = (CourseBean) request.getAttribute("cbean");
 										<!-- 										<div class="quantity"></div> -->
 										<!-- 										<button class="single_add_to_cart_button button">加入購物車</button> -->
 										<!-- 									</div> -->
-										<form action="cartadd" method="post">
-										<input type="hidden" name="courseID" value="<%=courseBean.getCourse_id()%>">>
-											<button class="single_add_to_cart_button button">加入購物車</button>
-										</form>
+<!-- 										<form action="cartadd" method="post"> -->
+<%-- 										<input type="hidden" name="courseID" value="<%=courseBean.getCourse_id()%>"> --%>
+<!-- 										</form> -->
+											<button class="single_add_to_cart_button button" onclick="add(<%=courseBean.getCourse_id()%>)">加入購物車</button>
 <%-- 										<form action="cart/addCart/<%=courseBean.getCourse_id()%>>" method="post"> --%>
 <!-- 											<input type="hidden" name="courseID" -->
 <%-- 												value="<%=courseBean.getCourse_id()%>"> --%>
@@ -397,6 +399,9 @@ CourseBean courseBean = (CourseBean) request.getAttribute("cbean");
 				</div>
 			</div>
 		</div>
+<!-- 		加入購物車 -->
+		<script src="wayne/cart.js"></script>
+		
 		<script src="backend/vendors/jquery/jquery.min.js"></script>
 		<script src="backend/vendors/popper.js/popper.min.js"></script>
 		<script src="backend/vendors/bootstrap/js/bootstrap.min.js"></script>
@@ -446,5 +451,6 @@ CourseBean courseBean = (CourseBean) request.getAttribute("cbean");
 		<script
 			src='http://www.google.cn/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script>
 		<script src="./js/frontend-plugin.js"></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
