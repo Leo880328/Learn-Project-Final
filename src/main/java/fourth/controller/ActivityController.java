@@ -31,10 +31,14 @@ public class ActivityController {
 	@Autowired
 	private ActivityImageService activityImageService;
 
-	// Activity_OP_test get
-	@GetMapping("/ActivityTest")
-	public String test() {
-		return "ActivityUpdate";
+//	// Activity_OP_test get
+//	@GetMapping("/ActivityTest")
+//	public String test() {
+//		return "ActivityUpdate";
+//	}
+	@GetMapping("/Activityeree")
+	public String testSelect() {
+		return "ActivitySelect";
 	}
 
 	// Activity get
@@ -43,9 +47,14 @@ public class ActivityController {
 		return "ActivityPreviewUser";
 	}
 
-	@GetMapping("/Activity/{id}")
+	@GetMapping("Activitye")
 	public String ActivitySelect() {
 		return "ActivitySelect";
+	}
+	@GetMapping("Activitye-{id}")
+	public String ActivitySelectById(@PathVariable("id") Integer id) {
+		System.out.println(id);
+		return "ActivitySelectByID";
 	}
 
 	// Activity_OP_test get
@@ -60,7 +69,7 @@ public class ActivityController {
 		return "ActivityUpdate";
 	}
 
-	@PostMapping("/ActivityOPUpdate/{id}")
+	@PostMapping("/ActivityOPUpdate-{id}")
 	public String updateActivities() {
 		// 應插入權限判斷
 		return "ActivityUpdate";
@@ -77,7 +86,7 @@ public class ActivityController {
 		return selectActivityBeans;
 	}
 
-	@GetMapping("/ActivitySelect/{id}")
+	@GetMapping("/ActivitySelect-{id}")
 	@ResponseBody
 	public ActivityBean selectActivity(@PathVariable Integer id) {
 		return activityService.selectActivityById(id);

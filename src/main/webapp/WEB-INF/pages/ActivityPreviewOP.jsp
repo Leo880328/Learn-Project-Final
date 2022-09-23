@@ -82,10 +82,10 @@
               <div class="u-container-style u-group u-white u-group-4">
                 <div class="u-container-layout u-container-layout-4">
                   <div class="u-expanded-width u-table u-table-responsive u-table-1">
-                    <table class="u-table-entity">
+                    <table class="u-table-entity" id="data-table">
                       <colgroup>
-                        <col width="18.4%">
-                        <col width="81.6%">
+                        <col width="20.0%">
+                        <col width="80.0%">
                       </colgroup>
                       <thead class="u-align-center u-grey-50 u-table-header u-table-header-1">
                         <tr style="height: 34px;">
@@ -93,51 +93,13 @@
                           <th class="u-border-1 u-border-grey-50 u-table-cell u-table-cell-2">標題</th>
                         </tr>
                       </thead>
-                      <tbody class="u-align-center u-table-body">
-                        <tr style="height: 76px;">
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                        </tr>
-                        <tr style="height: 76px;">
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                        </tr>
-                        <tr style="height: 76px;">
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                        </tr>
-                        <tr style="height: 76px;">
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                        </tr>
-                        <tr style="height: 76px;">
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                        </tr>
-                        <tr style="height: 76px;">
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                        </tr>
-                        <tr style="height: 76px;">
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                        </tr>
-                        <tr style="height: 76px;">
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                        </tr>
-                        <tr style="height: 76px;">
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                        </tr>
-                        <tr style="height: 76px;">
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                          <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
-                        </tr>
-                      </tbody>
+                      <tbody class="u-align-center u-table-body " id="hrml_content">
+                        
+                       
+                      </tbody >
                     </table>
                   </div>
-                </div>
+                </div >
               </div>
             </div>
           </div>
@@ -146,14 +108,10 @@
     </div>
   </section>
 
-  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-  <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-  <script>
-    $().ready(
+  <script async=false src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+  <script async=false src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+  <script async=false src="ActivityResources/js/SelectActivityOP.js"></script>
 
-      $('.u-table-entity').DataTable()
-    )
-  </script>
 
 </body>
 
