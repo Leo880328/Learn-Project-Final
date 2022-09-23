@@ -155,7 +155,7 @@
 						<div class="container-wapper">
 							<ul class="teamo-clone-mobile-menu teamo-nav main-menu "
 								id="menu-main-menu">
-								<li><a href="courseList" class="teamo-menu-item-title"
+								<li><a href="coursefront1.list" class="teamo-menu-item-title"
 									title="Home">課程</a><span class="toggle-submenu"></span>
 								<li class="menu-item "><a href="Exam.jsp"
 									class="teamo-menu-item-title" title="Shop">試卷</a><span
