@@ -1,6 +1,5 @@
 package fourth.controller;
 
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,27 +31,37 @@ public class ActivityController {
 	@Autowired
 	private ActivityImageService activityImageService;
 
+	// Activity_OP_test get
+	@GetMapping("/ActivityTest")
+	public String test() {
+		return "ActivityUpdate";
+	}
+
 	// Activity get
-	@GetMapping("/Activity")
-	public String uerSelect() {
-		return "Activity_User";
+	@GetMapping("/Activities")
+	public String ActivityPreviewUser() {
+		return "ActivityPreviewUser";
+	}
+
+	@GetMapping("/Activity/{id}")
+	public String ActivitySelect() {
+		return "ActivitySelect";
 	}
 
 	// Activity_OP_test get
-	@GetMapping("/Activity_OP")
-	public String test() {
-		return "Activity_OP";
+	@GetMapping("/ActivityPreviewOP")
+	public String ActivityPreviewOP() {
+		return "ActivityPreviewOP";
 	}
 
-// /Activity_OP/insert post
-	@PostMapping("/Activity_OP_insert")
+	// Activity_OP/insert post
+	@PostMapping("/ActivityOPInsert")
 	public String insertActivities() {
-		return "ActivityInster";
+		return "ActivityUpdate";
 	}
 
-	@PostMapping("/Activity_OP_Update/{id}")
+	@PostMapping("/ActivityOPUpdate/{id}")
 	public String updateActivities() {
-
 		// 應插入權限判斷
 		return "ActivityUpdate";
 	}
@@ -61,16 +70,17 @@ public class ActivityController {
 //	====================================================API區=============================================================================================
 //	======================================================================================================================================================
 	// 查詢所有API
-	@GetMapping("/Activity.getAll")
+	@GetMapping("/ActivitySelect")
 	@ResponseBody
 	public List<ActivityBean> selectActivityAll() {
 		List<ActivityBean> selectActivityBeans = activityService.selectAllActivity();
 		return selectActivityBeans;
 	}
-	@GetMapping("/Activity/{id}")
+
+	@GetMapping("/ActivitySelect/{id}")
 	@ResponseBody
 	public ActivityBean selectActivity(@PathVariable Integer id) {
-		 return activityService.selectActivityById(id);	
+		return activityService.selectActivityById(id);
 	}
 
 	// 新增
@@ -78,7 +88,7 @@ public class ActivityController {
 	@PostMapping("/Activity_OP")
 	@ResponseBody
 	public ActivityBean insertActivities(@RequestBody() ActivityJsonBean activityJsonBean) {
-		activityJsonBean.setActivityBean(activityService.insertActivities(activityJsonBean.getActivityBean())) ;
+		activityJsonBean.setActivityBean(activityService.insertActivities(activityJsonBean.getActivityBean()));
 		return updateActivities(activityJsonBean);
 	}
 
@@ -88,7 +98,7 @@ public class ActivityController {
 	public ActivityBean updateActivities(@RequestBody() ActivityJsonBean activityJsonBean) {
 		activityJsonBean.getBase64FileBean().setFileName(activityJsonBean.getActivityBean().getId().toString());
 		String imgPath = activityImageService.saveBase64Img(activityJsonBean.getBase64FileBean());
-		if(imgPath != null) {
+		if (imgPath != null) {
 			activityJsonBean.getActivityBean().setImgPath(imgPath);
 		}
 		return activityService.updateActivities(activityJsonBean.getActivityBean());
@@ -100,7 +110,7 @@ public class ActivityController {
 		activityService.deleteActivities(activityBean);
 		if (activityBean.getImgPath() != null) {
 			activityImageService.deleteImg(activityBean.getImgPath());
-		} 
+		}
 	}
 
 }
