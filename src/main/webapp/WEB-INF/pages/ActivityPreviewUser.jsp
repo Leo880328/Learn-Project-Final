@@ -11,6 +11,7 @@
   <title>活動預覽</title>
   <link rel="stylesheet" href="ActivityResources/css/nicepage.css" media="screen">
   <link rel="stylesheet" href="ActivityResources/css/活動預覽.css" media="screen">
+  
   <link id="u-theme-google-font" rel="stylesheet" href="ActivityResources/css/u-theme-google-font.css">
   <link rel="stylesheet" href="ActivityResources/css/jqueryDataTables.css" media="screen">
   <script class="u-script" type="text/javascript" src="ActivityResources/js/jquery.js" defer=""></script>
@@ -67,6 +68,6 @@
   </section>
   
   <script src="ActivityResources/js/SelectActivity.js"></script>
- 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
