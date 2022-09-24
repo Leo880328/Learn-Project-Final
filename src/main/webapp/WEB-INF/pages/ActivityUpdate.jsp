@@ -50,14 +50,14 @@
                   <div
                     class="u-border-1 u-border-black u-border-no-left u-border-no-bottom u-border-no-right u-border-no-top u-container-style u-grey-10 u-group u-group-4">
                   
-                      <h4  id="activityTime"  class="u-text u-text-default u-text-4">
-                        活動時間:0000年00月00日 ~ 0000年00月00日
+                      <h4 onclick="changeTime(this)" id="activityTime" title="點擊進行編輯" class="u-text u-text-default u-text-4">
+                        活動時間:0000/00/00 00:00 ~ 0000/00/00 00:00
                       </h4>
                    
                   </div>
                   <div class="u-align-center u-container-style u-grey-10 u-group u-group-5">
                     <div class="u-container-layout u-container-layout-5">
-                      <h4 onclick="changeVal(this)" id="content" class="u-text u-text-default u-text-4">
+                      <h4 onclick="changeVal(this)" id="content" title="點擊進行編輯" class="u-text u-text-default u-text-4">
                         請點擊輸入內文
                       </h4>
                     </div>
@@ -66,6 +66,7 @@
                     class="u-align-center u-btn u-btn-round u-button-style u-hover-palette-1-light-2 u-palette-1-base u-radius-2 u-btn-2">儲存&nbsp;​&nbsp;<span
                       class="u-file-icon u-icon u-icon-2"><img src="ActivityResources/images/2874091.png" alt=""></span>
                   </button>
+                  <input type="file" id="avatar" style="visibility:hidden;"  accept="image/*">
                 </div>
               </div>
             </div>

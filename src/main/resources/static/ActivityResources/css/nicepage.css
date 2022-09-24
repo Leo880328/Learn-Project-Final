@@ -533,7 +533,7 @@ span.fr-img-caption.fr-view.fr-dii.fr-fir {
 }
 
 /*end-commonstyles library*/
-@charset "UTF-8";
+/* @charset "UTF-8"; */
 
 .u-hidden-block {
   visibility: hidden !important;
@@ -24490,6 +24490,10 @@ a.pswp__share--download:hover {
 
 .u-tabs .u-tab-item {
   margin-bottom: 5px;
+}
+
+.u-grey-10 {
+  background-color: #e5e5e5;
 }
 
 .u-tabs .u-tab-link {

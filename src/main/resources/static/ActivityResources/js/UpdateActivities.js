@@ -1,3 +1,4 @@
+'use strict'
 let activitjson = {
     activityBean:
     {
@@ -25,7 +26,6 @@ $().ready(
         let id = window.location.href.substring(idIndexOf + 1);
         if (id) {
             selectByID(id)
-            activitjson.activityBean.id = id
         }
     },
 )
@@ -35,18 +35,35 @@ function selectByID(id) {
         method: "GET",
         dataType: "JSON",
         success: function (activity) {
-            creatActivity(activity);
+            activitjson.activityBean = activity;
+            activitjson.activityBean.id = id
+            changeHtmlActivity();
         },
         error: function (err) { alert("資料獲取失敗，請刷新網頁!") },
     });
 }
 function saveActivityBean() {
-    activitjson.activityBean.title = $("#title").html();
-    activitjson.activityBean.content = $("#content").html();
-    activitjson.activityBean.startTime = $("#startTime").val();
-    activitjson.activityBean.endTime = $("#endTime").val();
-    console.log(activitjson.activityBean);
 
+    console.log(activitjson.activityBean);
+    console.log(JSON.stringify(activitjson));
+    $.ajax({
+        url: "Activity_OP",
+        method: "PUT",
+        dataType: "JSON",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(activitjson),
+        success: function (res) {
+            $("body").append($(`<form action="ActivitiesOP" method="GET" id="onlyPost"></form>`))
+            $("#onlyPost").submit()
+        },
+        error: function (err) {
+            Swal.fire({
+                icon: 'error',
+                title: '上傳失敗',
+                text: err
+            })
+        },
+    });
 
 }
 function saveActivity() {
@@ -90,19 +107,18 @@ function updeBase64(file) {
         })
     })
 }
-function creatActivity(activityBean) {
-    $("#title").html(activityBean.title);
-    $("#content").html(activityBean.content);
-    if (activityBean.imgPath != 'null' && activityBean.imgPath != null) {
-
+function changeHtmlActivity() {
+    $("#title").html(activitjson.activityBean.title);
+    $("#content").html(activitjson.activityBean.content);
+    if (activitjson.activityBean.imgPath != 'null' && activitjson.activityBean.imgPath > 0) {
+        $("#imgPath").attr('src', activitjson.activityBean.imgPath)
     }
-    let startTime = new Date(activityBean.startTime)
-    let endTime = new Date(activityBean.endTime)
-    let activityTime = `活動時間:${startTime.getFullYear()}年${startTime.getMonth()}月${startTime.getDate()}日 ~ ${endTime.getFullYear()}年${endTime.getMonth()}月${endTime.getDate()}日`
-    console.log(startTime.getFullYear());
+    let activityTime = `活動時間:${activitjson.activityBean.startTime} ~ ${activitjson.activityBean.endTime}`
     $("#activityTime").html(activityTime);
 
 }
+
+
 function changeVal(e) {
     Swal.fire({
         input: 'textarea',
@@ -118,6 +134,7 @@ function changeVal(e) {
 
         inputValidator: (value) => {
             e.innerHTML = value;
+            activitjson.activityBean.content = value;
         },
         showCancelButton: true
     })
@@ -140,17 +157,51 @@ function changeH1title(e) {
                 return '請輸入標題!'
             } else {
                 e.innerHTML = value;
+                activitjson.activityBean.title = value
             }
         }
     })
 
 }
 function changeimg(e) {
-    $("body").append($(`<input type="file" id="avatar" style="display:hidden;"  accept="image/*">`));
     $("#avatar").click();
     $("#avatar").change(function (e) {
         updeBase64(e.target.files[0]);
-        $("#avatar").remove();
     })
 
+}
+function changeTime(e) {
+    let startTime;
+    let endTime;
+    Swal.fire({
+        title: '<h2>請輸入時間<h2>',
+        width: "690px",
+        html: `
+                <h4  id="activityTime"  class="u-text u-text-default u-text-4">
+                    <div> 
+                    <input type="datetime-local" id="startTime" value="${activitjson.activityBean.startTime}"> ~ <input type="datetime-local" id="endTime" value="${activitjson.activityBean.endTime}" >
+                    </div>
+                </h4>
+                `,
+        stopKeydownPropagation: false,
+
+        preConfirm: () => {
+            startTime = $(Swal.getPopup().querySelector('#startTime')).val();
+            endTime = $(Swal.getPopup().querySelector('#endTime')).val();
+            if (startTime < 1 || endTime < 1) {
+                Swal.showValidationMessage(`請輸入時間!`)
+            } else if (new Date(endTime) <= new Date(startTime)) {
+                Swal.showValidationMessage(`結束時間必須大於開始時間`)
+            } else if (activitjson.activityBean.id < 1 && new Date(startTime) < new Date()) {
+                Swal.showValidationMessage(`開始時間必須比今天大`)
+            } else {
+                activitjson.activityBean.startTime = startTime.replace("T", " ");
+                activitjson.activityBean.endTime = endTime.replace("T", " ");
+                changeHtmlActivity();
+            }
+
+        }
+
+
+    })
 }

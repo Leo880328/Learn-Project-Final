@@ -46,7 +46,7 @@ public class ActivityController {
 	}
 
 	// Activity_OP/insert post
-	@PostMapping("/ActivityOPInsert")
+	@PostMapping("/ActivityOPUpdate")
 	public String insertActivities() {
 		return "ActivityUpdate";
 	}
