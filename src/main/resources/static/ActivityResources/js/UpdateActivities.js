@@ -4,8 +4,8 @@ let activitjson = {
         id: null,
         title: null,
         content: null,
-        start_time: null,
-        end_time: null,
+        startTime: null,
+        endTime: null,
         imgPath: null
     },
     base64FileBean:
@@ -23,41 +23,48 @@ $().ready(
         let url
         let idIndexOf = window.location.href.indexOf('-');
         let id = window.location.href.substring(idIndexOf + 1);
-        console.log(id)
-        activitjson.activityBean.id = id
+        if (id) {
+            selectByID(id)
+            activitjson.activityBean.id = id
+        }
     },
 )
-
 function selectByID(id) {
     $.ajax({
         url: "http://localhost:8080/HappyLearning/ActivitySelect-" + id,
         method: "GET",
         dataType: "JSON",
         success: function (activity) {
-            $(".u-group-3").empty();
-            $(".u-group-3").append(creatActivity(activity))
+            creatActivity(activity);
         },
         error: function (err) { alert("資料獲取失敗，請刷新網頁!") },
     });
 }
 function saveActivityBean() {
-    console.log($(".u-text-4").val())
+    activitjson.activityBean.title = $("#title").html();
+    activitjson.activityBean.content = $("#content").html();
+    activitjson.activityBean.startTime = $("#startTime").val();
+    activitjson.activityBean.endTime = $("#endTime").val();
+    console.log(activitjson.activityBean);
+
 
 }
 function saveActivity() {
-    activitjson.activityBean.title = $("#title").val();
-    activitjson.activityBean.content = $("#content").val();
-    activitjson.activityBean.start_time = $("#start_time").val();
-    activitjson.activityBean.tiend_timetle = $("#end_time").val();
-    console.log(activityBean);
-    $.ajax({
-        url: "/Activity_OP",
-        method: "POST",
-        dataType: "JSON",
-        data: activitjson,
-        success: function (res) { console.log(res) },
-        error: function (err) { alert("上傳失敗") },
-    });
+
+    // $.ajax({
+    //     url: "/Activity_OP",
+    //     method: "POST",
+    //     dataType: "JSON",
+    //     data: activitjson,
+    //     success: function (res) { console.log(res) },
+    //     error: function (err) {
+    //         Swal.fire({
+    //             icon: 'error',
+    //             title: '上傳失敗',
+    //             text: err
+    //         })
+    //     },
+    // });
 }
 function updeBase64(file) {
 
@@ -71,41 +78,79 @@ function updeBase64(file) {
         // 讀取檔案
         reader.readAsDataURL(file)
     }).then(base64 => {
+
         activitjson.base64FileBean.fileType = file.type; // 把編碼後的字串return
         activitjson.base64FileBean.base64 = base64; // 把編碼後的字串return
+        $('.u-image-1').attr('src', activitjson.base64FileBean.base64);
     }).catch(err => {
-        alert("圖片格式錯誤錯誤:" + err)
+        Swal.fire({
+            icon: 'error',
+            title: '圖片格式錯誤錯誤',
+            text: err
+        })
     })
 }
+function creatActivity(activityBean) {
+    $("#title").html(activityBean.title);
+    $("#content").html(activityBean.content);
+    if (activityBean.imgPath != 'null' && activityBean.imgPath != null) {
 
-function creatActivity(ActivityBean) {
-    let startTime = new Date(ActivityBean.startTime)
-    let endTime = new Date(ActivityBean.endTime)
-    let imgPath = 'ActivityResources/images/default-image.jpg';
-    if (ActivityBean.imgPath != 'null' && ActivityBean.imgPath != null) {
-        imgPath = ActivityBean.imgPath;
     }
-    let div = $(`
-    <div class="u-container-layout u-container-layout-3">
-    <h1 class="u-align-center u-custom-font u-font-lobster u-text u-text-3" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">${ActivityBean.title}</h1>
-    <img class="u-image u-image-default u-image-1" src="${imgPath}" alt="圖片讀取失敗" data-image-width="400" data-image-height="265">
-    <div class="u-border-1 u-border-black u-border-no-left u-border-no-right u-border-no-top u-container-style u-grey-10 u-group u-group-4">
-      <div class="u-container-layout u-container-layout-4">
-        <a href="" class="u-active-none u-border-2 u-border-hover-palette-1-dark-2 u-btn u-button-style u-hover-none u-none u-text-hover-palette-1-dark-2 u-text-palette-1-base u-btn-1"><span class="u-icon"><svg class="u-svg-content" viewBox="0 0 42 42" x="0px" y="0px" style="width: 1em; height: 1em;"><polygon points="42,20 22,20 22,0 20,0 20,20 0,20 0,22 20,22 20,42 22,42 22,22 42,22 "></polygon></svg><img></span>&nbsp;上傳圖片
-        </a>
-      </div>
-    </div>
-    <div class="u-align-center u-container-style u-grey-10 u-group u-group-5">
-      <div class="u-container-layout u-container-layout-5">
-        <textarea class="u-text u-text-default u-text-4">
-        ${ActivityBean.content}
-        </textarea>
-      </div>
-    </div>
-    <button onclick="saveActivityBean()" id="saveActivityBean" class="u-align-center u-btn u-btn-round u-button-style u-hover-palette-1-light-2 u-palette-1-base u-radius-2 u-btn-2">儲存&nbsp;​&nbsp;<span class="u-file-icon u-icon u-icon-2"><img src="ActivityResources/images/2874091.png" alt=""></span>
-    </button>
-  </div>
-      `);
+    let startTime = new Date(activityBean.startTime)
+    let endTime = new Date(activityBean.endTime)
+    let activityTime = `活動時間:${startTime.getFullYear()}年${startTime.getMonth()}月${startTime.getDate()}日 ~ ${endTime.getFullYear()}年${endTime.getMonth()}月${endTime.getDate()}日`
+    console.log(startTime.getFullYear());
+    $("#activityTime").html(activityTime);
 
-    return div;
+}
+function changeVal(e) {
+    Swal.fire({
+        input: 'textarea',
+        inputLabel: '標題',
+        heightAuto: false,
+        customClass: {
+            popup: "swal-popup-changeVal",
+            input: 'swal-textarea-1'
+
+        },
+        inputValue: e.innerHTML,
+        inputPlaceholder: '請輸入內容',
+
+        inputValidator: (value) => {
+            e.innerHTML = value;
+        },
+        showCancelButton: true
+    })
+
+
+    console.log(e.innerHTML)
+}
+function changeH1title(e) {
+
+    Swal.fire({
+        title: '標題',
+        input: 'text',
+        width: '800px',
+        inputValue: e.innerHTML,
+        //        inputLabel: '請輸入標題',
+        inputPlaceholder: '請輸入內容',
+        showCancelButton: true,
+        inputValidator: (value) => {
+            if (!value) {
+                return '請輸入標題!'
+            } else {
+                e.innerHTML = value;
+            }
+        }
+    })
+
+}
+function changeimg(e) {
+    $("body").append($(`<input type="file" id="avatar" style="display:hidden;"  accept="image/*">`));
+    $("#avatar").click();
+    $("#avatar").change(function (e) {
+        updeBase64(e.target.files[0]);
+        $("#avatar").remove();
+    })
+
 }

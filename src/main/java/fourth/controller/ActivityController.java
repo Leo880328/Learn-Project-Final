@@ -27,12 +27,6 @@ public class ActivityController {
 	@Autowired
 	private ActivityImageService activityImageService;
 
-//	// Activity_OP_test get
-//	@GetMapping("/ActivityTest")
-//	public String test() {
-//		return "ActivityUpdate";
-//	}
-	
 
 	// Activity get
 	@GetMapping("/Activities")
