@@ -63,6 +63,12 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 							<div class="col-lg-8 no-padding">
 								<div class="form-message">
 									<h2 class="title">我的檔案</h2>
+									<c:if
+															test="<%=memberBean.getStatus() == 1%>">
+										<button type="submit">
+											<a href="becometeacher.controller">申請成為老師</a>
+									</button>
+									</c:if>
 									<form action="updateMyUser" method="post"
 										class="teamo-contact-fom">
 										<div class="row">
@@ -121,18 +127,16 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 											<div class="col-sm-6">
 												<p>
 													<span class="form-label">身分</span><span
-														class="form-control-wrap "> 
-															<c:if test="<%=memberBean.getStatus() == 1%>">
-																<option value="1">學生</option> <button type="submit">
-			<a href="becometeacher.controller">申請成為老師</a>
-		</button>
-															</c:if>
-															<c:if test="<%=memberBean.getStatus() == 2%>">
-																<option value="2">老師</option>
-															</c:if>
-															<c:if test="<%=memberBean.getStatus() == 3%>">
-																<option value="3">管理員</option>
-															</c:if>
+														class="form-control-wrap "> <c:if
+															test="<%=memberBean.getStatus() == 1%>">
+															<p>
+																<option value="1">學生</option>
+															</p>
+														</c:if> <c:if test="<%=memberBean.getStatus() == 2%>">
+															<option value="2">老師</option>
+														</c:if> <c:if test="<%=memberBean.getStatus() == 3%>">
+															<option value="3">管理員</option>
+														</c:if>
 													</span>
 												</p>
 											</div>
@@ -177,6 +181,7 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 									<div class="teamo-contact-info">
 										<h2 class="title"></h2>
 										<div class="info">
+
 											<div class="item phone">
 												<span class="icon"></span><span class="text"><input
 													title="cellphone" type="text" name="cellphone" size="40"

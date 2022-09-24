@@ -215,4 +215,17 @@
 	<script type="text/javascript" charset="utf8"
 		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 </body>
+<script>
+		function previewImg(element) {
+
+			let file = element.files[0];
+			let img = element.parentElement.querySelector("#img");
+			let imgPath = element.parentElement.querySelector("#imgPath");
+			if (file) {
+				img.src = URL.createObjectURL(file);
+				imgPath.value = "images/" + file.name;
+			}
+
+		}
+	</script>
 </html>

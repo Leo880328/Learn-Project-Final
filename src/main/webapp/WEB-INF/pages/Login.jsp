@@ -4,9 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="google-signin-client_id"
+	content="489628837861-ttr8bjl9ptu0br8oqnip94gg7fvgqp0f.apps.googleusercontent.com">
 <title>登入</title>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://kit.fontawesome.com/6cda0c2d7d.js"
 	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
+	integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA="
+	crossorigin="anonymous"></script>
+
 <link rel="shortcut icon" type="image/x-icon"
 	href="assets/images/smalllogo.png" />
 <link rel="shortcut icon" type="image/x-icon"
@@ -33,18 +40,18 @@ article {
 							<div class="sign1">
 								<h5 class="title-login">登入</h5>
 								<div>
-									如果您還沒有註冊，請點擊<a href="register.controller">快速註冊</a>
+									如果您還沒有註冊，請點擊
+									<button type="button" class="btn btn-info btn--raised">
+										<a href="register.controller">快速註冊</a>
+									</button>
+
 								</div>
 								<form method="post" action="checklogin.controller">
-									<div class="social-account">
-										<h6 class="title-social">其他登入方式</h6>
-										<a href="#" class="mxh-item google"><i
-											class="icon fa fa-google" aria-hidden="true"></i><span
-											class="text">Google</span></a> <a href="#"
-											class="mxh-item twitter"><i class="icon fa fa-twitter"
-											aria-hidden="true"></i><span class="text">TWITTER</span></a>
-									</div>
-									<br> <font face="微軟正黑體">或使用快樂學習帳號密碼登入</font>
+<!-- 									<div class="social-account"> -->
+<!-- 										<h6 class="title-social">其他登入方式</h6> -->
+<!-- 										<div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+<!-- 									</div> -->
+									<br> <font face="微軟正黑體">使用快樂學習帳號密碼登入</font>
 									<div class=group>
 										<label for="account"><i class="fa-solid fa-user"></i>
 										</label> <input type="text" name="account" id="account"
@@ -61,11 +68,14 @@ article {
 												for="cb1" class="label-text">Remember me</label></span>
 										</p>
 										<p>
-											<a href="#" class="forgot-pw">忘記密碼?</a>
+											<input type="text" name="email" id="email"
+												placeholder="請輸入email" autocomplete="off" >
+											<a id="forgot" class="forgot-pw">忘記密碼?</a>
 										</p>
 									</div>
-									<div class="button">
-										<input type="submit" name="signin" id="signin" value="登入">
+									<div class="">
+										<input type="submit" class="btn btn-success" name="signin"
+											id="signin" value="登入">
 									</div>
 									<br>
 									<p>${errors.msg}</p>
@@ -149,4 +159,22 @@ article {
 		<!-- 	</div> -->
 	</article>
 </body>
+<script>
+	function onSignIn(googleUser) {
+		var profile = googleUser.getBasicProfile();
+		console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+		console.log('Name: ' + profile.getName());
+		console.log('Image URL: ' + profile.getImageUrl());
+		console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+	}
+
+	$('#forgot').on("click", function() {
+			let mail=$('#email').val();
+			console.log(mail)
+		fetch("/HappyLearning/forgotpassword/"+mail, {
+			method : 'GET'
+		});
+
+	})
+</script>
 </html>

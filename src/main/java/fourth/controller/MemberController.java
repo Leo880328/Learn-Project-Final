@@ -26,6 +26,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import fourth.bean.MemberBean;
+import fourth.service.MemberMailService;
 import fourth.service.MemberService;
 
 @Controller
@@ -35,14 +36,33 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-	//成為老師
+	@Autowired
+	private MemberMailService memberMailService;
+
+	@GetMapping(path = "/forgotpassword/{mail}")
+	public void forgotPWD(@PathVariable String mail) {
+		MemberBean member = memberService.checkRegister(mail);
+		System.out.println("member: " + mail);
+		if (member != null) {
+			String pwd = memberMailService.givenUsingJava8_whenGeneratingRandomAlphanumericString_thenCorrect();
+			System.out.println("pwd:" + pwd);
+			member.setPassword(pwd);
+			MemberBean registerUser = memberService.registerUser(member);
+			System.out.println("registerUser: " + registerUser);
+			System.out.println("email:" + member.getEmail());
+			memberMailService.sendMail(member.getEmail(), "[ 快樂學習 ]忘記密碼通知信",
+					"親愛的會員您好:<br><br>您的帳號:" + member.getAccount() + " 申請忘記密碼通知，" + "系統發送新密碼為:" + pwd + "，"
+							+ "請使用新密碼登入，並至登入頁重新修改密碼。<br> <br> <br>  Leo管理系統 敬上");
+
+		}
+	}
+
+	// 成為老師
 	@RequestMapping(path = "/becometeacher.controller", method = RequestMethod.GET)
 	public String becometeacherController() {
 		return "BecomeTeacher";
 	}
-	
-	
-	
+
 	// 一般會員查詢
 	@RequestMapping(path = "/user.controller", method = RequestMethod.GET)
 	public String userController(Model m) {
@@ -175,7 +195,7 @@ public class MemberController {
 
 	// 更新會員
 	@PostMapping("/updateUser")
-	public String updateUser(MemberBean memberBean,MultipartFile mf) throws IllegalStateException, IOException {
+	public String updateUser(MemberBean memberBean, MultipartFile mf) throws IllegalStateException, IOException {
 //		String fileName = mf.getOriginalFilename();
 //		String saveFileDir = "D:\\webgit\\teamproject\\HappyLearning\\src\\main\\resources\\static\\images";
 //		File saveFileDirPath = new File(saveFileDir);

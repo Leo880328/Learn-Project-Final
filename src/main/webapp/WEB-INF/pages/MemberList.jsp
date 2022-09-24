@@ -22,11 +22,12 @@
 .tb {
 	border-collapse: collapse;
 	margin-left: 300px;
-	width: 1200px;
+	width: 1600px;
 	/*自動斷行*/
 	word-wrap: break-word;
 	table-layout: fixed;
 }
+
 </style>
 
 </head>
@@ -105,9 +106,10 @@
 					<td width="150px"><c:out value="${mb.birthday}" /></td>
 					<td width="159px"><c:out value="${mb.cellphone}" /></td>
 					<td width="200px"><c:out value="${mb.email}" /></td>
-					<td width="300px"><c:out value="${mb.joinDate}" /></td>
-					<td><a href="showEditUser?userId=${mb.userId} ">修改</a> <a
-						onclick="if( !(confirm('確認刪除?') ) ) return false"
+					<td class="td1"><c:out value="${mb.joinDate}" /></td>
+					<td><a class="btn btn-warning" href="showEditUser?userId=${mb.userId} ">修改</a> <a
+						class="btn btn-danger btn--raised"
+						onclick="if( !(confirm('確認刪除?') ) ) return false";alert(刪除成功)
 						href="deleteUser?userId=${mb.userId} ">刪除</a></td>
 				</tr>
 			</tbody>
