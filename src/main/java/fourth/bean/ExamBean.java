@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -36,6 +37,9 @@ public class ExamBean implements Serializable
 	@JoinColumn(name="EDUCATIONLEVEL")
     private ExamEduBean education;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "exam")
+    private  List<ExamTest> examTests = new ArrayList<ExamTest>() ;
+	
 	@Column(name = "EXAMNAME")
     private String examName;
 
@@ -45,8 +49,7 @@ public class ExamBean implements Serializable
 	@Column(name = "EXAMPIC")	
 	private String examPic;
 	
-	
-	
+
 	public ExamBean() {
 		super();
 	}
@@ -124,16 +127,15 @@ public class ExamBean implements Serializable
 	public void setExamPic(String examPic) {
 		this.examPic = examPic;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
+	public List<ExamTest> getExamTests() {
+		return examTests;
+	}
+
+	public void setExamTests(List<ExamTest> examTests) {
+		this.examTests = examTests;
+	}
+	
   
 
 }

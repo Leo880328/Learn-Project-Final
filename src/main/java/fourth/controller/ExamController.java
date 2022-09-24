@@ -25,16 +25,20 @@ import fourth.bean.ExamQuesBean;
 import fourth.bean.MemberBean;
 import fourth.dao.ExamDaoInterface;
 import fourth.service.ExamService;
+import fourth.service.ExamTestService;
 import fourth.util.ExamUtil;
 
 
 //	/ExamMainView
 @Controller
-@SessionAttributes(names = {"examQuTable","user"})
+@SessionAttributes(names = {"testMap","user"})
 public class ExamController {
 	
 	@Autowired
 	private ExamService examService;
+	
+	@Autowired
+	private ExamTestService examTestService;
 	
 	@GetMapping("/firstExamController")
 	public String entrance(Model m,HttpServletRequest request) {
@@ -58,18 +62,22 @@ public class ExamController {
 	
 	
 	@PostMapping("/ExamController")
-	public String processAction(@RequestParam("todo") String todo, Model m, Model examQuTable
+	public String processAction(@RequestParam("todo") String todo, Model m
 			
-			//考試相關
+			//考試相關(queryAll的參數)
 			,@RequestParam(defaultValue = "") String quSubject,@RequestParam(defaultValue = "") String quEducation
 			
-			//考卷相關
+			//考卷相關(個別query參數)
 			,@RequestParam(defaultValue = "") String subject,@RequestParam(defaultValue = "") String education
 			,@RequestParam(defaultValue = "") String examName,@RequestParam(defaultValue = "") String examDate
 			,@RequestParam(defaultValue = "") String examID,@RequestParam(defaultValue = "") String examPic
 			
 			//考試答題答案
-			,@RequestParam(defaultValue = "") List<String> answerList, HttpServletRequest request) {
+			,@RequestParam(defaultValue = "") List<String> answerList, HttpServletRequest request
+			
+			//考試確認 收藏題目
+			,@RequestParam(defaultValue = "") List<Integer> reserveQuIdx) {
+		
 		
 		MemberBean user = (MemberBean)m.getAttribute("user");
 		List<ExamBean> theExamTable= new ArrayList<ExamBean>();
@@ -126,51 +134,53 @@ public class ExamController {
 		}else if (todo.equals("test")) {
 			
 			
-			theExamQuTable = examService.selectQu(subject,education,examID);
-			m.addAttribute("examQuTable", theExamQuTable);
-			
+//			theExamQuTable = examService.selectQu(subject,education,examID);
+//			m.addAttribute("examQuTable", theExamQuTable);
+			Map<String, Object> testMap = examTestService.EstaTest(examID);
+			m.addAttribute("testMap",testMap);
 			
 			
 			nextPage = "ExamPaper";
 			
 		}else if(todo.equals("testSubmit")) {
 		
-			System.err.println(examQuTable);
-			List<ExamQuesBean> examQuesList=(List<ExamQuesBean>) m.getAttribute("examQuTable");
-			List<ExamQuesBean> examWrongList= new ArrayList<ExamQuesBean>();
-			for(int i=0; i < examQuesList.size();i++) {
-				System.err.println("答案為"+examQuesList.get(i).getQuesAnswer());
+			
+			Map<String, Object> testMap = (Map<String, Object>) m.getAttribute("testMap");
+			List<ExamQuesBean> examQuList = (List<ExamQuesBean>)testMap.get("examQueList");
+			List<String> chooseList = new ArrayList<String>();
+			////接值: 題目map、chooseAns值
+		
+			
+			//chooseAns		
+			for (int i = 0; i < examQuList.size(); i++) {
+				chooseList.add(request.getParameter("answer"+i));
+				System.err.println("controller選擇為"+request.getParameter("answer"+i));
+				System.err.println("controller答案為"+examQuList.get(i).getQuesAnswer());
 			}
+			testMap.put("chooseList", chooseList);
+			
+			
+			//對答案並加入錯誤的題目，等等前台會顯示
+			examTestService.checkAns(testMap);
+			
+			
+			
+			//紀錄會員考試資訊
+			examTestService.EstaRecord(testMap, user.getuserId());
 
-			int ctCount =0;
-//			//故意多宣告一個陣列長度，讓答案陣列的i與答案參數的i互相相等，後面getParameter比較方便
-			String[] chooseAns = new String[8];
 			
-			//讀取答案
-			for(int i=1;i<= examQuesList.size();i++) {
-				chooseAns[i] = request.getParameter("answer"+i);
-				System.err.println("第"+i+"題做答"+chooseAns[i]);
-				if (chooseAns[i].equals(examQuesList.get(i-1).getQuesAnswer()) ) {
-					
-					ctCount++;
-					
-				}else {
-					
-					//把錯誤題目加入List
-					examWrongList.add(examQuesList.get(i-1));
-					
-					System.err.println("答錯第"+i+"題"+examQuesList.get(i-1).getQuesContent());
-					System.err.println("examId"+user.getuserId());
-				}
-			}	
+			nextPage = "ExamShowScore";
 			
 			
-			m.addAttribute("examWrongTable", examWrongList);
+		}else if(todo.equals("testConfirm")) {
 			
-			System.out.println("答對"+ctCount+"題");
-			m.addAttribute("examResult", ctCount);
+			//保存題目
+			Map<String, Object> testMap = (Map<String, Object>) m.getAttribute("testMap");
+			List<ExamQuesBean> reserveList = (List<ExamQuesBean>)testMap.get("examWrongList");
 			
-			nextPage = "ExamShowScore";	
+			examTestService.reserveQu(testMap, reserveQuIdx,user.getuserId());
+			
+			nextPage = nextPageFunction(pageStatus);
 		}
 
 		

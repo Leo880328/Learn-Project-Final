@@ -1,10 +1,12 @@
-package fourth.service;
+  package fourth.service;
 
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -106,6 +108,15 @@ public class ExamService  {
 	//刪除
 	public void delete(String id){
 		Integer examID = Integer.valueOf(id);
+		
+		ExamBean deExamBean = examRes.findById(examID).get();
+		
+		List<ExamTest> deSet = deExamBean.getExamTests();
+		
+		for (int i = 0; i < deSet.size(); i++) {
+			deSet.get(i).setExam(null);
+		}
+		
 		examRes.deleteById(examID);
 	}
 	

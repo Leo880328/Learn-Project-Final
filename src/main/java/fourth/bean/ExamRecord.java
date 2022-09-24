@@ -34,25 +34,35 @@ public class ExamRecord implements Serializable
     private MemberBean member;
 	
 	@ManyToOne
-	@JoinColumn(name="examtestid")
+	@JoinColumn(name="EXAMTESTID")
     private ExamTest examTest;
 	
-	private int examScore;
+	@JoinColumn(name="EXAMSCORE")
+	private int examscore;
 	
-	private Date testDate;
+	@JoinColumn(name="TESTDATE")
+	private Date testdate;
 	
 	@Override
 	public String toString() {
 		return "ExamRecord [examMemRecordId=" + examMemRecordId + ", member=" + member + ", examTest=" + examTest
-				+ ", examScore=" + examScore + ", testDate=" + testDate + "]";
+				+ ", examScore=" + examscore + ", testDate=" + testdate + "]";
 	}
+	
+	
+	
+	public ExamRecord() {
+		super();
+	}
+
+
 
 	public ExamRecord(MemberBean member, ExamTest examTest, int examScore, Date testDate) {
 		super();
 		this.member = member;
 		this.examTest = examTest;
-		this.examScore = examScore;
-		this.testDate = testDate;
+		this.examscore = examScore;
+		this.testdate = testDate;
 	}
 
 	public ExamRecord(Integer examMemRecordId, MemberBean member, ExamTest examTest, int examScore, Date testDate) {
@@ -60,8 +70,8 @@ public class ExamRecord implements Serializable
 		this.examMemRecordId = examMemRecordId;
 		this.member = member;
 		this.examTest = examTest;
-		this.examScore = examScore;
-		this.testDate = testDate;
+		this.examscore = examScore;
+		this.testdate = testDate;
 	}
 
 	public Integer getExamMemRecordId() {
@@ -89,19 +99,19 @@ public class ExamRecord implements Serializable
 	}
 
 	public int getExamScore() {
-		return examScore;
+		return examscore;
 	}
 
 	public void setExamScore(int examScore) {
-		this.examScore = examScore;
+		this.examscore = examScore;
 	}
 
 	public Date getTestDate() {
-		return testDate;
+		return testdate;
 	}
 
 	public void setTestDate(Date testDate) {
-		this.testDate = testDate;
+		this.testdate = testDate;
 	}
 	
 }

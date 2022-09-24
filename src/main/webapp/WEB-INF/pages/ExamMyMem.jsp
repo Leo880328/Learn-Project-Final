@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="UTF-8"
 	import="java.util.*,fourth.bean.*,java.util.Date,java.text.SimpleDateFormat,java.text.DateFormat"%>
 <!DOCTYPE html>
 <html>
@@ -43,36 +42,18 @@
 
 <body>
 
-    <jsp:include page="BackendHeader.jsp" />
+    <jsp:include page="Header.jsp" />
     <!-- 選項與CRUD按鈕 -->
-    <br>
-    <br>
-    <br>
-    <br>
+
     <div class="divform">
         <form action="ExamController" method="post">
             <div>
-                <label>科目:</label>
-                <select name="quSubject" size="1">
-                    <option value="數學">數學</option>
-                    <option value="英文">英文</option>
-                    <option value="國文">國文</option>
-                </select>
-                <label>程度:
-                </label>
-                <select name="quEducation" size="1">
-                    <option value="國中">國中</option>
-                    <option value="高中">高中</option>
-                    <option value="成人">成人</option>
-                </select>
+                <input type="submit" name="todo" value="query"> 考卷
+                <input type="submit" name="todo" value="queryAll"> 錯題
             </div>
-            <div>
-                <input type="submit" name="todo" value="query">
-                <input type="submit" name="todo" value="queryAll">
-                <input type="submit" name="todo" value="upload">
-            </div>
+            
             <!-- 表格 -->
-            <h2>試卷名稱</h2>
+            <h2>考試天地</h2>
             <table class="tb" align="center">
                 <thead>
                     <tr>
@@ -82,9 +63,6 @@
                         <th>程度</th>
                         <th>名稱</th>
                         <th>年度</th>
-                        <th>刪除</th>
-                        <th>更新</th>
-                        <th>考試</th>
                     </tr>
                 </thead>
 
@@ -109,9 +87,6 @@
 				                <input type="hidden" name="examName" value="<%= examTable.get(i).getExamName()%>">
 				                <input type="hidden" name="examDate" value="<%= dateToStr%>">
 				                <input type="hidden" name="examPic" value="<%= examTable.get(i).getExamPic() %>">
-				                <td><input type="submit" name="todo" value="delete" onclick="if( !(confirm('確認刪除?') ) ) return false"></td>
-				                <td><input type="submit" name="todo" value="update"></td>
-				                <td><input type="submit" name="todo" value="test"></td>
 				            </form>
 				    </tr>
 				</tbody>

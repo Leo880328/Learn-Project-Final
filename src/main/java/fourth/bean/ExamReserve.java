@@ -39,6 +39,14 @@ public class ExamReserve implements Serializable
 		return "ExamReserve [examReserveID=" + examReserveID + ", examQues=" + examQues + ", member=" + member
 				+ ", marker=" + marker + "]";
 	}
+	
+	
+	
+	public ExamReserve() {
+		super();
+	}
+
+
 
 	public ExamReserve(ExamQuesBean examQues, MemberBean member, Integer marker) {
 		super();
