@@ -136,8 +136,7 @@ public class CourseController {
 		m.addAttribute("errorMsgMap", errorMsgMap);
 		if (keyword == "") {
 			keyword = "0";
-		}
-		;
+		};
 		CourseBean cb = cService.findByCourseId(Integer.parseInt(keyword));
 		if (keyword == "0" || cb == null) {
 			errorMsgMap.put("QueryError", "<font color=red size=5>查無資料!!</font>");

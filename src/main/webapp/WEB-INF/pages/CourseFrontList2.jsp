@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.*,fourth.*"%>
 <!DOCTYPE html>
@@ -9,6 +8,7 @@
 <title>課程列表</title>
 </head>
 <body class="inblog-page">
+
 	<jsp:include page="Header.jsp" />
 
 
@@ -554,6 +554,7 @@
 	<br>
 	<br>
 	<jsp:include page="Footer.jsp" />
+
 
 </body>
 </html>

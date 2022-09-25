@@ -48,10 +48,12 @@ public class CourseBean implements Serializable {
 	private int course_status;
 	private String course_picture;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "education_id")
 	private CourseEdu courseedu;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "subject_id")
 	private CourseSub coursesub;

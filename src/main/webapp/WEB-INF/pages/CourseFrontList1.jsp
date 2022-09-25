@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>課程列表</title>
+
 <script type="text/javascript">
 // $(function(){
 // 	$('#cb1').click(function(){
@@ -29,6 +30,7 @@ border:solid 0.5px;
 border-radius: 5px;
 }
 </style>
+
 </head>
 <body>
 <jsp:include page="Header.jsp"/>
@@ -85,6 +87,7 @@ border-radius: 5px;
             <div class="row">
                 <div class="content-area shop-grid-content no-banner col-lg-9 col-md-9 col-sm-12 col-xs-12">
                     <div class="site-main">
+
 <!--                         <h3 class="custom_blog_title">所有課程 </h3> -->
                         <div class="shop-top-control">
 <!--                             <form class="select-item select-form"><span class="title">Sort</span><select title="sort" -->
@@ -204,10 +207,8 @@ border-radius: 5px;
 																	<c:out value="${course.course_price}" />
 																</ins>
 															</div>
-															<br> <a href=""><button>
-																	加入購物車 <i class="fa-solid fa-cart-shopping"></i>
-																</button></a>
-
+															<br> 
+															<button class="fa-solid fa-cart-shopping" onclick="add(${course.course_id})">加入購物車</button>
 														</div>
 													</div>
 												</div>
@@ -224,17 +225,19 @@ border-radius: 5px;
 <!--                                         aria-hidden="true"></i></a><a href="#" class="page-numbers current">1</a> -->
 <!--                                         <a href="#" class="page-numbers">2</a><a href="#" class="page-numbers">3</a> -->
 <!--                                     <a href="#" class="page-numbers"><i class="icon fa fa-angle-right" aria-hidden="true"></i></a> -->
+
 <!--                             </div> -->
 <!--                         </div> -->
                     </div>
                 </div>
-               
+
                 <div class="sidebar col-lg-3 col-md-3 col-sm-12 col-xs-12">
                     <div class="wrapper-sidebar shop-sidebar">
                         <div class="widget woof_Widget">
                             <div class="widget widget-categories">
                                 <h3 class="widgettitle">課程分類</h3>
                                 <ul class="list-categories">
+
                                 
                                     <li><a href="coursefront.qenglish"><button type="submit" class="cb" id="cb1">英文</button></a>
                                     <a href="coursefront.qmath"><button type="submit" class="cb" id="cb2">數學</button></a>
@@ -273,6 +276,7 @@ border-radius: 5px;
 <!--                                     <li><input id="cb9" type="checkbox"><label for="cb9" class="label-text">成人</label> -->
 <!--                                     </li> -->
 
+
                                 </ul>
                             </div>
 
@@ -285,6 +289,8 @@ border-radius: 5px;
         </div>
     </div>
 <jsp:include page="Footer.jsp"/>
+<script src="wayne/cart.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
 $(function(){
     $("#cb1").click(function (){
@@ -300,6 +306,7 @@ $(function(){
 })
 
 </script>
+
 
 </body>
 </html>
