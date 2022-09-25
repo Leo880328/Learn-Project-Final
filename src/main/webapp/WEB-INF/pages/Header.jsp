@@ -164,7 +164,7 @@
 									class="toggle-submenu"></span>
 								<li><a href="Activity" class="teamo-menu-item-title"
 									title="Pages">活動</a><span class="toggle-submenu"></span></li>
-								<li><a href="ColumnQueryAll.jsp"
+								<li><a href="QueryAll"
 									class="teamo-menu-item-title" title="Blogs">專欄</a><span
 									class="toggle-submenu"></span>
 									<ul class="submenu">
