@@ -121,10 +121,13 @@ function updeBase64(file) {
     })
 }
 function changeHtmlActivity() {
-    $("#title").html(activitjson.activityBean.title);
-    $("#content").html(activitjson.activityBean.content);
-    console.log(activitjson.activityBean.imgPath != 'null')
-    console.log(activitjson.activityBean.imgPath > 0)
+
+    if (activitjson.activityBean.title != null) {
+        $("#title").html(activitjson.activityBean.title);
+    }
+    if (activitjson.activityBean.content != null) {
+        $("#content").html(activitjson.activityBean.content);
+    }
     if (activitjson.activityBean.imgPath != 'null' && activitjson.activityBean.imgPath != null) {
         $("#imgPath").attr('src', activitjson.activityBean.imgPath)
     }
@@ -226,4 +229,50 @@ function changeTime(e) {
 
 
     })
+}
+
+function delectActivity() {
+
+    Swal.fire({
+        icon: 'warning',
+        title: '確定是否刪除',
+        text: `請在下方輸入框中輸入: ${activitjson.activityBean.id} 來確認刪除!`,
+        input: 'text',
+        showCancelButton: true,
+        inputValidator: (value) => {
+            if (value != activitjson.activityBean.id) {
+                return "驗證碼錯誤!"
+            }
+            $.ajax({
+                url: "Activity_OP",
+                type: 'DELETE',
+                dataType: "JSON",
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(activitjson.activityBean),
+                success: function (res) {
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: '刪除成功',
+                        text: '刪除成功，請去顯示頁面確認',
+                        willClose: function () {
+                            $("body").append($(`<form action="ActivitiesOP" method="GET" id="onlyPost"></form>`))
+                            $("#onlyPost").submit()
+                        }
+                    })
+
+                },
+                error: function (err) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '刪除失敗',
+                        text: JSON.stringify(err)
+                    })
+                },
+            });
+        }
+    })
+
+
+
 }

@@ -17,7 +17,7 @@ import fourth.bean.Base64FileBean;
 public class ActivityImageDao {
 
 	private String staticPath = getStaticPath();
-	private String path = "ActivityResources" + File.separator + "images" + File.separator;
+	private String path = "ActivityResources" + File.separator + "activityImages" + File.separator;
 
 	private String getStaticPath() {
 		String path = this.getClass().getClassLoader().getResource("").getPath();

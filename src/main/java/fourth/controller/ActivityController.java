@@ -72,7 +72,7 @@ public class ActivityController {
 	@PostMapping("/ActivitySelect")
 	@ResponseBody
 	public Page<ActivityBean> selectActivityAllByTitleLike(@RequestBody() Map<String, String> map) {
-		System.out.println(map);
+		
 		Integer pageNo = Integer.valueOf(map.get(MapKey_pageNo)) ;
 		Integer pageSize =Integer.valueOf(map.get(MapKey_pageSize));
 		String keyWord = map.get(MapKey_keyWord);
@@ -105,7 +105,6 @@ public class ActivityController {
 		Base64FileBean  base64FileBean = activityJsonBean.getBase64FileBean();
 		//先儲存取得ID，把ID給base64FileBean當名字，儲存base64FileBean拿到imgPath
 		
-		System.out.println(activityBean);
 		ActivityBean insertActivities = activityService.insertActivities(activityBean);
 		base64FileBean.setFileName(insertActivities.getId().toString());
 		String imgPath = activityImageService.saveBase64Img(base64FileBean);
@@ -133,11 +132,12 @@ public class ActivityController {
 
 	@DeleteMapping("/Activity_OP")
 	@ResponseBody
-	public void deleteActivities(@RequestBody ActivityBean activityBean) {
+	public boolean deleteActivities(@RequestBody ActivityBean activityBean) {
 		activityService.deleteActivities(activityBean);
 		if (activityBean.getImgPath() != null) {
 			activityImageService.deleteImg(activityBean.getImgPath());
 		}
+		return true;
 	}
 
 }
