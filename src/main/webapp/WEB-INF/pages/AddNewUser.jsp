@@ -75,10 +75,9 @@
 					</c:if>
 
 					<div class="card new-contact">
-						<div class="new-contact__header" >
-						<input onchange="previewImg(this)" class="zmdi zmdi-camera  "
-							type="file" id="imgin">
-							<a href="" ></a><img
+						<div class="new-contact__header">
+							<input onchange="previewImg(this)" class="zmdi zmdi-camera  "
+								type="file" id="imgin"> <a href=""></a><img
 								src="${mb.img}" id="img" alt="" title="" width="200"
 								height="150" class="new-contact__img"> <input id="imgPath"
 								type="hidden" name="img" title="大頭貼" value="${mb.img}">
@@ -113,16 +112,18 @@
 									<div class="form-group">
 										<label>密碼</label><input type="text" title="密碼" name="password"
 											id="password" value="<c:out value='${mb.password}' />"
-											class="form-control" placeholder="*必填"><font color="red"><span
-											id="sp5" class="msg" ></span></font><i class="form-group__bar"></i>
+											class="form-control" placeholder="*必填"><font
+											color="red"><span id="sp5" class="msg"></span></font><i
+											class="form-group__bar"></i>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
 										<label>Email </label><input type="text" title="電子郵件"
 											value="<c:out value='${mb.email}' />" id="email" name="email"
-											class="form-control" placeholder="*必填"><font color="red"><span
-											id="sp4" class="msg"></span></font><i class="form-group__bar"></i>
+											class="form-control" placeholder="*必填"><font
+											color="red"><span id="sp4" class="msg"></span></font><i
+											class="form-group__bar"></i>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -184,13 +185,17 @@
 										</select><i class="form-group__bar"></i>
 									</div>
 								</div>
-<!-- 								<div class="col-md-6"> -->
-<!-- 									<div class="form-group"> -->
-<!-- 										<label>申請成為老師 </label><input type="button" value="申請表單" -->
-<!-- 											class="form-control" placeholder="i.e. John"><i -->
-<!-- 											class="form-group__bar"></i> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
+								<c:if test="${mb.status !='1'}">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>學歷 </label><input type="text" name="education"
+												size="50" id="education"
+												value="<c:out value='${mb.education}' />"
+												class="form-control" placeholder=""><i
+												class="form-group__bar"></i>
+										</div>
+									</div>
+								</c:if>
 							</div>
 							<div class="form-group">
 								<label>加入時間</label><input type="date" name="joinDate"
@@ -200,22 +205,24 @@
 							</div>
 							<div class="form-group">
 								<label>自我介紹</label>
-								<textarea class="form-control textarea-autosize"></textarea>
+								<textarea title="自我介紹" name="userprofile"
+									class="form-control textarea-autosize" id="userprofile"
+									value="<c:out value='${mb.userprofile}' />" placeholder="*必填">
+								</textarea>
 								<i class="form-group__bar"></i>
 							</div>
 							<div class="clearfix"></div>
 							<div class="mt-5 text-center">
 								<a href="" class="btn btn-primary">清空</a>
 								<button type="button" class="btn btn-primary " id="correct">一鍵輸入</button>
-						<a href="memberList"><input type="submit" name="return"
-							value="儲存"></a>
-							<a href="memberList"><input type="button" name="return" class="btn btn-outline-success"
-			value="返回會員列表"></a>
+								<a href="memberList"><input type="submit" name="return"
+									value="儲存"></a> <a href="memberList"><input
+									type="button" name="return" class="btn btn-outline-success"
+									value="返回會員列表"></a>
 							</div>
 				</form>
 				<br>
-				<div>
-				</div>
+				<div></div>
 			</div>
 
 		</section>

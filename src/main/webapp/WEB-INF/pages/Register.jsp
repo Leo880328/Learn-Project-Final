@@ -88,10 +88,10 @@
 		<script>
 			$(function() {
 				$('#correct').click(function() {
-					$('#account').val("jamesaccount");
-					$('#password').val("james");
-					$('#password1').val("james");
-					$('#email').val("james@gmail.com");
+					$('#account').val("edward");
+					$('#password').val("test123");
+					$('#password1').val("test123");
+					$('#email').val("ch570981400@gmail.com");
 				})
 			})
 		</script>

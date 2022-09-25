@@ -27,7 +27,6 @@
 	word-wrap: break-word;
 	table-layout: fixed;
 }
-
 </style>
 
 </head>
@@ -90,6 +89,9 @@
 					<td><c:out value="${mb.account}" /></td>
 					<!-- <td><c:out value="${mb.password}" /></td> -->
 					<td><c:choose>
+							<c:when test="${mb.status==4}">
+             		 						待審核
+       							</c:when>
 							<c:when test="${mb.status==1}">
              		 						學生
        							</c:when>
@@ -107,9 +109,10 @@
 					<td width="159px"><c:out value="${mb.cellphone}" /></td>
 					<td width="200px"><c:out value="${mb.email}" /></td>
 					<td class="td1"><c:out value="${mb.joinDate}" /></td>
-					<td><a class="btn btn-warning" href="showEditUser?userId=${mb.userId} ">修改</a> <a
+					<td><a class="btn btn-warning"
+						href="showEditUser?userId=${mb.userId} ">修改</a> <a
 						class="btn btn-danger btn--raised"
-						onclick="if( !(confirm('確認刪除?') ) ) return false";alert(刪除成功)
+						onclick="if( !(confirm('確認刪除?') ) ) return false" ;alert(刪除成功)
 						href="deleteUser?userId=${mb.userId} ">刪除</a></td>
 				</tr>
 			</tbody>

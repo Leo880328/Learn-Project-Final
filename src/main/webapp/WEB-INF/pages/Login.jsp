@@ -47,10 +47,10 @@ article {
 
 								</div>
 								<form method="post" action="checklogin.controller">
-<!-- 									<div class="social-account"> -->
-<!-- 										<h6 class="title-social">其他登入方式</h6> -->
-<!-- 										<div class="g-signin2" data-onsuccess="onSignIn"></div> -->
-<!-- 									</div> -->
+									<!-- 									<div class="social-account"> -->
+									<!-- 										<h6 class="title-social">其他登入方式</h6> -->
+									<!-- 										<div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+									<!-- 									</div> -->
 									<br> <font face="微軟正黑體">使用快樂學習帳號密碼登入</font>
 									<div class=group>
 										<label for="account"><i class="fa-solid fa-user"></i>
@@ -69,13 +69,14 @@ article {
 										</p>
 										<p>
 											<input type="text" name="email" id="email"
-												placeholder="請輸入email" autocomplete="off" >
-											<a id="forgot" class="forgot-pw">忘記密碼?</a>
+												placeholder="請輸入email" autocomplete="off"> <a
+												id="forgot" class="forgot-pw">忘記密碼?</a>
 										</p>
 									</div>
 									<div class="">
 										<input type="submit" class="btn btn-success" name="signin"
 											id="signin" value="登入">
+										<button type="button" class="btn btn-primary " id="correct">新會員登入</button>
 									</div>
 									<br>
 									<p>${errors.msg}</p>
@@ -83,82 +84,20 @@ article {
 
 							</div>
 						</div>
-						<!-- --------------------------------------------------------------------------------------------------------------- -->
-						<!-- 	<div class="row"> -->
-						<!-- 		<div class="content-area col-lg-12 col-md-12 col-sm-12 col-xs-12"> -->
-						<!-- 			<div class="site-main"> -->
-						<!-- 				<h3 class="custom_blog_title"></h3> -->
-						<!-- 				<div class="customer_login"> -->
-						<!-- 					<div class="row"> -->
-						<!-- 						<div class="col-lg-6 col-md-6 col-sm-12"> -->
-						<!-- 							<div class="login-item"> -->
-						<!-- 								<h5 class="title-login">登入</h5> -->
-						<!-- 								<form method="post" action="checklogin.controller"> -->
-						<!-- 									<div class="social-account"> -->
-						<!-- 										<h6 class="title-social">其他登入方式</h6> -->
-						<!-- 										<a href="#" class="mxh-item google"><i -->
-						<!-- 											class="icon fa fa-google-square" aria-hidden="true"></i><span -->
-						<!-- 											class="text">Google</span></a><a href="#" -->
-						<!-- 											class="mxh-item twitter"><i class="icon fa fa-twitter" -->
-						<!-- 											aria-hidden="true"></i><span class="text">TWITTER</span></a> -->
-						<!-- 									</div> -->
-						<!-- 									<div class=group> -->
-						<!-- 										<label for="account"><i class="fa-solid fa-user"></i> -->
-						<!-- 										</label> <input type="text" name="account" id="account" -->
-						<!-- 											placeholder="請輸入帳號" autocomplete="off" value=account> -->
-						<!-- 									</div> -->
-						<!-- 									<div class=group> -->
-						<!-- 										<label for="password"><i class="fa-solid fa-lock"></i> -->
-						<!-- 										</label><input type="password" name="password" id="password" -->
-						<!-- 											placeholder="請輸入密碼(大小寫有別)" autocomplete="off" value=password> -->
-						<!-- 									</div> -->
-						<!-- 									<div class=group> -->
-						<!-- 										<input type="checkbox" name="remember me" id="remember me"><label>Remember -->
-						<!-- 											me</label> -->
-						<!-- 									</div> -->
-						<!-- 									<div class="button"> -->
-						<!-- 										<input type="submit" name="signin" id="signin" value="登入"> -->
-						<!-- 									</div> -->
-						<!-- 									<br> -->
-						<%-- 									<p>${errors.msg}</p> --%>
-						<!-- 								</form> -->
-						<!-- 							</div> -->
-						<!-- 						</div> -->
-						<!-- 						<div class="col-lg-6 col-md-6 col-sm-12"> -->
-						<!-- 							<div class="login-item"> -->
-						<!-- 								<h5 class="title-login">註冊</h5> -->
-						<!-- 								<form class="register"> -->
-						<!-- 									<p class="form-row form-row-wide"> -->
-						<!-- 										<label class="text">Your email</label><input title="email" -->
-						<!-- 											type="email" class="input-text"> -->
-						<!-- 									</p> -->
-						<!-- 									<p class="form-row form-row-wide"> -->
-						<!-- 										<label class="text">Username</label><input title="name" -->
-						<!-- 											type="text" class="input-text"> -->
-						<!-- 									</p> -->
-						<!-- 									<p class="form-row form-row-wide"> -->
-						<!-- 										<label class="text">Password</label><input title="pass" -->
-						<!-- 											type="password" class="input-text"> -->
-						<!-- 									</p> -->
-						<!-- 									<p class="form-row"> -->
-						<!-- 										<span class="inline"><input type="checkbox" id="cb2"><label -->
-						<!-- 											for="cb2" class="label-text">I agree to <span>Terms -->
-						<!-- 													& Conditions</span></label></span> -->
-						<!-- 									</p> -->
-						<!-- 									<p class=""> -->
-						<!-- 										<input type="submit" class="button-submit" -->
-						<!-- 											value="Register Now"> -->
-						<!-- 									</p> -->
-						<!-- 								</form> -->
-						<!-- 							</div> -->
-						<!-- 						</div> -->
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- 	</div> -->
 	</article>
 </body>
+<script>
+	$(function() {
+		$('#correct').click(function() {
+			$('#account').val("edward");
+			$('#password').val("test123");
+		})
+	})
+</script>
 <script>
 	function onSignIn(googleUser) {
 		var profile = googleUser.getBasicProfile();
@@ -169,9 +108,9 @@ article {
 	}
 
 	$('#forgot').on("click", function() {
-			let mail=$('#email').val();
-			console.log(mail)
-		fetch("/HappyLearning/forgotpassword/"+mail, {
+		let mail = $('#email').val();
+		console.log(mail)
+		fetch("/HappyLearning/forgotpassword/" + mail, {
 			method : 'GET'
 		});
 

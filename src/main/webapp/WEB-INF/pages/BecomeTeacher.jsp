@@ -47,25 +47,26 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 									<p>
 										<span class="form-label">姓名(全名) *</span><span
 											class="form-control-wrap your-name"><input
-											title="your-name" type="text" name="your-name" size="40"
+											placeholder="*必填" title="your-name" type="text"
+											name="your-name" size="40"
 											class="form-control form-control-name"></span>
 									</p>
 									<p>
 										<span class="form-label">電話 *</span><span
 											class="form-control-wrap your-phone"><input
 											title="your-phone" type="text" name="your-phone"
-											class="form-control form-control-phone"></span>
+											placeholder="*必填" class="form-control form-control-phone"></span>
 									</p>
 									<p>
 										<span class="form-label">學歷 *</span><span
 											class="form-control-wrap your-name"><input
-											title="your-name" type="text" name="your-name" size="40"
+											title="your-name" type="text" name="your-name" size="40" placeholder="*必填(請輸入最高學歷)"
 											class="form-control form-control-name"></span>
 									</p>
 									<p>
 										<span class="form-label">自我介紹 * </span><span
 											class="wpcf7-form-control-wrap your-message"><textarea
-												title="your-message" name="your-message" cols="40" rows="9"
+												title="your-message" name="your-message" cols="40" rows="9" placeholder="*必填"
 												class="form-control your-textarea"></textarea></span>
 									</p>
 								</div>
@@ -86,5 +87,17 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 	</div>
 
 </body>
+
+<script>
+	$(function() {
+
+		$('#correct').click(function() {
+			$('#name').val("愛德華");
+			$('#cellphone').val("0912345678");
+			$('#education').val("edward");
+			$('#userprofile').val("愛德華");
+		})
+	})
+</script>
 <jsp:include page="Footer.jsp" />
 </html>

@@ -67,7 +67,7 @@ public class MemberController {
 	@RequestMapping(path = "/user.controller", method = RequestMethod.GET)
 	public String userController(Model m) {
 		MemberBean user = (MemberBean) m.getAttribute("user");
-		MemberBean mem = memberService.findByAccountLogin(user.getAccount());
+		MemberBean mem = memberService.checkLogin(user.getAccount());
 		m.addAttribute("user", mem);
 		return "UserSeting";
 	}
@@ -100,7 +100,7 @@ public class MemberController {
 		if (errors != null && !errors.isEmpty()) {
 			return "Login";
 		}
-		MemberBean user = memberService.findByAccountLogin(account);
+		MemberBean user = memberService.checkLogin(account);
 		System.out.println("執行user");
 		System.out.println(user);
 		m.addAttribute("user", user);
@@ -139,23 +139,22 @@ public class MemberController {
 		memberBean.setImg("images/user000.png");
 		memberBean.setJoinDate(timeStamp);
 
-		MemberBean checkRegister = memberService.checkRegister(memberBean.getEmail());
-		System.out.println("checkRegister:" + checkRegister);
-		if (checkRegister != null) {
+		MemberBean checkRegisterByEmail = memberService.checkRegister(memberBean.getEmail());
+		MemberBean checkRegisterByAccount = memberService.checkLogin(memberBean.getAccount());
 
-			System.out.println("檢查信箱");
-			if (checkRegister.getEmail() != null) {
+		if (checkRegisterByEmail != null) {
+			if (checkRegisterByEmail.getEmail() != null) {
 				errors.put("RegisterError", "<font color=red size=4 >信箱已經註冊!!</font>");
 				return "Register";
-
 			}
-			System.out.println("檢查帳號");
-			if (checkRegister.getAccount() != null) {
-				errors.put("RegisterError", "<font color=red size=4 >帳號已經註冊!!</font>");
+		}
+		if (checkRegisterByAccount != null) {
+			if (checkRegisterByAccount.getAccount() != null) {
+				errors.put("RegisterErrorAccount", "<font color=red size=4 >帳號已經註冊!!</font>");
 				return "Register";
 			}
-			System.out.println("檢查帳號完畢");
 		}
+
 		memberService.registerUser(memberBean);
 		m.addAttribute("register", mb);
 
@@ -180,7 +179,6 @@ public class MemberController {
 	// 新增會員
 	@PostMapping("/insertNewUser")
 	public String insertMember(@ModelAttribute("memberBean") MemberBean memberBean) {
-		memberBean.setImg("images/" + memberBean.getImg());
 		memberService.insertUser(memberBean);
 		return "redirect:/memberList";
 	}

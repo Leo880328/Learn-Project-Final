@@ -9,18 +9,18 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import fourth.service.AuthUserDetailsService;
+//import fourth.service.AuthUserDetailsService;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private AuthUserDetailsService auDetailService;
+//	private AuthUserDetailsService auDetailService;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		System.out.println("進入WebSecurity");
-		auth.userDetailsService(auDetailService).passwordEncoder(new BCryptPasswordEncoder());
+//		auth.userDetailsService(auDetailService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 
 	@Override
