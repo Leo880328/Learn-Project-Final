@@ -139,7 +139,7 @@
 								class="teamo-nav-vertical vertical-menu teamo-clone-mobile-menu">
 								<li class="menu-item"><a href="searchLearn"
 									class="teamo-menu-item-title" title="New Arrivals">我的學習</a></li>
-								<li class="menu-item"><a title="Hot Sale" href="#"
+								<li class="menu-item"><a title="Hot Sale" href="ExamMyMemController"
 									class="teamo-menu-item-title">我的試卷</a></li>
 								<li class="menu-item "><a title="Accessories" href="#"
 									class="teamo-menu-item-title">我的活動</a><span
@@ -159,7 +159,7 @@
 								id="menu-main-menu">
 								<li><a href="coursefront1.list" class="teamo-menu-item-title"
 									title="Home">課程</a><span class="toggle-submenu"></span>
-								<li class="menu-item "><a href="Exam.jsp"
+								<li class="menu-item "><a href="firstExamController"
 									class="teamo-menu-item-title" title="Shop">試卷</a><span
 									class="toggle-submenu"></span>
 								<li><a href="Activity" class="teamo-menu-item-title"
