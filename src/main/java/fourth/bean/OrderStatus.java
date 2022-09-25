@@ -10,8 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Table(name = "orderStatus")
+@Table(name = "orderstatus")
 public class OrderStatus {
 
 	@Id
@@ -22,6 +24,7 @@ public class OrderStatus {
 	
 	private String status;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "status")
 	List<OrderUser> orders ;
 	

@@ -39,39 +39,47 @@ public class CartController {
 	private CourseService cService;
 	
 	
+	@ResponseBody
+	@GetMapping(path = "/cartAll")
+	public List<CartItem>  cartListRes(Model m,HttpServletRequest request) {
+		MemberBean user = (MemberBean)m.getAttribute("user");
+		List<CartItem> cartList = cartService.cartList(user.getuserId());
+		return cartList;
+	}
 	
 	@GetMapping(path = "/cart")
 	public String cartList(Model m,HttpServletRequest request) {
-		MemberBean user = (MemberBean)m.getAttribute("user");
-		List<CartItem> cartList = cartService.cartList(user.getuserId());
-		m.addAttribute("cartList", cartList);
-		CartItem countPriceTotal = cartService.getCountPriceTotal(cartList);
-		m.addAttribute("countPriceTotal",countPriceTotal);
 		return "Cart";
 	}
 
-	
-	@PostMapping(path = "/cartadd")
-	public String addCart(Model m, String courseID) throws SQLException {
+	@ResponseBody
+	@PostMapping(path = "/cartadd/{id}")
+	public String addCart(Model m,@PathVariable("id") String courseID) throws SQLException {
 		MemberBean user = (MemberBean)m.getAttribute("user");
 		cartService.cartAdd(courseID,user.getuserId());
-		CourseBean cbean = cService.select(WebUtils.paseInt(courseID));
-		m.addAttribute("cbean", cbean); 
-		return "Details";
+
+		return "add Ok";
+
+//		CourseBean cbean = cService.findByCourseId(WebUtils.paseInt(courseID));
+//		m.addAttribute("cbean", cbean); 
+//		return "Details";
+
 	}
 	
-	
+	@ResponseBody
 	@DeleteMapping(path = "/cart/{cartID}")
 	public String deleteCart(@PathVariable("cartID") String cartID) {
 		cartService.cartDelete(cartID);
-		return "redirect:/cart";
+		return "deleteOK";
 	}
+
 	
+	@ResponseBody
 	@PostMapping(path = "/cart/clearCart")
 	public String clearCart(Model m) {
 		MemberBean user = (MemberBean)m.getAttribute("user");
 		cartService.cartClear(user.getuserId());
-		return "redirect:/cart";
+		return "clear Ok";
 	}
 	
 	@GetMapping(path = "/cart/cartCount")

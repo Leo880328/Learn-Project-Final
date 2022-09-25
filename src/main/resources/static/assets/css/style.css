@@ -5434,7 +5434,7 @@ ul.list-products {
 }
 
 .teamo-google-maps {
-    min-height: 480px
+    min-height: 360px
 }
 
 .form-contact {
@@ -5548,8 +5548,8 @@ ul.list-products {
     text-align: center
 }
 
-.teamo-contact-info .address .icon::before {
-    content: "\f041"
+.teamo-contact-info .address .icon {
+    content: "\f073"
 }
 
 .teamo-contact-info .phone .icon::before {
