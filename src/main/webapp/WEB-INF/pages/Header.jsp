@@ -28,6 +28,7 @@
 <link rel="stylesheet" href="./css/mobile-menu.css">
 <link rel="stylesheet" href="./fonts/flaticon/flaticon.css">
 <link rel="stylesheet" href="./css/style.css">
+
 <style>
 .main-header1 {
 	height: 50px;
@@ -35,6 +36,7 @@
 }
 </style>
 <title>Header</title>
+<%request.getServletContext().setAttribute("PATH", request.getContextPath()); %>
 <script>
 	function myFunction() {
 		$.getJSON("cart/cartCount", function(data) {
@@ -155,7 +157,7 @@
 						<div class="container-wapper">
 							<ul class="teamo-clone-mobile-menu teamo-nav main-menu "
 								id="menu-main-menu">
-								<li><a href="courseList" class="teamo-menu-item-title"
+								<li><a href="coursefront1.list" class="teamo-menu-item-title"
 									title="Home">課程</a><span class="toggle-submenu"></span>
 								<li class="menu-item "><a href="firstExamController"
 									class="teamo-menu-item-title" title="Shop">試卷</a><span

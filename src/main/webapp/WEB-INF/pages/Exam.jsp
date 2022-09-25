@@ -73,7 +73,8 @@
             </div>
             <!-- 表格 -->
             <h2>試卷名稱</h2>
-            <table class="tb" align="center">
+<!--             <table id="data-table" class="table table-bordered" align="center"> -->
+				<table  class="tb" align="center">
                 <thead>
                     <tr>
                         <th>項次</th>

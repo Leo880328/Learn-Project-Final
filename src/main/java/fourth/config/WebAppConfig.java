@@ -11,8 +11,10 @@ public class WebAppConfig implements WebMvcConfigurer {
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/").setViewName("Index");
 		registry.addViewController("/ExamMember").setViewName("ExamMember");
+		registry.addViewController("/chart").setViewName("chart");
+
 		
 	}
-
+	
 	
 }
