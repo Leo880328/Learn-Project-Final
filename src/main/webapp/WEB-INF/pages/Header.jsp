@@ -179,6 +179,11 @@
 									<li class="menu-item"><a href="backendIndex"
 										class="teamo-menu-item-title" title="About">後台管理</a></li>
 								</c:if>
+								<c:if test="${sessionScope.user.status == 2}">
+
+									<li class="menu-item"><a href="coursefront2.list"
+										class="teamo-menu-item-title" title="About">講師專區</a></li>
+								</c:if>
 
 							</ul>
 						</div>
@@ -215,5 +220,6 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript" charset="utf8"
 		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+		<script src="https://kit.fontawesome.com/9d965cf88e.js" crossorigin="anonymous"></script>
 </body>
 </html>
