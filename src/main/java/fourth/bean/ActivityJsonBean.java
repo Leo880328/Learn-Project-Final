@@ -1,7 +1,6 @@
 package fourth.bean;
 
 public class ActivityJsonBean {
-	
 	private ActivityBean activityBean;
 	private Base64FileBean base64FileBean;
 	
@@ -17,6 +16,5 @@ public class ActivityJsonBean {
 	public void setBase64FileBean(Base64FileBean base64FileBean) {
 		this.base64FileBean = base64FileBean;
 	}
-	
 	
 }

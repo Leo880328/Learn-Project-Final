@@ -24,7 +24,8 @@ $().ready(
         let url
         let idIndexOf = window.location.href.indexOf('-');
         let id = window.location.href.substring(idIndexOf + 1);
-        if (id) {
+        if (id > 1) {
+
             selectByID(id)
         }
     },
@@ -43,46 +44,57 @@ function selectByID(id) {
     });
 }
 function saveActivityBean() {
+    let activityBean = activitjson.activityBean
+    if (!activityBean.title > 0) {
+        Swal.fire({
+            icon: 'error',
+            title: '上傳失敗',
+            text: "標題為空"
+        })
+    } else if (!activityBean.content > 0) {
+        Swal.fire({
+            icon: 'error',
+            title: '上傳失敗',
+            text: "內容為空"
+        })
+    } else if (!activityBean.startTime > 0 || !activityBean.endTime > 0) {
+        Swal.fire({
+            icon: 'error',
+            title: '上傳失敗',
+            text: "時間為空"
+        })
+    } else {
+        let reqMethod = "PUT";
+        if (!activityBean.id > 0) {
+            reqMethod = "POST"
+        }
 
-    console.log(activitjson.activityBean);
-    console.log(JSON.stringify(activitjson));
-    $.ajax({
-        url: "Activity_OP",
-        method: "PUT",
-        dataType: "JSON",
-        contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify(activitjson),
-        success: function (res) {
-            $("body").append($(`<form action="ActivitiesOP" method="GET" id="onlyPost"></form>`))
-            $("#onlyPost").submit()
-        },
-        error: function (err) {
-            Swal.fire({
-                icon: 'error',
-                title: '上傳失敗',
-                text: err
-            })
-        },
-    });
+        console.log(activitjson.activityBean);
+        console.log(JSON.stringify(activitjson));
+        $.ajax({
+            url: "Activity_OP",
+            method: reqMethod,
+            dataType: "JSON",
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(activitjson),
+            success: function (res) {
+                $("body").append($(`<form action="ActivitiesOP" method="GET" id="onlyPost"></form>`))
+                $("#onlyPost").submit()
+            },
+            error: function (err) {
+                Swal.fire({
+                    icon: 'error',
+                    title: '上傳失敗',
+                    text: err
+                })
+            },
+        });
+    }
+
+
 
 }
-function saveActivity() {
 
-    // $.ajax({
-    //     url: "/Activity_OP",
-    //     method: "POST",
-    //     dataType: "JSON",
-    //     data: activitjson,
-    //     success: function (res) { console.log(res) },
-    //     error: function (err) {
-    //         Swal.fire({
-    //             icon: 'error',
-    //             title: '上傳失敗',
-    //             text: err
-    //         })
-    //     },
-    // });
-}
 function updeBase64(file) {
 
     new Promise((resolve, reject) => {
@@ -96,7 +108,8 @@ function updeBase64(file) {
         reader.readAsDataURL(file)
     }).then(base64 => {
 
-        activitjson.base64FileBean.fileType = file.type; // 把編碼後的字串return
+        activitjson.base64FileBean.fileType = file.type.replace("image/", ""); // 把編碼後的字串return
+        console.log(activitjson.base64FileBean.fileType);
         activitjson.base64FileBean.base64 = base64; // 把編碼後的字串return
         $('.u-image-1').attr('src', activitjson.base64FileBean.base64);
     }).catch(err => {
@@ -110,7 +123,9 @@ function updeBase64(file) {
 function changeHtmlActivity() {
     $("#title").html(activitjson.activityBean.title);
     $("#content").html(activitjson.activityBean.content);
-    if (activitjson.activityBean.imgPath != 'null' && activitjson.activityBean.imgPath > 0) {
+    console.log(activitjson.activityBean.imgPath != 'null')
+    console.log(activitjson.activityBean.imgPath > 0)
+    if (activitjson.activityBean.imgPath != 'null' && activitjson.activityBean.imgPath != null) {
         $("#imgPath").attr('src', activitjson.activityBean.imgPath)
     }
     let activityTime = `活動時間:${activitjson.activityBean.startTime} ~ ${activitjson.activityBean.endTime}`
@@ -119,7 +134,11 @@ function changeHtmlActivity() {
 }
 
 
-function changeVal(e) {
+function changeVal() {
+    let inputValue = $('#content').html();
+    if (!activitjson.activityBean.content > 0) {
+        inputValue = null;
+    }
     Swal.fire({
         input: 'textarea',
         inputLabel: '標題',
@@ -129,11 +148,11 @@ function changeVal(e) {
             input: 'swal-textarea-1'
 
         },
-        inputValue: e.innerHTML,
+        inputValue: inputValue,
         inputPlaceholder: '請輸入內容',
 
         inputValidator: (value) => {
-            e.innerHTML = value;
+            $('#content').html(value);
             activitjson.activityBean.content = value;
         },
         showCancelButton: true
@@ -143,21 +162,24 @@ function changeVal(e) {
     console.log(e.innerHTML)
 }
 function changeH1title(e) {
+    let inputValue = $('#title').html();
+    if (!activitjson.activityBean.title > 0) {
+        inputValue = null;
+    }
 
     Swal.fire({
         title: '標題',
         input: 'text',
         width: '800px',
-        inputValue: e.innerHTML,
-        //        inputLabel: '請輸入標題',
+        inputValue: inputValue,
         inputPlaceholder: '請輸入內容',
         showCancelButton: true,
         inputValidator: (value) => {
             if (!value) {
                 return '請輸入標題!'
             } else {
-                e.innerHTML = value;
-                activitjson.activityBean.title = value
+                $('#title').html(value);
+                activitjson.activityBean.title = value;
             }
         }
     })
@@ -175,7 +197,7 @@ function changeTime(e) {
     let endTime;
     Swal.fire({
         title: '<h2>請輸入時間<h2>',
-        width: "690px",
+        width: "700px",
         html: `
                 <h4  id="activityTime"  class="u-text u-text-default u-text-4">
                     <div> 

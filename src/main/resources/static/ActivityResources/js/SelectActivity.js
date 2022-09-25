@@ -1,4 +1,10 @@
+let pageRequest = {
+  pageSize: 2,
+  pageNo: 1
+}
+let totalPages = 1;
 $().ready(
+
 
   // 取直並將ActivityBean送出等待回應
   function () {
@@ -10,17 +16,26 @@ $().ready(
 
 )
 function selectAll() {
+  console.log(JSON.stringify(pageRequest));
+
   $.ajax({
     url: "http://localhost:8080/HappyLearning/ActivitySelect",
-    method: "GET",
+    method: "POST",
     dataType: "JSON",
+    contentType: 'application/json; charset=utf-8',
+    data: JSON.stringify(pageRequest),
     success: function (activityArray) {
+
+      console.log(activityArray)
+
+      totalPages = activityArray.totalPages;
+      $(".totalPages").html(pageRequest.pageNo)
       $("#join").empty();
-      activityArray.forEach(function (activity, index, array) {
+      activityArray.content.forEach(function (activity, index, array) {
         $("#join").append(creatActivity(activity))
       });
 
-      // 
+
     },
     error: function (err) { alert("資料獲取失敗，請刷新網頁!") },
   })
@@ -32,6 +47,19 @@ function selectAll() {
       }
     )
 }
+function pageNoIncrease() {
+  if (pageRequest.pageNo < totalPages) {
+    pageRequest.pageNo++;
+    selectAll()
+  }
+}
+function pageNoReduce() {
+  if (pageRequest.pageNo > 1) {
+    pageRequest.pageNo--;
+    selectAll()
+  }
+}
+
 function creatActivity(ActivityBean) {
   let endTime = new Date(ActivityBean.endTime)
   let imgPath = 'ActivityResources/images/default-image.jpg';

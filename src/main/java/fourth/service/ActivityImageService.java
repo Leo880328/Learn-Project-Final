@@ -13,9 +13,6 @@ public class ActivityImageService {
 	private ActivityImageDao activityImageDao;
 	
 	public String saveBase64Img(Base64FileBean base64FileBean) {
-		if (base64FileBean.haveNull()) {
-			return null;
-		}
 		return activityImageDao.saveBase64Image(base64FileBean);
 	}
 	

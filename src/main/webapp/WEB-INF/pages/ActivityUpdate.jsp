@@ -43,8 +43,7 @@
                 <div class="u-container-layout u-container-layout-3">
                   <h1 id="title" title="點擊進行編輯" onclick="changeH1title(this)"
                     class="u-align-center u-custom-font u-font-lobster u-text u-text-3" data-animation-name=""
-                    data-animation-duration="0" data-animation-delay="0" data-animation-direction="">
-                    請點擊輸入標題</h1>
+                    data-animation-duration="0" data-animation-delay="0" data-animation-direction="">請點擊輸入標題</h1>
                   <img id="imgPath" onclick="changeimg(this)" title="點擊進行編輯" class="u-image u-image-default u-image-1"
                     src="ActivityResources/images/default-image.jpg" alt="圖片讀取失敗" data-image-width="400" data-image-height="265">
                   <div
@@ -55,11 +54,9 @@
                       </h4>
                    
                   </div>
-                  <div class="u-align-center u-container-style u-grey-10 u-group u-group-5">
+                  <div onclick="changeVal()" class="u-align-center u-container-style u-grey-10 u-group u-group-5">
                     <div class="u-container-layout u-container-layout-5">
-                      <h4 onclick="changeVal(this)" id="content" title="點擊進行編輯" class="u-text u-text-default u-text-4">
-                        請點擊輸入內文
-                      </h4>
+                      <h4  id="content" title="點擊進行編輯" class="u-text u-text-default u-text-4" >請點擊輸入內文</h4>
                     </div>
                   </div>
                   <button onclick="saveActivityBean()" id="saveActivityBean"

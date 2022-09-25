@@ -40,11 +40,16 @@ public class ActivityImageDao {
 
 			try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
 				outputStream.write(decode);
+				
+				System.out.println(file.getPath());
+				
 				return path;
 			} catch (IOException e) {
+				System.out.println(e);
 				return null;
 			}
 		}
+		System.out.println("ActivityImageDao:"+base64FileBean.toString());
 		return null;
 	}
 

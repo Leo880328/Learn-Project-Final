@@ -29,11 +29,11 @@ public class ActivityBean {
 	private String content;
 	
 	@Column(name = "start_time")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone = "GMT+8")
 	private Date startTime;
 	
 	@Column(name = "end_time") 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone = "GMT+8")
 	private Date endTime;
 	
 	@Column(name = "imgpath")
