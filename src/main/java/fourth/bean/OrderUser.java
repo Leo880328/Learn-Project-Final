@@ -18,28 +18,25 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
-@Table(name = "Order_user")
+@Table(name = "order_user")
 public class OrderUser implements Serializable{
 	
-	@Transient
-	private String account;
-	@Transient
-	private String name;
-	@Transient
-	private String email;
-	@Transient
-	private String cellphone;
 	
 	@Id
 	@Column(name = "order_id")
-	private String order_id;
+	private String orderId;
+	
 	private Date date;
 
 	@ManyToOne
 	@JoinColumn(name = "status")
 	private OrderStatus status;
+	
 	private int totoalcount = 1;
 	private String discount;
 	private double totoalprice;
@@ -48,8 +45,11 @@ public class OrderUser implements Serializable{
 //	@Transient
 //	private int user_id;
 
+	@JsonManagedReference 
 	@OneToMany(mappedBy = "orderUser" ,cascade = CascadeType.ALL)
 	List<OrderItem> orderItems ;
+	
+	
 	
 	@OneToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 			 CascadeType.DETACH, CascadeType.REFRESH})
@@ -62,9 +62,9 @@ public class OrderUser implements Serializable{
 		
 	}
 	
-	public OrderUser(String order_id, int user_id, Date date, OrderStatus status, int totoalcount, String discount,
+	public OrderUser(String orderId, int user_id, Date date, OrderStatus status, int totoalcount, String discount,
 			double totoalprice) {
-		this.order_id = order_id;
+		this.orderId = orderId;
 		//this.user_id = user_id;
 		this.date = date;
 		this.status = status;
@@ -73,12 +73,10 @@ public class OrderUser implements Serializable{
 		this.totoalprice = totoalprice;
 	}
 	
-	public OrderUser(String account, String name, String email, String order_id, int user_id, Date date, OrderStatus status,
+	public OrderUser(String account, String name, String email, String orderId, int user_id, Date date, OrderStatus status,
 			int totoalcount, String discount, double totoalprice) {
-		this.account = account;
-		this.name = name;
-		this.email = email;
-		this.order_id = order_id;
+	
+		this.orderId = orderId;
 		//this.user_id = user_id;
 		this.date = date;
 		this.status = status;
@@ -88,13 +86,10 @@ public class OrderUser implements Serializable{
 	}
 	
 
-	public OrderUser(String account, String name, String email, String cellphone, String order_id, int user_id,
+	public OrderUser(String account, String name, String email, String cellphone, String orderId, int user_id,
 			Date date, OrderStatus status, int totoalcount, String discount, double totoalprice) {
-		this.account = account;
-		this.name = name;
-		this.email = email;
-		this.cellphone = cellphone;
-		this.order_id = order_id;
+		
+		this.orderId = orderId;
 		//this.user_id = user_id;
 		this.date = date;
 		this.status = status;
@@ -105,14 +100,11 @@ public class OrderUser implements Serializable{
 	
 	
 	
-	public OrderUser(String account, String name, String email, String cellphone, String order_id, Date date,
+	public OrderUser(String account, String name, String email, String cellphone, String orderId, Date date,
 			OrderStatus status, int totoalcount, String discount, double totoalprice, List<OrderItem> orderItems,
 			MemberBean memberBean) {
-		this.account = account;
-		this.name = name;
-		this.email = email;
-		this.cellphone = cellphone;
-		this.order_id = order_id;
+		
+		this.orderId = orderId;
 		this.date = date;
 		this.status = status;
 		this.totoalcount = totoalcount;
@@ -122,19 +114,13 @@ public class OrderUser implements Serializable{
 		this.memberBean = memberBean;
 	}
 
-	public String getCellphone() {
-		return cellphone;
-	}
+	
 
-	public void setCellphone(String cellphone) {
-		this.cellphone = cellphone;
+	public String getOrderId() {
+		return orderId;
 	}
-
-	public String getOrder_id() {
-		return order_id;
-	}
-	public void setOrder_id(String order_id) {
-		this.order_id = order_id;
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
 	}
 //	public int getUser_id() {
 //		return user_id;
@@ -148,12 +134,15 @@ public class OrderUser implements Serializable{
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
 	public OrderStatus getStatus() {
 		return status;
 	}
+
 	public void setStatus(OrderStatus status) {
 		this.status = status;
 	}
+
 	public int getTotoalcount() {
 		return totoalcount;
 	}
@@ -173,29 +162,6 @@ public class OrderUser implements Serializable{
 		this.totoalprice = totoalprice;
 	}
 	
-	public String getAccount() {
-		return account;
-	}
-
-	public void setAccount(String account) {
-		this.account = account;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	public MemberBean getMemberBean() {
 		return memberBean;
@@ -217,7 +183,7 @@ public class OrderUser implements Serializable{
 
 	@Override
 	public String toString() {
-		return "OrderUser [order_id=" + order_id  + ", date=" + date + ", status=" + status
+		return "OrderUser [orderId=" + orderId  + ", date=" + date + ", status=" + status
 				+ ", totoalcount=" + totoalcount + ", discount=" + discount + ", totoalprice=" + totoalprice + "]";
 	}
 	

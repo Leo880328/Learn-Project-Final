@@ -18,10 +18,8 @@ import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 public class HappyLearningApplication {
 
 	public static void main(String[] args) {
+		System.out.println("啟動專案");
 		SpringApplication.run(HappyLearningApplication.class, args);
 	}
-	
-	
-	
 	
 }
