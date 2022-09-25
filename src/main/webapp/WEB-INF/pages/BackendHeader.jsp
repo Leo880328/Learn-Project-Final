@@ -158,14 +158,15 @@
 							<li><a href="firstExamController">高中</a></li>
 							<li><a href="firstExamController">成人</a></li>
 						</ul></li>
-					<li class="navigation__sub"><a href=""><i
+					<li class=""><a href="course.list"><i
 							class="zmdi zmdi-view-list"></i>課程管理</a>
-						<ul>
-							<li><a href="course.list">全部課程</a></li>
-							<li><a href="hidden-sidebar.html">國中</a></li>
-							<li><a href="boxed-layout.html">高中</a></li>
-							<li><a href="hidden-sidebar-boxed-layout.html">成人</a></li>
-						</ul></li>
+<!-- 						<ul> -->
+<!-- 							<li><a href="course.list">全部課程</a></li> -->
+<!-- 							<li><a href="hidden-sidebar.html">國中</a></li> -->
+<!-- 							<li><a href="boxed-layout.html">高中</a></li> -->
+<!-- 							<li><a href="hidden-sidebar-boxed-layout.html">成人</a></li> -->
+<!-- 						</ul> -->
+						</li>
 
 					
 					<li><a href="QueryAll"><i class="zmdi zmdi-collection-text"></i>專欄管理</a></li>
@@ -209,7 +210,7 @@
 	<script src="backend/demo/js/jqvmap.js"></script>
 	<!-- App functions and actions -->
 	<script src="backend/js/app.min.js"></script>
-	
+	<script src="https://kit.fontawesome.com/9d965cf88e.js" crossorigin="anonymous"></script>
 	<!-- 	dataTable jQuery -->
 	<script type="text/javascript" charset="utf8"
 		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>

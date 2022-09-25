@@ -155,7 +155,7 @@
 						<div class="container-wapper">
 							<ul class="teamo-clone-mobile-menu teamo-nav main-menu "
 								id="menu-main-menu">
-								<li><a href="courseList" class="teamo-menu-item-title"
+								<li><a href="coursefront1.list" class="teamo-menu-item-title"
 									title="Home">課程</a><span class="toggle-submenu"></span>
 								<li class="menu-item "><a href="Exam.jsp"
 									class="teamo-menu-item-title" title="Shop">試卷</a><span
@@ -176,6 +176,11 @@
 
 									<li class="menu-item"><a href="backendIndex"
 										class="teamo-menu-item-title" title="About">後台管理</a></li>
+								</c:if>
+								<c:if test="${sessionScope.user.status == 2}">
+
+									<li class="menu-item"><a href="coursefront2.list"
+										class="teamo-menu-item-title" title="About">講師專區</a></li>
 								</c:if>
 
 							</ul>
@@ -213,5 +218,6 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript" charset="utf8"
 		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+		<script src="https://kit.fontawesome.com/9d965cf88e.js" crossorigin="anonymous"></script>
 </body>
 </html>
