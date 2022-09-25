@@ -465,33 +465,42 @@ function htmlToPdf() {
 		}
 	};
 	margins = {
-		top: 150,
+		top: 10,
 		bottom: 60,
 		left: 40,
 		right: 40,
 		width: 600
 	};
 	var y = 20;
+	doc.setFont('SourceHanSansCN-Bold', 'normal');
 	doc.setLineWidth(2);
-	doc.text(200, y = y + 30, "TOTAL MARKS OF STUDENTS");
 	doc.autoTable({
-		html: '#simple_table',
+		html: '#data-table',
 		startY: 70,
 		theme: 'grid',
 		columnStyles: {
 			0: {
-				cellWidth: 180,
+				cellWidth: 80,
 			},
 			1: {
-				cellWidth: 180,
+				cellWidth: 80,
 			},
 			2: {
-				cellWidth: 180,
+				cellWidth: 80,
 			}
 		},
 		styles: {
-			minCellHeight: 40
-		}
+			minCellHeight: 10,
+			font: 'SourceHanSansCN-Bold',
+            fontStyle: 'normal',
+		},
+		headerStyles: {
+				font: 'SourceHanSansCN-Bold',
+				fontStyle: 'normal'
+		},
+		tableWidth: 'wrap',
+		
+		margin: {left:10, right:150}
 	})
 	doc.save('Marks_Of_Students.pdf');
 }

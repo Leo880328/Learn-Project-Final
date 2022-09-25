@@ -18,7 +18,9 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fourth.bean.CartItem;
 
@@ -48,12 +50,12 @@ public class CourseBean implements Serializable {
 	private int course_status;
 	private String course_picture;
 
-	@JsonIgnore
+	@JsonManagedReference 
 	@ManyToOne
 	@JoinColumn(name = "education_id")
 	private CourseEdu courseedu;
 
-	@JsonIgnore
+	@JsonManagedReference 
 	@ManyToOne
 	@JoinColumn(name = "subject_id")
 	private CourseSub coursesub;

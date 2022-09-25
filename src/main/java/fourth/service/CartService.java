@@ -44,6 +44,7 @@ public class CartService {
 
 	//@Override
 	public void cartAdd(String cartId,int id) throws SQLException{
+		System.out.println(cartId);
 		CourseBean course = courseRepository.findById(WebUtils.paseInt(cartId)).get();
 		CartItem cart = new CartItem(0, id, course.getCourse_id(), course.getCourse_name(), 1,
 				course.getCourse_price());
