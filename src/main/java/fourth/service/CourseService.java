@@ -43,7 +43,6 @@ public class CourseService {
 
 	public CourseBean findByCourseId(int course_id) {
 		Optional<CourseBean> optional = cosRep.findById(course_id);
-		System.err.println(course_id);
 		if (optional.isPresent()) {
 			return optional.get();
 		}

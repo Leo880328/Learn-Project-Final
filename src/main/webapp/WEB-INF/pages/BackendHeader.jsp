@@ -10,8 +10,11 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Vendor styles -->
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  
 <link rel="stylesheet"
 	href="backend/vendors/material-design-iconic-font/css/material-design-iconic-font.min.css">
+<!-- <link rel="stylesheet" href="wayne/dist/css/adminlte.min.css"> -->
 <link rel="stylesheet"
 	href="backend/vendors/animate.css/animate.min.css">
 <link rel="stylesheet"
@@ -124,15 +127,16 @@
 
 
 					<div class="user__info" data-toggle="dropdown">
-						<img class="user__img" src="backend/demo/img/profile-pics/8.jpg"
+<%-- 					<img src="${mb.img}" width="150" height="100"> --%>
+						<img class="user__img" src="${sessionScope.user.img }"
 							alt="">
 
 					</div>
 
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="">${sessionScope.user.name }</a><a class="dropdown-item"
-							href="">查看個人檔案</a><a class="dropdown-item"
-							href="login.controller">登出</a>
+							href="user.controller">查看個人檔案</a><a class="dropdown-item"
+							href="logout.controller">登出</a>
 					</div>
 
 
@@ -170,10 +174,13 @@
 
 					
 					<li><a href="QueryAll"><i class="zmdi zmdi-collection-text"></i>專欄管理</a></li>
+					
 					<li><a href="Activity_OP"><i class="zmdi zmdi-calendar"></i>活動管理</a></li>
 
 					<li><a href="orderList"><i class="zmdi zmdi-widgets"></i>訂單管理</a></li>
-
+					
+					<li><a href="chart"><i class="zmdi zmdi-trending-up"></i>營收圖表</a></li>
+                            
 				</ul>
 			</div>
 
@@ -192,6 +199,7 @@
 	<script
 		src="backend/vendors/jquery-scrollLock/jquery-scrollLock.min.js"></script>
 	<script src="backend/vendors/flot/jquery.flot.js"></script>
+	<script src="backend/vendors/flot/jquery.flot.pie.js"></script>
 	<script src="backend/vendors/flot/jquery.flot.resize.js"></script>
 	<script src="backend/vendors/flot.curvedlines/curvedLines.js"></script>
 	<script src="backend/vendors/jqvmap/jquery.vmap.min.js"></script>
@@ -206,8 +214,11 @@
 	<script src="backend/demo/js/flot-charts/dynamic.js"></script>
 	<script src="backend/demo/js/flot-charts/line.js"></script>
 	<script src="backend/demo/js/flot-charts/chart-tooltips.js"></script>
+	<script src="backend/demo/js/flot-charts/bar.js"></script>
+	<script src="backend/demo/js/flot-charts/pie.js"></script>
 	<script src="backend/demo/js/other-charts.js"></script>
 	<script src="backend/demo/js/jqvmap.js"></script>
+	<script src="backend/demo/js/demo.js"></script>
 	<!-- App functions and actions -->
 	<script src="backend/js/app.min.js"></script>
 	<script src="https://kit.fontawesome.com/9d965cf88e.js" crossorigin="anonymous"></script>

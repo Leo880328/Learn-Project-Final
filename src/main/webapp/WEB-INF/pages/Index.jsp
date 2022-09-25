@@ -30,6 +30,7 @@
 		<div class="fullwidth-template">
 			<div class="home-slider fullwidth rows-space-60">
 
+
 				<div class="slider-item style4">
 					<div class="slider-inner equal-element">
 						<div class="container">
@@ -48,6 +49,7 @@
 					</div>
 				</div>
 <br><br>
+
 
 				<div>
 					<div class="fullwidth-template">

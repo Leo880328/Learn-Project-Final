@@ -23,24 +23,54 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" charset="utf8"
 	src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-<script>
-	
-	function del(id){
-		
-		var cartId = id;
-		
-		$.ajax({
-			async:false,
-			type:"DELETE",
-			url:"cart/"+id,
 
-		})
+<script type="text/javascript">
+	function buyCheck() {
+		
+			const swalWithBootstrapButtons = Swal.mixin({
+				customClass: {
+					confirmButton: 'btn btn-success',
+					cancelButton: 'btn btn-danger'
+				},
+				buttonsStyling: false
+			})
+		
+			swalWithBootstrapButtons.fire({
+				title: '確認購買?',
+				text: "",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonText: '購買',
+				cancelButtonText: '取消',
+				reverseButtons: false
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						async : false,
+						type : "POST",
+						url : "orderAdd",
+						success : function(data) {
+							window.location.href = "${PATH}/orderList";
+						}
+					})
+					swalWithBootstrapButtons.fire(
+						'生成訂單!',
+						'你的訂單已生成',
+						'success'
+					)
+ 				} 
+
+			})
 	}
 </script>
+
 </head>
-<body>
+<body onload="cartList()">
 	<c:if test="${sessionScope.pageStatus == '3'}">
-	<br><br><br><br>
+		<br>
+		<br>
+		<br>
+		<br>
 		<jsp:include page="BackendHeader.jsp" />
 
 	</c:if>
@@ -49,8 +79,9 @@
 	</c:if>
 	<div class="container ">
 		<div lass="row justify-content-center ">
-			<form class="cart-form" method="post">
-				<table class="table table-striped " style="text-align: center;" id="example">
+			<form class="cart-form" method="post" id="f">
+				<table class="table table-striped " style="text-align: center;"
+					id="e">
 					<thead>
 						<tr>
 							<th class="table-success">課程照片</th>
@@ -60,79 +91,34 @@
 							<th class="table-success">講師</th>
 							<th class="table-success">購買人數</th>
 							<th class="table-success">價格</th>
-							<th class="table-success"><div style="vertical-align: middle;">刪除</div></th>
+							<th class="table-success"><div
+									style="vertical-align: middle;">刪除</div></th>
 						</tr>
 					</thead>
-					<tbody>
-						<c:forEach var="cart" items="${cartList}">
-							<tr>
-								<td><img src="${cart.courseBean.course_picture }" alt=""
-									title="" width="150" height="100"></td>
-								<td style="vertical-align: middle;">${cart.itemName}</td>
-								<td style="vertical-align: middle;"><c:choose>
-										<c:when test="${cart.courseBean.subject_id == 1}">數學</c:when>
-										<c:when test="${cart.courseBean.subject_id == 2}">英文</c:when>
-										<c:when test="${cart.courseBean.subject_id == 3}">多益</c:when>
-									</c:choose></td>
-								<td style="vertical-align: middle;">${cart.courseBean.course_duration}</td>
-								<td style="vertical-align: middle;">${cart.courseBean.lecturer_name }</td>
-								<td style="vertical-align: middle;">${cart.courseBean.enrollment }</td>
-								<td style="vertical-align: middle;">$${cart.courseBean.course_price}</td>
-								
-								<td class="product-remove" style="vertical-align: middle;"><a
-									href="${tempLink}" class="remove" onclick="del(${cart.id})"></a></td>
-	
-							</tr>
-						</c:forEach>
+					<tbody id="cart">
 					</tbody>
-						<c:if test="${empty cartList}">
-							<tr>
-								<td colspan="8">目前購物車沒有資料!!!</td>
-	
-							</tr>
-							<tr>
-	
-								<td colspan="8"><a href="course.list" style="color: red"><input
-										type="hidden" name="return" value="前往探索更多課程~">前往探索更多課程~</a></td>
-							</tr>
-						</c:if>
-						<tr>
-							<td colspan="7"></td>
-							<th>總金額: $${countPriceTotal.totalPrice}</th>
-						</tr>
+
 				</table>
 			</form>
 			<table class="table table-striped" style="text-align: center;">
 				<tr>
-					<td colspan="8"><input type="hidden" name="command"
-						value="ADD"> <c:if test="${empty cartList}">
-							<button class="btn btn-success" id="myBtn" disabled
-								onclick="if( !(confirm('確認購買?') ) ) return false ; alert('生成訂單!!!');">確認購買</button>
-						</c:if> <c:if test="${not empty cartList}">
-							<form action="orderAdd" method="post">
-								<input type="hidden" name="command" value="ADD">
-								<button class="btn btn-success"
-									onclick="if( !(confirm('確認購買?') ) ) return false ; alert('生成訂單!!!');">確認購買</button>
-							</form>
-						</c:if></td>
+					<td colspan="8" id="buy"></td>
 
 
 				</tr>
 				<tr>
 					<td colspan="10">
-						<form action="cart/clearCart" method="post">
-							<button class="btn btn-danger"
-								onclick="if( !(confirm('確認清除?') ) ) return false">清空購物車</button>
-						</form>
+						<button class="btn btn-danger" id="b" onclick="cartClear()">清空購物車</button>
 					</td>
 				</tr>
 			</table>
 		</div>
 	</div>
-	
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
 		crossorigin="anonymous"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="wayne/cart.js"></script>
 </body>
 </html>

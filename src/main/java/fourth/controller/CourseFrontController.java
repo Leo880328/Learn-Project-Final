@@ -26,7 +26,6 @@ public class CourseFrontController {
 		return "CourseFrontList1";
 
 	}
-
 	@GetMapping("/coursefront2.list")
 	public String listCourse2(Model m) {
 		List<CourseBean> list = cService.selectAll();
