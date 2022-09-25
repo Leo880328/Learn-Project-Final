@@ -44,7 +44,7 @@
                   <h1 id="title" title="點擊進行編輯" onclick="changeH1title(this)"
                     class="u-align-center u-custom-font u-font-lobster u-text u-text-3" data-animation-name=""
                     data-animation-duration="0" data-animation-delay="0" data-animation-direction="">請點擊輸入標題</h1>
-                    <a onclick="delectActivity()" class="deleltButton u-active-none u-border-2 u-border-active-palette-2-dark-1 u-border-hover-palette-2-base u-border-palette-1-base u-btn u-button-style u-hover-none u-none u-text-hover-palette-2-base u-text-palette-1-base u-btn-1"><span class="u-file-icon u-icon"><img src="images/484662.png" alt=""></span>&nbsp; <span class="u-icon u-icon-2"></span>&nbsp;刪除活動&nbsp; 
+                    <a onclick="delectActivity()" class="deleltButton u-active-none u-border-2 u-border-active-palette-2-dark-1 u-border-hover-palette-2-base u-border-palette-1-base u-btn u-button-style u-hover-none u-none u-text-hover-palette-2-base u-text-palette-1-base u-btn-1"><span class="u-file-icon u-icon"><img src="ActivityResources/images/484662.png" alt=""></span>&nbsp; <span class="u-icon u-icon-2"></span>&nbsp;刪除活動&nbsp; 
                 </a>
                   <img id="imgPath" onclick="changeimg(this)" title="點擊進行編輯" class="u-image u-image-default u-image-1"
                     src="ActivityResources/images/default-image.jpg" alt="圖片讀取失敗" data-image-width="400" data-image-height="265">
