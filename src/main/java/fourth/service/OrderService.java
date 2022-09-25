@@ -144,7 +144,7 @@ public class OrderService {
 	}
 
 	// @Override
-	public void updateOrder(int userStatus, int status, String orderId) throws SQLException {
+	public void updateOrder(int userStatus, int status, String orderId ,String url) throws SQLException {
 		OrderUser orderUser = orderRepository.findById(orderId).get();
 		OrderStatus orderStatus = orderStatusRepository.findById(status).get();
 		orderUser.setStatus(orderStatus);
@@ -158,7 +158,11 @@ public class OrderService {
 			}
 		//已付款寄送信件
 		} else if (status == 2) {
-			sendMail(orderUser);
+			sendbuyMail(orderUser,url);
+		}else if(status == 5) {
+			sendbackMail(orderUser,url);
+		}else if(status == 6) {
+			sendTurnMail(orderUser, url);
 		}
 
 	}
@@ -212,13 +216,39 @@ public class OrderService {
 		}
 	}
 
-	public void sendMail(OrderUser orderUser) {
+	public void sendbuyMail(OrderUser orderUser,String url) {
 		String txt = "<h2>" + "訂單編號: " + orderUser.getOrderId() + "<br>" + "訂單生成日期: " + orderUser.getDate() + "<br>"
 				+ "購買人姓名: " + orderUser.getMemberBean().getName() + "<br>" + "購買人信箱: "
-				+ orderUser.getMemberBean().getEmail() + "<br>" + "總金額: " + orderUser.getTotoalprice() + "<h2>";
+				+ orderUser.getMemberBean().getEmail() + "<br>" + "總金額: " + orderUser.getTotoalprice() + "<br>"
+				+ "審核結果: 付款完成"+"<br>"
+				+"網站連結: <a href="+url +">EEIT49 好學生</a>"+"<h2>";
 		JavaMail javaMail = new JavaMail();
 		javaMail.setCustomer("ggyy45529441@gmail.com");
 		javaMail.setSubject("好學生-EEIT49 線上付款成功!");
+		javaMail.setTxt(txt);
+		javaMail.sendMail();
+	}
+	public void sendbackMail(OrderUser orderUser,String url) {
+		String txt = "<h2>" + "訂單編號: " + orderUser.getOrderId() + "<br>" + "訂單生成日期: " + orderUser.getDate() + "<br>"
+				+ "購買人姓名: " + orderUser.getMemberBean().getName() + "<br>" + "購買人信箱: "
+				+ orderUser.getMemberBean().getEmail() + "<br>" + "總金額: " + orderUser.getTotoalprice()+"<br>"
+				+ "審核結果: 已退款"+"<br>"
+				+"網站連結: <a href="+url +">EEIT49 好學生</a>"+"<h2>";
+		JavaMail javaMail = new JavaMail();
+		javaMail.setCustomer("ggyy45529441@gmail.com");
+		javaMail.setSubject("好學生-EEIT49 申請退款已成功!");
+		javaMail.setTxt(txt);
+		javaMail.sendMail();
+	}
+	public void sendTurnMail(OrderUser orderUser,String url) {
+		String txt = "<h2>" + "訂單編號: " + orderUser.getOrderId() + "<br>" + "訂單生成日期: " + orderUser.getDate() + "<br>"
+				+ "購買人姓名: " + orderUser.getMemberBean().getName() + "<br>" + "購買人信箱: "
+				+ orderUser.getMemberBean().getEmail() + "<br>" + "總金額: " + orderUser.getTotoalprice() + "<br>"
+				+"審核結果: 已駁回" +"<br>"
+				+"網站連結: <a href="+url +">EEIT49 好學生</a>"+"<h2>";
+		JavaMail javaMail = new JavaMail();
+		javaMail.setCustomer("ggyy45529441@gmail.com");
+		javaMail.setSubject("好學生-EEIT49 申請退款已駁回!");
 		javaMail.setTxt(txt);
 		javaMail.sendMail();
 	}
@@ -275,6 +305,17 @@ public class OrderService {
 
 	public List<OrderUser> total() {
 		List<OrderUser> list = orderRepository.findAllByStatus_Id(4);
+		return list;
+	}
+
+	public List<OrderUser> searchStatust(Integer user ,Integer status) {
+		List<OrderUser> list = null;
+		if(status == 0) {
+			list = orderRepository.findByMemberBean_userId(user);
+		}else {
+			
+			list = orderRepository.findUserByStatus_Id(user, status);
+		}
 		return list;
 	}
 

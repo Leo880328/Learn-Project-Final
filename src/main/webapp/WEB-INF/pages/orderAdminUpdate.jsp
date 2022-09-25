@@ -21,18 +21,18 @@
 </style>
 <script>
 	$(function(){
-		$("#up").click(function(){
-			var status = $("#status").val();
-			$.ajax({
-				async : false,
-				type:"GET",
-				url:"updateOrder/"+status+"/${order.orderId }",
-				success:function(data){
-					window.location.href="${path}/orderList";
-					console.log(data);
-				}
-			})
-		})
+// 		$("#up").click(function(){
+// 			var status = $("#status").val();
+// 			$.ajax({
+// 				async : false,
+// 				type:"GET",
+// 				url:"updateOrder/"+status+"/${order.orderId }",
+// 				success:function(data){
+// 					window.location.href="${path}/orderList";
+// 					console.log(data);
+// 				}
+// 			})
+// 		})
 	})
 </script>
 </head>
@@ -55,22 +55,22 @@
 								<tr>
 									<td>${order.orderId }</td>
 									<td>${order.date }</td>
+									<td>${order.status.status}</td>
 
-									<c:choose>
-										<c:when test="${order.status.id == 4}">
-											<td>${order.status.status}</td>
-										</c:when>
-										<c:otherwise>
-											<td>
-											<select name="updateStatus" id="status">
-												<c:set var="status" value="${statusArr}"></c:set>
-												<c:forEach var="i" begin="1" end="4">
-														<c:if test="${i == 1}"><option value="${order.status.id}">${order.status.status}</option></c:if>
-														<c:if test="${i != order.status.id}"><option value="${i}">${status[i]}</option></c:if>
-												</c:forEach>
-											</select></td>
-										</c:otherwise>
-									</c:choose>
+<%-- 									<c:choose> --%>
+<%-- 										<c:when test="${order.status.id == 4}"> --%>
+<%-- 										</c:when> --%>
+<%-- 										<c:otherwise> --%>
+<!-- 											<td> -->
+<!-- 											<select name="updateStatus" id="status"> -->
+<%-- 												<c:set var="status" value="${statusArr}"></c:set> --%>
+<%-- 												<c:forEach var="i" begin="1" end="4"> --%>
+<%-- 														<c:if test="${i == 1}"><option value="${order.status.id}">${order.status.status}</option></c:if> --%>
+<%-- 														<c:if test="${i != order.status.id}"><option value="${i}">${status[i]}</option></c:if> --%>
+<%-- 												</c:forEach> --%>
+<!-- 											</select></td> -->
+<%-- 										</c:otherwise> --%>
+<%-- 									</c:choose> --%>
 
 								</tr>
 							</table>
@@ -145,16 +145,7 @@
 					</tr>
 				</table>
 				<div style="margin: auto; width: 88px;">
-
-					<c:choose>
-						
-						<c:when test="${order.status.id != 4}">
-								<button id="up"
-									onclick="if( !(confirm('確認修改?') ) ) return false ; alert('修改成功!!!');">
-									<center>確認修改</center>
-								</button>
-						</c:when>
-					</c:choose>
+					<form action="orderList" method="GET"><button  class="btn btn-dark">返回</button></form>
 
 				</div>
 

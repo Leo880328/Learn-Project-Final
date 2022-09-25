@@ -86,13 +86,14 @@ function add(id) {
 		timer: 1500
 	})
 	$.ajax({
-		async: true,
+		async: false,
 		type: "POST",
 		url: "cartadd/" + id,
 		success: function(data) {
 			console.log(data);
 		}
 	})
+	myFunction();
 }
 
 function cartTotal() {

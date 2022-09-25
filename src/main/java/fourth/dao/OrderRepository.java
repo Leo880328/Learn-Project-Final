@@ -24,4 +24,7 @@ public interface OrderRepository  extends JpaRepository<OrderUser, String>{
 	public List<OrderUser> findAllByOrderByDateAsc();
 
 	public List<OrderUser> findAllByStatus_Id(Integer status);
+	
+	@Query(value ="select * from order_user where user_id = ?1 and status = ?2 ",nativeQuery = true)
+	public List<OrderUser> findUserByStatus_Id(Integer user ,Integer status);
 }

@@ -6,36 +6,37 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!------------------------------------ 訂單樣式 -------------------------------------->
- <!-- bootstrap & fontawesome -->
+<!-- bootstrap & fontawesome -->
 <!--     <link rel="stylesheet" href="wayne/assets/css/bootstrap.min.css" /> -->
-    <link rel="stylesheet" href="wayne/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="wayne/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
 
-    <!-- page specific plugin styles -->
+<!-- page specific plugin styles -->
 
-    <!-- text fonts -->
+<!-- text fonts -->
 <!--     <link rel="stylesheet" href="wayne/assets/css/fonts.googleapis.com.css" /> -->
 
-    <!-- ace styles -->
+<!-- ace styles -->
 <!--     <link rel="stylesheet" href="wayne/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" /> -->
 
-    <!--[if lte IE 9]>
+<!--[if lte IE 9]>
 			<link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
 		<![endif]-->
-    <link rel="stylesheet" href="wayne/assets/css/ace-skins.min.css" />
-    <link rel="stylesheet" href="wayne/assets/css/ace-rtl.min.css" />
+<link rel="stylesheet" href="wayne/assets/css/ace-skins.min.css" />
+<link rel="stylesheet" href="wayne/assets/css/ace-rtl.min.css" />
 
-    <!--[if lte IE 9]>
+<!--[if lte IE 9]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
 		<![endif]-->
 
-    <!-- inline styles related to this page -->
+<!-- inline styles related to this page -->
 
-    <!-- ace settings handler -->
-    <script src="wayne/assets/js/ace-extra.min.js"></script>
+<!-- ace settings handler -->
+<script src="wayne/assets/js/ace-extra.min.js"></script>
 
-    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
-    <!--[if lte IE 8]>
+<!--[if lte IE 8]>
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
@@ -58,49 +59,56 @@
 		order(${sessionScope.pageStatus});
 	});
 </script>
-<link rel="shortcut icon" type="image/x-icon" href="assets/images/smalllogo.png" />
+<link rel="shortcut icon" type="image/x-icon"
+	href="assets/images/smalllogo.png" />
+<link
+	href="//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css" />
+
 </head>
 <html>
-<body >
-	<c:if test="${sessionScope.user == null}"><% request.getRequestDispatcher("/Login.jsp").forward(request, response); %></c:if>
+<body>
+	<c:if test="${sessionScope.user == null}">
+		<% request.getRequestDispatcher("/Login.jsp").forward(request, response); %>
+	</c:if>
 	<c:choose>
 		<c:when test="${sessionScope.pageStatus == '3'}">
 			<jsp:include page="BackendHeader.jsp" />
-		
+
 			<jsp:include page="orderAdmin.jsp" />
-			
+
 		</c:when>
 
 		<c:otherwise>
 			<jsp:include page="Header.jsp" />
-		
+
 			<jsp:include page="orderUser.jsp" />
-			
+
 		</c:otherwise>
 	</c:choose>
 	<!------------------------------------ 訂單樣式 -------------------------------------->
-	 <script type="text/javascript">
+	<script type="text/javascript">
         if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
     </script>
-    
-    <script src="wayne/assets/js/bootstrap.min.js"></script>
 
-    <!-- page specific plugin scripts -->
-<!--     <script src="wayne/assets/js/jquery.dataTables.min.js"></script> -->
-<!--     <script src="wayne/assets/js/jquery.dataTables.bootstrap.min.js"></script> -->
-    <script src="wayne/assets/js/dataTables.buttons.min.js"></script>
-    <script src="wayne/assets/js/buttons.flash.min.js"></script>
-    <script src="wayne/assets/js/buttons.html5.min.js"></script>
-    <script src="wayne/assets/js/buttons.print.min.js"></script>
-    <script src="wayne/assets/js/buttons.colVis.min.js"></script>
-<!--     <script src="wayne/assets/js/dataTables.select.min.js"></script> -->
+	<script src="wayne/assets/js/bootstrap.min.js"></script>
 
-    <!-- ace scripts -->
-    <script src="wayne/assets/js/ace-elements.min.js"></script>
-    <script src="wayne/assets/js/ace.min.js"></script>
+	<!-- page specific plugin scripts -->
+	<!--     <script src="wayne/assets/js/jquery.dataTables.min.js"></script> -->
+	<!--     <script src="wayne/assets/js/jquery.dataTables.bootstrap.min.js"></script> -->
+	<script src="wayne/assets/js/dataTables.buttons.min.js"></script>
+	<script src="wayne/assets/js/buttons.flash.min.js"></script>
+	<script src="wayne/assets/js/buttons.html5.min.js"></script>
+	<script src="wayne/assets/js/buttons.print.min.js"></script>
+	<script src="wayne/assets/js/buttons.colVis.min.js"></script>
+	<!--     <script src="wayne/assets/js/dataTables.select.min.js"></script> -->
 
-    <!-- inline scripts related to this page -->
-    <script type="text/javascript">
+	<!-- ace scripts -->
+	<script src="wayne/assets/js/ace-elements.min.js"></script>
+	<script src="wayne/assets/js/ace.min.js"></script>
+
+	<!-- inline scripts related to this page -->
+	<script type="text/javascript">
         jQuery(function ($) {
             //initiate dataTables plugin
             var myTable =
@@ -335,11 +343,18 @@
         })
     </script>
 	<!------------------------------------ 訂單樣式 -------------------------------------->
+<!-- 	<script src="https://cdn.jsdelivr.net/npm/jspdf"></script> -->
+<!-- 	<script -->
+<!-- 		src="https://cdn.jsdelivr.net/npm/vxe-table-plugin-export-pdf/fonts/source-han-sans-normal.js"></script> -->
+<!-- 	<script -->
+<!-- 		src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>  
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
 		crossorigin="anonymous"></script>
-		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		<script src="wayne/order.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="wayne/order.js"></script>
 </body>
 </html>

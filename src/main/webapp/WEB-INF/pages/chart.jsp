@@ -17,6 +17,39 @@
 <link rel="stylesheet" id="main-stylesheet" data-version="1.1.0"
 	href="backend2/styles/shards-dashboards.1.1.0.min.css">
 <link rel="stylesheet" href="backend2/styles/extras.1.1.0.min.css">
+
+<!-- Google Font: Source Sans Pro -->
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
+<!-- Font Awesome -->
+<!-- <link rel="stylesheet" -->
+<!-- 	href="wayne/plugins/fontawesome-free/css/all.min.css"> -->
+<!-- Ionicons -->
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- Tempusdominus Bootstrap 4 -->
+<!-- <link rel="stylesheet" -->
+<!-- 	href="wayne/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css"> -->
+<!-- iCheck -->
+<!-- <link rel="stylesheet" -->
+<!-- 	href="wayne/plugins/icheck-bootstrap/icheck-bootstrap.min.css"> -->
+<!-- JQVMap -->
+<!-- <link rel="stylesheet" href="wayne/plugins/jqvmap/jqvmap.min.css"> -->
+<!-- Theme style -->
+
+<!-- overlayScrollbars -->
+<!-- <link rel="stylesheet" -->
+<!-- 	href="wayne/plugins/overlayScrollbars/css/OverlayScrollbars.min.css"> -->
+<!-- <!-- Daterange picker -->
+<!-- <link rel="stylesheet" -->
+<!-- 	href="wayne/plugins/daterangepicker/daterangepicker.css"> -->
+<!-- <!-- summernote  -->
+<!-- <link rel="stylesheet" -->
+<!-- 	href="wayne/plugins/summernote/summernote-bs4.min.css"> -->
+
+<link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="wayne/css/style.css" rel="stylesheet" type="text/css" />
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- <script -->
 <!-- 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script> -->
@@ -94,6 +127,7 @@
 					rangeMoney += total;
 					rangeCount += item.length;
 				});
+				rangeMoney += '';
 				$("#rangeMoney").html(rangeMoney);
 				$("#rangeCount").html(rangeCount);
 					console.log(lab);
@@ -226,104 +260,134 @@
 
 	<main
 		class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
-		<br/>
-		<br/>
-		<br/>
-		<br/>
+		<br /> <br /> <br /> <br />
 		<div class="main-content-container container-fluid px-4">
-			
-<!-- <!-- 			End Page Header  -->
-<!-- <!-- 			Small Stats Blocks  -->
-			<div class="row"> 
-				<div class="col-lg col-md-6 col-sm-6 mb-4">
-					<div class="stats-small stats-small--1 card card-small">
-						<div class="card-body p-0 d-flex">
-							<div class="d-flex flex-column m-auto">
-								<div class="stats-small__data text-center">
-									<span class="stats-small__label text-uppercase">總金額</span>
-									<h6 class="stats-small__value count my-3" id="money">0</h6>
-								</div>
-								<div class="stats-small__data">
- 									<span 
-										class="stats-small__percentage stats-small__percentage--increase">4.7%</span> 
-								</div>
-							</div>
- 							<canvas height="120" class="blog-overview-stats-small-1"></canvas> 
-						</div>
-					</div>
-				</div>
-				<div class="col-lg col-md-6 col-sm-6 mb-4">
-					<div class="stats-small stats-small--1 card card-small">
-						<div class="card-body p-0 d-flex">
-							<div class="d-flex flex-column m-auto">
-								<div class="stats-small__data text-center">
-									<span class="stats-small__label text-uppercase">總訂單數</span>
-									<h6 class="stats-small__value count my-3" id="count">0</h6>
-								</div>
-								<div class="stats-small__data">
- 									<span 
- 										class="stats-small__percentage stats-small__percentage--increase">12.4%</span> 
-								</div>
-							</div>
-							<canvas height="120" class="blog-overview-stats-small-2"></canvas> 
-						</div>
-					</div>
-				</div>
-				<div class="col-lg col-md-4 col-sm-6 mb-4">
-					<div class="stats-small stats-small--1 card card-small">
-						<div class="card-body p-0 d-flex">
-							<div class="d-flex flex-column m-auto">
-								<div class="stats-small__data text-center">
-									<span class="stats-small__label text-uppercase">Comments</span>
-									<h6 class="stats-small__value count my-3" id="rangeMoney">0</h6>
-								</div>
-								<div class="stats-small__data">
-									<span
-										class="stats-small__percentage stats-small__percentage--decrease">3.8%</span>
-								</div>
-							</div>
-							<canvas height="120" class="blog-overview-stats-small-3"></canvas>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg col-md-4 col-sm-6 mb-4">
-					<div class="stats-small stats-small--1 card card-small">
-						<div class="card-body p-0 d-flex">
-							<div class="d-flex flex-column m-auto">
-								<div class="stats-small__data text-center">
-									<span class="stats-small__label text-uppercase">Users</span>
-									<h6 class="stats-small__value count my-3" id="rangeCount">0</h6>
-								</div>
-								<div class="stats-small__data">
-									<span
-										class="stats-small__percentage stats-small__percentage--increase">12.4%</span>
-								</div>
-							</div>
-							<canvas height="120" class="blog-overview-stats-small-4"></canvas>
-						</div>
-					</div>
-				</div>
-<!-- 				<div class="col-lg col-md-4 col-sm-12 mb-4"> -->
-<!-- 					<div class="stats-small stats-small--1 card card-small"> -->
-<!-- 						<div class="card-body p-0 d-flex"> -->
-<!-- 							<div class="d-flex flex-column m-auto"> -->
-<!-- 								<div class="stats-small__data text-center"> -->
-<!-- 									<span class="stats-small__label text-uppercase">Subscribers</span> -->
-<!-- 									<h6 class="stats-small__value count my-3">17,281</h6> -->
-<!-- 								</div> -->
-<!-- 								<div class="stats-small__data"> -->
-<!-- 									<span -->
-<!-- 										class="stats-small__percentage stats-small__percentage--decrease">2.4%</span> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<canvas height="120" class="blog-overview-stats-small-5"></canvas> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-			</div>
-<!-- <!-- 			End Small Stats Blocks  -->
+
+			<!-- <!-- 			End Page Header  -->
+			<!-- <!-- 			Small Stats Blocks  -->
 			<div class="row">
-<!-- 				Users Stats -->
+				<!-- 				<div class="col-lg-3 col-6"> -->
+				<!-- 					small box -->
+				<!-- 				</div> -->
+
+				<!-- 				<div class="col-lg-3 col-6"> -->
+				<!-- 					small box -->
+				<!-- 				</div> -->
+				
+
+				<div class="col-lg col-md-6 col-sm-6 mb-4" >
+<!-- 					<div class="stats-small stats-small--1 card card-small"> -->
+						<div class="small-box bg-warning" style="border-radius:10px ;">
+							<div class="inner">
+								<h3 id="money">44</h3>
+
+								<p>營業總額</p>
+							</div>
+							<div class="icon">
+								<i class="fa fa-dollar"></i>
+							</div>
+							<a href="#" class="small-box-footer" style="border-radius:10px ;">More info <i
+								class="fas fa-arrow-circle-right"></i></a>
+						</div>
+						<!-- 						<div class="card-body p-0 d-flex"> -->
+						<!-- 							<div class="d-flex flex-column m-auto"> -->
+						<!-- 								<div class="stats-small__data text-center"> -->
+						<!-- 									<span class="stats-small__label text-uppercase">區間筆數</span> -->
+						<!-- 									<h6 class="stats-small__value count my-3" >0</h6> -->
+						<!-- 								</div> -->
+						<!-- 								<div class="stats-small__data"> -->
+						<!-- 									<span -->
+						<!-- 										class="stats-small__percentage stats-small__percentage--increase">12.4%</span> -->
+						<!-- 								</div> -->
+						<!-- 							</div> -->
+						<!-- 							<canvas height="120" class="blog-overview-stats-small-2"></canvas> -->
+						<!-- 						</div> -->
+<!-- 					</div> -->
+				</div>
+				<div class="col-lg col-md-6 col-sm-6 mb-4">
+<!-- 					<div class="stats-small stats-small--1 card card-small"> -->
+						<div class="small-box bg-info" style="border-radius:10px ;">
+							<div class="inner">
+								<h3 id="count">150</h3>
+
+								<p>總訂單量</p>
+							</div>
+							<div class="icon">
+								<i class="ion ion-bag"></i>
+							</div>
+							<a href="#" class="small-box-footer" style="border-radius:10px ;">More info <i
+								class="fas fa-arrow-circle-right"></i></a>
+						</div>
+						<!-- 						<div class="card-body p-0 d-flex"> -->
+						<!-- 							<div class="d-flex flex-column m-auto"> -->
+						<!-- 								<div class="stats-small__data text-center"> -->
+						<!-- 									<span class="stats-small__label text-uppercase">區間金額</span> -->
+						<!-- 									<h6 class="stats-small__value count my-3" >0</h6> -->
+						<!-- 								</div> -->
+						<!-- 								<div class="stats-small__data"> -->
+						<!-- 									<span -->
+						<!-- 										class="stats-small__percentage stats-small__percentage--increase">4.7%</span> -->
+						<!-- 								</div> -->
+						<!-- 							</div> -->
+						<!-- 							<canvas height="120" class="blog-overview-stats-small-1"></canvas> -->
+						<!-- 						</div> -->
+<!-- 					</div> -->
+				</div>
+				<!-- 				<div class="col-lg col-md-4 col-sm-6 mb-4"> -->
+				<!-- 					<div class="stats-small stats-small--1 card card-small"> -->
+				<!-- 						<div class="card-body p-0 d-flex"> -->
+				<!-- 							<div class="d-flex flex-column m-auto"> -->
+				<!-- 								<div class="stats-small__data text-center"> -->
+				<!-- 									<span class="stats-small__label text-uppercase">Comments</span> -->
+				<!-- 									<h6 class="stats-small__value count my-3" id="rangeMoney">0</h6> -->
+				<!-- 								</div> -->
+				<!-- 								<div class="stats-small__data"> -->
+				<!-- 									<span -->
+				<!-- 										class="stats-small__percentage stats-small__percentage--decrease">3.8%</span> -->
+				<!-- 								</div> -->
+				<!-- 							</div> -->
+				<!-- 							<canvas height="120" class="blog-overview-stats-small-3"></canvas> -->
+				<!-- 						</div> -->
+				<!-- 					</div> -->
+				<!-- 				</div> -->
+				<!-- 				<div class="col-lg col-md-4 col-sm-6 mb-4"> -->
+				<!-- 					<div class="stats-small stats-small--1 card card-small"> -->
+				<!-- 						<div class="card-body p-0 d-flex"> -->
+				<!-- 							<div class="d-flex flex-column m-auto"> -->
+				<!-- 								<div class="stats-small__data text-center"> -->
+				<!-- 									<span class="stats-small__label text-uppercase">Users</span> -->
+				<!-- 									<h6 class="stats-small__value count my-3" id="rangeCount">0</h6> -->
+				<!-- 								</div> -->
+				<!-- 								<div class="stats-small__data"> -->
+				<!-- 									<span -->
+				<!-- 										class="stats-small__percentage stats-small__percentage--increase">12.4%</span> -->
+				<!-- 								</div> -->
+				<!-- 							</div> -->
+				<!-- 							<canvas height="120" class="blog-overview-stats-small-4"></canvas> -->
+				<!-- 						</div> -->
+				<!-- 					</div> -->
+				<!-- 				</div> -->
+				<!-- 				<div class="col-lg col-md-4 col-sm-12 mb-4"> -->
+				<!-- 					<div class="stats-small stats-small--1 card card-small"> -->
+				<!-- 						<div class="card-body p-0 d-flex"> -->
+				<!-- 							<div class="d-flex flex-column m-auto"> -->
+				<!-- 								<div class="stats-small__data text-center"> -->
+				<!-- 									<span class="stats-small__label text-uppercase">Subscribers</span> -->
+				<!-- 									<h6 class="stats-small__value count my-3">17,281</h6> -->
+				<!-- 								</div> -->
+				<!-- 								<div class="stats-small__data"> -->
+				<!-- 									<span -->
+				<!-- 										class="stats-small__percentage stats-small__percentage--decrease">2.4%</span> -->
+				<!-- 								</div> -->
+				<!-- 							</div> -->
+				<!-- 							<canvas height="120" class="blog-overview-stats-small-5"></canvas> -->
+				<!-- 						</div> -->
+				<!-- 					</div> -->
+				<!-- 				</div> -->
+			</div>
+			<!-- <!-- 			End Small Stats Blocks  -->
+			<div class="row">
+				<!-- 				Users Stats -->
 				<div class="col-lg-8 col-md-12 col-sm-12 mb-4">
 					<div class="card card-small">
 						<div class="card-header border-bottom">
@@ -351,11 +415,23 @@
 										Full Report &rarr;</button>
 								</div>
 							</div>
-							<div class="d-flex flex-column m-auto">
-								<div class="stats-small__data text-center">
-									<span class="stats-small__label text-uppercase">區間營收</span>
-									<h6 class="stats-small__value count my-3">8,147</h6>
+							<br>
+							<div>
+								<div style="display: inline-block; width: 400px;">
+									<span class="sm-st-icon st-blue"><i class="fa fa-dollar"></i></span>
+									<div class="sm-st-info">
+										<span id="rangeMoney">0</span> 區間營業額
+
+									</div>
 								</div>
+								<div style="display: inline-block; width: 300px;">
+									<span class="sm-st-icon st-red"><i
+										class="fa fa-check-square-o"></i></span>
+									<div class="sm-st-info">
+										<span id="rangeCount">0</span> 區間筆數
+									</div>
+								</div>
+								<hr>
 							</div>
 							<canvas height="130" style="max-width: 100% !important;"
 								class="blog-overview-users" id="can"></canvas>
@@ -390,7 +466,7 @@
 						</div>
 					</div>
 				</div>
-<!-- 				End Users By Device Stats -->
+				<!-- 				End Users By Device Stats -->
 
 			</div>
 

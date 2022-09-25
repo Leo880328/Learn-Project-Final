@@ -29,7 +29,7 @@ function del(id) {
 		showCancelButton: true,
 		confirmButtonColor: '#3085d6',
 		cancelButtonColor: '#d33',
-		confirmButtonText: '刪除!',
+		confirmButtonText: '刪除',
 		cancelButtonText: '取消',
 	}).then((result) => {
 		if (result.isConfirmed) {
@@ -45,8 +45,7 @@ function del(id) {
 				url: "order/" + id,
 				success: function(data) {
 					$(`#${id}`).remove();
-					//					$(".table-responsive").empty();
-					//					order();
+
 				}
 			})
 		}
@@ -85,12 +84,10 @@ function order(status) {
 					</table>`);
 				console.log("管理員訂單");
 				$.each(data, function(i, n) {
-					console.log(n);
 					$("#body").append(orderList(n));
+					orderButton(n);
 					$(`.${n.orderId}`).append(bt);
-					if (n.status.id == 2) {
-						$(`.${n.orderId}check`).append(check);
-					}
+
 				})
 			} else {
 				console.log("會員訂單");
@@ -98,7 +95,6 @@ function order(status) {
 					memberStatus = n.status.id;
 					$("#userbody").append(orderListUser(n));
 					if (memberStatus == 1) {
-						console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 						$(`#${n.orderId}`).append(`<td ><button onclick="del(${n.orderId})" class="btn btn-danger">刪除</button></td>`);
 					} else {
 						$(`#${n.orderId}`).append(`<td ></td>`);
@@ -113,28 +109,7 @@ function order(status) {
 
 
 function orderList(order) {
-	bt = "";
-	check = "";
-	if (order.status.id == 1) {
-		bt = `<span class="badge badge-secondary" >${order.status.status}</span>`
-	};
 
-	if (order.status.id == 2) {
-		bt = `<span class="badge badge-success" >${order.status.status}</span>`
-		check = `<button class="btn btn-xs btn-success" onclick="checkOrder(${order.orderId})">
-	                            <i class="ace-icon fa fa-check bigger-120"></i>
-	                        </button>`;
-	};
-	if (order.status.id == 3) {
-		bt = `<span class="badge badge-warning">${order.status.status}</span>`
-	};
-	if (order.status.id == 4) {
-		bt = `<span class="badge badge-primary">${order.status.status}</span>`
-	}
-	if (order.status.id == 5 || order.status.id==6) {
-		console.log("!!!!!!!!!!!!!!!!!");
-		bt = `<span class="badge badge-dark">${order.status.status}</span>`
-	}
 
 	let data = `
             <tr id="${order.orderId}">
@@ -145,18 +120,20 @@ function orderList(order) {
                 <td>${formatDate(new Date(order.date))}</td>
                 <td>${order.totoalcount}</td>
                 <td>$${order.totoalprice}</td>
-                <td class="${order.orderId}"  ></td>
+                <td class="${order.orderId}"></td>
 
 
                 <td>
                     <div class="hidden-sm hidden-xs btn-group">
-                    	<div class="${order.orderId}check">
-	                        
-                        </div>
+                    
+	                     <button class="btn btn-xs btn-success" onclick="checkOrder(${order.orderId})" >
+	                            <i class="ace-icon fa fa-check bigger-120"></i>
+	                     </button>
 
-                        <button class="btn btn-xs btn-info">
-                            <i class="ace-icon fa fa-pencil bigger-120"></i>
-                        </button>
+                      
+                            <button class="btn btn-xs btn-warning" onclick="audit(${order.orderId})">
+                                <i class="ace-icon fa fa-flag bigger-120"></i>
+                            </button>
 
 
                         <button class="btn btn-xs btn-danger" onclick="del(${order.orderId})">
@@ -165,9 +142,9 @@ function orderList(order) {
 
                         <form action="orderDetail" method="post">
                             <input type="hidden" name="cartID" value="${order.orderId}" />
-                            <button class="btn btn-xs btn-warning">
-                                <i class="ace-icon fa fa-flag bigger-120"></i>
-                            </button>
+                              <button class="btn btn-info" data-toggle="tooltip" href="#" title="" data-original-title="Zoom">
+                    				<i class="icon-zoom-in"></i>
+                  				</button>
                         </form>
                     </div>
                 </td>
@@ -175,11 +152,41 @@ function orderList(order) {
 
 	return data;
 }
+
+function orderButton(order) {
+	bt = "";
+
+	//未付款
+	if (order.status.id == 1) {
+		bt = `<span class="badge badge-secondary" >${order.status.status}</span>`
+		$(`#${order.orderId}`).find(".btn-success").attr("disabled", true);
+		$(`#${order.orderId}`).find(".btn-warning").attr("disabled", true);
+	};
+
+	//已付款
+	if (order.status.id == 2) {
+		bt = `<span class="badge badge-success" >${order.status.status}</span>`
+		$(`#${order.orderId}`).find(".btn-warning").attr("disabled", true);
+	}
+	if (order.status.id == 3) {
+		bt = `<span class="badge badge-warning">${order.status.status}</span>`
+		$(`#${order.orderId}`).find(".btn-success").attr("disabled", true);
+	};
+	if (order.status.id == 4) {
+		bt = `<span class="badge badge-primary">${order.status.status}</span>`
+		$(`#${order.orderId}`).find(".btn-success").attr("disabled", true);
+		$(`#${order.orderId}`).find(".btn-warning").attr("disabled", true);
+	}
+	if (order.status.id == 5 || order.status.id == 6) {
+		bt = `<span class="badge badge-dark">${order.status.status}</span>`
+		$(`#${order.orderId}`).find(".btn-success").attr("disabled", true);
+		$(`#${order.orderId}`).find(".btn-warning").attr("disabled", true);
+	}
+}
 function orderListUser(order) {
 
-	let part = "";
+	part = "";
 	memberStatus = order.status.id;
-	console.log(order.status.id);
 	if (memberStatus == 1) {
 		part = `<td>
 						<form action="orderDetail" method="post">
@@ -189,12 +196,12 @@ function orderListUser(order) {
 				</td>`;
 
 	} else if (memberStatus == 2) {
-		part = `<td><button id="btn" disabled class="btn btn-secondary">已付款</button></td><td><butto  class="btn btn-info" onclick="backpay()")>退款申請</button></td><form id="audit" action="updateOrder/3/${order.orderId}" method="GET">
+		part = `<td><button id="btn" disabled class="btn btn-secondary">已付款</button></td><td><butto  class="btn btn-info" onclick="backpay(${order.orderId})")>退款申請</button></td>">
 	</form>`;
 
 	} else if (memberStatus == 3) {
-		part = `<td>
-					<button class="btn btn-warning">待審核</button>
+		part = `<td >
+					<button type="button" class="btn btn-warning">${order.status.status}</button>
 				</td>`;
 
 	} else if (memberStatus == 4) {
@@ -205,8 +212,12 @@ function orderListUser(order) {
 					</form>
 				</td>`;
 
+	} else if (memberStatus == 5 || memberStatus == 6) {
+		part = `<td>
+					<button type="button" class="btn btn-info">${order.status.status}</button>
+				</td>`;
+
 	}
-	console.log(part);
 	let data = `
             <tr id="${order.orderId}">
 				<td>${order.orderId}</td>
@@ -214,13 +225,13 @@ function orderListUser(order) {
 				<td>${order.totoalcount}</td>
 				<td>$${order.totoalprice}</td>
 				<td>${order.status.status}</td>` + part + "</tr>";
-	
+
 
 
 	return data;
 }
 
-function backpay() {
+function backpay(orderId) {
 	Swal.fire({
 		title: '確認申請退款?',
 		text: "",
@@ -233,12 +244,27 @@ function backpay() {
 	}).then((result) => {
 
 		if (result.isConfirmed) {
-			$("#audit").submit();
+			//			$("#audit").submit();
 			Swal.fire(
 				'申請成功',
 				'',
 				'success'
 			)
+			$.ajax({
+				async: false,
+				type: "GET",
+				url: "updateOrder/3/" + orderId,
+				success: function(data) {
+					$(`#${orderId}`).empty();
+					var order = orderUser(orderId);
+					orderListUser(order);
+					$(`#${orderId}`).append(`<td>${order.orderId}</td>
+											<td>${formatDate(new Date(order.date))}</td>
+											<td>${order.totoalcount}</td>
+											<td>$${order.totoalprice}</td>
+											<td>${order.status.status}</td>` + part);
+				}
+			})
 		}
 	})
 }
@@ -246,7 +272,7 @@ function backpay() {
 function checkOrder(orderId) {
 
 	Swal.fire({
-		title: '確認是否完成'+orderId+'此訂單?',
+		title: '確認是否完成' + orderId + '此訂單?',
 		showDenyButton: true,
 		showCancelButton: true,
 		confirmButtonText: '完成訂單',
@@ -255,31 +281,217 @@ function checkOrder(orderId) {
 	}).then((result) => {
 		/* Read more about isConfirmed, isDenied below */
 		if (result.isConfirmed) {
-			Swal.fire('完成訂單', '', 'success'),
-				$.ajax({
+			Swal.fire('完成訂單', '', 'success');
+			$.ajax({
 				async: false,
 				type: "GET",
-				url: "updateOrder/4/"+orderId,
+				url: "updateOrder/4/" + orderId,
 				success: function(data) {
-					console.log(data);
+					$(`#${orderId}`).empty();
+					console.log(bt);
+					$(`#${orderId}`).append(orderAdminContent(orderUser(orderId)));
+					orderButton(orderUser(orderId));
+					$(`.${orderId}`).append(bt);
 				}
 			})
 		} else if (result.isDenied) {
-			Swal.fire({
-				icon: 'success',
-				title: '退款成功',
-				showConfirmButton: false,
-				timer: 1500
-			})
-			Swal.fire('完成訂單', '', 'success'),
-				$.ajax({
-				async: false,
+			Swal.fire('退款成功', '', 'success')
+			$.ajax({
+				async: true,
 				type: "GET",
-				url: "updateOrder/5/"+orderId,
+				url: "updateOrder/5/" + orderId,
 				success: function(data) {
-					console.log(data);
+					$(`#${orderId}`).empty();
+					$(`#${orderId}`).append(orderAdminContent(orderUser(orderId)));
+					orderButton(orderUser(orderId));
+					$(`.${orderId}`).append(bt);
 				}
 			})
 		}
 	})
+}
+
+function orderUser(orderId) {
+	var order;
+	$.ajax({
+		async: false,
+		type: "GET",
+		url: "order/" + orderId,
+		success: function(data) {
+			order = data;
+			console.log(data);
+		}
+	})
+	return order;
+}
+
+
+function orderAdminContent(order) {
+	var data = `<td>${order.memberBean.account}</td>
+                <td>${order.memberBean.name}</td>
+                <td>${order.memberBean.email}</td>
+                <td>${order.orderId}</td>
+                <td>${formatDate(new Date(order.date))}</td>
+                <td>${order.totoalcount}</td>
+                <td>$${order.totoalprice}</td>
+                <td class="${order.orderId}"></td>
+
+
+                <td>
+                    <div class="hidden-sm hidden-xs btn-group">
+                    	
+	                     <button class="btn btn-xs btn-success" onclick="checkOrder(${order.orderId})" >
+	                            <i class="ace-icon fa fa-check bigger-120"></i>
+	                     </button>
+
+                         <button class="btn btn-xs btn-warning">
+                                <i class="ace-icon fa fa-flag bigger-120"></i>
+                            </button>
+
+
+                        <button class="btn btn-xs btn-danger" onclick="del(${order.orderId})">
+                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                        </button>
+
+                        <form action="orderDetail" method="post">
+                            <input type="hidden" name="cartID" value="${order.orderId}" />
+                              <button class="btn btn-info" data-toggle="tooltip" href="#" title="" data-original-title="Zoom">
+                    				<i class="icon-zoom-in"></i>
+                  				</button>
+                        </form>
+                    </div>
+                </td>`;
+	return data;
+}
+
+function audit(orderId) {
+	Swal.fire({
+		title: '此訂單' + orderId + '正在申請退款請審核確認是否通過?',
+		showDenyButton: true,
+		showCancelButton: true,
+		confirmButtonText: '退款',
+		denyButtonText: '駁回',
+		cancelButtonText: '取消'
+	}).then((result) => {
+		/* Read more about isConfirmed, isDenied below */
+		if (result.isConfirmed) {
+			Swal.fire('已退款', '', 'success');
+			$.ajax({
+				async: true,
+				type: "GET",
+				url: "updateOrder/5/" + orderId,
+				success: function(data) {
+					$(`#${orderId}`).empty();
+					$(`#${orderId}`).append(orderAdminContent(orderUser(orderId)));
+					orderButton(orderUser(orderId));
+					$(`.${orderId}`).append(bt);
+				}
+			})
+		} else if (result.isDenied) {
+			Swal.fire('已駁回', '', 'success');
+			$.ajax({
+				async: true,
+				type: "GET",
+				url: "updateOrder/6/" + orderId,
+				success: function(data) {
+					$(`#${orderId}`).empty();
+					$(`#${orderId}`).append(orderAdminContent(orderUser(orderId)));
+					orderButton(orderUser(orderId));
+					$(`.${orderId}`).append(bt);
+				}
+			})
+		}
+	})
+
+}
+
+
+function selectStatus(e) {
+
+	let st = $(e).val();
+	console.log(st);
+
+	$.ajax({
+		async: false,
+		type: "GET",
+		url: "searchStatus/" + st,
+		success: function(data) {
+			console.log(data);
+			$("#not").remove();
+			$("#userbody").empty();
+			if (data.length == 0) {
+				console.log($("#userOutBody"));
+				$("#userOutBody").append(`<div style="border: 1px solid #ddd" id="not">
+								<div style="width: 100px; margin: auto;" >尚無訂單!!!</div>
+								</div>
+							`);
+			}
+			$.each(data, function(i, n) {
+				memberStatus = n.status.id;
+				$("#userbody").append(orderListUser(n));
+				if (memberStatus == 1) {
+					$(`#${n.orderId}`).append(`<td ><button onclick="del(${n.orderId})" class="btn btn-danger">刪除</button></td>`);
+				} else {
+					$(`#${n.orderId}`).append(`<td ></td>`);
+				}
+
+			})
+		}
+	})
+}
+function htmlToPdf() {
+	//	var doc = new jsPDF();
+	//	doc.fromHTML(document.getElementById("pdfTransfer"),
+	//		15,
+	//		15,
+	//		{ 'width': 170 },
+	//		function() {
+	//			doc.addFont('SourceHanSans-Normal.ttf', 'SourceHanSans-Normal', 'normal');
+	//			doc.setFont('SourceHanSans-Normal');
+	//			doc.save("PDF_Documet.pdf");
+	//		});
+//	doc = window.jspdf.jsPDF;
+	//	var doc = new jsPDF();
+	var doc = new jsPDF('p', 'pt', 'letter');
+	var htmlstring = '';
+	var tempVarToCheckPageHeight = 0;
+	var pageHeight = 0;
+	pageHeight = doc.internal.pageSize.height;
+	specialElementHandlers = {
+		// element with id of "bypass" - jQuery style selector  
+		'#bypassme': function(element, renderer) {
+			// true = "handled elsewhere, bypass text extraction"  
+			return true
+		}
+	};
+	margins = {
+		top: 150,
+		bottom: 60,
+		left: 40,
+		right: 40,
+		width: 600
+	};
+	var y = 20;
+	doc.setLineWidth(2);
+	doc.text(200, y = y + 30, "TOTAL MARKS OF STUDENTS");
+	doc.autoTable({
+		html: '#simple_table',
+		startY: 70,
+		theme: 'grid',
+		columnStyles: {
+			0: {
+				cellWidth: 180,
+			},
+			1: {
+				cellWidth: 180,
+			},
+			2: {
+				cellWidth: 180,
+			}
+		},
+		styles: {
+			minCellHeight: 40
+		}
+	})
+	doc.save('Marks_Of_Students.pdf');
 }
