@@ -1,10 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 	import="java.util.*,fourth.bean.*,java.util.Date,java.text.SimpleDateFormat,java.text.DateFormat"%>
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+	   $(function(){
+		   $("#resbtn").click(function(){
+			   
+			   var resultText = "";
+			   
+			   $.ajax({
+				   type:'post',
+				   url:'ExamMyMemSe',
+				   dataType: 'json',
+				   success: function(data){
+					   
+					   console.log(data);
+					   
+					   for(var i=0;i<data.length;i++){
+						   
+						   resultText += data[i].examQues.quesContent+"<br>";
+						   
+					   }
+					   
+					   $('#result').html(resultText);
+					   
+					   console.log(resultText);
+	
+				   },error: function(e){
+					   
+					   console.log(e);
+					   
+				   }
+			   });
+		   });
+	   });
+	</script>
+    
     <style>
         .divform {
 
@@ -36,68 +71,44 @@
         tr {
             text-align: center;
         }
+
+        h2 {
+            border: 1px solid black;
+            width: 200px;
+            display:inline-block;
+        }
     </style>
 </head>
 
 
 <body>
-
     <jsp:include page="Header.jsp" />
-    <!-- 選項與CRUD按鈕 -->
 
-    <div class="divform">
-        <form action="ExamController" method="post">
-            <div>
-                <input type="submit" name="todo" value="query"> 考卷
-                <input type="submit" name="todo" value="queryAll"> 錯題
-            </div>
-            
-            <!-- 表格 -->
-            <h2>考試天地</h2>
-            <table class="tb" align="center">
-                <thead>
-                    <tr>
-                        <th>項次</th>
-                        <th>圖片</th>
-                        <th>科目</th>
-                        <th>程度</th>
-                        <th>名稱</th>
-                        <th>年度</th>
-                    </tr>
-                </thead>
-
-                <% List<ExamBean> examTable = (List<ExamBean>) request.getAttribute("examTable");
-                        if (examTable != null && examTable.size() > 0) {
-                        for (int i = 0; i < examTable.size(); i++) { DateFormat dateFormat=new
-                            SimpleDateFormat("yyyy-MM-dd"); Date date=new Date(); String
-                            dateToStr=dateFormat.format(examTable.get(i).getExamdate()); %>
-				<tbody>
-				    <tr>
-				        <%-- <td><input type="checkbox" name="examTableIndex" value="<%= i %>"></td> --%>
-				            <td><%= i+1 %></td>
-				            <td><img src="<%=examTable.get(i).getExamPic()%>" alt="" title="" width="80"></td>
-				            <td><%= examTable.get(i).getSubject().getSubjectName() %></td>
-				            <td><%= examTable.get(i).getEducation().getEducationName() %></td>
-				            <td><%= examTable.get(i).getExamName() %></td>
-				            <td><%= dateToStr %></td>
-				            <form action="ExamController" method="post">
-				                <input type="hidden" name="examID" value="<%= examTable.get(i).getExamID() %>">
-				                <input type="hidden" name="subject" value="<%= examTable.get(i).getSubject().getSubjectName() %>">
-				                <input type="hidden" name="education" value="<%= examTable.get(i).getEducation().getEducationName() %>">
-				                <input type="hidden" name="examName" value="<%= examTable.get(i).getExamName()%>">
-				                <input type="hidden" name="examDate" value="<%= dateToStr%>">
-				                <input type="hidden" name="examPic" value="<%= examTable.get(i).getExamPic() %>">
-				            </form>
-				    </tr>
-				</tbody>
-
-                <% } // for loop %>
-
-               	<% } // if %>
+    <div>
+        <div>
+            <h2>收藏題目</h2>
+            <button id="resbtn" type="button">查詢</button>
+        </div>
+        <div>
+            <table>
+                <tr>
+                	<div id="result"></div>
+                	
+<%--                     <td><label>${loop.index+1}${que.quesContent}</label></td> --%>
+<%--                     <td><label>答案為:${que.quesAnswer}</label></td> --%>
+                </tr>
             </table>
+        </div>
+        <div>
+            <h2>我的考卷</h2>
+        </div>
+        <div>
 
-        </form>
+        </div>
     </div>
+    
+	
 </body>
+
 
 </html>

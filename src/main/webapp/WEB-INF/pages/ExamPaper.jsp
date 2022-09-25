@@ -7,19 +7,27 @@
 <head>
     <title>Insert title here</title>
     <style>
-        .divform {
-
-            width: 1000px;
-            margin: auto;
-        }
 
         .tb {
-/*             border: solid 3px gray; */
-/*             border-collapse: collapse; */
             width: 1000px;
             word-wrap: break-word;
             table-layout: fixed;
             margin: auto;
+            background-color: #FFFFFF;
+            padding:10px;
+        }
+        
+        td{
+        	
+        }
+        
+        .Div1{
+        
+	        width: 1020px;
+	        margin: auto;
+	        padding:10px;
+	        background-color: #F5F5F5;
+        
         }
     </style>
 </head>
@@ -27,8 +35,7 @@
 <body>
     <jsp:include page="Header.jsp" />
 
-
-    <div>
+    <div class="Div1">
         <form action="ExamController" method="post">
             <table class="tb">
                 <tr>
@@ -46,16 +53,11 @@
                         <td><input type="radio" name="answer${loop.index}" id="" value="D">D.${que.optD}</td>
                     </tr>
                 </c:forEach>
-			</table>
- 
-
-            <div style="margin:auto; height:42px;width:120px;">
-                 <button  type="submit" name="todo" value="testSubmit">testSubmit</button>
-            </div>
-   
-
-                
-            
+			
+ 				<tr>
+	                 <td style="text-align: center" colspan="4"><button  type="submit" name="todo" value="testSubmit">testSubmit</button></td>    
+            	</tr>
+            </table>
         </form>
     </div>
 

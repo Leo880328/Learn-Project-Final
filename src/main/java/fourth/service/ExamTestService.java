@@ -75,7 +75,8 @@ public class ExamTestService  {
 		
 		//看是哪張考卷
 		ExamBean examBean = examRes.findById(Integer.valueOf(examID)).get(); 
-		
+		System.err.println(examBean);
+		System.err.println(examID);
 		//找出考題
 		List<ExamQuesBean> examQuesList = examQuRes.findQues(examBean.getSubject().getSubjectId(),examBean.getEducation().getEducationId());
 		

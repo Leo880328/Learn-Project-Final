@@ -137,7 +137,7 @@
 								class="teamo-nav-vertical vertical-menu teamo-clone-mobile-menu">
 								<li class="menu-item"><a href="searchLearn"
 									class="teamo-menu-item-title" title="New Arrivals">我的學習</a></li>
-								<li class="menu-item"><a title="Hot Sale" href="firstExamController"
+								<li class="menu-item"><a title="Hot Sale" href="ExamMyMemController"
 									class="teamo-menu-item-title">我的試卷</a></li>
 								<li class="menu-item "><a title="Accessories" href="#"
 									class="teamo-menu-item-title">我的活動</a><span
