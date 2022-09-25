@@ -20,7 +20,7 @@ function cartList() {
 			
 			        </tr>
 			    
-			        <td colspan="8"><a href="course.list" style="color: red"><input type="hidden" name="return"
+			        <td colspan="8"><a href="coursefront1.list" style="color: red"><input type="hidden" name="return"
 			                value="前往探索更多課程~">前往探索更多課程~</a></td>
 			        <tr>
 			        
