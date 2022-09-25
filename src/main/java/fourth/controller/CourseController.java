@@ -22,8 +22,13 @@ public class CourseController {
 
 	@Autowired
 	private CourseService cService;
-
 	
+	@GetMapping("/footer")
+	public String footer() {
+		return "CourseFrontList2";
+
+	}
+
 
 	
 	@GetMapping("/course.list")
@@ -48,14 +53,14 @@ public class CourseController {
 	
 	@GetMapping("/course.details")
 	public String showDetails(int course_id,Model m) {
-		CourseBean cbean = cService.select(course_id);
+		CourseBean cbean = cService.findByCourseId(course_id);
 		m.addAttribute("cbean", cbean); 
 		return "Details";
 	}
 	
 	@GetMapping("/course.show")
 	public String updateDetails(int course_id,Model m) {
-		CourseBean bean = cService.select(course_id);
+		CourseBean bean = cService.findByCourseId(course_id);
 		m.addAttribute("bean", bean); 
 		return "Update";
 	}
@@ -73,7 +78,7 @@ public class CourseController {
 		if (keyword == "") {
 			keyword = "0";
 		};
-		CourseBean cb = cService.select(Integer.parseInt(keyword));
+		CourseBean cb = cService.findByCourseId(Integer.parseInt(keyword));
 		if (keyword == "0" || cb == null) {
 			errorMsgMap.put("QueryError", "<font color=red size=5>查無資料!!</font>");
 		}
@@ -91,7 +96,7 @@ public class CourseController {
 	public String queryName(@RequestParam("keyword") String keyword, Model m) {
 		HashMap<String, String> errorMsgMap = new HashMap<String, String>();
 		m.addAttribute("errorMsgMap", errorMsgMap);
-		List<CourseBean> list = cService.selectName(keyword);
+		List<CourseBean> list = cService.findByNameLike("%" + keyword + "%");
 		if(keyword == "" || keyword.length() == 0) {
 			return "redirect:/course.list";
 		}

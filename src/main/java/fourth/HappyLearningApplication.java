@@ -21,7 +21,4 @@ public class HappyLearningApplication {
 		SpringApplication.run(HappyLearningApplication.class, args);
 	}
 	
-	
-	
-	
 }

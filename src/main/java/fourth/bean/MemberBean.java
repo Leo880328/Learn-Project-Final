@@ -18,8 +18,6 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
-
 @Entity
 @Table(name = "member")
 @Component
@@ -62,19 +60,19 @@ public class MemberBean {
 
 	@Column(name = "joindate")
 	private String joinDate;
-	
-	//一個用戶對多個訂單
+
+	// 一個用戶對多個訂單
 	@JsonIgnore
-	@OneToMany(mappedBy = "memberBean",cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-			 CascadeType.DETACH, CascadeType.REFRESH})
+	@OneToMany(mappedBy = "memberBean", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+			CascadeType.REFRESH })
 	List<OrderUser> orderUsers;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "memberBean",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "memberBean", cascade = CascadeType.ALL)
 	private List<CartItem> cartItems;
-	
-	public MemberBean(Integer userId, String nick, String account, String password, int status, String name,
-			String img, String sex, String birthday, String cellphone, String email, String joinDate) {
+
+	public MemberBean(Integer userId, String nick, String account, String password, int status, String name, String img,
+			String sex, String birthday, String cellphone, String email, String joinDate) {
 		super();
 		this.userId = userId;
 		this.nick = nick;
@@ -88,6 +86,18 @@ public class MemberBean {
 		this.cellphone = cellphone;
 		this.email = email;
 		this.joinDate = joinDate;
+	}
+
+	public  MemberBean(String account, String password) {
+		this.account = account;
+		this.password = password;
+	}
+
+	public MemberBean(String account, String password, String email) {
+		super();
+		this.account = account;
+		this.password = password;
+		this.email = email;
 	}
 
 	public MemberBean() {
@@ -189,24 +199,22 @@ public class MemberBean {
 	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
 	}
-	
-	
-	
+
 	public List<OrderUser> getOrderUsers() {
 		return orderUsers;
 	}
+
 	public void setOrderUsers(List<OrderUser> orderUsers) {
 		this.orderUsers = orderUsers;
 	}
-	
-	
-	//用戶加入訂單
+
+	// 用戶加入訂單
 	public void addorderUsers(OrderUser orderUser) {
-		
-		if(orderUsers == null) {
+
+		if (orderUsers == null) {
 			orderUsers = new ArrayList<>();
 		}
-		
+
 		orderUsers.add(orderUser);
 	}
 
@@ -218,13 +226,11 @@ public class MemberBean {
 		this.cartItems = cartItems;
 	}
 
-
 	@Override
 	public String toString() {
 		return "MemberBean [userId=" + userId + ", nick=" + nick + ", account=" + account + ", password=" + password
 				+ ", status=" + status + ", name=" + name + ", img=" + img + ", sex=" + sex + ", birthday=" + birthday
 				+ ", cellphone=" + cellphone + ", email=" + email + ", joinDate=" + joinDate + "]";
 	}
-	
-	
+
 }
