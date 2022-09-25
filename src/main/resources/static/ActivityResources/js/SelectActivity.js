@@ -39,13 +39,7 @@ function selectAll() {
     },
     error: function (err) { alert("資料獲取失敗，請刷新網頁!") },
   })
-    .then(
-      function () {
-        $('a').click(function (event) {
-          event.preventDefault();
-        });
-      }
-    )
+
 }
 function pageNoIncrease() {
   if (pageRequest.pageNo < totalPages) {

@@ -1,5 +1,12 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
+<<<<<<< HEAD
+encoding//src/main/webapp/WEB-INF/pages/ColumnFrontEnd.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/pages/ColumnFrontEndDetails.jsp=UTF-8
+=======
+encoding//src/main/webapp/WEB-INF/pages/BecomeTeacher.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/pages/UserSeting.jsp=UTF-8
+>>>>>>> 7b6741a84c165d7fcfeabcbe5cfb7b21bec957c6
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8

@@ -13,8 +13,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
-@Table(name = "OrderItem")
+@Table(name = "orderitem")
 public class OrderItem implements Serializable{
 	
 	@Id
@@ -28,6 +30,7 @@ public class OrderItem implements Serializable{
 	@Transient
 	private String order_id;  
 	
+	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name = "order_id")
 	OrderUser orderUser;

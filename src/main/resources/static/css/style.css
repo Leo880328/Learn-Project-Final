@@ -5549,7 +5549,7 @@ ul.list-products {
 }
 
 .teamo-contact-info .address .icon::before {
-    content: "\f041"
+    content: "\f073"
 }
 
 .teamo-contact-info .phone .icon::before {
@@ -5563,7 +5563,6 @@ ul.list-products {
 .teamo-contact-info .item .text {
     display: block;
     color: #ddd;
-    text-transform: capitalize;
     font-size: 14px;
     overflow: hidden
 }
@@ -7783,7 +7782,7 @@ ul.list-products {
 }
 
 .slider-item.style4 .slider-inner {
-    background-image: url(../images/slider-thumb-full-1.jpg);
+    background-image: url(../images/未命名設計2.png);
     border-radius: 0
 }
 
@@ -10935,6 +10934,10 @@ iframe {
     font-size: 18px;
     color: #eee;
     margin-right: 20px
+}
+
+.footer .menu-connect li.google a::before {
+    content: "\f1a0"
 }
 
 .footer .menu-connect li.facebook a::before {
