@@ -115,13 +115,26 @@
 								<td>$${order.totoalprice }</td>
 							</tr>
 						</table>
-						<c:if test="${order.status.id != 4}">
+				<c:if test="${order.status.id != 1}">
+					<div style="margin: auto; width: 88px;">
+						<form action="orderList" method="GET">
+							<button class="btn btn-dark">返回</button>
+						</form>
 
+					</div>
+
+				</c:if>
+						<c:if test="${order.status.id == 1}">
+<!-- 							//"updateOrder/5/" + orderId -->
 							<div style="margin: auto; width: 88px;">
-								<form action="goEcpay" method="post">
-									<input type="hidden" name="orderID" value="${order.orderId}" />
-									<button onclick="if( !(confirm('確認付款?') ) ) return false ; ">確認付款</button>
+								<form action="updateOrder/2/${order.orderId}"  method="get">
+<%-- 									<input type="hidden" name="orderID" value="${order.orderId}" /> --%>
+									<button class="btn btn-success"  onclick="if( !(confirm('確認付款?') ) ) return false ; ">確認付款</button>
 								</form>
+<!-- 								<form action="goEcpay" method="post"> -->
+<%-- 									<input type="hidden" name="orderID" value="${order.orderId}" /> --%>
+<!-- 									<button onclick="if( !(confirm('確認付款?') ) ) return false ; ">確認付款</button> -->
+<!-- 								</form> -->
 							</div>
 
 						</c:if>

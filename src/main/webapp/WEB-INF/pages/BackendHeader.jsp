@@ -10,8 +10,11 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Vendor styles -->
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  
 <link rel="stylesheet"
 	href="backend/vendors/material-design-iconic-font/css/material-design-iconic-font.min.css">
+<!-- <link rel="stylesheet" href="wayne/dist/css/adminlte.min.css"> -->
 <link rel="stylesheet"
 	href="backend/vendors/animate.css/animate.min.css">
 <link rel="stylesheet"
@@ -124,15 +127,16 @@
 
 
 					<div class="user__info" data-toggle="dropdown">
-						<img class="user__img" src="backend/demo/img/profile-pics/8.jpg"
+<%-- 					<img src="${mb.img}" width="150" height="100"> --%>
+						<img class="user__img" src="${sessionScope.user.img }"
 							alt="">
 
 					</div>
 
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="">${sessionScope.user.name }</a><a class="dropdown-item"
-							href="">查看個人檔案</a><a class="dropdown-item"
-							href="login.controller">登出</a>
+							href="user.controller">查看個人檔案</a><a class="dropdown-item"
+							href="logout.controller">登出</a>
 					</div>
 
 

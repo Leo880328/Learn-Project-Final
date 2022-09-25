@@ -74,6 +74,13 @@ public class OrderController {
 		return "delete Ok";
 	}
 	
+	@ResponseBody
+	@GetMapping(path = "order/{id}")
+	public OrderUser OrderById(@PathVariable("id") String cartID) {
+		OrderUser orderItemUser = orderService.orderItemUser(cartID);
+		return orderItemUser;
+	}
+	
 //	@PostMapping(path = "/deleteOrder")
 //	public String deleteOrder(String cartID) {
 //		orderService.deleteOrder(cartID);
@@ -105,9 +112,11 @@ public class OrderController {
 	public String updateOrder(
 			@PathVariable(required = false , value = "status")	int status,
 			@PathVariable(required = false, value="orderId") String orderId,
-			Model m) throws SQLException  {
+			Model m,HttpServletRequest request) throws SQLException  {
+		String url =request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+		+ request.getContextPath();
 		MemberBean user = (MemberBean)m.getAttribute("user");
-		orderService.updateOrder(user.getStatus(), status, orderId);
+		orderService.updateOrder(user.getStatus(), status, orderId,url);
 		return "redirect:/orderList";
 	}
 	
@@ -150,4 +159,11 @@ public class OrderController {
 		return statusChart;
 	}
 
+	@ResponseBody
+	@GetMapping(path = "/searchStatus/{status}")
+	public List<OrderUser>  searchStatus(Model m,@PathVariable("status") Integer status) throws Exception{
+		MemberBean user = (MemberBean)m.getAttribute("user");
+		List<OrderUser> searchStatust = orderService.searchStatust(user.getuserId(), status);
+		return searchStatust;
+	}
 }

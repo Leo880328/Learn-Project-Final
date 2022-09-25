@@ -33,7 +33,7 @@
         <div class="fullwidth-template">
             <div class="teamo-product produc-featured rows-space-65">
                 <div class="container">
-                    <a href="CourseListServlet"><h3 class="custommenu-title-blog">課程 </h3></a>
+                    <a href="coursefront1.list"><h3 class="custommenu-title-blog">課程 </h3></a>
                     <div class="owl-products owl-slick equal-container nav-center"
                         data-slick='{"autoplay":false, "autoplaySpeed":1000, "arrows":false, "dots":true, "infinite":false, "speed":800, "rows":1}'
                         data-responsive='[{"breakpoint":"2000","settings":{"slidesToShow":4}},{"breakpoint":"1200","settings":{"slidesToShow":3}},{"breakpoint":"992","settings":{"slidesToShow":2}},{"breakpoint":"480","settings":{"slidesToShow":1}}]'>

@@ -15,18 +15,52 @@
 <script type="text/javascript" charset="utf8"
 	src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 <script>
-	$(function(){
-			
-			//$('#order').DataTable();
-	})
+	
+	
 </script>
 </head>
-<body >
+<body>
+	<div class="container">
+
+		<div class="shop-top-control">
+		
+			<form class="select-item select-form">
+				<span class="title">課程分類</span><select title="sort"
+					data-placeholder="12 Products/Page" class="chosen-select" >
+					<option value="1">英文</option>
+					<option value="2">數學</option>
+					<option value="3">10 Products/Page</option>
+					<option value="4">8 Products/Page</option>
+					<option value="5">6 Products/Page</option>
+				</select>
+			</form>
+			<form class="filter-choice select-form">
+				<span class="title">訂單狀態</span><select title="by"
+					data-placeholder="Price: Low to High" class="chosen-select" onchange="selectStatus(this)">
+					<option value="0">全部</option>
+					<option value="1">未付款</option>
+					<option value="2">已付款</option>
+					<option value="3">待審核</option>
+					<option value="4">完成訂單</option>
+					<option value="5">已退款</option>
+					<option value="6">已駁回</option>
+				</select>
+			</form>
+			<div class="grid-view-mode">
+				<div class="inner">
+					<a href="listproducts.html" class="modes-mode mode-list active"><span></span><span></span></a><a
+						href="gridproducts.html" class="modes-mode mode-grid"><span></span><span></span><span></span><span></span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- --------------------------------------------------------------top -->
+
 	<div style="width: 1500px;" class="container">
 		<div class="row justify-content-center">
-			<div class="col-auto">
+			<div class="col-auto" id="userOutBody">
 
-				<table class="table table-striped table-hover" id="order" >
+				<table class="table table-striped table-hover" id="order">
 					<thead>
 						<tr>
 							<th>訂單編號</th>
@@ -38,62 +72,57 @@
 							<th></th>
 						</tr>
 					</thead>
-					<tbody id = "userbody">
-<%-- 						<c:forEach items="${order}" var="order" > --%>
-<%-- 							<tr id="${order.orderId }"> --%>
-<%-- 								<td>${order.orderId }</td> --%>
-<%-- 								<td>${order.date }</td> --%>
-<%-- 								<td>${order.totoalcount }</td> --%>
-<%-- 								<td>${order.status.status }</td> --%>
-<%-- 								<td>${order.discount }</td> --%>
-<!-- 								<td>$${order.totoalprice }</td> -->
+					<tbody id="userbody">
+						<%-- 						<c:forEach items="${order}" var="order" > --%>
+						<%-- 							<tr id="${order.orderId }"> --%>
+						<%-- 								<td>${order.orderId }</td> --%>
+						<%-- 								<td>${order.date }</td> --%>
+						<%-- 								<td>${order.totoalcount }</td> --%>
+						<%-- 								<td>${order.status.status }</td> --%>
+						<%-- 								<td>${order.discount }</td> --%>
+						<!-- 								<td>$${order.totoalprice }</td> -->
 
-<%-- 								<c:if test="${order.status.id == 1}"> --%>
-<!-- 									<td> -->
-<!-- 										<form action="orderDetail" method="post"> -->
-<%-- 											<input type="hidden" name="cartID" value="${order.orderId}" /> --%>
-<!-- 											<button>結帳</button> -->
-<!-- 										</form> -->
-<!-- 									</td> -->
-<%-- 								</c:if> --%>
-<%-- 								<c:if test="${order.status.id == 2}"> --%>
-<%-- 									<td><a href="${upStatus}"><button id="btn" disabled>已付款</button></a></td> --%>
-<%-- 								</c:if> --%>
-<%-- 								<c:if test="${order.status.id == 3}"> --%>
-<!-- 									<td> -->
-<!-- 											<button>待審核</button> -->
-<!-- 									</td> -->
-<%-- 								</c:if> --%>
-<%-- 								<c:if test="${order.status.id == 4}"> --%>
-<!-- 									<td> -->
-<!-- 										<form action="orderDetail" method="post"> -->
-<%-- 											<input type="hidden" name="cartID" value="${order.orderId}" /> --%>
-<!-- 											<button style="background-color: blue;">詳細</button> -->
-<!-- 										</form> -->
-<!-- 									</td> -->
-<%-- 								</c:if> --%>
+						<%-- 								<c:if test="${order.status.id == 1}"> --%>
+						<!-- 									<td> -->
+						<!-- 										<form action="orderDetail" method="post"> -->
+						<%-- 											<input type="hidden" name="cartID" value="${order.orderId}" /> --%>
+						<!-- 											<button>結帳</button> -->
+						<!-- 										</form> -->
+						<!-- 									</td> -->
+						<%-- 								</c:if> --%>
+						<%-- 								<c:if test="${order.status.id == 2}"> --%>
+						<%-- 									<td><a href="${upStatus}"><button id="btn" disabled>已付款</button></a></td> --%>
+						<%-- 								</c:if> --%>
+						<%-- 								<c:if test="${order.status.id == 3}"> --%>
+						<!-- 									<td> -->
+						<!-- 											<button>待審核</button> -->
+						<!-- 									</td> -->
+						<%-- 								</c:if> --%>
+						<%-- 								<c:if test="${order.status.id == 4}"> --%>
+						<!-- 									<td> -->
+						<!-- 										<form action="orderDetail" method="post"> -->
+						<%-- 											<input type="hidden" name="cartID" value="${order.orderId}" /> --%>
+						<!-- 											<button style="background-color: blue;">詳細</button> -->
+						<!-- 										</form> -->
+						<!-- 									</td> -->
+						<%-- 								</c:if> --%>
 
-<!-- 								<td> -->
-<%-- 									<c:if test="${order.status.id == 1}"> --%>
-									
-<%-- 											<button onclick="del(${order.orderId})">刪除</button> --%>
-	
-<%-- 									</c:if> --%>
-<!-- 								</td> -->
-	
-<!-- 							</tr> -->
-<%-- 						</c:forEach> --%>
+						<!-- 								<td> -->
+						<%-- 									<c:if test="${order.status.id == 1}"> --%>
+
+						<%-- 											<button onclick="del(${order.orderId})">刪除</button> --%>
+
+						<%-- 									</c:if> --%>
+						<!-- 								</td> -->
+
+						<!-- 							</tr> -->
+						<%-- 						</c:forEach> --%>
 					</tbody>
 				</table>
-				<c:if test="${order.size() == 0 }">
-					<div style="border: 1px solid #ddd">
-						<div style="width: 100px; margin: auto;">尚無訂單!!!</div>
-					</div>
-
-				</c:if>
+					
 			</div>
 		</div>
 	</div>
-	
+
 </body>
 </html>

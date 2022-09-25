@@ -57,9 +57,13 @@ public class CartController {
 	public String addCart(Model m,@PathVariable("id") String courseID) throws SQLException {
 		MemberBean user = (MemberBean)m.getAttribute("user");
 		cartService.cartAdd(courseID,user.getuserId());
-//		CourseBean cbean = cService.select(WebUtils.paseInt(courseID));
-//		m.addAttribute("cbean", cbean); 
+
 		return "add Ok";
+
+//		CourseBean cbean = cService.findByCourseId(WebUtils.paseInt(courseID));
+//		m.addAttribute("cbean", cbean); 
+//		return "Details";
+
 	}
 	
 	@ResponseBody
@@ -68,11 +72,7 @@ public class CartController {
 		cartService.cartDelete(cartID);
 		return "deleteOK";
 	}
-//	@DeleteMapping(path = "/cart/{cartID}")
-//	public String deleteCart(@PathVariable("cartID") String cartID) {
-//		cartService.cartDelete(cartID);
-//		return "redirect:/cart";
-//	}
+
 	
 	@ResponseBody
 	@PostMapping(path = "/cart/clearCart")

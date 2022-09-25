@@ -45,7 +45,7 @@
 			</header>
 			<div class="card">
 				<div class="card-body" class="row justify-content-center">
-					<div class="table-responsive">
+					<div class="table-responsive" id="pdfTransfer">
 <!-- 						<table id="data-table" class="table table-bordered"> -->
 <!-- 							<thead class="thead-default"> -->
 <!-- 								<tr> -->
