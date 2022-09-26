@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import fourth.bean.MemberBean;
 import fourth.dao.MemberRepository;
 import fourth.exception.UserNotFoundException;
@@ -24,6 +23,11 @@ public class MemberService {
 //	public MemberBean checkRegister(String account, String password, String email) {
 //		return memberRepository.checkRegister(account, password, email);
 //	}
+	
+	public MemberBean checkRegisterAll(String account, String email) {
+		return memberRepository.findByEmailAndAccount(account,email);
+	}
+
 	public MemberBean checkRegister(String email) {
 		return memberRepository.findByEmail(email);
 	}
@@ -33,25 +37,22 @@ public class MemberService {
 		return memberRepository.save(newRegister);
 
 	}
-	
-	public MemberBean findByAccountLogin(String account) {
-		Optional<MemberBean> op = memberRepository.findByAccount(account);
-		System.out.println("進入findByAccountLogin");
-		System.out.println("op: " + op);
-		if (op.isEmpty()) {
-			throw new UserNotFoundException("Can't find User");
-		}
 
-		return op.get();
-	}
-	
-	
-	
+//	public MemberBean findByAccountLogin(String account) {
+//		Optional<MemberBean> op = memberRepository.findByAccount(account);
+//		System.out.println("進入findByAccountLogin");
+//		System.out.println("op: " + op);
+//		if (op.isEmpty()) {
+//			throw new UserNotFoundException("Can't find User");
+//		}
+//
+//		return op.get();
+//	}
 
 	// 會員登入
-//	public MemberBean checkLogin(String account) {
-//		return memberRepository.findByAccount(account);
-//	}
+	public MemberBean checkLogin(String account) {
+		return memberRepository.findByAccount(account);
+	}
 
 	// 新增會員
 	public MemberBean insertUser(MemberBean memberBean) {
@@ -86,5 +87,7 @@ public class MemberService {
 	public List<MemberBean> QueryUserByAccount(String account) {
 		return memberRepository.findByAccountLike(account);
 	}
+
+
 
 }
