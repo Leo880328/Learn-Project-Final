@@ -123,22 +123,22 @@ public class MemberBean {
 	@OneToMany(mappedBy = "memberBean", cascade = CascadeType.ALL)
 	private List<CartItem> cartItems;
 
-//	public MemberBean(Integer userId, String nick, String account, String password, int status, String name, String img,
-//			String sex, String birthday, String cellphone, String email, String joinDate) {
-//		super();
-//		this.userId = userId;
-//		this.nick = nick;
-//		this.account = account;
-//		this.password = password;
-//		this.status = status;
-//		this.name = name;
-//		this.img = img;
-//		this.sex = sex;
-//		this.birthday = birthday;
-//		this.cellphone = cellphone;
-//		this.email = email;
-//		this.joinDate = joinDate;
-//	}
+	public MemberBean(Integer userId, String nick, String account, String password, int status, String name, String img,
+			String sex, String birthday, String cellphone, String email, String joinDate) {
+		super();
+		this.userId = userId;
+		this.nick = nick;
+		this.account = account;
+		this.password = password;
+		this.status = status;
+		this.name = name;
+		this.img = img;
+		this.sex = sex;
+		this.birthday = birthday;
+		this.cellphone = cellphone;
+		this.email = email;
+		this.joinDate = joinDate;
+	}
 
 	public MemberBean(String account, String password) {
 		this.account = account;

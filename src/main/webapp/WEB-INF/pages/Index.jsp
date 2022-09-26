@@ -9,138 +9,179 @@
 </head>
 <body>
 <jsp:include page="Header.jsp"/>
-<br>
-    <br>
-
-    <div class="banner-wrapp rows-space-65">
-        <div class="container">
-            <div class="banner">
-                <div class="item-banner style17">
-                    <div class="inner">
-                        <div class="banner-content">
-                            <div class="description">歡迎來到</div>
-                            <h3 class="title">好學生學習平台</h3>
-                            <div class="banner-price">馬上開始<span class="number-price"></span></div>
-                            <a href="#" class="button btn-shop-now">活動</a><a href="#"
-                                class="button btn-view-collection">專欄</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div>
-        <div class="fullwidth-template">
-            <div class="teamo-product produc-featured rows-space-65">
-                <div class="container">
-                    <a href="coursefront1.list"><h3 class="custommenu-title-blog">課程 </h3></a>
-                    <div class="owl-products owl-slick equal-container nav-center"
-                        data-slick='{"autoplay":false, "autoplaySpeed":1000, "arrows":false, "dots":true, "infinite":false, "speed":800, "rows":1}'
-                        data-responsive='[{"breakpoint":"2000","settings":{"slidesToShow":4}},{"breakpoint":"1200","settings":{"slidesToShow":3}},{"breakpoint":"992","settings":{"slidesToShow":2}},{"breakpoint":"480","settings":{"slidesToShow":1}}]'>
-                        <div class="product-item style-5">
-                            <div class="product-inner equal-element">
-                                <div class="product-top">
-
-                                </div>
-                                <div class="product-thumb">
-                                    <div class="thumb-inner"><a href="#"><img src="images/英文6.png" alt="img"></a>
-                                        <div class="thumb-group">
+<!--     <div class="banner-wrapp rows-space-65"> -->
+<!--         <div class="container"> -->
+<!--             <div class="banner"> -->
+<!--                 <div class="item-banner style17"> -->
+<!--                     <div class="inner"> -->
+<!--                         <div class="banner-content"> -->
+<!--                             <div class="description">歡迎來到</div> -->
+<!--                             <h3 class="title">好學生學習平台</h3> -->
+<!--                             <div class="banner-price">馬上開始<span class="number-price"></span></div> -->
+<!--                             <a href="#" class="button btn-shop-now">活動</a><a href="#" -->
+<!--                                 class="button btn-view-collection">專欄</a> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </div> -->
+<!--     </div> -->
+	<div class="">
+		<div class="fullwidth-template">
+			<div class="home-slider fullwidth rows-space-60">
 
 
-                                        </div>
-                                    </div>
+				<div class="slider-item style4">
+					<div class="slider-inner equal-element">
+						<div class="container">
+							<div class="slider-infor">
+								<h5 class="title-small">歡迎使用</h5>
+								<h3 class="title-big">
+									好學生教育平台
+								</h3>
+								<br>
+								<div class="price">
+									<span class="number-price">馬上開始</span>
+								</div>
+								<a href="#" class=""></a>
+							</div>
+						</div>
+					</div>
+				</div>
+<br><br>
 
-                                </div>
-                                <div class="product-info">
-                                    <h5 class="product-name product_title"><a href="#">英文好6</a></h5>
-                                    <div class="group-info">
-                                        <div class="stars-rating">
-                                            <div class="star-rating"><span class="star-3"></span></div>
-                                            <div class="count-star">(3) </div>
-                                        </div>
-                                        <div class="price"><del>$7999 </del><ins>$799 </ins></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item style-5">
-                            <div class="product-inner equal-element">
-                                <div class="product-top">
 
-                                </div>
-                                <div class="product-thumb">
-                                    <div class="thumb-inner"><a href="#"><img src="images/數學30.png"
-                                                alt="img"></a>
+				<div>
+					<div class="fullwidth-template">
+						<div class="teamo-product produc-featured rows-space-65">
+							<div class="container">
+								<a href="coursefront1.list"><h3
+										class="custommenu-title-blog">課程</h3></a>
+								<div class="owl-products owl-slick equal-container nav-center"
+									data-slick='{"autoplay":false, "autoplaySpeed":1000, "arrows":false, "dots":true, "infinite":false, "speed":800, "rows":1}'
+									data-responsive='[{"breakpoint":"2000","settings":{"slidesToShow":4}},{"breakpoint":"1200","settings":{"slidesToShow":3}},{"breakpoint":"992","settings":{"slidesToShow":2}},{"breakpoint":"480","settings":{"slidesToShow":1}}]'>
+									<div class="product-item style-5">
+										<div class="product-inner equal-element">
+											<div class="product-top"></div>
+											<div class="product-thumb">
+												<div class="thumb-inner">
+													<a href="#"><img src="images/英文6.png" alt="img"></a>
+													<div class="thumb-group"></div>
+												</div>
 
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <h5 class="product-name product_title"><a href="#">30天變身數學神童</a></h5>
-                                    <div class="group-info">
-                                        <div class="stars-rating">
-                                            <div class="star-rating"><span class="star-3"></span></div>
-                                            <div class="count-star">(3) </div>
-                                        </div>
-                                        <div class="price"><del>$19999 </del><ins>$1999 </ins></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item style-5">
-                            <div class="product-inner equal-element">
-                                <div class="product-top">
+											</div>
+											<div class="product-info">
+												<h5 class="product-name product_title">
+													<a href="#">英文好6</a>
+												</h5>
+												<div class="group-info">
+													<div class="stars-rating">
+														<div class="star-rating">
+															<span class="star-3"></span>
+														</div>
+														<div class="count-star">(3)</div>
+													</div>
+													<div class="price">
+														<del>$7999 </del>
+														<ins>$799 </ins>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="product-item style-5">
+										<div class="product-inner equal-element">
+											<div class="product-top"></div>
+											<div class="product-thumb">
+												<div class="thumb-inner">
+													<a href="#"><img src="images/數學30.png" alt="img"></a>
 
-                                </div>
-                                <div class="product-thumb">
-                                    <div class="thumb-inner"><a href="#"><img src="images/多益高分衝刺班.png"
-                                                alt="img"></a>
+												</div>
+											</div>
+											<div class="product-info">
+												<h5 class="product-name product_title">
+													<a href="#">30天變身數學神童</a>
+												</h5>
+												<div class="group-info">
+													<div class="stars-rating">
+														<div class="star-rating">
+															<span class="star-3"></span>
+														</div>
+														<div class="count-star">(3)</div>
+													</div>
+													<div class="price">
+														<del>$19999 </del>
+														<ins>$1999 </ins>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="product-item style-5">
+										<div class="product-inner equal-element">
+											<div class="product-top"></div>
+											<div class="product-thumb">
+												<div class="thumb-inner">
+													<a href="#"><img src="images/多益高分衝刺班.png" alt="img"></a>
 
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <h5 class="product-name product_title"><a href="#">多益高分衝刺班</a></h5>
-                                    <div class="group-info">
-                                        <div class="stars-rating">
-                                            <div class="star-rating"><span class="star-3"></span></div>
-                                            <div class="count-star">(3) </div>
-                                        </div>
-                                        <div class="price"><del>$9999 </del><ins>$999 </ins></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item style-5">
-                            <div class="product-inner equal-element">
-                                <div class="product-top">
+												</div>
+											</div>
+											<div class="product-info">
+												<h5 class="product-name product_title">
+													<a href="#">多益高分衝刺班</a>
+												</h5>
+												<div class="group-info">
+													<div class="stars-rating">
+														<div class="star-rating">
+															<span class="star-3"></span>
+														</div>
+														<div class="count-star">(3)</div>
+													</div>
+													<div class="price">
+														<del>$9999 </del>
+														<ins>$999 </ins>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="product-item style-5">
+										<div class="product-inner equal-element">
+											<div class="product-top"></div>
+											<div class="product-thumb">
+												<div class="thumb-inner">
+													<a href="#"><img src="images/多益990分保證班.png" alt="img"></a>
 
-                                </div>
-                                <div class="product-thumb">
-                                    <div class="thumb-inner"><a href="#"><img src="images/多益990分保證班.png"
-                                                alt="img"></a>
-
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <h5 class="product-name product_title"><a href="#">多益990保證班</a></h5>
-                                    <div class="group-info">
-                                        <div class="stars-rating">
-                                            <div class="star-rating"><span class="star-3"></span></div>
-                                            <div class="count-star">(3) </div>
-                                        </div>
-                                        <div class="price"><del>$99999 </del><ins>$9999 </ins></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    <footer class="footer style7">
+												</div>
+											</div>
+											<div class="product-info">
+												<h5 class="product-name product_title">
+													<a href="#">多益990保證班</a>
+												</h5>
+												<div class="group-info">
+													<div class="stars-rating">
+														<div class="star-rating">
+															<span class="star-3"></span>
+														</div>
+														<div class="count-star">(3)</div>
+													</div>
+													<div class="price">
+														<del>$99999 </del>
+														<ins>$9999 </ins>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer class="footer style7">
         <div class="container">
             <div class="container-wapper">
                 <div class="row">

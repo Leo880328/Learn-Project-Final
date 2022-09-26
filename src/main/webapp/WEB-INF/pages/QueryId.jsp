@@ -16,6 +16,8 @@
    	/*自動斷行*/
    	word-wrap: break-word;
    	table-layout: fixed;
+   	background-color: white;
+   	border-radius: 20px;
    }
 </style>
 </head>
@@ -53,7 +55,6 @@
 			<td><center>${queryId.enrollment}</center></td>
 			<td>${queryId.course_date}</td>
 			<td><center>${queryId.lecturer_name}</center></td>
-<%-- 			<td><center><%=courseBean.getLecturer_name() %></center></td> --%>
 			<td>
 				<%--request.setAttribute("bean", courseBean); --%> <a
 				href="course.details?action=details&course_id=${queryId.course_id}"><input

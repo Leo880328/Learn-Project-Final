@@ -1,5 +1,6 @@
 package fourth.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,24 +14,30 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fourth.bean.CartItem;
 
 @Entity
 @Table(name = "course")
 @Component
-public class CourseBean {
+public class CourseBean implements Serializable {
 
 	@Id
 	@Column(name = "course_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int course_id;
 	private int user_id;
+	@Transient
 	private int subject_id;
+
+	@Transient
 	private int education_id;
 	private String course_name;
 	private String course_introduction;
@@ -40,26 +47,30 @@ public class CourseBean {
 	private String course_date;
 	private String lecturer_name;
 	private String lecturer_email;
+	private int course_status;
 	private String course_picture;
-	
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name = "education_id")
-//	private Education education;
-//	
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name = "subject_id")
-//	private Subject subject;
+
+	@JsonManagedReference 
+	@ManyToOne
+	@JoinColumn(name = "education_id")
+	private CourseEdu courseedu;
+
+	@JsonManagedReference 
+	@ManyToOne
+	@JoinColumn(name = "subject_id")
+	private CourseSub coursesub;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "courseBean",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "courseBean", cascade = CascadeType.ALL)
 	private List<CartItem> carts;
-		
+
 	public CourseBean() {
 	}
 
 	public CourseBean(int course_id, int user_id, int subject_id, int education_id, String course_name,
 			String course_introduction, double course_price, String course_duration, int enrollment, String course_date,
-			String lecturer_name, String lecturer_email, String course_picture) {
+			String lecturer_name, String lecturer_email, int course_status, String course_picture, CourseEdu courseedu,
+			CourseSub coursesub, List<CartItem> carts) {
 		super();
 		this.course_id = course_id;
 		this.user_id = user_id;
@@ -73,7 +84,11 @@ public class CourseBean {
 		this.course_date = course_date;
 		this.lecturer_name = lecturer_name;
 		this.lecturer_email = lecturer_email;
+		this.course_status = course_status;
 		this.course_picture = course_picture;
+		this.courseedu = courseedu;
+		this.coursesub = coursesub;
+		this.carts = carts;
 	}
 
 	public int getCourse_id() {
@@ -172,6 +187,14 @@ public class CourseBean {
 		this.lecturer_email = lecturer_email;
 	}
 
+	public int getCourse_status() {
+		return course_status;
+	}
+
+	public void setCourse_status(int course_status) {
+		this.course_status = course_status;
+	}
+
 	public String getCourse_picture() {
 		return course_picture;
 	}
@@ -179,56 +202,21 @@ public class CourseBean {
 	public void setCourse_picture(String course_picture) {
 		this.course_picture = course_picture;
 	}
-	
-	
 
-//	public Education getEducation() {
-//		return education;
-//	}
-//
-//	public void setEducation(Education education) {
-//		this.education = education;
-//	}
-//
-//	public Subject getSubject() {
-//		return subject;
-//	}
-//
-//	public void setSubject(Subject subject) {
-//		this.subject = subject;
-//	}
-	
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("CourseBean [course_id=");
-		builder.append(course_id);
-		builder.append(", user_id=");
-		builder.append(user_id);
-		builder.append(", subject_id=");
-		builder.append(subject_id);
-		builder.append(", education_id=");
-		builder.append(education_id);
-		builder.append(", course_name=");
-		builder.append(course_name);
-		builder.append(", course_introduction=");
-		builder.append(course_introduction);
-		builder.append(", course_price=");
-		builder.append(course_price);
-		builder.append(", course_duration=");
-		builder.append(course_duration);
-		builder.append(", enrollment=");
-		builder.append(enrollment);
-		builder.append(", course_date=");
-		builder.append(course_date);
-		builder.append(", lecturer_name=");
-		builder.append(lecturer_name);
-		builder.append(", lecturer_email=");
-		builder.append(lecturer_email);
-		builder.append(", course_picture=");
-		builder.append(course_picture);
-		builder.append("]");
-		return builder.toString();
+	public CourseEdu getCourseedu() {
+		return courseedu;
+	}
+
+	public void setCourseedu(CourseEdu courseedu) {
+		this.courseedu = courseedu;
+	}
+
+	public CourseSub getCoursesub() {
+		return coursesub;
+	}
+
+	public void setCoursesub(CourseSub coursesub) {
+		this.coursesub = coursesub;
 	}
 
 	public List<CartItem> getCarts() {
@@ -238,6 +226,15 @@ public class CourseBean {
 	public void setCarts(List<CartItem> carts) {
 		this.carts = carts;
 	}
+//
+//	@Override
+//	public String toString() {
+//		return "CourseBean [course_id=" + course_id + ", user_id=" + user_id + ", subject_id=" + subject_id
+//				+ ", education_id=" + education_id + ", course_name=" + course_name + ", course_introduction="
+//				+ course_introduction + ", course_price=" + course_price + ", course_duration=" + course_duration
+//				+ ", enrollment=" + enrollment + ", course_date=" + course_date + ", lecturer_name=" + lecturer_name
+//				+ ", lecturer_email=" + lecturer_email + ", course_picture=" + course_picture + ", courseedu="
+//				+ courseedu + ", coursesub=" + coursesub + ", carts=" + carts + "]";
+//	}
 
-	
 }

@@ -104,9 +104,9 @@ public class MemberController {
 		if (user != null && user.getPassword().equals(password)) {
 			if (user.getStatus() == 3) {
 
-				return "BackendIndex";
+				return "redirect:/backendIndex";
 			} else {
-				return "Index";
+				return "redirect:/Index";
 			}
 
 		} else {
