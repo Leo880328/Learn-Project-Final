@@ -420,7 +420,7 @@
 								<div style="display: inline-block; width: 400px;">
 									<span class="sm-st-icon st-blue"><i class="fa fa-dollar"></i></span>
 									<div class="sm-st-info">
-										<span id="rangeMoney">0</span> 區間營業額
+										<span id="rangeMoney">0</span> 營業額
 
 									</div>
 								</div>
@@ -428,7 +428,7 @@
 									<span class="sm-st-icon st-red"><i
 										class="fa fa-check-square-o"></i></span>
 									<div class="sm-st-info">
-										<span id="rangeCount">0</span> 區間筆數
+										<span id="rangeCount">0</span> 訂單數量
 									</div>
 								</div>
 								<hr>
@@ -473,9 +473,9 @@
 		</div>
 	</main>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-		crossorigin="anonymous"></script>
+<!-- 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" -->
+<!-- 		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" -->
+<!-- 		crossorigin="anonymous"></script> -->
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
