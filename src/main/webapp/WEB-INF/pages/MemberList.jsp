@@ -115,7 +115,7 @@
 					<td><a class="btn btn-warning"
 						href="showEditUser?userId=${mb.userId} ">修改</a> <a
 						class="btn btn-danger btn--raised"
-						onclick="if( !(confirm('確認刪除?') ) ) return false ;alert(刪除成功)""
+						onclick="if( !(confirm('確認刪除?') ) ) return false; alert('刪除成功!')"
 						href="deleteUser?userId=${mb.userId} ">刪除</a></td>
 				</tr>
 			</tbody>

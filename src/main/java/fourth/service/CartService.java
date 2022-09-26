@@ -16,24 +16,26 @@ import com.google.gson.Gson;
 
 import fourth.bean.CartItem;
 import fourth.bean.CourseBean;
-import fourth.dao.CartDaoImpt;
+import fourth.bean.MemberBean;
 import fourth.dao.CartRepository;
-import fourth.dao.CourseDao;
+import fourth.dao.CourseRepository;
+import fourth.dao.MemberRepository;
 import fourth.util.WebUtils;
 
 @Service
 @Transactional
 public class CartService {
 	
-	@Autowired
-	CartDaoImpt cartDaoImpt ;
 	
-	@Autowired
-	CourseDao courseDao ;
 	
 	@Autowired
 	private CartRepository cartRepository;	
 	
+	@Autowired
+	private CourseRepository courseRepository;
+	
+	@Autowired
+	private MemberRepository memberRepository;
 
 	//@Override
 	public void cartClear(int userId) {
@@ -42,12 +44,14 @@ public class CartService {
 
 	//@Override
 	public void cartAdd(String cartId,int id) throws SQLException{
-		CourseBean course = courseDao.select(WebUtils.paseInt(cartId));
+		System.out.println(cartId);
+		CourseBean course = courseRepository.findById(WebUtils.paseInt(cartId)).get();
 		CartItem cart = new CartItem(0, id, course.getCourse_id(), course.getCourse_name(), 1,
 				course.getCourse_price());
+		MemberBean memberBean = memberRepository.findById(id).get();
 		cart.setCourseBean(course);
-		
-		cartDaoImpt.addCart(cart);
+		cart.setMemberBean(memberBean);
+		cartRepository.save(cart);
 	}
 
 	//@Override

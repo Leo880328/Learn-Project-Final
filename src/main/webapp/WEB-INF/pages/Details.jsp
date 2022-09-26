@@ -2,9 +2,10 @@
 <%@ page import="fourth.dao.CourseDao"%>
 <%@ page import="java.util.List"%>
 <%@ page import="fourth.bean.CourseBean"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="java.util.*,fourth.*"%>
 <%
 response.setContentType("text/html;charset=UTF-8");
 response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1
@@ -15,8 +16,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="shortcut icon" type="image/x-icon"
-	href="backend/img/smalllogo.png" />
+<link rel="shortcut icon" type="image/x-icon" href="backend/img/smalllogo.png" />
 <!-- <meta name="viewport" -->
 <!-- 	content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
 
@@ -54,6 +54,13 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <!-- <link rel="stylesheet" href="./fonts/flaticon/flaticon.css"> -->
 <!-- <link rel="stylesheet" href="./css/style.css"> -->
 <title>課程詳情</title>
+<style type="text/css">
+.alb{
+ margin: auto;
+ width: 70%;
+ 
+}
+</style>
 </head>
 <jsp:include page="Header.jsp"/>
 <%
@@ -61,7 +68,9 @@ CourseBean courseBean = (CourseBean) request.getAttribute("cbean");
 %>
 
 
-<body class="details-page" data-ma-theme="green">
+
+<body class="details-page">
+
 
 <!-- 	<main class="main"> -->
 <!-- 		<div class="page-loader"> -->
@@ -81,6 +90,85 @@ CourseBean courseBean = (CourseBean) request.getAttribute("cbean");
 <!-- 						class="navigation-trigger__line"></i> -->
 <!-- 				</div> -->
 <!-- 			</div> -->
+
+<!-- 			<div class="row"> -->
+<!-- 				<div -->
+<!-- 					class="content-area content-details full-width col-lg-9 col-md-8 col-sm-12 col-xs-12"> -->
+<!-- 					<div class="site-main"> -->
+<!-- 						<div class="details-product"> -->
+<!-- 							<div class="details-thumd"> -->
+<!-- 								<div -->
+<!-- 									class="image-preview-container image-thick-box image_preview_container"> -->
+<!-- 									<img id="img_zoom" -->
+<%-- 										data-zoom-image="<%=courseBean.getCourse_picture()%>" --%>
+<%-- 										src="<%=courseBean.getCourse_picture()%>" alt="img"><a --%>
+<!-- 										href="#" class="btn-zoom open_qv"><i class="fa fa-search" -->
+<!-- 										aria-hidden="true"></i></a> -->
+<!-- 								</div> -->
+
+<!-- 							</div> -->
+<!-- 							<div class="details-infor"> -->
+<%-- 								<h1><%=courseBean.getCourse_name()%></h1> --%>
+<!-- 								<div class="stars-rating"> -->
+<!-- 									<div class="star-rating"> -->
+<!-- 										<span class="star-5"></span> -->
+<!-- 									</div> -->
+<!-- 									<div class="count-star">(7)</div> -->
+<!-- 								</div> -->
+
+<!-- 								<div class="product-details-description"> -->
+<!-- 									<ul> -->
+<%-- 										<li>課程時長:<%=courseBean.getCourse_duration()%></li> --%>
+<%-- 										<li>已購買人數:<%=courseBean.getEnrollment()%></li> --%>
+<%-- 										<li>講師姓名:<%=courseBean.getLecturer_name()%></li> --%>
+<%-- 										<li>講師信箱:<%=courseBean.getLecturer_email()%></li> --%>
+<%-- 										<li>上架日期:<%=courseBean.getCourse_date()%></li> --%>
+<!-- 									</ul> -->
+<!-- 								</div> -->
+
+<!-- 								<div class="group-button"> -->
+<!-- 									<div class="yith-wcwl-add-to-wishlist"> -->
+<!-- 										<div class="yith-wcwl-add-button"> -->
+<!-- 											<a href="#">加入最愛</a> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									<div class="availability">課程價格:</div> -->
+<!-- 									<div class="price"> -->
+<%-- 										<span>$ <%=courseBean.getCourse_price()%></span> --%>
+<!-- 									</div> -->
+
+<!-- 									<div class="quantity-add-to-cart"> -->
+<!-- 										<div class="quantity"></div> -->
+<!-- 										<button class="single_add_to_cart_button button">加入購物車</button> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="tab-details-product"> -->
+<!-- 							<ul class="tab-link"> -->
+<!-- 								<li class="active"><a data-toggle="tab" -->
+<!-- 									aria-expanded="true"><h3>課程簡介</h3></a></li> -->
+<!-- 							</ul> -->
+<!-- 							<div class="tab-container"> -->
+<!-- 								<div id="product-descriptions" class="tab-panel active"> -->
+<!-- 									<p> -->
+<!-- 									<h5> -->
+<%-- 										<center> --%>
+<!-- 											★ -->
+<%-- 											<%=courseBean.getCourse_introduction()%></center> --%>
+<!-- 									</h5> -->
+<!-- 									</p> -->
+
+<!-- 								</div> -->
+
+
+
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+
 <!-- 			<div class="header__logo hidden-sm-down"> -->
 <!-- 				<h1> -->
 <!-- 					<a href="BackendIndex.jsp"><img src="backend/img/logo.png" -->
@@ -136,119 +224,159 @@ CourseBean courseBean = (CourseBean) request.getAttribute("cbean");
 <!-- 				</li> -->
 <!-- 			</ul> -->
 <!-- 		</header> -->
-		<div class="main-content main-content-details single no-sidebar">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="breadcrumb-trail breadcrumbs">
-							<ul class="trail-items breadcrumb">
-								<c:if test="${sessionScope.user.status == 3 }">
-									<li class="trail-item trail-begin"><a
-									href="backendIndex">首頁</a></li>
 
-								</c:if>
-								<c:if test="${sessionScope.user.status != 3 }">
-									<li class="trail-item trail-begin"><a
-									href="Index">首頁</a></li>
-								</c:if>
-								
-								<li class="trail-item"><a href="coursefront1.list">課程列表</a></li>
-								<li class="trail-item trail-end active">課程詳情</li>
-							</ul>
-						</div>
+	<div class="main-content main-content-details single no-sidebar">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="breadcrumb-trail breadcrumbs">
+						<ul class="trail-items breadcrumb">
+							<c:if test="${sessionScope.user.status == 3 }">
+								<li class="trail-item trail-begin"><a href="backendIndex">首頁</a></li>
+
+							</c:if>
+							<c:if test="${sessionScope.user.status != 3 }">
+								<li class="trail-item trail-begin"><a href="Index">首頁</a></li>
+							</c:if>
+
+							<li class="trail-item"><a href="coursefront1.list">課程列表</a></li>
+							<li class="trail-item trail-end active">課程詳情</li>
+						</ul>
 					</div>
 				</div>
-				<div class="row">
-					<div
-						class="content-area content-details full-width col-lg-9 col-md-8 col-sm-12 col-xs-12">
-						<div class="site-main">
-							<div class="details-product">
-								<div class="details-thumd">
-									<div
-										class="image-preview-container image-thick-box image_preview_container">
-										<img id="img_zoom"
-											data-zoom-image="${cbean.course_picture}"
-											src="${cbean.course_picture}" alt="img"><a
-											href="#" class="btn-zoom open_qv"><i class="fa fa-search"
-											aria-hidden="true"></i></a>
-									</div>
-
+			</div>
+			<div class="row">
+				<div
+					class="content-area content-details full-width col-lg-9 col-md-8 col-sm-12 col-xs-12">
+					<div class="site-main">
+						<div class="details-product">
+							<div class="details-thumd">
+								<div
+									class="image-preview-container image-thick-box image_preview_container">
+									<img id="img_zoom" data-zoom-image="${cbean.course_picture}"
+										src="${cbean.course_picture}" alt="img"><a href="#"
+										class="btn-zoom open_qv"><i class="fa fa-search"
+										aria-hidden="true"></i></a>
 								</div>
-								<div class="details-infor">
-									<h1>${cbean.course_name}</h1>
-									<div class="stars-rating">
-										<div class="star-rating">
-											<span class="star-5"></span>
+
+							</div>
+							<div class="details-infor">
+								<h1>${cbean.course_name}</h1>
+								<div class="stars-rating">
+									<div class="star-rating">
+										<span class="star-5"></span>
+									</div>
+									<div class="count-star">(7)</div>
+								</div>
+
+								<div class="product-details-description">
+									<ul>
+										<li>課程時長:${cbean.course_duration}</li>
+										<li>已購買人數:${cbean.enrollment}</li>
+										<li>講師姓名:${cbean.lecturer_name}</li>
+										<li>講師信箱:${cbean.lecturer_email}</li>
+										<li>上架日期:${cbean.course_date}</li>
+									</ul>
+								</div>
+
+								<div class="group-button">
+									<div class="yith-wcwl-add-to-wishlist">
+										<div class="yith-wcwl-add-button">
+											<a href="#">加入收藏</a>
+
 										</div>
-										<div class="count-star">(7)</div>
+									</div>
+									<div class="availability">課程價格:</div>
+									<div class="price">
+										<span>$ ${cbean.course_price}</span>
 									</div>
 
-									<div class="product-details-description">
-										<ul>
-											<li>課程時長:${cbean.course_duration}</li>
-											<li>已購買人數:${cbean.enrollment}</li>
-											<li>講師姓名:${cbean.lecturer_name}</li>
-											<li>講師信箱:${cbean.lecturer_email}</li>
-											<li>上架日期:${cbean.course_date}</li>
-										</ul>
-									</div>
 
-									<div class="group-button">
-										<div class="yith-wcwl-add-to-wishlist">
-											<div class="yith-wcwl-add-button">
-												<a href="#">加入收藏</a>
-											</div>
-										</div>
-										<div class="availability">課程價格:</div>
-										<div class="price">
-											<span>$ ${cbean.course_price}</span>
-										</div>
+									<!-- 									<div class="quantity-add-to-cart"> -->
+									<!-- 										<div class="quantity"></div> -->
+									<!-- 										<button class="single_add_to_cart_button button">加入購物車</button> -->
+									<!-- 									</div> -->
+									<button class="single_add_to_cart_button button" onclick="add(${cbean.course_id})">加入購物車</button>
+									
+									<%-- 										<form action="cart/addCart/<%=courseBean.getCourse_id()%>>" method="post"> --%>
+									<!-- 											<input type="hidden" name="courseID" -->
+									<%-- 												value="<%=courseBean.getCourse_id()%>"> --%>
 
-										<!-- 									<div class="quantity-add-to-cart"> -->
-										<!-- 										<div class="quantity"></div> -->
-										<!-- 										<button class="single_add_to_cart_button button">加入購物車</button> -->
-										<!-- 									</div> -->
-										<form action="cartadd" method="post">
-										<input type="hidden" name="courseID" value="${cbean.course_id}">
-											<button class="single_add_to_cart_button button">加入購物車</button>
-										</form>
-<%-- 										<form action="cart/addCart/<%=courseBean.getCourse_id()%>>" method="post"> --%>
-<!-- 											<input type="hidden" name="courseID" -->
-<%-- 												value="<%=courseBean.getCourse_id()%>"> --%>
-											
-<!-- 											<button class="single_add_to_cart_button button">加入購物車</button> -->
-<!-- 										</form> -->
-									</div>
+									<!-- 											<button class="single_add_to_cart_button button">加入購物車</button> -->
+									<!-- 										</form> -->
 								</div>
 							</div>
-							<div class="tab-details-product">
-								<ul class="tab-link">
-									<li class="active"><a data-toggle="tab"
-										aria-expanded="true"><h3>課程簡介</h3></a></li>
-								</ul>
-								<div class="tab-container">
-									<div id="product-descriptions" class="tab-panel active">
-										<p>
-										<h5>
-											<center>
-												★
-												${cbean.course_introduction}</center>
-										</h5>
-										</p>
-
-									</div>
-
-
+						</div>
+						<div class="tab-details-product">
+							<ul class="tab-link">
+								<li class="active"><a data-toggle="tab"
+									aria-expanded="true"><h3>課程簡介</h3></a></li>
+							</ul>
+							<div class="tab-container">
+								<div id="product-descriptions" class="tab-panel active">
+									<h5>
+										<center><i class="fa-solid fa-star"></i> ${cbean.course_introduction}</center>
+									</h5>
 
 								</div>
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
-<!-- 		<script src="backend/vendors/jquery/jquery.min.js"></script> -->
+
+	</div>
+
+	<br>
+	<br>
+	<hr>
+
+	<div style="clear: left;"></div>
+	<div class="related products product-grid">
+		<h2 class="product-grid-title">你可能會喜歡</h2>
+
+		<div class="alb owl-products owl-slick equal-container nav-center" 
+			data-slick='{"autoplay":false, "autoplaySpeed":1000, "arrows":true, "dots":false, "infinite":true, "speed":800, "rows":1}'
+			data-responsive='[{"breakpoint":"2000","settings":{"slidesToShow":3}},{"breakpoint":"1200","settings":{"slidesToShow":2}},{"breakpoint":"992","settings":{"slidesToShow":2}},{"breakpoint":"480","settings":{"slidesToShow":1}}]'>
+			<c:forEach var="course" items="${list}">
+				<div class="product-item style-1" >
+					<div class="product-inner equal-element">
+						<div class="product-top"></div>
+						<div class="product-thumb">
+							<div class="thumb-inner">
+
+								<a href="coursefront.details?course_id=${course.course_id}"><img src="<c:out value="${course.course_picture}" />"
+									alt="img"></a>
+
+							</div>
+						</div>
+						<div class="product-info">
+							<h5 class="product-name product_title">
+								<a href="coursefront.details?course_id=${course.course_id}"><c:out value="${course.course_name}" /></a>
+							</h5>
+							<div class="group-info">
+								<div class="stars-rating">
+									<div class="star-rating">
+										<span class="star-5"></span>
+									</div>
+									<div class="count-star">(5)</div>
+								</div>
+								<div class="price">
+									<ins>$ <c:out value="${course.course_price}" /> </ins>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+
+		</div>
+	</div>
+<br>
+
+	<!-- 		<script src="backend/vendors/jquery/jquery.min.js"></script> -->
+
 <!-- 		<script src="backend/vendors/popper.js/popper.min.js"></script> -->
 <!-- 		<script src="backend/vendors/bootstrap/js/bootstrap.min.js"></script> -->
 <!-- 		<script src="backend/vendors/jquery-scrollbar/jquery.scrollbar.min.js"></script> -->
@@ -298,5 +426,7 @@ CourseBean courseBean = (CourseBean) request.getAttribute("cbean");
 <!-- 			src='http://www.google.cn/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script> -->
 <!-- 		<script src="./js/frontend-plugin.js"></script> -->
 <jsp:include page="Footer.jsp"/>
+<script src="wayne/cart.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

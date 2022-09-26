@@ -10,8 +10,11 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Vendor styles -->
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  
 <link rel="stylesheet"
 	href="backend/vendors/material-design-iconic-font/css/material-design-iconic-font.min.css">
+<!-- <link rel="stylesheet" href="wayne/dist/css/adminlte.min.css"> -->
 <link rel="stylesheet"
 	href="backend/vendors/animate.css/animate.min.css">
 <link rel="stylesheet"
@@ -159,21 +162,25 @@
 							<li><a href="firstExamController">高中</a></li>
 							<li><a href="firstExamController">成人</a></li>
 						</ul></li>
-					<li class="navigation__sub"><a href=""><i
+					<li class=""><a href="course.list"><i
 							class="zmdi zmdi-view-list"></i>課程管理</a>
-						<ul>
-							<li><a href="course.list">全部課程</a></li>
-							<li><a href="hidden-sidebar.html">國中</a></li>
-							<li><a href="boxed-layout.html">高中</a></li>
-							<li><a href="hidden-sidebar-boxed-layout.html">成人</a></li>
-						</ul></li>
+<!-- 						<ul> -->
+<!-- 							<li><a href="course.list">全部課程</a></li> -->
+<!-- 							<li><a href="hidden-sidebar.html">國中</a></li> -->
+<!-- 							<li><a href="boxed-layout.html">高中</a></li> -->
+<!-- 							<li><a href="hidden-sidebar-boxed-layout.html">成人</a></li> -->
+<!-- 						</ul> -->
+						</li>
 
 					
 					<li><a href="QueryAll"><i class="zmdi zmdi-collection-text"></i>專欄管理</a></li>
-					<li><a href="Activity_OP"><i class="zmdi zmdi-calendar"></i>活動管理</a></li>
+					
+					<li><a href="ActivitiesOP"><i class="zmdi zmdi-calendar"></i>活動管理</a></li>
 
 					<li><a href="orderList"><i class="zmdi zmdi-widgets"></i>訂單管理</a></li>
-
+					
+					<li><a href="chart"><i class="zmdi zmdi-trending-up"></i>營收圖表</a></li>
+                            
 				</ul>
 			</div>
 
@@ -192,6 +199,7 @@
 	<script
 		src="backend/vendors/jquery-scrollLock/jquery-scrollLock.min.js"></script>
 	<script src="backend/vendors/flot/jquery.flot.js"></script>
+	<script src="backend/vendors/flot/jquery.flot.pie.js"></script>
 	<script src="backend/vendors/flot/jquery.flot.resize.js"></script>
 	<script src="backend/vendors/flot.curvedlines/curvedLines.js"></script>
 	<script src="backend/vendors/jqvmap/jquery.vmap.min.js"></script>
@@ -206,11 +214,14 @@
 	<script src="backend/demo/js/flot-charts/dynamic.js"></script>
 	<script src="backend/demo/js/flot-charts/line.js"></script>
 	<script src="backend/demo/js/flot-charts/chart-tooltips.js"></script>
+	<script src="backend/demo/js/flot-charts/bar.js"></script>
+	<script src="backend/demo/js/flot-charts/pie.js"></script>
 	<script src="backend/demo/js/other-charts.js"></script>
 	<script src="backend/demo/js/jqvmap.js"></script>
+	<script src="backend/demo/js/demo.js"></script>
 	<!-- App functions and actions -->
 	<script src="backend/js/app.min.js"></script>
-	
+	<script src="https://kit.fontawesome.com/9d965cf88e.js" crossorigin="anonymous"></script>
 	<!-- 	dataTable jQuery -->
 	<script type="text/javascript" charset="utf8"
 		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
