@@ -43,14 +43,18 @@ public class ExamRecord implements Serializable
 	@JoinColumn(name="TESTDATE")
 	private Date testdate;
 	
+	@Column(name = "EXAMNAME")
+	private String examName;
+	
+	
 	@Override
 	public String toString() {
 		return "ExamRecord [examMemRecordId=" + examMemRecordId + ", member=" + member + ", examTest=" + examTest
-				+ ", examScore=" + examscore + ", testDate=" + testdate + "]";
+				+ ", examscore=" + examscore + ", testdate=" + testdate + ", examName=" + examName + "]";
 	}
-	
-	
-	
+
+
+
 	public ExamRecord() {
 		super();
 	}
@@ -74,44 +78,93 @@ public class ExamRecord implements Serializable
 		this.testdate = testDate;
 	}
 
+	
+	
+
+	public ExamRecord(MemberBean member, ExamTest examTest, int examscore, Date testdate, String examName) {
+		super();
+		this.examMemRecordId = examMemRecordId;
+		this.member = member;
+		this.examTest = examTest;
+		this.examscore = examscore;
+		this.testdate = testdate;
+		this.examName = examName;
+	}
+
+
+
 	public Integer getExamMemRecordId() {
 		return examMemRecordId;
 	}
+
+
 
 	public void setExamMemRecordId(Integer examMemRecordId) {
 		this.examMemRecordId = examMemRecordId;
 	}
 
+
+
 	public MemberBean getMember() {
 		return member;
 	}
+
+
 
 	public void setMember(MemberBean member) {
 		this.member = member;
 	}
 
+
+
 	public ExamTest getExamTest() {
 		return examTest;
 	}
+
+
 
 	public void setExamTest(ExamTest examTest) {
 		this.examTest = examTest;
 	}
 
-	public int getExamScore() {
+
+
+	public int getExamscore() {
 		return examscore;
 	}
 
-	public void setExamScore(int examScore) {
-		this.examscore = examScore;
+
+
+	public void setExamscore(int examscore) {
+		this.examscore = examscore;
 	}
 
-	public Date getTestDate() {
+
+
+	public Date getTestdate() {
 		return testdate;
 	}
 
-	public void setTestDate(Date testDate) {
-		this.testdate = testDate;
+
+
+	public void setTestdate(Date testdate) {
+		this.testdate = testdate;
 	}
+
+
+
+	public String getExamName() {
+		return examName;
+	}
+
+
+
+	public void setExamName(String examName) {
+		this.examName = examName;
+	}
+	
+	
+	
+	
 	
 }

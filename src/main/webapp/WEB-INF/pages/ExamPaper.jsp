@@ -44,7 +44,7 @@
 
                 <c:forEach items="${testMap.examQueList}" var="que" varStatus="loop">
                     <tr>
-                        <td colspan="4"><label>${loop.index+1}${que.quesContent}:</label></td>
+                        <td colspan="4"><label>${loop.index+1}.${que.quesContent}:</label></td>
                     </tr>
                     <tr>
                         <td><input type="radio" name="answer${loop.index}" id="" value="A" required>A.${que.optA}</td>
