@@ -77,6 +77,7 @@ article {
 									<div class="">
 										<input type="submit" class="btn btn-success" name="signin"
 											id="signin" value="登入">
+										<button type="button" class="btn btn-primary " id="winnie">老師登入</button>
 										<button type="button" class="btn btn-primary " id="correct">新會員登入</button>
 									</div>
 									<br>
@@ -96,6 +97,14 @@ article {
 		$('#correct').click(function() {
 			$('#account').val("edward");
 			$('#password').val("test123");
+		})
+	})
+</script>
+<script>
+	$(function() {
+		$('#winnie').click(function() {
+			$('#account').val("winnie");
+			$('#password').val("winnie");
 		})
 	})
 </script>
