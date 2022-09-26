@@ -96,6 +96,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label>性別</label><span class="form-control ">${mb.sex}</span>
+										<input type="hidden" name="sex" value="${mb.sex}" />
 										<i class="form-group__bar"></i>
 									</div>
 								</div>

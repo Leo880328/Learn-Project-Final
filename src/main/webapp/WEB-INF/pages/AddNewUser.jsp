@@ -283,7 +283,7 @@
          checkAccount()
         })
         function checkAccount(){
-          let account = $('#account').val()
+          let account = $('#email').val()
                   if(typeof account === "string"){
                       if (account ==null || account ==""){
                   var msg = "信箱必須填寫";  

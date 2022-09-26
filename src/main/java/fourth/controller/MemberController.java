@@ -1,6 +1,5 @@
 package fourth.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -9,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
@@ -50,9 +47,9 @@ public class MemberController {
 			MemberBean registerUser = memberService.registerUser(member);
 			System.out.println("registerUser: " + registerUser);
 			System.out.println("email:" + member.getEmail());
-			memberMailService.sendMail(member.getEmail(), "[ 快樂學習 ]忘記密碼通知信",
+			memberMailService.sendMail(member.getEmail(), "[ 快樂學習(你快樂嗎?) ]忘記密碼通知信",
 					"親愛的會員您好:<br><br>您的帳號:" + member.getAccount() + " 申請忘記密碼通知，" + "系統發送新密碼為:" + pwd + "，"
-							+ "請使用新密碼登入，並至登入頁重新修改密碼。<br> <br> <br>  Leo管理系統 敬上");
+							+ "請使用新密碼登入，並至個人資料重新修改密碼。<br> <br> <br>  快樂學習團隊 敬上");
 
 		}
 	}
@@ -201,8 +198,15 @@ public class MemberController {
 		
 	//提出申請成為老師
 		@PostMapping("/becometeacher")
-		public String becomeTeacher(MemberBean memberBean) {
+		public String becomeTeacher(MemberBean memberBean,Model m) {
+			System.out.println("//////////////////////執行成為老師");
+			MemberBean user = (MemberBean) m.getAttribute("user");
+			MemberBean mem = memberService.checkLogin(user.getAccount());
+			System.out.println("mem: "+ mem);
+			mem.setStatus(4);
+			m.addAttribute("user", mem);
 			memberService.updateUser(memberBean);
+	System.out.println("memberBean: "+ memberBean);
 			return "redirect:/user.controller";
 		}
 		

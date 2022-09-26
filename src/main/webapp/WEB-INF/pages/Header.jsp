@@ -62,6 +62,18 @@
 								<li></li>
 							</ul>
 						</c:when>
+						
+						<c:when test="${sessionScope.user.status == 4 }">
+
+							<ul class="header-user-links">
+								<c:if test="${sessionScope.user.nick == null}">
+
+								</c:if>
+								<li><a href="#"><b>${sessionScope.user.nick}(審核中)</b></a> |
+									<a href="logout.controller">登出</a></li>
+								<li></li>
+							</ul>
+						</c:when>
 
 						<c:when test="${sessionScope.user.status == 1 }">
 
@@ -74,7 +86,7 @@
 								<li></li>
 							</ul>
 						</c:when>
-
+						
 						<c:when test="${sessionScope.user.status == 2 }">
 
 							<ul class="header-user-links">

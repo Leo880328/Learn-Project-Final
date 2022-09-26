@@ -79,6 +79,10 @@
 				<td><%=memberBean.getAccount()%></td>
 				<!-- <td><c:out value="${mb.password}" /></td> -->
 				<td><c:choose>
+				<c:when test="<%=memberBean.getStatus() == 4%>">
+             		 						(學生)待審核
+       							</c:when>
+				
 						<c:when test="<%=memberBean.getStatus() == 1%>">
              		 						學生
        							</c:when>
@@ -88,7 +92,10 @@
 						<c:otherwise>
               						管理員
        							</c:otherwise>
-					</c:choose></td>
+					</c:choose><c:if test="<%=memberBean.getStatus() == 4%>">
+							<a class="btn btn-primary"
+								href="checkteacher?userId=<%=memberBean.getuserId()%> ">審核</a>
+						</c:if></td>
 				<td><%=memberBean.getName()%></td>
 				<td><img src="<%=memberBean.getImg()%>" width="150"
 					height="100"></td>

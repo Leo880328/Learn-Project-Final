@@ -31,6 +31,7 @@ article {
 </head>
 <body>
 	<jsp:include page="loginNav.jsp" />
+	
 	<article>
 		<div class="main" align="center">
 			<div class="row">
@@ -38,7 +39,7 @@ article {
 					<div class="site-main">
 						<div class="login-item">
 							<div class="sign1">
-								<h5 class="title-login">登入</h5>
+								<h2 class="title-login">登入</h2>
 								<div>
 									如果您還沒有註冊，請點擊
 									<button type="button" class="btn btn-info btn--raised">

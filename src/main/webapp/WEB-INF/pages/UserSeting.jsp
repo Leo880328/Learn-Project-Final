@@ -88,19 +88,29 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 												%>
 												<p>
 													<span class="form-label">暱稱</span><span
-														class="form-control-wrap "><input title="暱稱" id="nick"
-														type="text" name="nick" size="40"
+														class="form-control-wrap "><input title="暱稱"
+														id="nick" type="text" name="nick" size="40"
 														class="form-control form-control-name"
 														value='<%=memberBean.getNick()%>'></span>
 												</p>
 											</div>
+										</div>
+										<div class="row">
 											<div class="col-sm-6">
 												<p>
 													<span class="form-label">帳號 </span><span
-														class="form-control-wrap "><input title="帳號" id="account"
-														type="text" name="account" size="40" placeholder="*必填"
-														class="form-control form-control-name"
+														class="form-control-wrap "><input title="帳號"
+														id="account" type="text" name="account" size="40"
+														placeholder="*必填" class="form-control form-control-name"
 														value='<%=memberBean.getAccount()%>'></span>
+												</p>
+											</div>
+											<div class="col-sm-6">
+												<p>
+													<span class="form-label">密碼 </span><span
+														class="form-control-wrap "><input type="text"
+														title="密碼" name="password" maxlength="30"
+														placeholder="*必填" value='<%=memberBean.getPassword()%>' /></span>
 												</p>
 											</div>
 										</div>
@@ -108,8 +118,8 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 											<div class="col-sm-6">
 												<p>
 													<span class="form-label">姓名</span><span
-														class="form-control-wrap "><input title="姓名" id="name"
-														type="text" name="name" size="40"
+														class="form-control-wrap "><input title="姓名"
+														id="name" type="text" name="name" size="40"
 														class="form-control form-control-name"
 														value='<%=memberBean.getName()%>'></span>
 												</p>
@@ -117,7 +127,8 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 											<div class="col-sm-6">
 												<p>
 													<span class="form-label">性別 </span><span
-														class="form-control-wrap "><select name="sex" id="sex">
+														class="form-control-wrap "><select name="sex"
+														id="sex">
 															<option><%=memberBean.getSex()%></option>
 															<option value="男生">男生</option>
 															<option value="女生">女生</option>
@@ -127,26 +138,40 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 										</div>
 										<div class="row">
 											<div class="col-sm-6">
-												<p>
-													<span class="form-label">身分</span><span
-														class="form-control-wrap "> <c:if
-															test="<%=memberBean.getStatus() == 1%>">
-															<p>
-																<option value="1">學生</option>
-															</p>
-														</c:if> <c:if test="<%=memberBean.getStatus() == 2%>">
-															<option value="2">老師</option>
-														</c:if> <c:if test="<%=memberBean.getStatus() == 3%>">
-															<option value="3">管理員</option>
-														</c:if>
-													</span>
-												</p>
+												<span class="form-label">身分</span><span
+													class="form-control-wrap "> <c:if
+														test="<%=memberBean.getStatus() == 1%>">
+															<option class="form-control  value="1">學生</option>
+													</c:if> <c:if test="<%=memberBean.getStatus() == 2%>">
+														<option class="form-control value="2">老師</option>
+													</c:if> <c:if test="<%=memberBean.getStatus() == 3%>">
+														<option class="form-control value="3">管理員</option>
+													</c:if> <c:if test="<%=memberBean.getStatus() == 4%>">
+															<option class="form-control value="4">審核中</option>
+													</c:if>
+												</span>
 											</div>
+											<c:if test="<%=memberBean.getStatus() != 1%>">
+												<div class="col-sm-6">
+													<span class="form-label">學歷 </span><span
+														class="form-control-wrap "><input title="學歷"
+														id="education" type="hidden" name="education"
+														class="form-control "
+														value='<%=memberBean.getEducation()%>'><span
+														class="form-control "><%=memberBean.getEducation()%></span></span>
+												</div>
+												<input type="hidden" name="userprofile" id="userprofile"
+													value="<c:out value='<%=memberBean.getUserprofile()%>' />"
+													class="form-control" placeholder="">
+											</c:if>
+										</div>
+										<div class="row">
 											<div class="col-sm-6">
 												<p>
 													<span class="form-label">生日 </span><span
-														class="form-control-wrap "><input title="生日" id="birthday"
-														type="date" name="birthday" class="form-control "
+														class="form-control-wrap "><input title="生日"
+														id="birthday" type="date" name="birthday"
+														class="form-control "
 														value='<%=memberBean.getBirthday()%>'></span>
 												</p>
 											</div>
@@ -162,14 +187,14 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 												value="<%=memberBean.getImg()%>"> <input
 												onchange="previewImg(this)" type="file" title="大頭貼"></span>
 										</p>
-										<input type="hidden" title="密碼" name="password" maxlength="20"
-											placeholder="*必填" value='<%=memberBean.getPassword()%>' /> <input
-											type="hidden" name="userId"
+										<input type="hidden" name="userId"
 											value="<%=memberBean.getuserId()%>" /> <input type="hidden"
 											name="joinDate" value="<%=memberBean.getJoinDate()%>" /> <input
 											type="hidden" name="status"
-											value="<%=memberBean.getStatus()%>" />
-
+											value="<%=memberBean.getStatus()%>" /> <input title="學歷"
+											id="education" type="hidden" name="education" size="40"
+											placeholder="*必填(請輸入最高學歷)"
+											class="form-control form-control-name">
 
 
 										<p>
@@ -187,7 +212,8 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 
 											<div class="item phone">
 												<span class="icon"></span><span class="text"><input
-													title="cellphone" type="text" name="cellphone" id="cellphone" size="40"
+													title="cellphone" type="text" name="cellphone"
+													id="cellphone" size="40"
 													value='<%=memberBean.getCellphone()%>'></span>
 											</div>
 											<div class="item email">
