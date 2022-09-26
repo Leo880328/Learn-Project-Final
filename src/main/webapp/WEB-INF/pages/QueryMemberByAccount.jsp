@@ -14,7 +14,7 @@
 .tb {
 	border-collapse: collapse;
 	margin-left: 300px;
-	width: 1200px;
+	width: 1600px;
 	/*自動斷行*/
 	word-wrap: break-word;
 	table-layout: fixed;
@@ -34,7 +34,11 @@
 	<br>
 	<br>
 	<br>
-	<br>
+	<div align="center">
+		<button type="submit">
+			<a href="addNewUser">新增會員</a>
+		</button>
+	</div>ㄋ
 	<div align="center">
 		<form action="queryAccount" method="post">
 			<label> 帳號查詢 : <input type="text" name="keyword_account">
@@ -75,6 +79,10 @@
 				<td><%=memberBean.getAccount()%></td>
 				<!-- <td><c:out value="${mb.password}" /></td> -->
 				<td><c:choose>
+				<c:when test="<%=memberBean.getStatus() == 4%>">
+             		 						(學生)待審核
+       							</c:when>
+				
 						<c:when test="<%=memberBean.getStatus() == 1%>">
              		 						學生
        							</c:when>
@@ -84,7 +92,10 @@
 						<c:otherwise>
               						管理員
        							</c:otherwise>
-					</c:choose></td>
+					</c:choose><c:if test="<%=memberBean.getStatus() == 4%>">
+							<a class="btn btn-primary"
+								href="checkteacher?userId=<%=memberBean.getuserId()%> ">審核</a>
+						</c:if></td>
 				<td><%=memberBean.getName()%></td>
 				<td><img src="<%=memberBean.getImg()%>" width="150"
 					height="100"></td>
@@ -93,9 +104,10 @@
 				<td><%=memberBean.getCellphone()%></td>
 				<td><%=memberBean.getEmail()%></td>
 				<td><%=memberBean.getJoinDate()%></td>
-				<td><a href="showEditUser?userId=<%=memberBean.getuserId()%>">修改</a> <a
-					onclick="if( !(confirm('確認刪除?') ) ) return false"
-					href="deleteUser?userId=<%=memberBean.getuserId()%>">刪除</a></td>
+				<<td><a class="btn btn-warning" href="showEditUser?userId=<%=memberBean.getuserId()%> ">修改</a> <a
+						class="btn btn-danger btn--raised"
+						onclick="if( !(confirm('確認刪除?') ) ) return false";alert(刪除成功)
+						href="deleteUser?userId=<%=memberBean.getuserId()%> ">刪除</a></td>
 			</tr>
 			<%
 			}
@@ -103,7 +115,7 @@
 		</tbody>
 	</table>
 	<center>
-		<a href=memberList><input type="submit" name="return"
+		<a href="memberList"><input type="submit" name="return"
 			value="返回會員列表"></a>
 	</center>
 </body>
