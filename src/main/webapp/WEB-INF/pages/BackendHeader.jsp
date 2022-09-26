@@ -175,7 +175,7 @@
 					
 					<li><a href="QueryAll"><i class="zmdi zmdi-collection-text"></i>專欄管理</a></li>
 					
-					<li><a href="Activity_OP"><i class="zmdi zmdi-calendar"></i>活動管理</a></li>
+					<li><a href="ActivitiesOP"><i class="zmdi zmdi-calendar"></i>活動管理</a></li>
 
 					<li><a href="orderList"><i class="zmdi zmdi-widgets"></i>訂單管理</a></li>
 					
@@ -227,4 +227,17 @@
 		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
+<script>
+		function previewImg(element) {
+
+			let file = element.files[0];
+			let img = element.parentElement.querySelector("#img");
+			let imgPath = element.parentElement.querySelector("#imgPath");
+			if (file) {
+				img.src = URL.createObjectURL(file);
+				imgPath.value = "images/" + file.name;
+			}
+
+		}
+	</script>
 </html>
