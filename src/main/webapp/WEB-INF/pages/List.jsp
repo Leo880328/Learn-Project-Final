@@ -135,40 +135,10 @@
 	</table>
 	<br><br>
 	<div align="center">
-		<a href="course.add"><input type="submit" name="addcourse"
-			value="新增課程"></a>
+		<center><a href="course.add"><input type="submit" name="addcourse"
+			value="新增課程"></a></center>
 	</div>
-<script type="text/javascript">
-function del(id) {
-	console.log(id);
-	Swal.fire({
-		title: '確認刪除課程?"',
-		text: "",
-		icon: 'warning',
-		showCancelButton: true,
-		confirmButtonColor: '#d33',
-		cancelButtonColor: '#3085d6',
-		confirmButtonText: '刪除',
-		cancelButtonText: '取消',
-	}).then((result) => {
-		if (result.isConfirmed) {
-			Swal.fire(
-				'刪除成功!',
-			)
-
-			$.ajax({
-				async: true,
-				type: "get",
-				url: "course.delete/" + id,
-				success: function(data) {
-					$(`#${id}`).remove();
-				}
-			})
-		}
-	})
-}
-
-</script>
+<script src="xiang/courseback.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 

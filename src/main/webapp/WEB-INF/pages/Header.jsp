@@ -164,7 +164,7 @@
 									class="toggle-submenu"></span>
 								<li><a href="Activity" class="teamo-menu-item-title"
 									title="Pages">活動</a><span class="toggle-submenu"></span></li>
-								<li><a href="QueryAll"
+								<li><a href="ColumnFrontEnd"
 									class="teamo-menu-item-title" title="Blogs">專欄</a><span
 									class="toggle-submenu"></span>
 									<ul class="submenu">
@@ -221,5 +221,6 @@
 	<script type="text/javascript" charset="utf8"
 		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 		<script src="https://kit.fontawesome.com/9d965cf88e.js" crossorigin="anonymous"></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

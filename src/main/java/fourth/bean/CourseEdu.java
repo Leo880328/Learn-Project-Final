@@ -13,6 +13,9 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="course_Education")
 @Component
@@ -26,6 +29,8 @@ public class CourseEdu {
 	@Column(name = "educationlevel")
 	private String educationlevel;
 	
+	
+	@JsonBackReference
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "courseedu")
 	private List<CourseBean> courseBeans;
 

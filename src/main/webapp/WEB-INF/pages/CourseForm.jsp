@@ -47,10 +47,10 @@ integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeM
 </center>
 
 <c:if test="${sessionScope.user.status == 3}">
-<form action="course.insert" method="post" onSubmit="return checkNull(this)">
+<form action="course.insert" method="post" class="cfi">
 </c:if>
 <c:if test="${sessionScope.user.status == 2}">
-<form action="coursefront.insert" method="post" onSubmit="return checkNull(this)">
+<form action="coursefront.insert" method="post" class="cfi">
 </c:if>
 <table class=tb align='center'>
 <!-- <tr> -->
@@ -134,38 +134,27 @@ integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeM
   	  	}
    	</script>  -->
  	
-<center>
 
-<br><br>
+<br/>
+<br/>
 
 
-<input type="submit" name="submit" value="確定" onclick="if( !(confirm('確認新增?') ) ) return false;alert('新增完成 ! 請等待管理員審核')">
+<!-- <input type="submit" name="submit" value="確定" onclick="if( !(confirm('確認新增?') ) ) return false;alert('新增完成 ! 請等待管理員審核')"> -->
+
 
 </form>
 
-		<button type="button" id="correct">一鍵輸入</button>
+<center>
+    <button onclick="checkAdd()" >送出</button>
+    
+    <button type="button" id="correct" style="background-color:blue">一鍵輸入</button>
 
-	<button type="reset" value="reset">清除   <i class="fa-solid fa-trash-can"></i></button>
+<!-- 	<button type="reset" value="reset">清除   <i class="fa-solid fa-trash-can"></i></button> -->
 </center>
-<script>
-			$(function() {
-				$('#correct').click(function() {
-					$('#user_id').val("2");
-					$('#course_name').val("敬評教英文");
-					$('#subject_id').val("2");
-					$('#education_id').val("3");
-					$('#course_introduction').val("我們鼓勵每位學員上網進行教師評比，藉由獨家研發的「即時教師評鑑系統」，教務團隊即時連線，隨時掌握課堂教學狀況與成效，透過學生的進步率與教學風格評價，隨時調整授課方向與教學互動。學生可以從教師教學風格中找到適合的老師，也能透過學員的意見讓我們更瞭解教師們的實際授課情況，提升整體教學品質。");
-					$('#course_price').val("487.00");
-					$('#course_duration').val("36小時8分");
-					$('#course_date').val("2022-06-04");
-					$('#lecturer_name').val("敬評");
-					$('#lecturer_email').val("winniepooh@gmail.com");
-				})
-			})
-		</script>
+
 		
 <script src="https://kit.fontawesome.com/9d965cf88e.js" crossorigin="anonymous"></script>
-
+<script src="xiang/courseback.js"></script>
 
 </body>
 </html>
