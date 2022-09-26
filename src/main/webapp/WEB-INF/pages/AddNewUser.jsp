@@ -7,7 +7,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>新增使用者</title>
+<title><c:if test="${mb != null}">
+                        修改會員
+                    </c:if> <c:if test="${mb == null}">
+                        新增會員
+                    </c:if></title>
 <link rel="shortcut icon" type="image/x-icon"
 	href="assets/images/smalllogo.png" />
 <style>
@@ -16,13 +20,9 @@
 }
 </style>
 </head>
-<body>
+<body data-ma-theme="green">
 	<jsp:include page="BackendHeader.jsp" />
 	<jsp:include page="Style.jsp" />
-	<br>
-	<br>
-	<br>
-	<%-- 	<c:if test="${sessionScope.user == null}"><% request.getRequestDispatcher("/Login.jsp").forward(request, response); %></c:if> --%>
 	<%
 	String action = "";
 	%>
@@ -36,123 +36,197 @@
 		action = "insertNewUser";
 		%>
 	</c:if>
-	<header>
-		<br> <br>
-		<div align="center">
-			<h2>
-				<c:if test="${mb != null}">
-                        修改會員
-                    </c:if>
-				<c:if test="${mb == null}">
-                        新增會員
-                    </c:if>
-			</h2>
-		</div>
-	</header>
-	<hr>
-	<form action="<%=action%>" method="post"
-		onSubmit="return checkNull(this)">
-		<table class="tb" cellspacing="2" cellpadding="1" border="50"
-			width="60%">
 
-			<c:if test="${mb != null}">
-				<input type="hidden" name="userId" value="${mb.userId}" />
-			</c:if>
-			<tr>
-				<td>暱稱:</td>
-				<td><input type="text" title="暱稱" name="nick" size="10"
-					id="nick" maxlength="10" value="<c:out value='${mb.nick}' />" />(請輸入0~10個字)</td>
-			</tr>
-			<tr>
-				<td>帳號:</td>
-				<td><input type="text" title="帳號" name="account" maxlength="10"
-					id="account" value="<c:out value='${mb.account}' />" /></td>
-			</tr>
-			<tr>
-				<td>密碼:</td>
-				<td><input type="text" title="密碼" name="password" id="password"
-					maxlength="20" value="<c:out value='${mb.password}' />" /><span
-					id="sp5" class="msg"></span></td>
-			</tr>
-			<tr>
-				<td>身分:</td>
-				<td><select name="status" title="身分" id="status">
-						<c:if test="${mb.status==null}">
-							<option>請選擇</option>
-							<option value="1">學生</option>
-							<option value="2">老師</option>
-							<option value="3">管理員</option>
-						</c:if>
-						<c:if test="${mb.status=='1'}">
-							<option value="1">學生</option>
-							<option value="2">老師</option>
-							<option value="3">管理員</option>
-						</c:if>
-						<c:if test="${mb.status=='2'}">
-							<option value="2">老師</option>
-							<option value="1">學生</option>
-							<option value="3">管理員</option>
-						</c:if>
-						<c:if test="${mb.status=='3'}">
-							<option value="3">管理員</option>
-							<option value="1">學生</option>
-							<option value="2">老師</option>
-						</c:if>
-				</select></td>
-			</tr>
-			<tr>
-				<td>姓名:</td>
-				<td><input type="text" title="姓名" name="name" maxlength="10"
-					id="name" value="<c:out value='${mb.name}' />" /></td>
-			</tr>
-			<tr>
-				<td>大頭貼:</td>
-				<td><img src="${mb.img}" id="img" alt="" title="" width="200"
-					height="150"> <input id="imgPath" type="hidden" name="img"
-					title="大頭貼" value="${mb.img}"> <input
-					onchange="previewImg(this)" type="file" title="大頭貼" id="imgin"></td>
-			</tr>
-			<tr>
-				<td>性別:</td>
-				<td><select name="sex" id="sex">
-						<option>${mb.sex}</option>
-						<option value="男生" <c:if test="${mb.sex=='男生'}"></c:if>>男生</option>
-						<option value="女生" <c:if test="${mb.sex=='女生'}"></c:if>>女生</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>生日:</td>
-				<td><input type="date" title="生日" name="birthday" id="birthday"
-					value="<c:out value='${mb.birthday}' />" /></td>
-			</tr>
-			<tr>
-				<td>聯絡電話:</td>
-				<td><input type="text" title="聯絡電話" name="cellphone" size="20"
-					id="cellphone" value="<c:out value='${mb.cellphone}' />" /></td>
-			</tr>
-			<tr>
-				<td>電子郵件:</td>
-				<td><input type="text" title="電子郵件" name="email" size="40"
-					id="email" maxlength="50" value="<c:out value='${mb.email}' />" /><span
-					id="sp4" class="msg"></span></td>
-			</tr>
-			<tr>
-				<td>加入時間:</td>
-				<td><input type="date" title="加入時間" name="joinDate" size="50"
-					id="joinDate" maxlength="20"
-					value="<c:out value='${mb.joinDate}' />" /></td>
-			</tr>
+	<main class="main">
 
-		</table>
-		<center>
-			<input type="submit" value="儲存" />
-			<button type="button" class="btn btn-primary " id="correct">一鍵輸入</button>
-		</center>
-	</form>
-		<center>
-		<a href="memberList"><input type="submit" name="return"
-			value="返回會員列表"></a>
-	</center>
+		<section class="content">
+			<div class="content__inner content__inner--sm">
+				<header class="content__title">
+					<h1>
+						<h2>
+							<c:if test="${mb != null}">
+                                    修改會員
+                                </c:if>
+							<c:if test="${mb == null}">
+                                    新增會員
+                                </c:if>
+						</h2>
+					</h1>
+					<small></small>
+					<div class="actions">
+						<a href="" class="actions__item zmdi zmdi-trending-up"></a><a
+							href="" class="actions__item zmdi zmdi-check-all"></a>
+						<div class="dropdown actions__item">
+							<i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+							<div class="dropdown-menu dropdown-menu-right">
+								<a href="" class="dropdown-item">Refresh</a><a href=""
+									class="dropdown-item">Manage Widgets</a><a href=""
+									class="dropdown-item">Settings</a>
+							</div>
+						</div>
+					</div>
+				</header>
+
+
+				<form action="<%=action%>" method="post"
+					onSubmit="return checkNull(this)">
+					<c:if test="${mb != null}">
+						<input type="hidden" name="userId" value="${mb.userId}" />
+					</c:if>
+
+					<div class="card new-contact">
+						<div class="new-contact__header">
+							<input onchange="previewImg(this)" class="zmdi zmdi-camera  "
+								type="file" id="imgin"> <a href=""></a><img
+								src="${mb.img}" id="img" alt="" title="" width="200"
+								height="150" class="new-contact__img"> <input id="imgPath"
+								type="hidden" name="img" title="大頭貼" value="${mb.img}">
+						</div>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>暱稱 </label><input type="text"
+											value="<c:out value='${mb.nick}' />" name="nick"
+											placeholder="請輸入最多10個字" maxlength="10" id="nick"
+											class="form-control"><i class="form-group__bar"></i>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>姓名 </label><input type="text" name="name"
+											value="<c:out value='${mb.name}' />" id="name"
+											class="form-control" placeholder="請輸入全名"><i
+											class="form-group__bar"></i>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>帳號</label><input type="text" name="account"
+											value="<c:out value='${mb.account}' />" title="帳號"
+											id="account" class="form-control" placeholder="*必填"><i
+											class="form-group__bar"></i>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>密碼</label><input type="text" title="密碼" name="password"
+											id="password" value="<c:out value='${mb.password}' />"
+											class="form-control" placeholder="*必填"><font
+											color="red"><span id="sp5" class="msg"></span></font><i
+											class="form-group__bar"></i>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Email </label><input type="text" title="電子郵件"
+											value="<c:out value='${mb.email}' />" id="email" name="email"
+											class="form-control" placeholder="*必填"><font
+											color="red"><span id="sp4" class="msg"></span></font><i
+											class="form-group__bar"></i>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>性別</label><select name="sex" id="sex"
+											class="form-control">
+											<option>${mb.sex}</option>
+											<option value="男生"
+												<c:if test="${mb.sex=='男生'}">
+                                                    </c:if>>男生</option>
+											<option value="女生"
+												<c:if test="${mb.sex=='女生'}">
+                                                    </c:if>>女生</option>
+										</select><i class="form-group__bar"></i>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>聯絡電話 </label><input type="text" name="cellphone"
+											size="20" id="cellphone"
+											value="<c:out value='${mb.cellphone}' />"
+											class="form-control" placeholder=""><i
+											class="form-group__bar"></i>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>生日 </label><input type="date" name="birthday"
+											id="birthday" value="<c:out value='${mb.birthday}' />"
+											class="form-control" placeholder=""><i
+											class="form-group__bar"></i>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>身分 </label><select class="form-control" name="status"
+											title="身分" id="status">
+											<c:if test="${mb.status==null}">
+												<option>請選擇</option>
+												<option value="1">學生</option>
+												<option value="2">老師</option>
+												<option value="3">管理員</option>
+											</c:if>
+											<c:if test="${mb.status=='1'}">
+												<option value="1">學生</option>
+												<option value="2">老師</option>
+												<option value="3">管理員</option>
+											</c:if>
+											<c:if test="${mb.status=='2'}">
+												<option value="2">老師</option>
+												<option value="1">學生</option>
+												<option value="3">管理員</option>
+											</c:if>
+											<c:if test="${mb.status=='3'}">
+												<option value="3">管理員</option>
+												<option value="1">學生</option>
+												<option value="2">老師</option>
+											</c:if>
+										</select><i class="form-group__bar"></i>
+									</div>
+								</div>
+								<c:if test="${mb.status !='1'}">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>學歷 </label><input type="text" name="education"
+												size="50" id="education"
+												value="<c:out value='${mb.education}' />"
+												class="form-control" placeholder=""><i
+												class="form-group__bar"></i>
+										</div>
+									</div>
+								</c:if>
+							</div>
+							<div class="form-group">
+								<label>加入時間</label><input type="date" name="joinDate"
+									id="joinDate" value="<c:out value='${mb.joinDate}' />"
+									class="form-control" placeholder=""><i
+									class="form-group__bar"></i>
+							</div>
+							<div class="form-group">
+								<label>自我介紹</label>
+								<textarea title="自我介紹" name="userprofile"
+									class="form-control textarea-autosize" id="userprofile"
+									value="<c:out value='${mb.userprofile}' />" placeholder="*必填">
+								</textarea>
+								<i class="form-group__bar"></i>
+							</div>
+							<div class="clearfix"></div>
+							<div class="mt-5 text-center">
+								<a href="" class="btn btn-primary">清空</a>
+								<button type="button" class="btn btn-primary " id="correct">一鍵輸入</button>
+								<a href="memberList"><input type="submit" name="return"
+									value="儲存"></a> <a href="memberList"><input
+									type="button" name="return" class="btn btn-outline-success"
+									value="返回會員列表"></a>
+							</div>
+				</form>
+				<br>
+				<div></div>
+			</div>
+
+		</section>
+	</main>
 	<script>
 		function previewImg(element) {
 
@@ -209,7 +283,7 @@
          checkAccount()
         })
         function checkAccount(){
-          let account = $('#account').val()
+          let account = $('#email').val()
                   if(typeof account === "string"){
                       if (account ==null || account ==""){
                   var msg = "信箱必須填寫";  

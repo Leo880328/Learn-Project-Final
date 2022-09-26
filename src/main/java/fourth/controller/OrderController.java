@@ -46,6 +46,7 @@ public class OrderController {
 		String pageStatus = (String)request.getSession().getAttribute("pageStatus");
 		MemberBean user = (MemberBean)m.getAttribute("user");
 		List<OrderUser> orderList = orderService.orderList(user.getuserId(),user.getStatus(),pageStatus);
+		System.out.println(orderList);
 		return orderList;
 	}
 	@GetMapping(path = "/orderList")
@@ -81,11 +82,7 @@ public class OrderController {
 		return orderItemUser;
 	}
 	
-//	@PostMapping(path = "/deleteOrder")
-//	public String deleteOrder(String cartID) {
-//		orderService.deleteOrder(cartID);
-//		return "redirect:/orderList";
-//	}
+
 	@PostMapping(path = "/orderDetail")
 	public String orderDetail(String cartID,Model m) {
 		List<OrderItem> orderItemList = orderService.orderItemList(cartID);

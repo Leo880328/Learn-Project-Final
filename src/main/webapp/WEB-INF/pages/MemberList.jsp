@@ -22,7 +22,7 @@
 .tb {
 	border-collapse: collapse;
 	margin-left: 300px;
-	width: 1200px;
+	width: 1600px;
 	/*自動斷行*/
 	word-wrap: break-word;
 	table-layout: fixed;
@@ -89,6 +89,9 @@
 					<td><c:out value="${mb.account}" /></td>
 					<!-- <td><c:out value="${mb.password}" /></td> -->
 					<td><c:choose>
+							<c:when test="${mb.status==4}">
+             		 						(學生)待審核
+       							</c:when>
 							<c:when test="${mb.status==1}">
              		 						學生
        							</c:when>
@@ -98,16 +101,21 @@
 							<c:otherwise>
               						管理員
        							</c:otherwise>
-						</c:choose></td>
+						</c:choose><c:if test="${mb.status==4}">
+							<a class="btn btn-primary"
+								href="checkteacher?userId=${mb.userId} ">審核</a>
+						</c:if></td>
 					<td><c:out value="${mb.name}" /></td>
 					<td><img src="${mb.img}" width="150" height="100"></td>
 					<td><c:out value="${mb.sex}" /></td>
 					<td width="150px"><c:out value="${mb.birthday}" /></td>
 					<td width="159px"><c:out value="${mb.cellphone}" /></td>
 					<td width="200px"><c:out value="${mb.email}" /></td>
-					<td width="300px"><c:out value="${mb.joinDate}" /></td>
-					<td><a href="showEditUser?userId=${mb.userId} ">修改</a> <a
-						onclick="if( !(confirm('確認刪除?') ) ) return false"
+					<td class="td1"><c:out value="${mb.joinDate}" /></td>
+					<td><a class="btn btn-warning"
+						href="showEditUser?userId=${mb.userId} ">修改</a> <a
+						class="btn btn-danger btn--raised"
+						onclick="if( !(confirm('確認刪除?') ) ) return false; alert('刪除成功!')"
 						href="deleteUser?userId=${mb.userId} ">刪除</a></td>
 				</tr>
 			</tbody>

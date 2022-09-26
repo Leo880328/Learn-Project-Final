@@ -154,28 +154,29 @@ function orderButton(order) {
 	//未付款
 	if (order.status.id == 1) {
 		bt = `<span class="badge badge-secondary" >${order.status.status}</span>`
-		$(`#${order.orderId}`).find(".btn-success").attr("disabled", true);
-		$(`#${order.orderId}`).find(".btn-warning").attr("disabled", true);
+		$(`#${order.orderId}`).find(".btn-success").remove();
+//		$(`#${order.orderId}`).find(".btn-warning").attr("disabled", true);
+		$(`#${order.orderId}`).find(".btn-warning").remove();
 	};
 
 	//已付款
 	if (order.status.id == 2) {
 		bt = `<span class="badge badge-success" >${order.status.status}</span>`
-		$(`#${order.orderId}`).find(".btn-warning").attr("disabled", true);
+		$(`#${order.orderId}`).find(".btn-warning").remove();
 	}
 	if (order.status.id == 3) {
 		bt = `<span class="badge badge-warning">${order.status.status}</span>`
-		$(`#${order.orderId}`).find(".btn-success").attr("disabled", true);
+		$(`#${order.orderId}`).find(".btn-success").remove();
 	};
 	if (order.status.id == 4) {
 		bt = `<span class="badge badge-primary">${order.status.status}</span>`
-		$(`#${order.orderId}`).find(".btn-success").attr("disabled", true);
-		$(`#${order.orderId}`).find(".btn-warning").attr("disabled", true);
+		$(`#${order.orderId}`).find(".btn-success").remove();
+		$(`#${order.orderId}`).find(".btn-warning").remove();
 	}
 	if (order.status.id == 5 || order.status.id == 6) {
 		bt = `<span class="badge badge-dark">${order.status.status}</span>`
-		$(`#${order.orderId}`).find(".btn-success").attr("disabled", true);
-		$(`#${order.orderId}`).find(".btn-warning").attr("disabled", true);
+		$(`#${order.orderId}`).find(".btn-success").remove();
+		$(`#${order.orderId}`).find(".btn-warning").remove();
 	}
 }
 function orderListUser(order) {
