@@ -72,11 +72,9 @@ public class ActivityController {
 	@PostMapping("/ActivitySelect")
 	@ResponseBody
 	public Page<ActivityBean> selectActivityAllByTitleLike(@RequestBody() Map<String, String> map) {
-		
 		Integer pageNo = Integer.valueOf(map.get(MapKey_pageNo)) ;
 		Integer pageSize =Integer.valueOf(map.get(MapKey_pageSize));
 		String keyWord = map.get(MapKey_keyWord);
-		
 		PageRequest pageable = PageRequest.of(pageNo-1,pageSize);
 
 		if(keyWord!=null) {
