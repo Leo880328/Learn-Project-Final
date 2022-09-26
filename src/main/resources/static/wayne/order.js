@@ -284,7 +284,6 @@ function checkOrder(orderId) {
 				url: "updateOrder/4/" + orderId,
 				success: function(data) {
 					$(`#${orderId}`).empty();
-					console.log(bt);
 					$(`#${orderId}`).append(orderAdminContent(orderUser(orderId)));
 					orderButton(orderUser(orderId));
 					$(`.${orderId}`).append(bt);
