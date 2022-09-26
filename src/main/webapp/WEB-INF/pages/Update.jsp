@@ -34,7 +34,7 @@
 <center>
 <h1>課程資料修改</h1>
 </center>
-<form action="course.update" method="post">
+<form action="course.update" class="cfu" method="post">
 <c:choose>
 <c:when test="${bean.course_status == 1}">
 <table class=tb align='center'>
@@ -235,19 +235,20 @@
 </c:otherwise>
 </c:choose>
 
-
+</form>
 <center>
 <br><br>
-<c:if test="${bean.course_status == 1}">
-<input onclick="if( !(confirm('確定送出審核結果嗎?') ) ) return false; alert('已送出!')" type="submit" name="submit"  value="送出">
-</c:if>
-<c:if test="${bean.course_status == 2}">
-<input onclick="if( !(confirm('確定要修改嗎?') ) ) return false; alert('修改成功!')" type="submit" name="submit"  value="確定">
-</c:if>
+<%-- <c:if test="${bean.course_status == 1}"> --%>
+<!-- <input onclick="if( !(confirm('確定送出審核結果嗎?') ) ) return false; alert('已送出!')" type="submit" name="submit"  value="送出"> -->
+<%-- </c:if> --%>
+<%-- <c:if test="${bean.course_status == 2}"> --%>
+<!-- <input onclick="if( !(confirm('確定要修改嗎?') ) ) return false; alert('修改成功!')" type="submit" name="submit"  value="確定"> -->
+<%-- </c:if> --%>
+<button onclick="checkUpdate()">送出</button>
 </center>
 
 
-</form>
+
 <script>
 function previewImg(element) {
 
@@ -261,6 +262,6 @@ function previewImg(element) {
    
 }
 </script>
-
+<script src="xiang/courseback.js"></script>
 </body>
 </html>
