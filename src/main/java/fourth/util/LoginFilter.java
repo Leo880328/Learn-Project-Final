@@ -20,6 +20,7 @@ import fourth.bean.MemberBean;
  * Servlet Filter implementation class LoginFilter
  */
 
+//@WebFilter({"/cart","/orderList","/cart.jsp",""})
 @WebFilter({"/cart","/orderList","/searchLearn","/chart","/CartController"})
 public class LoginFilter extends HttpFilter implements Filter {
        
