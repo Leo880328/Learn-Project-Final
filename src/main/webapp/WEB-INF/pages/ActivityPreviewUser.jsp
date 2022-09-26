@@ -37,7 +37,7 @@
         <div class="u-container-layout u-container-layout-1">
           <div class="u-container-style u-group u-radius-10 u-shape-round u-white u-group-2">
             <div class="u-container-layout u-container-layout-2">
-              <h1 class="u-align-center u-text u-text-default u-text-1">Sample Headline</h1>
+              <h1 class="u-align-center u-text u-text-default u-text-1">活動</h1>
             </div>
           </div>
           <table class="u-table-entity">      
