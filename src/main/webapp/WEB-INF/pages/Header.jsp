@@ -141,7 +141,7 @@
 									class="teamo-menu-item-title" title="New Arrivals">我的學習</a></li>
 								<li class="menu-item"><a title="Hot Sale" href="ExamMyMemController"
 									class="teamo-menu-item-title">我的試卷</a></li>
-								<li class="menu-item "><a title="Accessories" href="#"
+								<li class="menu-item "><a title="Accessories" href="Activities"
 									class="teamo-menu-item-title">我的活動</a><span
 									class="toggle-submenu"></span></li>
 								<li class="menu-item"><a title="Variegated" href="cart"
@@ -162,7 +162,7 @@
 								<li class="menu-item "><a href="firstExamController"
 									class="teamo-menu-item-title" title="Shop">試卷</a><span
 									class="toggle-submenu"></span>
-								<li><a href="Activity" class="teamo-menu-item-title"
+								<li><a href="Activities" class="teamo-menu-item-title"
 									title="Pages">活動</a><span class="toggle-submenu"></span></li>
 								<li><a href="ColumnFrontEnd"
 									class="teamo-menu-item-title" title="Blogs">專欄</a><span
