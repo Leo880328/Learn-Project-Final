@@ -34,7 +34,7 @@
 <center>
 <h1>課程資料修改</h1>
 </center>
-<form action="coursefront.update" method="post">
+<form action="coursefront.update" class="cfu" method="post">
 <table class=tb align='center'>
 
 <tr>
@@ -135,15 +135,16 @@
 
 		</table>
 
-
+</form>
 <center>
 <br><br>
-<input onclick="if( !(confirm('確定要重新送交管理員審核?') ) ) return false; alert('送出成功 ! 請等候管理員審核')" 
-type="submit" name="submit"  value="重新送出審核" style="background-color: red">
+<!-- <input onclick="if( !(confirm('確定要重新送交管理員審核?') ) ) return false; alert('送出成功 ! 請等候管理員審核')"  -->
+<!-- type="submit" name="submit"  value="重新送出審核" style="background-color: red"> -->
+<button onclick="checkUpdate()" style="background-color: red">重新送出審核</button>
 </center>
 
 
-</form>
+
 
 <script>
 function previewImg(element) {
@@ -158,6 +159,6 @@ function previewImg(element) {
    
 }
 </script>
-
+<script src="xiang/coursefront.js"></script>
 </body>
 </html>
