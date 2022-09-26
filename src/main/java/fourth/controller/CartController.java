@@ -57,6 +57,11 @@ public class CartController {
 	public String addCart(Model m,@PathVariable("id") String courseID) throws SQLException {
 		MemberBean user = (MemberBean)m.getAttribute("user");
 		cartService.cartAdd(courseID,user.getuserId());
+//<<<<<<< HEAD
+//		CourseBean cbean = cService.findByCourseId(WebUtils.paseInt(courseID));
+//		m.addAttribute("cbean", cbean); 
+//		return "Details";
+//=======
 
 		return "add Ok";
 
