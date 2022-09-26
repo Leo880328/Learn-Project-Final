@@ -61,6 +61,58 @@ public class MemberBean {
 	@Column(name = "joindate")
 	private String joinDate;
 
+	@Column(name = "education")
+	private String education;
+
+	@Column(name = "userprofile")
+	private String userprofile;
+
+	public MemberBean(Integer userId, String nick, String account, String password, int status, String name, String img,
+			String sex, String birthday, String cellphone, String email, String joinDate, String education,
+			String userprofile, List<OrderUser> orderUsers, List<CartItem> cartItems) {
+		super();
+		this.userId = userId;
+		this.nick = nick;
+		this.account = account;
+		this.password = password;
+		this.status = status;
+		this.name = name;
+		this.img = img;
+		this.sex = sex;
+		this.birthday = birthday;
+		this.cellphone = cellphone;
+		this.email = email;
+		this.joinDate = joinDate;
+		this.education = education;
+		this.userprofile = userprofile;
+		this.orderUsers = orderUsers;
+		this.cartItems = cartItems;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public String getEducation() {
+		return education;
+	}
+
+	public void setEducation(String education) {
+		this.education = education;
+	}
+
+	public String getUserprofile() {
+		return userprofile;
+	}
+
+	public void setUserprofile(String userprofile) {
+		this.userprofile = userprofile;
+	}
+
 	// 一個用戶對多個訂單
 	@JsonIgnore
 	@OneToMany(mappedBy = "memberBean", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
@@ -88,7 +140,7 @@ public class MemberBean {
 		this.joinDate = joinDate;
 	}
 
-	public  MemberBean(String account, String password) {
+	public MemberBean(String account, String password) {
 		this.account = account;
 		this.password = password;
 	}
