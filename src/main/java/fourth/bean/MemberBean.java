@@ -89,13 +89,13 @@ public class MemberBean {
 		this.cartItems = cartItems;
 	}
 
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+//	public Integer getUserId() {
+//		return userId;
+//	}
+//
+//	public void setUserId(Integer userId) {
+//		this.userId = userId;
+//	}
 
 	public String getEducation() {
 		return education;
