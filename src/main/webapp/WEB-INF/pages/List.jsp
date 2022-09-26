@@ -121,9 +121,11 @@
 				</td>
 				</c:if>
 				<c:if test="${course.course_status == 2}">
-				<td><a href="course.delete?course_id=${course.course_id}"><button
-							onclick="if( !(confirm('確認刪除?') ) ) return false; alert('刪除成功!')"
-							id='delete' type="submit" name="delete" value="刪除課程"> <i class="fa-solid fa-trash"></i>  刪除</button></a></td>
+<%-- 				<td><a href="course.delete?course_id=${course.course_id}"><button --%>
+<!-- 							onclick="if( !(confirm('確認刪除?') ) ) return false; alert('刪除成功!')" -->
+<!-- 							id='delete' type="submit" name="delete" value="刪除課程"> <i class="fa-solid fa-trash"></i>  刪除</button></a></td> -->
+				<td><button onclick="del(${course.course_id})"
+							id='delete' type="submit" name="delete" value="刪除課程"> <i class="fa-solid fa-trash"></i>  刪除</button></td>
 				</c:if>
 			</tr>
 
@@ -133,14 +135,11 @@
 	</table>
 	<br><br>
 	<div align="center">
-		<a href="course.add"><input type="submit" name="addcourse"
-			value="新增課程"></a>
+		<center><a href="course.add"><input type="submit" name="addcourse"
+			value="新增課程"></a></center>
 	</div>
-<script type="text/javascript">
-
-
-</script>
-
+<script src="xiang/courseback.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 </body>
