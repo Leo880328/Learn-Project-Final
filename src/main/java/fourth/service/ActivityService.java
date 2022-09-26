@@ -31,7 +31,7 @@ public class ActivityService {
 		return activityBeans;
 	}
 	public Page<ActivityBean> selectAllByTitleLike(Pageable pageable,String keyWord) {
-		 Page<ActivityBean> findAllByTitleLike = activityRepository.findAllByTitleLike(pageable, keyWord);
+		 Page<ActivityBean> findAllByTitleLike = activityRepository.findAllByTitleLike(pageable, "%"+keyWord+"%");
 		return findAllByTitleLike;
 	}
 

@@ -48,7 +48,7 @@
           </table>
           <div class="u-align-center u-clearfix u-group-elements u-group-elements-1">
             <a onclick="pageNoIncrease()"
-              class="u-btn u-btn-round u-button-style u-hover-palette-1-light-2 u-palette-1-base u-radius-2 u-btn-3">Next&nbsp;<span
+              class="pageNoIncrease u-btn u-btn-round u-button-style u-hover-palette-1-light-2 u-palette-1-base u-radius-2 u-btn-3">Next&nbsp;<span
                 class="u-icon u-text-white"><svg class="u-svg-content" viewBox="0 0 512 512" x="0px" y="0px"
                   style="width: 1em; height: 1em;">
                   <path
@@ -57,7 +57,7 @@
                 </svg><img></span>
             </a>
             <a onclick="pageNoReduce()"
-              class="u-align-center u-btn u-btn-round u-button-style u-hover-palette-1-light-2 u-palette-1-base u-radius-2 u-btn-4"><span
+              class="pageNoReduce u-align-center u-btn u-btn-round u-button-style u-hover-palette-1-light-2 u-palette-1-base u-radius-2 u-btn-4"><span
                 class="u-file-icon u-icon u-text-white"><img src="ActivityResources/images/545680-10.png" alt=""></span>&nbsp;Back
             </a>
             <h3 class="u-text u-text-default u-text-6 totalPages">1</h3>
