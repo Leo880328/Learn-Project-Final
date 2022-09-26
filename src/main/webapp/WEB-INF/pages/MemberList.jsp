@@ -101,7 +101,10 @@
 							<c:otherwise>
               						管理員
        							</c:otherwise>
-						</c:choose></td>
+						</c:choose><c:if test="${mb.status==4}">
+							<a class="btn btn-primary"
+								href="checkteacher?userId=${mb.userId} ">審核</a>
+						</c:if></td>
 					<td><c:out value="${mb.name}" /></td>
 					<td><img src="${mb.img}" width="150" height="100"></td>
 					<td><c:out value="${mb.sex}" /></td>

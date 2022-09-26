@@ -190,6 +190,25 @@ public class MemberController {
 		m.addAttribute("mb", existingUser);
 		return "AddNewUser";
 	}
+	
+	// 審核更新會員
+		@GetMapping("/checkteacher")
+		public String checkTeacher(int userId, Model m) {
+			MemberBean existingUser = memberService.selectUserById(userId);
+			m.addAttribute("mb", existingUser);
+			return "CheckBecomeTeacher";
+		}
+		
+	//提出申請成為老師
+		@PostMapping("/becometeacher")
+		public String becomeTeacher(MemberBean memberBean) {
+			memberService.updateUser(memberBean);
+			return "redirect:/user.controller";
+		}
+		
+		
+		
+	
 
 	// 更新會員
 	@PostMapping("/updateUser")
