@@ -116,7 +116,7 @@ public class MemberBean {
 	// 一個用戶對多個訂單
 	@JsonIgnore
 	@OneToMany(mappedBy = "memberBean", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH })
+			CascadeType.REFRESH ,CascadeType.REMOVE})
 	List<OrderUser> orderUsers;
 
 	@JsonIgnore
