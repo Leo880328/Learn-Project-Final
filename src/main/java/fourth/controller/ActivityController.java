@@ -100,32 +100,16 @@ public class ActivityController {
 //	@GetMapping("/Activity_OP_path")
 	@PostMapping("/Activity_OP")
 	@ResponseBody
-	public ActivityBean insertActivities(@RequestBody() ActivityJsonBean activityJsonBean) {
-		ActivityBean activityBean = activityJsonBean.getActivityBean();
-		Base64FileBean  base64FileBean = activityJsonBean.getBase64FileBean();
-		//先儲存取得ID，把ID給base64FileBean當名字，儲存base64FileBean拿到imgPath
-		
+	public ActivityBean insertActivities(@RequestBody() ActivityBean activityBean) {
 		ActivityBean insertActivities = activityService.insertActivities(activityBean);
-		base64FileBean.setFileName(insertActivities.getId().toString());
-		String imgPath = activityImageService.saveBase64Img(base64FileBean);
-		insertActivities.setImgPath(imgPath);
-		
-		//取得imgPath再更新
-		ActivityBean updateActivities = activityService.updateActivities(insertActivities);
-		return updateActivities;
+		return insertActivities;
 	}
 
 	// 修改
 	@PutMapping("/Activity_OP")
 	@ResponseBody
-	public ActivityBean updateActivities(@RequestBody() ActivityJsonBean activityJsonBean) {
-		ActivityBean activityBean = activityJsonBean.getActivityBean();
-		Base64FileBean  base64FileBean = activityJsonBean.getBase64FileBean();
-		base64FileBean.setFileName(activityBean.getId().toString());
-		String imgPath = activityImageService.saveBase64Img(base64FileBean);
-		activityBean.setImgPath(imgPath);
+	public ActivityBean updateActivities(@RequestBody() ActivityBean activityBean) {
 		ActivityBean updateActivities = activityService.updateActivities(activityBean);
-		
 		return updateActivities;
 		
 	}
