@@ -178,13 +178,13 @@ public class OrderUser implements Serializable{
 	}
 
 	public void setorderItems(List<OrderItem> orderItems) {
-		orderItems = orderItems;
+		this.orderItems = orderItems;
 	}
 
 	@Override
 	public String toString() {
 		return "OrderUser [orderId=" + orderId  + ", date=" + date + ", status=" + status
-				+ ", totoalcount=" + totoalcount + ", discount=" + discount + ", totoalprice=" + totoalprice + "]";
+				+ ", totoalcount=" + totoalcount + ", discount=" + discount + ", totoalprice=" + totoalprice + "]" + memberBean;
 	}
 	
 	public void addorderItems(OrderItem item) {

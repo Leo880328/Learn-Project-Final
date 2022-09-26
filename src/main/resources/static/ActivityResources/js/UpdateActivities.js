@@ -12,7 +12,9 @@ let activityBean =
 
 let placeholder = {
     title: "點擊輸入標題",
-    content: "請點擊輸入內文"
+    content: "請點擊輸入內文",
+    startTime: '0000/00/00 00:00',
+    endTime: '0000/00/00 00:00'
 }
 $().ready(
     // 取直並將ActivityBean送出等待回應
@@ -89,8 +91,8 @@ function changeVal() {
         inputPlaceholder: '請輸入內容',
 
         inputValidator: (value) => {
-            $('.activityContent').html(value);
             activityBean.content = value;
+            changeHtml()
         },
         showCancelButton: true
     })
@@ -140,6 +142,8 @@ function changeTime() {
 
 //更新畫面
 function changeHtml() {
+    let startTime = '0000/00/00 00:00';
+    let endTime = '0000/00/00 00:00';
 
     if (activityBean.title != null) {
         $(".activityTitle").html(activityBean.title);
@@ -154,7 +158,13 @@ function changeHtml() {
     if (activityBean.imgPath != 'null' && activityBean.imgPath != null) {
         $(".activityImage").attr('src', activityBean.imgPath)
     }
-    let activityTime = `活動時間:${activityBean.startTime} ~ ${activityBean.endTime}`
+    if (activityBean.startTime != null) {
+        placeholder.startTime = activityBean.startTime;
+    }
+    if (activityBean.endTime != null) {
+        placeholder.endTime = activityBean.endTime;
+    }
+    let activityTime = `活動時間:${placeholder.startTime} ~ ${placeholder.endTime}`
     $(".activityTime").html(activityTime);
 
 }

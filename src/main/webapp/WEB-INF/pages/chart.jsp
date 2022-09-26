@@ -265,7 +265,7 @@
 
 			<!-- <!-- 			End Page Header  -->
 			<!-- <!-- 			Small Stats Blocks  -->
-			<div class="row">
+			<div class="row" style="margin-left:100px">
 				<!-- 				<div class="col-lg-3 col-6"> -->
 				<!-- 					small box -->
 				<!-- 				</div> -->
@@ -275,11 +275,11 @@
 				<!-- 				</div> -->
 				
 
-				<div class="col-lg col-md-6 col-sm-6 mb-4" >
+				<div style="width:400px" >
 <!-- 					<div class="stats-small stats-small--1 card card-small"> -->
 						<div class="small-box bg-warning" style="border-radius:10px ;">
 							<div class="inner">
-								<h3 id="money">44</h3>
+								<h3 id="money">0</h3>
 
 								<p>營業總額</p>
 							</div>
@@ -304,11 +304,11 @@
 						<!-- 						</div> -->
 <!-- 					</div> -->
 				</div>
-				<div class="col-lg col-md-6 col-sm-6 mb-4">
+				<div style="width:400px; margin-left:250px" >
 <!-- 					<div class="stats-small stats-small--1 card card-small"> -->
 						<div class="small-box bg-info" style="border-radius:10px ;">
 							<div class="inner">
-								<h3 id="count">150</h3>
+								<h3 id="count">0</h3>
 
 								<p>總訂單量</p>
 							</div>
@@ -417,10 +417,10 @@
 							</div>
 							<br>
 							<div>
-								<div style="display: inline-block; width: 400px;">
+								<div style="display: inline-block; width: 450px;">
 									<span class="sm-st-icon st-blue"><i class="fa fa-dollar"></i></span>
 									<div class="sm-st-info">
-										<span id="rangeMoney">0</span> 區間營業額
+										<span id="rangeMoney">0</span> 營業額
 
 									</div>
 								</div>
@@ -428,7 +428,7 @@
 									<span class="sm-st-icon st-red"><i
 										class="fa fa-check-square-o"></i></span>
 									<div class="sm-st-info">
-										<span id="rangeCount">0</span> 區間筆數
+										<span id="rangeCount">0</span> 訂單數量
 									</div>
 								</div>
 								<hr>
@@ -473,9 +473,9 @@
 		</div>
 	</main>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-		crossorigin="anonymous"></script>
+<!-- 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" -->
+<!-- 		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" -->
+<!-- 		crossorigin="anonymous"></script> -->
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
