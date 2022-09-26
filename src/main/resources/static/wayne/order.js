@@ -65,10 +65,10 @@ function order(status) {
 				$(".table-responsive").append(`<table id="data-table" class="table table-bordered">
 					    <thead class="thead-default">
 					        <tr>
+					            <th>訂單編號</th>
 					            <th>會員帳號</th>
 					            <th>會員姓名</th>
 					            <th>會員信箱</th>
-					            <th>訂單編號</th>
 					            <th>訂單生成日期</th>
 					            <th>總數</th>
 					            <th>總價</th>
@@ -94,11 +94,6 @@ function order(status) {
 				$.each(data, function(i, n) {
 					memberStatus = n.status.id;
 					$("#userbody").append(orderListUser(n));
-					if (memberStatus == 1) {
-						$(`#${n.orderId}`).append(`<td ><button onclick="del(${n.orderId})" class="btn btn-danger">刪除</button></td>`);
-					} else {
-						$(`#${n.orderId}`).append(`<td ></td>`);
-					}
 				})
 
 			}
@@ -113,10 +108,10 @@ function orderList(order) {
 
 	let data = `
             <tr id="${order.orderId}">
+                <td>${order.orderId}</td>
                 <td>${order.memberBean.account}</td>
                 <td>${order.memberBean.name}</td>
                 <td>${order.memberBean.email}</td>
-                <td>${order.orderId}</td>
                 <td>${formatDate(new Date(order.date))}</td>
                 <td>${order.totoalcount}</td>
                 <td>$${order.totoalprice}</td>
@@ -193,16 +188,17 @@ function orderListUser(order) {
 							<input type="hidden" name="cartID" value="${order.orderId}" />
 							<button class="btn btn-success">結帳</button>
 						</form>
-				</td>`;
+				</td>
+				<td ><button onclick="del(${order.orderId})" class="btn btn-danger">刪除</button></td>`;
 
 	} else if (memberStatus == 2) {
-		part = `<td><button id="btn" disabled class="btn btn-secondary">已付款</button></td><td><butto  class="btn btn-info" onclick="backpay(${order.orderId})")>退款申請</button></td>">
-	</form>`;
+		part = `<td><button id="btn" disabled class="btn btn-secondary">已付款</button></td>
+				<td><button  class="btn btn-info" onclick="backpay(${order.orderId})">退款申請</button></td>`;
 
 	} else if (memberStatus == 3) {
 		part = `<td >
 					<button type="button" class="btn btn-warning">${order.status.status}</button>
-				</td>`;
+				</td><td ></td>`;
 
 	} else if (memberStatus == 4) {
 		part = `<td>
@@ -210,12 +206,12 @@ function orderListUser(order) {
 							<input type="hidden" name="cartID" value="${order.orderId}" />
 							<button class="btn btn-primary">詳細</button>
 					</form>
-				</td>`;
+				</td><td ></td>`;
 
 	} else if (memberStatus == 5 || memberStatus == 6) {
 		part = `<td>
 					<button type="button" class="btn btn-info">${order.status.status}</button>
-				</td>`;
+				</td><td ></td>`;
 
 	}
 	let data = `
@@ -327,10 +323,10 @@ function orderUser(orderId) {
 
 
 function orderAdminContent(order) {
-	var data = `<td>${order.memberBean.account}</td>
+	var data = `<td>${order.orderId}</td>
+				<td>${order.memberBean.account}</td>
                 <td>${order.memberBean.name}</td>
                 <td>${order.memberBean.email}</td>
-                <td>${order.orderId}</td>
                 <td>${formatDate(new Date(order.date))}</td>
                 <td>${order.totoalcount}</td>
                 <td>$${order.totoalprice}</td>
@@ -429,11 +425,7 @@ function selectStatus(e) {
 			$.each(data, function(i, n) {
 				memberStatus = n.status.id;
 				$("#userbody").append(orderListUser(n));
-				if (memberStatus == 1) {
-					$(`#${n.orderId}`).append(`<td ><button onclick="del(${n.orderId})" class="btn btn-danger">刪除</button></td>`);
-				} else {
-					$(`#${n.orderId}`).append(`<td ></td>`);
-				}
+				
 
 			})
 		}
@@ -480,13 +472,13 @@ function htmlToPdf() {
 		theme: 'grid',
 		columnStyles: {
 			0: {
-				cellWidth: 80,
+				cellWidth: 110,
 			},
 			1: {
 				cellWidth: 80,
 			},
 			2: {
-				cellWidth: 80,
+				cellWidth: 55,
 			}
 		},
 		styles: {
@@ -500,7 +492,7 @@ function htmlToPdf() {
 		},
 		tableWidth: 'wrap',
 		
-		margin: {left:10, right:150}
+		margin: {left:0, right:200}
 	})
-	doc.save('Marks_Of_Students.pdf');
+	doc.save('好學生訂單資料.pdf');
 }
