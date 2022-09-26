@@ -3,16 +3,20 @@ package fourth.controller;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import fourth.bean.CourseBean;
@@ -33,7 +37,7 @@ public class CourseController {
 
 	}
 
-	@GetMapping("/course.add")
+	@GetMapping("/course.add")  
 	public String addForm() {
 		return "CourseForm";
 	}
@@ -45,6 +49,15 @@ public class CourseController {
 		return "redirect:/course.list";
 
 	}
+	
+//	@PostMapping("/course.insert")
+//	public String insertCourse(@RequestBody CourseBean courseBean, Integer subject_id, Integer education_id) {
+//		courseBean.setCourse_picture("images/" + courseBean.getCourse_picture());
+//		cService.insert(courseBean, subject_id, education_id);
+//		return "redirect:/course.list";
+//
+//	}
+	
 
 	@GetMapping("/course.details")
 	public String showDetails(int course_id, Model m) {
@@ -109,6 +122,7 @@ public class CourseController {
 				+ "審核結果: 通過!!" + "<h2>";
 		JavaMail javaMail = new JavaMail();
 		javaMail.setCustomer("fock360man@gmail.com");
+//		javaMail.setCustomer("ggyy45529441@gmail.com");
 		javaMail.setSubject("好學生-EEIT49 課程審核通過!");
 		javaMail.setTxt(txt);
 		javaMail.sendMail();
@@ -124,6 +138,7 @@ public class CourseController {
 				+ "審核結果: 駁回!!" + "<br>" + "駁回原因: 課程名稱或圖片帶有敏感資訊" + "<h2>";
 		JavaMail javaMail = new JavaMail();
 		javaMail.setCustomer("fock360man@gmail.com");
+//		javaMail.setCustomer("ggyy45529441@gmail.com");
 		javaMail.setSubject("好學生-EEIT49 課程駁回通知");
 		javaMail.setTxt(txt);
 		javaMail.sendMail();
@@ -171,16 +186,18 @@ public class CourseController {
 
 	}
 
-	@GetMapping("/course.delete")
-	public String delete(int course_id) {
+//	@ResponseBody
+	@GetMapping("/course.delete/{id}")
+	public String delete(@PathVariable("id") int course_id) {
 		cService.deleteOne(course_id);
 		return "redirect:/course.list";
 	}
+	
+//	@GetMapping("/course.delete")
+//	public String delete(int course_id) {
+//		cService.deleteOne(course_id);
+//		return "redirect:/course.list";
+//	}
 
-//	@GetMapping("/delete/{id}")    
-//    public String delete(@PathVariable(value = "id") int course_id){    
-//		cService.deleteOne(course_id);    
-//        return "redirect:/courseList";    
-//    }
 
 }

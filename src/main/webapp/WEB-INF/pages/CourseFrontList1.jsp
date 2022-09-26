@@ -128,6 +128,7 @@ border-radius: 5px;
 							<c:choose>
 								<c:when test="${queryResult != null }">
 									<c:forEach var="course" items="${queryResult}">
+									  <c:if test="${course.course_status == 2}">
 											<%-- <input type="hidden" name="course_id" value='<c:out value="${course.course_id}"/>'> --%>
 											<li
 												class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
@@ -168,6 +169,7 @@ border-radius: 5px;
 													</div>
 												</div>
 											</li>
+											</c:if>
 									</c:forEach>
 								</c:when>
 

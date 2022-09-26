@@ -27,8 +27,9 @@ import fourth.bean.CartItem;
 @Entity
 @Table(name = "course")
 @Component
-public class CourseBean implements Serializable {
+public class CourseBean implements Serializable{
 
+//	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "course_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,6 +50,8 @@ public class CourseBean implements Serializable {
 	private String lecturer_email;
 	private int course_status;
 	private String course_picture;
+	
+	
 
 	@JsonManagedReference 
 	@ManyToOne
@@ -236,5 +239,15 @@ public class CourseBean implements Serializable {
 //				+ ", lecturer_email=" + lecturer_email + ", course_picture=" + course_picture + ", courseedu="
 //				+ courseedu + ", coursesub=" + coursesub + ", carts=" + carts + "]";
 //	}
+
+	@Override
+	public String toString() {
+		return "CourseBean [course_id=" + course_id + ", user_id=" + user_id + ", subject_id=" + subject_id
+				+ ", education_id=" + education_id + ", course_name=" + course_name + ", course_introduction="
+				+ course_introduction + ", course_price=" + course_price + ", course_duration=" + course_duration
+				+ ", enrollment=" + enrollment + ", course_date=" + course_date + ", lecturer_name=" + lecturer_name
+				+ ", lecturer_email=" + lecturer_email + ", course_status=" + course_status + ", course_picture="
+				+ course_picture + "]";
+	}
 
 }
