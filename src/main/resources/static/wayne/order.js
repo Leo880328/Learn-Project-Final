@@ -71,7 +71,7 @@ function order(status) {
 					            <th>會員信箱</th>
 					            <th>訂單生成日期</th>
 					            <th>總數</th>
-					            <th>總價</th>
+					            <th>訂單金額</th>
 					            <th>訂單狀態</th>
 					            <th></th>
 					        </tr>
@@ -432,18 +432,7 @@ function selectStatus(e) {
 	})
 }
 function htmlToPdf() {
-	//	var doc = new jsPDF();
-	//	doc.fromHTML(document.getElementById("pdfTransfer"),
-	//		15,
-	//		15,
-	//		{ 'width': 170 },
-	//		function() {
-	//			doc.addFont('SourceHanSans-Normal.ttf', 'SourceHanSans-Normal', 'normal');
-	//			doc.setFont('SourceHanSans-Normal');
-	//			doc.save("PDF_Documet.pdf");
-	//		});
-//	doc = window.jspdf.jsPDF;
-	//	var doc = new jsPDF();
+	
 	var doc = new jsPDF('p', 'pt', 'letter');
 	var htmlstring = '';
 	var tempVarToCheckPageHeight = 0;
@@ -475,7 +464,7 @@ function htmlToPdf() {
 				cellWidth: 110,
 			},
 			1: {
-				cellWidth: 80,
+				cellWidth: 73,
 			},
 			2: {
 				cellWidth: 55,
@@ -494,5 +483,5 @@ function htmlToPdf() {
 		
 		margin: {left:0, right:200}
 	})
-	doc.save('好學生訂單資料.pdf');
+	doc.save('好學生 訂單資料.pdf');
 }

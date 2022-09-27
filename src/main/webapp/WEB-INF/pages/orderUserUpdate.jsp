@@ -129,14 +129,14 @@
 							<div style="margin: auto; width: 88px;">
 							
 							
-								<form action="updateOrder/2/${order.orderId}"  method="get">
-									<button class="btn btn-success"  onclick="if( !(confirm('確認付款?') ) ) return false ; ">確認付款</button>
-								</form>
-
-<!-- 								<form action="goEcpay" method="post"> -->
-<%-- 									<input type="hidden" name="orderID" value="${order.orderId}" /> --%>
+<%-- 								<form action="updateOrder/2/${order.orderId}"  method="get"> --%>
 <!-- 									<button class="btn btn-success"  onclick="if( !(confirm('確認付款?') ) ) return false ; ">確認付款</button> -->
 <!-- 								</form> -->
+
+								<form action="goEcpay" method="post">
+									<input type="hidden" name="orderID" value="${order.orderId}" />
+									<button class="btn btn-success"  onclick="if( !(confirm('確認付款?') ) ) return false ; ">確認付款</button>
+								</form>
 								
 								
 							</div>

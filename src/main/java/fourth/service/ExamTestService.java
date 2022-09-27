@@ -92,6 +92,7 @@ public class ExamTestService  {
 			examTestDetailRes.save(examTestDetail);
 		}
 		
+		testMap.put("examName", examBean.getExamName()); //紀錄考試名字，預防刪除後會員看不到考卷名
 		testMap.put("examBean", examBean); //哪張考卷
 		testMap.put("examTest", examTest); //哪次考試
 		testMap.put("examQueList", examQuesList); //那些題目
@@ -143,7 +144,7 @@ public class ExamTestService  {
 		System.out.println(dateFormat.format(date));
 		
 		ExamRecord examRecord = 
-				new ExamRecord(memberBean,examTest,score, date);
+				new ExamRecord(memberBean,examTest,score, date, (String)testMap.get("examName"));
 		
 		examMemRecordRes.save(examRecord);
 		
