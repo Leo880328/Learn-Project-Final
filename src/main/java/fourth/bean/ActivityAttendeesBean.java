@@ -3,6 +3,7 @@ package fourth.bean;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -14,6 +15,7 @@ public class ActivityAttendeesBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	@Id
 	private int acticitiesId;
 	
 	@OneToOne @JoinColumn(name="user_id")
