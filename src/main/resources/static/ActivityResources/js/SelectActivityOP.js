@@ -56,7 +56,7 @@ function selectAll() {
 
             }
 
-
+            mouseEventBorder()
 
 
         },
@@ -75,9 +75,28 @@ function search() {
     pageRequest.keyWord = null;
 }
 
+//動畫
+let eventJquery = {
+    mouseSelection: ".mouseSelection"
+
+}
+
+function mouseEventBorder() {
+    $(eventJquery.mouseSelection).mouseover(
+        function () {
+            $(this).css("background-color", "#D0D0D0");
+        })
+    $(eventJquery.mouseSelection).mouseleave(
+        function () {
+            $(this).css("background-color", "white");
+        }
+    )
+
+}
+
 function creatActivity(ActivityBean) {
     let div = $(`
-    <tr style="height: 75px; " onclick=ActivityUpdate(${ActivityBean.id})>
+    <tr style="height: 75px; cursor: pointer; "  class="mouseSelection" onclick=ActivityUpdate(${ActivityBean.id})>
     <td class="u-border-1 u-border-grey-40 u-table-cell">${ActivityBean.title}</td>
     <td class="u-border-1 u-border-grey-40 u-table-cell">${ActivityBean.endTime}</td>
     </tr>

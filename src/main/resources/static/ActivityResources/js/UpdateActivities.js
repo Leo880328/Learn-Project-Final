@@ -9,6 +9,17 @@ let activityBean =
     imgPath: null
 }
 
+let jquery = {
+
+    activityTitle: ".activityTitle",
+    activityContent: ".activityContent",
+    activityTime: ".activityTime",
+    activityImagePath: ".activityImage",
+    activityImgInput: ".activityImgInput",
+}
+let profile = {
+
+}
 
 let placeholder = {
     title: "點擊輸入標題",
@@ -40,7 +51,7 @@ function updeBase64(file) {
         reader.readAsDataURL(file)
     }).then(base64 => {
         activityBean.imgPath = base64; // 把編碼後的字串return
-        $('.activityImage').attr('src', base64);
+        $(jquery.activityImagePath).attr('src', base64);
     }).catch(err => {
         Swal.fire({
             icon: 'error',
@@ -52,7 +63,7 @@ function updeBase64(file) {
 function changeH1title() {
     let inputValue = null;
     if (activityBean.title != null) {
-        inputValue = $('.activityTitle').html();
+        inputValue = $(jquery.activityTitle).html();
     }
 
     Swal.fire({
@@ -76,7 +87,7 @@ function changeH1title() {
 function changeVal() {
     let inputValue;
     if (activityBean.content != null) {
-        inputValue = $('.activityContent').html()
+        inputValue = $(jquery.activityContent).html()
     }
     Swal.fire({
         input: 'textarea',
@@ -98,8 +109,8 @@ function changeVal() {
     })
 }
 function changeimg() {
-    $(".activityImgInput").click();
-    $(".activityImgInput").change(function (e) {
+    $(jquery.activityImgInput).click();
+    $(jquery.activityImgInput).change(function (e) {
         updeBase64(e.target.files[0]);
     })
 
@@ -146,17 +157,17 @@ function changeHtml() {
     let endTime = '0000/00/00 00:00';
 
     if (activityBean.title != null) {
-        $(".activityTitle").html(activityBean.title);
+        $(jquery.activityTitle).html(activityBean.title);
     } else {
-        $(".activityTitle").html(placeholder.title);
+        $(jquery.activityTitle).html(placeholder.title);
     }
     if (activityBean.content != null) {
-        $(".activityContent").html(activityBean.content);
+        $(jquery.activityContent).html(activityBean.content);
     } else {
-        $(".activityContent").html(placeholder.content);
+        $(jquery.activityContent).html(placeholder.content);
     }
     if (activityBean.imgPath != 'null' && activityBean.imgPath != null) {
-        $(".activityImage").attr('src', activityBean.imgPath)
+        $(jquery.activityImagePath).attr('src', activityBean.imgPath)
     }
     if (activityBean.startTime != null) {
         placeholder.startTime = activityBean.startTime;
@@ -165,9 +176,28 @@ function changeHtml() {
         placeholder.endTime = activityBean.endTime;
     }
     let activityTime = `活動時間:${placeholder.startTime} ~ ${placeholder.endTime}`
-    $(".activityTime").html(activityTime);
+    $(jquery.activityTime).html(activityTime);
+
 
 }
+//動畫
+let EventJquery = {
+    mouseSelection: ".mouseSelection"
+
+}
+
+function mouseEventBorder() {
+    $(mouseSelection).mouseover(function () {
+        $(this).css("background-color", "#333");
+    })
+    $(mouseSelection).mouseleave(
+        function () {
+            $(this).css("background-color", "white");
+        }
+    )
+
+}
+
 //送出請求
 function selectByID(id) {
     $.ajax({
