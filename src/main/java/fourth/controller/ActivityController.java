@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import fourth.bean.ActivityBean;
-import fourth.bean.ActivityJsonBean;
-import fourth.bean.Base64FileBean;
 import fourth.service.ActivityImageService;
 import fourth.service.ActivityService;
 
@@ -30,9 +27,6 @@ public class ActivityController {
 
 	@Autowired
 	private ActivityService activityService;
-
-	@Autowired
-	private ActivityImageService activityImageService;
 
 
 	// Activity get
@@ -72,11 +66,9 @@ public class ActivityController {
 	@PostMapping("/ActivitySelect")
 	@ResponseBody
 	public Page<ActivityBean> selectActivityAllByTitleLike(@RequestBody() Map<String, String> map) {
-		
 		Integer pageNo = Integer.valueOf(map.get(MapKey_pageNo)) ;
 		Integer pageSize =Integer.valueOf(map.get(MapKey_pageSize));
 		String keyWord = map.get(MapKey_keyWord);
-		
 		PageRequest pageable = PageRequest.of(pageNo-1,pageSize);
 
 		if(keyWord!=null) {
@@ -100,44 +92,28 @@ public class ActivityController {
 //	@GetMapping("/Activity_OP_path")
 	@PostMapping("/Activity_OP")
 	@ResponseBody
-	public ActivityBean insertActivities(@RequestBody() ActivityJsonBean activityJsonBean) {
-		ActivityBean activityBean = activityJsonBean.getActivityBean();
-		Base64FileBean  base64FileBean = activityJsonBean.getBase64FileBean();
-		//先儲存取得ID，把ID給base64FileBean當名字，儲存base64FileBean拿到imgPath
-		
+	public ActivityBean insertActivities(@RequestBody() ActivityBean activityBean) {
 		ActivityBean insertActivities = activityService.insertActivities(activityBean);
-		base64FileBean.setFileName(insertActivities.getId().toString());
-		String imgPath = activityImageService.saveBase64Img(base64FileBean);
-		insertActivities.setImgPath(imgPath);
-		
-		//取得imgPath再更新
-		ActivityBean updateActivities = activityService.updateActivities(insertActivities);
-		return updateActivities;
+		return insertActivities;
 	}
 
 	// 修改
 	@PutMapping("/Activity_OP")
 	@ResponseBody
-	public ActivityBean updateActivities(@RequestBody() ActivityJsonBean activityJsonBean) {
-		ActivityBean activityBean = activityJsonBean.getActivityBean();
-		Base64FileBean  base64FileBean = activityJsonBean.getBase64FileBean();
-		base64FileBean.setFileName(activityBean.getId().toString());
-		String imgPath = activityImageService.saveBase64Img(base64FileBean);
-		activityBean.setImgPath(imgPath);
+	public ActivityBean updateActivities(@RequestBody() ActivityBean activityBean) {
 		ActivityBean updateActivities = activityService.updateActivities(activityBean);
-		
 		return updateActivities;
 		
 	}
 
-	@DeleteMapping("/Activity_OP")
-	@ResponseBody
-	public boolean deleteActivities(@RequestBody ActivityBean activityBean) {
-		activityService.deleteActivities(activityBean);
-		if (activityBean.getImgPath() != null) {
-			activityImageService.deleteImg(activityBean.getImgPath());
-		}
-		return true;
-	}
+//	@DeleteMapping("/Activity_OP")
+//	@ResponseBody
+//	public boolean deleteActivities(@RequestBody ActivityBean activityBean) {
+//		activityService.deleteActivities(activityBean);
+//		if (activityBean.getImgPath() != null) {
+//			activityImageService.deleteImg(activityBean.getImgPath());
+//		}
+//		return true;
+//	}
 
 }

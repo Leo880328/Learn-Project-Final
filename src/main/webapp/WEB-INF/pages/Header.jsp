@@ -64,24 +64,67 @@
 								<li></li>
 							</ul>
 						</c:when>
+						
+						<c:when test="${sessionScope.user.status == 4 }">
+
+							<ul class="header-user-links">
+								<c:if test="${sessionScope.user.nick == null}">
+
+								</c:if>
+								<li><a href="#"><b>${sessionScope.user.nick}(審核中)</b></a> |
+									<a href="logout.controller">登出</a></li>
+								<li></li>
+							</ul>
+						</c:when>
+
+						<c:when test="${sessionScope.user.status == 1 }">
+
+							<ul class="header-user-links">
+								<c:if test="${sessionScope.user.nick == null}">
+
+								</c:if>
+								<li><a href="#"><b>${sessionScope.user.nick}(學生)</b></a> |
+									<a href="logout.controller">登出</a></li>
+								<li></li>
+							</ul>
+						</c:when>
+						
+						<c:when test="${sessionScope.user.status == 2 }">
+
+							<ul class="header-user-links">
+								<li><a href="#"><b>${sessionScope.user.nick}(老師)</b></a> |
+									<a href="logout.controller">登出</a></li>
+								<li></li>
+							</ul>
+						</c:when>
 
 						<c:otherwise>
 							<c:if test="${sessionScope.user.status == 3}">
 								<ul class="header-user-links">
-									<li><a href="#"><b>${sessionScope.user.name}(管理員)</b></a>
+									<li><a href="#"><b>${sessionScope.user.nick}(管理員)</b></a>
 										| <a href="logout.controller">登出</a></li>
 									<li></li>
 								</ul>
 
 							</c:if>
-							<c:if test="${sessionScope.user.status != 3}">
-								<ul class="header-user-links">
-									<li><a href=""><b>${sessionScope.user.name}</b></a> | <a
-										onclick="if( !(confirm('確認登出?') ) ) return false"
-										href="logout.controller">登出</a></li>
-									<li></li>
-								</ul>
-							</c:if>
+							<%-- 							<c:if test="${sessionScope.user.status != 3}"> --%>
+							<!-- 								<ul class="header-user-links"> -->
+							<%-- 								<c:when test="${sessionScope.user.nick == null}"> --%>
+							<!-- 								<li><a href=""><b>歡迎~</b></a> | <a -->
+							<!-- 										onclick="if( !(confirm('確認登出?') ) ) return false" -->
+							<!-- 										href="logout.controller">登出</a></li> -->
+							<!-- 									<li></li> -->
+
+							<%-- 								</c:when> --%>
+							<%-- 								<c:otherwise> --%>
+
+							<%-- 									<li><a href=""><b>${sessionScope.user.nick}</b></a> | <a --%>
+							<!-- 										onclick="if( !(confirm('確認登出?') ) ) return false" -->
+							<!-- 										href="logout.controller">登出</a></li> -->
+							<!-- 									<li></li> -->
+							<%--        							</c:otherwise> --%>
+							<!-- 								</ul> -->
+							<%-- 							</c:if> --%>
 						</c:otherwise>
 					</c:choose>
 				</div>
@@ -105,9 +148,9 @@
 						<div class="header-control">
 							<div class="block-minicart teamo-mini-cart block-header ">
 
-								<a href="cart" class="shopcart-icon"
-									data-teamo="teamo-dropdown">Cart <span class="count"
-									id="msg"></span></a>
+								<a href="cart" class="shopcart-icon" data-teamo="teamo-dropdown">Cart
+									<span class="count" id="msg"></span>
+								</a>
 								<div class="shopcart-description teamo-submenu">
 									<div class="content-wrap"></div>
 								</div>
@@ -157,6 +200,10 @@
 						<div class="container-wapper">
 							<ul class="teamo-clone-mobile-menu teamo-nav main-menu "
 								id="menu-main-menu">
+<!-- 								<li><a href="coursefront1.list" -->
+<!-- 									class="teamo-menu-item-title" title="Home">課程</a><span -->
+<!-- 									class="toggle-submenu"></span> -->
+<!-- 								<li class="menu-item "><a href="Exam.jsp" -->
 								<li><a href="coursefront1.list" class="teamo-menu-item-title"
 									title="Home">課程</a><span class="toggle-submenu"></span>
 								<li class="menu-item "><a href="firstExamController"

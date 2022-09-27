@@ -1,5 +1,6 @@
 package fourth.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -18,13 +19,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @Table(name = "acticities")
 @Component
-public class ActivityBean {
-//	[id] [int] IDENTITY(100000,1) Primary key,
+public class ActivityBean implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
 	@Id @Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@OneToOne @JoinColumn(name="user_id")
-	private MemberBean userId;
 	
 	private String title;
 	
@@ -32,11 +33,7 @@ public class ActivityBean {
 	
 	private String content;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone = "GMT+8")
-	private Date startTime;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone = "GMT+8")
-	private Date endTime;
 	//人數限制
 	private int participantLimit;
 	//googleMap API
@@ -46,6 +43,19 @@ public class ActivityBean {
 
 	private int ApprovalStatus;
 	
+	@OneToOne @JoinColumn(name="user_id")
+	private MemberBean userId;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone = "GMT+8")
+	private Date startTime;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone = "GMT+8")
+	private Date endTime;
+	
+	
+	//=======================================================================================
+	//=======================================================================================
+	//=======================================================================================
 	
 	public int getId() {
 		return id;

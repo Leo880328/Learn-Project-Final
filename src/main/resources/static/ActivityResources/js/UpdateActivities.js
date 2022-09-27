@@ -1,50 +1,218 @@
 'use strict'
-let activitjson = {
-    activityBean:
-    {
-        id: null,
-        title: null,
-        content: null,
-        startTime: null,
-        endTime: null,
-        imgPath: null
-    },
-    base64FileBean:
-    {
-        fileName: null,
-        base64: null,
-        fileType: null
-    }
+let activityBean =
+{
+    id: null,
+    title: null,
+    content: null,
+    startTime: null,
+    endTime: null,
+    imgPath: null
 }
 
+let jquery = {
+
+    activityTitle: ".activityTitle",
+    activityContent: ".activityContent",
+    activityTime: ".activityTime",
+    activityImagePath: ".activityImage",
+    activityImgInput: ".activityImgInput",
+}
+let profile = {
+
+}
+
+let placeholder = {
+    title: "點擊輸入標題",
+    content: "請點擊輸入內文",
+    startTime: '0000/00/00 00:00',
+    endTime: '0000/00/00 00:00'
+}
 $().ready(
     // 取直並將ActivityBean送出等待回應
     function () {
-
-        let url
         let idIndexOf = window.location.href.indexOf('-');
         let id = window.location.href.substring(idIndexOf + 1);
         if (id > 1) {
-
             selectByID(id)
         }
     },
 )
+//更新畫面
+function updeBase64(file) {
+
+    new Promise((resolve, reject) => {
+        // 建立FileReader物件
+        let reader = new FileReader()
+        // 註冊onload事件，取得result則resolve (會是一個Base64字串)
+        reader.onload = () => { resolve(reader.result) }
+        // 註冊onerror事件，若發生error則reject
+        reader.onerror = () => { reject(reader.error) }
+        // 讀取檔案
+        reader.readAsDataURL(file)
+    }).then(base64 => {
+        activityBean.imgPath = base64; // 把編碼後的字串return
+        $(jquery.activityImagePath).attr('src', base64);
+    }).catch(err => {
+        Swal.fire({
+            icon: 'error',
+            title: '圖片格式錯誤錯誤',
+            text: err
+        })
+    })
+}
+function changeH1title() {
+    let inputValue = null;
+    if (activityBean.title != null) {
+        inputValue = $(jquery.activityTitle).html();
+    }
+
+    Swal.fire({
+        title: '標題',
+        input: 'text',
+        width: '800px',
+        inputValue: inputValue,
+        inputPlaceholder: '請輸入內容',
+        showCancelButton: true,
+        inputValidator: (value) => {
+            if (!value) {
+                return '請輸入標題!'
+            } else {
+                activityBean.title = value;
+                changeHtml()
+            }
+        }
+    })
+
+}
+function changeVal() {
+    let inputValue;
+    if (activityBean.content != null) {
+        inputValue = $(jquery.activityContent).html()
+    }
+    Swal.fire({
+        input: 'textarea',
+        inputLabel: '標題',
+        heightAuto: false,
+        customClass: {
+            popup: "swal-popup-changeVal",
+            input: 'swal-textarea-1'
+
+        },
+        inputValue: inputValue,
+        inputPlaceholder: '請輸入內容',
+
+        inputValidator: (value) => {
+            activityBean.content = value;
+            changeHtml()
+        },
+        showCancelButton: true
+    })
+}
+function changeimg() {
+    $(jquery.activityImgInput).click();
+    $(jquery.activityImgInput).change(function (e) {
+        updeBase64(e.target.files[0]);
+    })
+
+}
+function changeTime() {
+    let startTime;
+    let endTime;
+    Swal.fire({
+        title: '<h2>請輸入時間<h2>',
+        width: "700px",
+        html: `
+                <h4  id="activityTime"  class="u-text u-text-default u-text-4">
+                    <div> 
+                    <input type="datetime-local" id="startTime" value="${activityBean.startTime}"> ~ <input type="datetime-local" id="endTime" value="${activityBean.endTime}" >
+                    </div>
+                </h4>
+                `,
+        stopKeydownPropagation: false,
+
+        preConfirm: () => {
+            startTime = $(Swal.getPopup().querySelector('#startTime')).val();
+            endTime = $(Swal.getPopup().querySelector('#endTime')).val();
+            if (startTime < 1 || endTime < 1) {
+                Swal.showValidationMessage(`請輸入時間!`)
+            } else if (new Date(endTime) <= new Date(startTime)) {
+                Swal.showValidationMessage(`結束時間必須大於開始時間`)
+            } else if (activityBean.id < 1 && new Date(startTime) < new Date()) {
+                Swal.showValidationMessage(`開始時間必須比今天大`)
+            } else {
+                activityBean.startTime = startTime.replace("T", " ");
+                activityBean.endTime = endTime.replace("T", " ");
+                changeHtml();
+            }
+
+        }
+
+
+    })
+}
+
+//更新畫面
+function changeHtml() {
+    let startTime = '0000/00/00 00:00';
+    let endTime = '0000/00/00 00:00';
+
+    if (activityBean.title != null) {
+        $(jquery.activityTitle).html(activityBean.title);
+    } else {
+        $(jquery.activityTitle).html(placeholder.title);
+    }
+    if (activityBean.content != null) {
+        $(jquery.activityContent).html(activityBean.content);
+    } else {
+        $(jquery.activityContent).html(placeholder.content);
+    }
+    if (activityBean.imgPath != 'null' && activityBean.imgPath != null) {
+        $(jquery.activityImagePath).attr('src', activityBean.imgPath)
+    }
+    if (activityBean.startTime != null) {
+        placeholder.startTime = activityBean.startTime;
+    }
+    if (activityBean.endTime != null) {
+        placeholder.endTime = activityBean.endTime;
+    }
+    let activityTime = `活動時間:${placeholder.startTime} ~ ${placeholder.endTime}`
+    $(jquery.activityTime).html(activityTime);
+
+
+}
+//動畫
+let EventJquery = {
+    mouseSelection: ".mouseSelection"
+
+}
+
+function mouseEventBorder() {
+    $(mouseSelection).mouseover(function () {
+        $(this).css("background-color", "#333");
+    })
+    $(mouseSelection).mouseleave(
+        function () {
+            $(this).css("background-color", "white");
+        }
+    )
+
+}
+
+//送出請求
 function selectByID(id) {
     $.ajax({
         url: "http://localhost:8080/HappyLearning/ActivitySelect-" + id,
         method: "GET",
         dataType: "JSON",
         success: function (activity) {
-            activitjson.activityBean = activity;
-            activitjson.activityBean.id = id
-            changeHtmlActivity();
+            activityBean = activity;
+            changeHtml();
         },
         error: function (err) { alert("資料獲取失敗，請刷新網頁!") },
     });
 }
 function saveActivityBean() {
-    let activityBean = activitjson.activityBean
+    // let activityBean = activityBean
     if (!activityBean.title > 0) {
         Swal.fire({
             icon: 'error',
@@ -69,14 +237,12 @@ function saveActivityBean() {
             reqMethod = "POST"
         }
 
-        console.log(activitjson.activityBean);
-        console.log(JSON.stringify(activitjson));
         $.ajax({
             url: "Activity_OP",
             method: reqMethod,
             dataType: "JSON",
             contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(activitjson),
+            data: JSON.stringify(activityBean),
             success: function (res) {
                 $("body").append($(`<form action="ActivitiesOP" method="GET" id="onlyPost"></form>`))
                 $("#onlyPost").submit()
@@ -94,153 +260,16 @@ function saveActivityBean() {
 
 
 }
-
-function updeBase64(file) {
-
-    new Promise((resolve, reject) => {
-        // 建立FileReader物件
-        let reader = new FileReader()
-        // 註冊onload事件，取得result則resolve (會是一個Base64字串)
-        reader.onload = () => { resolve(reader.result) }
-        // 註冊onerror事件，若發生error則reject
-        reader.onerror = () => { reject(reader.error) }
-        // 讀取檔案
-        reader.readAsDataURL(file)
-    }).then(base64 => {
-
-        activitjson.base64FileBean.fileType = file.type.replace("image/", ""); // 把編碼後的字串return
-        console.log(activitjson.base64FileBean.fileType);
-        activitjson.base64FileBean.base64 = base64; // 把編碼後的字串return
-        $('.u-image-1').attr('src', activitjson.base64FileBean.base64);
-    }).catch(err => {
-        Swal.fire({
-            icon: 'error',
-            title: '圖片格式錯誤錯誤',
-            text: err
-        })
-    })
-}
-function changeHtmlActivity() {
-
-    if (activitjson.activityBean.title != null) {
-        $("#title").html(activitjson.activityBean.title);
-    }
-    if (activitjson.activityBean.content != null) {
-        $("#content").html(activitjson.activityBean.content);
-    }
-    if (activitjson.activityBean.imgPath != 'null' && activitjson.activityBean.imgPath != null) {
-        $("#imgPath").attr('src', activitjson.activityBean.imgPath)
-    }
-    let activityTime = `活動時間:${activitjson.activityBean.startTime} ~ ${activitjson.activityBean.endTime}`
-    $("#activityTime").html(activityTime);
-
-}
-
-
-function changeVal() {
-    let inputValue = $('#content').html();
-    if (!activitjson.activityBean.content > 0) {
-        inputValue = null;
-    }
-    Swal.fire({
-        input: 'textarea',
-        inputLabel: '標題',
-        heightAuto: false,
-        customClass: {
-            popup: "swal-popup-changeVal",
-            input: 'swal-textarea-1'
-
-        },
-        inputValue: inputValue,
-        inputPlaceholder: '請輸入內容',
-
-        inputValidator: (value) => {
-            $('#content').html(value);
-            activitjson.activityBean.content = value;
-        },
-        showCancelButton: true
-    })
-
-
-    console.log(e.innerHTML)
-}
-function changeH1title(e) {
-    let inputValue = $('#title').html();
-    if (!activitjson.activityBean.title > 0) {
-        inputValue = null;
-    }
-
-    Swal.fire({
-        title: '標題',
-        input: 'text',
-        width: '800px',
-        inputValue: inputValue,
-        inputPlaceholder: '請輸入內容',
-        showCancelButton: true,
-        inputValidator: (value) => {
-            if (!value) {
-                return '請輸入標題!'
-            } else {
-                $('#title').html(value);
-                activitjson.activityBean.title = value;
-            }
-        }
-    })
-
-}
-function changeimg(e) {
-    $("#avatar").click();
-    $("#avatar").change(function (e) {
-        updeBase64(e.target.files[0]);
-    })
-
-}
-function changeTime(e) {
-    let startTime;
-    let endTime;
-    Swal.fire({
-        title: '<h2>請輸入時間<h2>',
-        width: "700px",
-        html: `
-                <h4  id="activityTime"  class="u-text u-text-default u-text-4">
-                    <div> 
-                    <input type="datetime-local" id="startTime" value="${activitjson.activityBean.startTime}"> ~ <input type="datetime-local" id="endTime" value="${activitjson.activityBean.endTime}" >
-                    </div>
-                </h4>
-                `,
-        stopKeydownPropagation: false,
-
-        preConfirm: () => {
-            startTime = $(Swal.getPopup().querySelector('#startTime')).val();
-            endTime = $(Swal.getPopup().querySelector('#endTime')).val();
-            if (startTime < 1 || endTime < 1) {
-                Swal.showValidationMessage(`請輸入時間!`)
-            } else if (new Date(endTime) <= new Date(startTime)) {
-                Swal.showValidationMessage(`結束時間必須大於開始時間`)
-            } else if (activitjson.activityBean.id < 1 && new Date(startTime) < new Date()) {
-                Swal.showValidationMessage(`開始時間必須比今天大`)
-            } else {
-                activitjson.activityBean.startTime = startTime.replace("T", " ");
-                activitjson.activityBean.endTime = endTime.replace("T", " ");
-                changeHtmlActivity();
-            }
-
-        }
-
-
-    })
-}
-
 function delectActivity() {
 
     Swal.fire({
         icon: 'warning',
         title: '確定是否刪除',
-        text: `請在下方輸入框中輸入: ${activitjson.activityBean.id} 來確認刪除!`,
+        text: `請在下方輸入框中輸入: ${activityBean.id} 來確認刪除!`,
         input: 'text',
         showCancelButton: true,
         inputValidator: (value) => {
-            if (value != activitjson.activityBean.id) {
+            if (value != activityBean.id) {
                 return "驗證碼錯誤!"
             }
             $.ajax({
@@ -248,7 +277,7 @@ function delectActivity() {
                 type: 'DELETE',
                 dataType: "JSON",
                 contentType: 'application/json; charset=utf-8',
-                data: JSON.stringify(activitjson.activityBean),
+                data: JSON.stringify(activityBean),
                 success: function (res) {
 
                     Swal.fire({

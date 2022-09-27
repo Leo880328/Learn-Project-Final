@@ -23,19 +23,41 @@ function selectAll() {
         success: function (activityArray) {
             totalPages = activityArray.totalPages;
             $(".totalPages").html(pageRequest.pageNo)
+
+            //顯示更新
             $(".u-table-body").empty();
             activityArray.content.forEach(function (activity, index, array) {
                 $(".u-table-body").append(creatActivity(activity))
             });
+            //判斷是否還有資料
             if (activityArray.content.length < pageRequest.pageSize) {
                 $(".u-table-body").append($(`
                 <tr style="height: 75px; " >
-                 <td class="u-border-1 u-border-grey-40 u-table-cell">後面已經沒有資料了!</td>
+                 <td class="u-border-1 u-border-grey-40 u-table-cell" >
+                 <font color="#FF0000">後面已經沒有資料了!</font>
+                 </td>
                  <td class="u-border-1 u-border-grey-40 u-table-cell"></td>
                 </tr>
                 
                 `))
             }
+
+
+            if (pageRequest.pageNo >= totalPages) {
+                $(".pageNoIncrease").css('visibility', 'hidden')
+            } else {
+                $(".pageNoIncrease").css('visibility', 'visible')
+
+            }
+            if (pageRequest.pageNo <= 1) {
+                $(".pageNoReduce").css('visibility', 'hidden')
+            } else {
+                $(".pageNoReduce").css('visibility', 'visible')
+
+            }
+
+            mouseEventBorder()
+
 
         },
         error: function (err) {
@@ -53,16 +75,35 @@ function search() {
     pageRequest.keyWord = null;
 }
 
+//動畫
+let eventJquery = {
+    mouseSelection: ".mouseSelection"
+
+}
+
+function mouseEventBorder() {
+    $(eventJquery.mouseSelection).mouseover(
+        function () {
+            $(this).css("background-color", "#D0D0D0");
+        })
+    $(eventJquery.mouseSelection).mouseleave(
+        function () {
+            $(this).css("background-color", "white");
+        }
+    )
+
+}
+
 function creatActivity(ActivityBean) {
     let div = $(`
-    <tr style="height: 75px; " onclick=ActivityUpdate(${ActivityBean.id})>
+    <tr style="height: 75px; cursor: pointer; "  class="mouseSelection" onclick=ActivityUpdate(${ActivityBean.id})>
     <td class="u-border-1 u-border-grey-40 u-table-cell">${ActivityBean.title}</td>
     <td class="u-border-1 u-border-grey-40 u-table-cell">${ActivityBean.endTime}</td>
     </tr>
     `);
-
     return div;
 }
+//換頁功能
 function pageNoIncrease() {
     if (pageRequest.pageNo < totalPages) {
         pageRequest.pageNo++;
@@ -75,10 +116,13 @@ function pageNoReduce() {
         selectAll()
     }
 }
+
+//更新按鈕
 function ActivityUpdate(id) {
     $("body").append($(`<form action="ActivityOPUpdate-${id}" method="post" id="onlyPost"></form>`))
     $("#onlyPost").submit()
 }
+//新增按鈕
 function ActivityInsert() {
     $("body").append($(`<form action="ActivityOPInsert" method="post" id="onlyPost"></form>`))
     $("#onlyPost").submit()

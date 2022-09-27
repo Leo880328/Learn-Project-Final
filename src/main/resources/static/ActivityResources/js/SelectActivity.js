@@ -36,6 +36,20 @@ function selectAll() {
       });
 
 
+      if (pageRequest.pageNo >= totalPages) {
+        $(".pageNoIncrease").css('visibility', 'hidden')
+      } else {
+        $(".pageNoIncrease").css('visibility', 'visible')
+
+      }
+      if (pageRequest.pageNo <= 1) {
+        $(".pageNoReduce").css('visibility', 'hidden')
+      } else {
+        $(".pageNoReduce").css('visibility', 'visible')
+
+      }
+
+
     },
     error: function (err) { alert("資料獲取失敗，請刷新網頁!") },
   })

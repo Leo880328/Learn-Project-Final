@@ -18,5 +18,28 @@ public class ActivityAttendeesBean implements Serializable {
 	
 	@OneToOne @JoinColumn(name="user_id")
 	private MemberBean userId;
+	
+	
+	//=======================================================================================
+	//=======================================================================================
+	//=======================================================================================
+
+	public int getActicitiesId() {
+		return acticitiesId;
+	}
+
+	public void setActicitiesId(int acticitiesId) {
+		this.acticitiesId = acticitiesId;
+	}
+
+	public MemberBean getUserId() {
+		return userId;
+	}
+
+	public void setUserId(MemberBean userId) {
+		this.userId = userId;
+	}
+	
+	
 
 }

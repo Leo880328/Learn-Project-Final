@@ -106,9 +106,7 @@ function cartTotal() {
 			$("#clear").html(list);
 			$("#b").val(total);
 			$("#buy").empty();
-			if (total == 0) {
-				$("#buy").append(`<button class="btn btn-success" id="myBtn"  disabled onclick="if( !(confirm('確認購買?') ) ) return false ; alert('生成訂單!!!');">確認購買</button>`);
-			} else {
+			if (total != 0) {
 				$("#buy").append(`<button class="btn btn-success" onclick="buyCheck()">確認購買</button>`);
 			}
 		}
