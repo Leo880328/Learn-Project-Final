@@ -72,7 +72,7 @@ public class ExamMyMemController {
 	@ResponseBody
 	public void processActionDe(@RequestParam(defaultValue = "") String Id ) {
 		
-		System.err.println("刪除ID"+Id);
+		System.err.println("收藏刪除ID"+Id);
 		
 //		examMyMemService.delete(Integer.valueOf(Id));
 		
@@ -94,6 +94,16 @@ public class ExamMyMemController {
 	};
 	
 	
+	
+	@PostMapping("/ExamMyMemRecordDe")
+	@ResponseBody
+	public void processActionReDe(@RequestParam(defaultValue = "") String Id ) {
+		
+		System.err.println("考試紀錄刪除ID"+Id);
+		
+		examMyMemService.ExamRecordDelete(Integer.valueOf(Id));
+
+	};
 	
 	
 	
