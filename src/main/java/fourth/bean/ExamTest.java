@@ -16,6 +16,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 @Table(name="examtest")
@@ -28,6 +30,7 @@ public class ExamTest implements Serializable
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer examTestId;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="EXAMID")
     private ExamBean exam;

@@ -153,15 +153,12 @@ public class ExamController {
 			
 			//chooseAns		
 			for (int i = 0; i < examQuList.size(); i++) {
-				chooseList.add(request.getParameter("answer"+i));
-				System.err.println("controller選擇為"+request.getParameter("answer"+i));
-				System.err.println("controller答案為"+examQuList.get(i).getQuesAnswer());
+//				chooseList.add(request.getParameter("answer"+i));
+				examQuList.get(i).setChooseAns(request.getParameter("answer"+i));
+//				System.err.println("controller選擇為"+request.getParameter("answer"+i));
+//				System.err.println("controller答案為"+examQuList.get(i).getQuesAnswer());
 			}
-			testMap.put("chooseList", chooseList);
-			
-			
-			//對答案並加入錯誤的題目，等等前台會顯示
-			examTestService.checkAns(testMap);
+//			testMap.put("chooseList", chooseList);
 			
 			
 			
@@ -176,9 +173,10 @@ public class ExamController {
 			
 			//保存題目
 			Map<String, Object> testMap = (Map<String, Object>) m.getAttribute("testMap");
-			List<ExamQuesBean> reserveList = (List<ExamQuesBean>)testMap.get("examWrongList");
+//			List<ExamQuesBean> reserveList = (List<ExamQuesBean>)testMap.get("examWrongList");
 			
 			examTestService.reserveQu(testMap, reserveQuIdx,user.getuserId());
+			System.err.println("保存Idx"+reserveQuIdx);
 			
 			nextPage = nextPageFunction(pageStatus);
 		}
