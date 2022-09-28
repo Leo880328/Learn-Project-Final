@@ -65,33 +65,45 @@
                 success: function (data) {
 
                     console.log(data);
-                    
+
                     var theadremain = $('k').text();
                     console.log(theadremain);
-                    console.log(typeof(theadremain))
-                    	
-	                    let thead = 
-	                    	"<th id='k' class='thcs'>題目</th>"+
-	                    	"<th class='thcs'>答案</th>"+
-	                    	"<th class='thcs'>刪除</th>"
-	                    
-	                    $('#resth').empty();
-	                    $('#resth').append(thead);
+                    console.log(typeof (theadremain))
 
-	                $('#restb').empty();
+                    let thead =
+                        "<th id='k' class='thcs'>題目</th>" +
+                        "<th class='thcs'>答案</th>" +
+                        "<th class='thcs'>刪除</th>"
+
+                    $('#resth').empty();
+                    $('#resth').append(thead);
+
+                    $('#restb').empty();
                     for (var i = 0; i < data.length; i++) {
-
+						
+                    	var optContent = "";
+                    	if (data[i].examQues.quesAnswer=="A"){
+                    		optContent=data[i].examQues.optA;
+                    	} else if (data[i].examQues.quesAnswer=="B"){
+                    		optContent=data[i].examQues.optB;
+                    	} else if (data[i].examQues.quesAnswer=="C"){ 
+                    		optContent=data[i].examQues.optC;
+                    	} else{
+                    		optContent=data[i].examQues.optD;
+                    	}	
+                    	console.log(optContent);
+                    	
                         let content =
                             "<tr>" +
                             "<td style='text-align:left'>" + data[i].examQues.quesContent + "</td>" +
-                            "<td>" + data[i].examQues.quesAnswer + "</td>" +
-//                             "<td>" + data[i].examReserveID + "</td>" +
+                            "<td>" + optContent + "</td>" +
+                            //                             "<td>" + data[i].examReserveID + "</td>" +
                             "<td style='display:none'>" + data[i].examReserveID + "</td>" +
-//                             "<input type='hidden' id='k' value="+data[i].examReserveID+">"+
+                            //                             "<input type='hidden' id='k' value="+data[i].examReserveID+">"+
                             "<td><button class='del'>Del</button></td>" +
                             "</tr>";
-                            
-                        
+
+
                         $('#restb').append(content);
 
                     }
@@ -99,34 +111,34 @@
                 }, error: function (e) {
                     console.log(e);
                 }
-                
+
             });
 
             $('#restb').on('click', '.del', function () {
-            	
+
                 $(this).closest('tr').remove();
 
-				var Id = $(this).parent().prev().text();	
+                var Id = $(this).parent().prev().text();
 
-                
-  				var params={"Id":""+ Id}
-  				
+
+                var params = { "Id": "" + Id }
+
                 $.ajax({
                     type: 'post',
                     url: 'ExamMyMemDe',
                     data: params,
                     dataType: 'json',
                     success: function (dataDe) {
-						
+
                     }, error: function (e) {
 
                     }
                 })
             })
-            
 
-        });        
-        
+
+        });
+
         $('#paperbtn').click(function () {
 
             $.ajax({
@@ -140,6 +152,8 @@
 
                     let thead =
                         "<th>卷名</th>" +
+                        "<th>分數</th>" +
+                        "<th>刪除</th>"
 
                     $('#paperth').empty();
                     $('#paperth').append(thead);
@@ -147,16 +161,44 @@
                     $('#papertb').empty();
                     for (var i = 0; i < data.length; i++) {
 
-
+                        let content =
+                            "<tr>" +
+                         	"<td style='text-align:left'><a href="+"/HappyLearning/ExamMember"+">"+data[i].examName+"</a></td>" +
+                            "<td>" + data[i].examscore + "</td>" +
+                            "<td style='display:none'>" + data[i].examMemRecordId + "</td>" +
+                            "<td><button class='del'>Del</button></td>" +
+                            "</tr>";
                         $('#papertb').append(content);
 
                     }
-                    console.log(resultText);
                 }, error: function (e) {
                     console.log(e);
                 }
 
             });
+
+            $('#papertb').on('click', '.del', function () {
+
+                $(this).closest('tr').remove();
+
+                var Id = $(this).parent().prev().text();
+
+                console.log('Id' + Id);
+
+                var params = { "Id": "" + Id }
+
+                $.ajax({
+                    type: 'post',
+                    url: 'ExamMyMemRecordDe',
+                    data: params,
+                    dataType: 'json',
+                    success: function (dataDe) {
+
+                    }, error: function (e) {
+
+                    }
+                })
+            })
 
 
         });
@@ -174,11 +216,13 @@
     <div class="divform">
         <div class="pre">
             <label class="lb">我的考卷<button type="button" id="paperbtn" class="btn"><i class="fa-solid fa-magnifying-glass"></i></button></label>
-            <table>
+            <table class="tb">
 	            <thead id="paperth">
 	            </thead>
 	            <tbody id="papertb">
-
+                          <col width="80.00%">
+                          <col width="10.00%">
+                          <col width="10.00%">
 	            </tbody>
        		</table>		
 
