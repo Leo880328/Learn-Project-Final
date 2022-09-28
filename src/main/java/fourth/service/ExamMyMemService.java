@@ -68,6 +68,12 @@ public class ExamMyMemService  {
 	}
 	
 	
-
+	//考試刪除
+	public void ExamRecordDelete(Integer recordId) {
+		
+	
+		examMemRecordRes.deleteById(recordId);
+		
+	}
 	
 }
