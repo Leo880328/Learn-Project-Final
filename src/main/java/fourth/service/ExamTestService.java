@@ -100,39 +100,35 @@ public class ExamTestService  {
 		return testMap;
 	}
 	
-	public void checkAns(Map<String, Object> testMap){
-		
-		//紀錄會員錯誤題目
-		List<ExamQuesBean> examWrongList= new ArrayList<ExamQuesBean>();
-		List<ExamQuesBean> examQueList = (List<ExamQuesBean>)testMap.get("examQueList");
-		List<String> chooseAns = (List<String>)testMap.get("chooseList");
-		
-		//對答案
-		int ctCount =0;
-		
-		for(int i=0;i<examQueList.size();i++) {
-			if (chooseAns.get(i).equals(examQueList.get(i).getQuesAnswer())) {
-				ctCount++;
-			}else {
-				examWrongList.add(examQueList.get(i));
-			}
-		}
-		
-		//裝作答錯誤的examQuesBean
-		testMap.put("examWrongList", examWrongList);
-		
-
-		
-	}
+	
 	
 	public void EstaRecord(Map<String, Object> testMap,Integer memberId) {
 		////ExamRecord紀錄考試相關資訊
 		//會員ID、分數、對應哪次考試
 		MemberBean memberBean = examMemberRes.findById(memberId).get();
 		
-		@SuppressWarnings("unchecked")
-		List<ExamQuesBean> examWrongList = (List<ExamQuesBean>) testMap.get("examWrongList");
-		Integer score = 100-(examWrongList.size()*20);
+		//拿到題目
+		List<ExamQuesBean> examQueList = (List<ExamQuesBean>)testMap.get("examQueList");
+//		List<String> chooseAnsList = (List<String>)testMap.get("chooseList");
+		
+		////紀錄會員的回答
+		//String[i][0] 錯第幾題
+		//String[i][1] 錯誤題目選哪個選項
+		List<String> wrongNumList = new ArrayList<String>();
+		
+		//對答案
+		int ctCount =0;
+		
+		for(int i=0;i<examQueList.size();i++) {
+			if (examQueList.get(i).getChooseAns().equals(examQueList.get(i).getQuesAnswer())) {
+				ctCount++;
+			}else {
+				wrongNumList.add(String.valueOf(i));
+			}
+		}
+		
+		//checkAns對答案，算分數
+		Integer score = 20*ctCount;
 		testMap.put("examScore", score);
 		
 		//抓取是哪次考試
@@ -157,7 +153,7 @@ public class ExamTestService  {
 		
 		MemberBean currentMember = examMemberRes.findById(memberId).get();
 		Integer marker = 1;
-		List<ExamQuesBean> examWrongList = (List<ExamQuesBean>)testMap.get("examWrongList");
+		List<ExamQuesBean> examQueList = (List<ExamQuesBean>)testMap.get("examQueList");
 		
 		
 		
@@ -167,11 +163,11 @@ public class ExamTestService  {
 			
 			System.err.println("保存考試" + reserveIdx);
 			
-			List<ExamReserve> checkExit = examReserveRes.findByexamQues_quesID(examWrongList.get(reserveIdx).getQuesID());
+			List<ExamReserve> checkExist = examReserveRes.findByexamQues_quesID(examQueList.get(reserveIdx).getQuesID());
  
-			if(checkExit.isEmpty()) {
+			if(checkExist.isEmpty()) {
 				
-				ExamReserve reserve = new ExamReserve(examWrongList.get(reserveIdx),currentMember,marker);
+				ExamReserve reserve = new ExamReserve(examQueList.get(reserveIdx),currentMember,marker);
 				examReserveRes.save(reserve);
 				
 			}else {

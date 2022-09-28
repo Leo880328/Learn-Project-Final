@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
@@ -52,6 +53,8 @@ public class ExamQuesBean implements Serializable
 	@Column(name="quesscore")
 	private int quesScore;
 	
+	@Transient
+	private String chooseAns;
 	
 	@Override
 	public String toString() {
@@ -156,6 +159,14 @@ public class ExamQuesBean implements Serializable
 
 	public void setQuesScore(int quesScore) {
 		this.quesScore = quesScore;
+	}
+
+	public String getChooseAns() {
+		return chooseAns;
+	}
+
+	public void setChooseAns(String chooseAns) {
+		this.chooseAns = chooseAns;
 	}
 
 	
