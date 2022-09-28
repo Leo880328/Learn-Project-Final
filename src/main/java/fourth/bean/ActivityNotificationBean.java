@@ -20,7 +20,7 @@ public class ActivityNotificationBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private int acticitiesId;
+	private int activityId;
 	
 	@OneToOne @JoinColumn(name="user_id")
 	private MemberBean userId;
@@ -42,11 +42,11 @@ public class ActivityNotificationBean {
 //=======================================================================================
 	
 	public int getActicitiesId() {
-		return acticitiesId;
+		return activityId;
 	}
 
 	public void setActicitiesId(int acticitiesId) {
-		this.acticitiesId = acticitiesId;
+		this.activityId = acticitiesId;
 	}
 
 	public MemberBean getUserId() {

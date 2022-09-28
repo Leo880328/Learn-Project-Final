@@ -29,6 +29,7 @@ public class ActivityService {
 	public Page<ActivityBean> selectAllActivity(Pageable pageable) {
 		Page<ActivityBean> activityBeans = activityRepository.findAll(pageable);
 		return activityBeans;
+		
 	}
 	public Page<ActivityBean> selectAllByTitleLike(Pageable pageable,String keyWord) {
 		 Page<ActivityBean> findAllByTitleLike = activityRepository.findAllByTitleLike(pageable, "%"+keyWord+"%");
@@ -71,6 +72,7 @@ public class ActivityService {
 
 
 	// 調用資料庫刪除活動
+	@SuppressWarnings("unused")
 	public boolean deleteActivities(ActivityBean activity) {
 		Integer id = activity.getId();
 		if (id != null) {
