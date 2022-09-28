@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,6 +55,13 @@ public class MemberController {
 		}
 	}
 
+	//切入忘記密碼畫面
+	@RequestMapping(path = "/forgetPassword.controller", method = RequestMethod.GET)
+	public String ForgetPWDController() {
+		return "ForgetPassword";
+	}
+	
+	
 	// 成為老師
 	@RequestMapping(path = "/becometeacher.controller", method = RequestMethod.GET)
 	public String becometeacherController() {
@@ -246,8 +254,8 @@ public class MemberController {
 	}
 
 	// 刪除會員
-	@GetMapping("/deleteUser")
-	public String deleteUser(int userId) {
+	@GetMapping("/deleteUser/{id}")
+	public String deleteUser(@PathVariable("id")  int userId) {
 		memberService.deleteUser(userId);
 		return "redirect:/memberList";
 	}

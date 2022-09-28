@@ -22,7 +22,7 @@
 .tb {
 	border-collapse: collapse;
 	margin-left: 300px;
-	width: 1600px;
+	width: 1000px;
 	/*自動斷行*/
 	word-wrap: break-word;
 	table-layout: fixed;
@@ -65,17 +65,17 @@
 		<thead>
 			<tr>
 				<th>ID</th>
-				<th>暱稱</th>
+<!-- 				<th>暱稱</th> -->
 				<th>帳號</th>
 				<!-- <th>密碼</th> -->
 				<th>身分</th>
 				<th>姓名</th>
 				<th>大頭貼</th>
-				<th>性別</th>
-				<th>生日</th>
+<!-- 				<th>性別</th> -->
+<!-- 				<th>生日</th> -->
 				<th>手機號碼</th>
 				<th>信箱</th>
-				<th>註冊日期</th>
+<!-- 				<th>註冊日期</th> -->
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -85,7 +85,7 @@
 
 				<tr>
 					<td><c:out value="${mb.userId}" /></td>
-					<td><c:out value="${mb.nick}" /></td>
+<%-- 					<td><c:out value="${mb.nick}" /></td> --%>
 					<td><c:out value="${mb.account}" /></td>
 					<!-- <td><c:out value="${mb.password}" /></td> -->
 					<td><c:choose>
@@ -101,22 +101,20 @@
 							<c:otherwise>
               						管理員
        							</c:otherwise>
-						</c:choose><c:if test="${mb.status==4}">
+						</c:choose> <c:if test="${mb.status==4}">
 							<a class="btn btn-primary"
 								href="checkteacher?userId=${mb.userId} ">審核</a>
 						</c:if></td>
 					<td><c:out value="${mb.name}" /></td>
 					<td><img src="${mb.img}" width="150" height="100"></td>
-					<td><c:out value="${mb.sex}" /></td>
-					<td width="150px"><c:out value="${mb.birthday}" /></td>
+<%-- 					<td><c:out value="${mb.sex}" /></td> --%>
+<%-- 					<td width="150px"><c:out value="${mb.birthday}" /></td> --%>
 					<td width="159px"><c:out value="${mb.cellphone}" /></td>
 					<td width="200px"><c:out value="${mb.email}" /></td>
-					<td class="td1"><c:out value="${mb.joinDate}" /></td>
+<%-- 					<td class="td1"><c:out value="${mb.joinDate}" /></td> --%>
 					<td><a class="btn btn-warning"
-						href="showEditUser?userId=${mb.userId} ">修改</a> <a
-						class="btn btn-danger btn--raised"
-						onclick="if( !(confirm('確認刪除?') ) ) return false; alert('刪除成功!')"
-						href="deleteUser?userId=${mb.userId} ">刪除</a></td>
+						href="showEditUser?userId=${mb.userId} ">修改</a> <button
+						class="btn btn-danger btn--raised" onclick="del(${mb.userId})">刪除</button></td>
 				</tr>
 			</tbody>
 		</c:forEach>
@@ -126,5 +124,43 @@
 			$('#member').DataTable();
 		});
 	</script>
+
+
+	<script type="text/javascript">
+	function del(id) {
+		console.log(id);
+		Swal.fire({
+			title: '確認刪除課程?"',
+			text: "",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#d33',
+			cancelButtonColor: '#3085d6',
+			confirmButtonText: '刪除',
+			cancelButtonText: '取消',
+		}).then((result) => {
+			if (result.isConfirmed) {
+				Swal.fire({
+					title: '刪除成功!',
+					willClose: function () {
+						$.ajax({
+							async: true,
+							type: "get",
+							
+							url: "deleteUser/" + id,
+							success: function (data) {
+								$(`#${id}`).remove();
+								window.location.assign(window.location.href);
+								// 					history.go(0);
+							}
+						})
+					}
+				})
+			}
+		})
+	}
+	
+	</script>
+
 </body>
 </html>

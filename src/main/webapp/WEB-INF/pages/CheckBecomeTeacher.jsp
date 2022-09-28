@@ -125,9 +125,8 @@
 											title="身分" id="status">
 											<c:if test="${mb.status==4}">
 												<option>未審核</option>
-												<option value="1">學生</option>
-												<option value="2">老師</option>
-												<option value="3">管理員</option>
+												<option value="1">駁回</option>
+												<option value="2">審核通過</option>
 											</c:if>
 										</select><i class="form-group__bar"></i>
 									</div>

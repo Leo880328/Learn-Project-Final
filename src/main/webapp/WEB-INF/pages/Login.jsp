@@ -42,7 +42,7 @@ article {
 								<h2 class="title-login">登入</h2>
 								<div>
 									如果您還沒有註冊，請點擊
-									<button type="button" class="btn btn-info btn--raised">
+									<button type="button" class="btn btn-secondary ">
 										<a href="register.controller">快速註冊</a>
 									</button>
 
@@ -69,9 +69,10 @@ article {
 												for="cb1" class="label-text">Remember me</label></span>
 										</p>
 										<p>
-											<input type="text" name="email" id="email"
-												placeholder="請輸入email" autocomplete="off"> <a
-												id="forgot" class="forgot-pw">忘記密碼?</a>
+<!-- 											<input type="text" name="email" id="email" -->
+<!-- 												placeholder="請輸入email" autocomplete="off"> -->
+												 <a href="forgetPassword.controller" class="forgot-pw">忘記密碼?</a>
+<!-- 												 <a id="forgot" class="forgot-pw">忘記密碼?</a> -->
 										</p>
 									</div>
 									<div class="">
