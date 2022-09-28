@@ -17,33 +17,48 @@ import org.springframework.stereotype.Component;
 public class ActivityAttendeesBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	public static final int statusCode_True = 1;
+	public static final int statusCode_False = -1;
+	
 	@Id
-	private int activityId;
+	@OneToOne
+	@JoinColumn(name = "id")
+	private ActivityBean activity;
 
 	@Id
 	@OneToOne
 	@JoinColumn(name = "user_id")
-	private MemberBean userId;
+	private MemberBean user;
+	
+	private int statusCode;
 
 	// =======================================================================================
 	// =======================================================================================
 	// =======================================================================================
 
-	public int getActivityId() {
-		return activityId;
+	public ActivityBean getActivity() {
+		return activity;
 	}
 
-	public void setActivityId(int activityId) {
-		this.activityId = activityId;
+	public void setActivity(ActivityBean activity) {
+		this.activity = activity;
 	}
 
-	public MemberBean getUserId() {
-		return userId;
+	public MemberBean getUser() {
+		return user;
 	}
 
-	public void setUserId(MemberBean userId) {
-		this.userId = userId;
+	public void setUser(MemberBean user) {
+		this.user = user;
+	}
+
+	public int getStatusCode() {
+		return statusCode;
+	}
+
+	public void setStatusCode(int statusCode) {
+		this.statusCode = statusCode;
 	}
 
 }
