@@ -18,6 +18,11 @@ public class ActivityAttendeesService {
 	private ActivityAttendeesRepository activityAttendeesRepository;
 	
 	
+	public List<ActivityAttendeesBean> selectAllByActivityID(ActivityAttendeesBean activityAttendeesBean) {
+		
+		List<ActivityAttendeesBean> findAllByActivityID = activityAttendeesRepository.findAllByActivityID();
+		return findAllByActivityID;
+	}
 		
 	public List<ActivityAttendeesBean> selectAllByActivityID(int activityId) {
 		List<ActivityAttendeesBean> findAllByActivityID = activityAttendeesRepository.findAllByActivityID(activityId);
