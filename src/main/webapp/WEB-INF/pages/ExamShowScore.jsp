@@ -10,7 +10,7 @@
     <style>
 
         .tb {
-            width: 1200px;
+            width: 1000px;
             word-wrap: break-word;
             table-layout: fixed;
             margin: auto;
