@@ -164,12 +164,23 @@
 									class="toggle-submenu"></span>
 								<li><a href="Activity" class="teamo-menu-item-title"
 									title="Pages">活動</a><span class="toggle-submenu"></span></li>
-								<li><a href="QueryAll"
-									class="teamo-menu-item-title" title="Blogs">專欄</a><span
-									class="toggle-submenu"></span>
-									<ul class="submenu">
-
-									</ul></li>
+								
+								<li><a href="QueryAll" class="teamo-menu-item-title" title="Blogs">專欄後台</a>
+								<span class="toggle-submenu"></span>
+									<ul class="submenu"></ul>
+								</li>
+								
+								<li class="menu-item  menu-item-has-children"><a href="ColumnFrontEnd"
+                                        class="teamo-menu-item-title" title="Home">專欄</a><span
+                                        class="toggle-submenu"></span>
+                                    <ul class="submenu">
+<%--                                     <c:if test="${sessionScope.user.status == 2}"> --%>
+                                        <li class="menu-item"><a href="ColumnTeacherFront">講師專區</a></li>
+<%--                                      </c:if> --%>
+                                        <li class="menu-item"><a href="home2.html">Home 02</a></li>
+                                        <li class="menu-item"><a href="home3.html">Home 03</a></li>
+                                    </ul>
+                                </li>
 
 								<li class="menu-item"><a href="cart"
 									class="teamo-menu-item-title" title="About">購物車</a></li>

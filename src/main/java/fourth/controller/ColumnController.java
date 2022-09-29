@@ -131,6 +131,29 @@ public class ColumnController {
 		m.addAttribute("col", col);
 		return "ColumnFrontEndDetails";
 	}
+	@GetMapping(path="/queryEnglish")
+	public String queryByEnglish(String subject, Model m) {
+		List<ColumnBean> list = columnService.findByEnglish("%"+"英文"+"%");
+		m.addAttribute("queryEnglish", list);
+		return "ColumnFrontEndQuery";
+	}
+	@GetMapping(path="/queryToeic")
+	public String queryByToeic(String subject, Model m) {
+		List<ColumnBean> list = columnService.findByEnglish("%"+"多益"+"%");
+		m.addAttribute("queryToeic", list);
+		return "ColumnFrontEndQuery";
+	}
+	@GetMapping(path="/queryMath")
+	public String queryByMath(String subject, Model m) {
+		List<ColumnBean> list = columnService.findByEnglish("%"+"數學"+"%");
+		m.addAttribute("queryMath", list);
+		return "ColumnFrontEndQuery";
+	}
+	@GetMapping("/ColumnTeacherFront")
+	public String columnTeacherFront() {
+		return "ColumnTeacherFront";
+	}
+	
 	
 	
 	

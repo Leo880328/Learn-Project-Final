@@ -26,66 +26,68 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	text-align: center
 }
 
-#id1{
+#id1 {
 	display: inline;
 }
 
 .tb {
 	border-collapse: collapse;
 	width: 79%;
-    word-wrap: break-word;
-    table-layout: fixed;
-    background-color: white;
-    border-radius: 20px;
-   margin-left:270px;
+	word-wrap: break-word;
+	table-layout: fixed;
+	background-color: white;
+	border-radius: 20px;
+	margin-left: 270px;
 }
-
 </style>
 </head>
 
 
 
 <body>
-<jsp:include page="BackendHeader.jsp" /> 
- 	<jsp:include page="Style.jsp" /> 
-	<br><br><br><br>
+	<jsp:include page="BackendHeader.jsp" />
+	<jsp:include page="Style.jsp" />
+	<br>
+	<br>
+	<br>
+	<br>
 
 
-		<center>
-			<h1>專欄列表</h1>
-		</center>
-		
- <center>		
-			<form action="searchAction" method="get" enctype="multipart/form-data">
-			<input type="text" name="search"> 
-			<input type="submit" name="searchno" value="查詢">
-	        </form>
-            <p>${errors.name }</p>
-   </center>           
- 
-   <center>
+	<center>
+		<h1>專欄列表</h1>
+	</center>
 
-   	<a id="id1" href="ColumnAdd">
-			<button >新增專欄</button>
-			</a>
+	<center>
+		<form action="searchAction" method="get" enctype="multipart/form-data">
+			<input type="text" name="search"> <input type="submit"
+				name="searchno" value="查詢">
+		</form>
+		<p>${errors.name }</p>
+	</center>
 
-         <form id="id1" action="searchEnglish" method="post">
-         <input type="submit" name="searchEnglish" value="英文">
-         </form>
-         
-          <form id="id1" action="searchToeic" method="post">
-         <input type="submit" name="searchToeic" value="多益">
-         </form>
-         
-          <form id="id1" action="searchMath" method="post">
-         <input type="submit" name="searchMath" value="數學">
-         </form>
-   </center>
+	<center>
+
+		<a id="id1" href="ColumnAdd">
+			<button>新增專欄</button>
+		</a>
+
+		<form id="id1" action="searchEnglish" method="post">
+			<input type="submit" name="searchEnglish" value="英文">
+		</form>
+
+		<form id="id1" action="searchToeic" method="post">
+			<input type="submit" name="searchToeic" value="多益">
+		</form>
+
+		<form id="id1" action="searchMath" method="post">
+			<input type="submit" name="searchMath" value="數學">
+		</form>
+	</center>
 
 
-		<table class="tb" border="1" >
+	<table class="tb" border="1">
 
-<thead>
+		<thead>
 			<tr>
 				<th>文章編號</th>
 				<th>發表日期</th>
@@ -94,67 +96,64 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				<th>權限</th>
 				<th>科目</th>
 				<th>標題</th>
-<!-- 				<th></th>	   -->
-<!-- 				<th></th>	   -->
-<!-- 				<th></th>	   -->
+				<!-- 				<th></th>	   -->
+				<!-- 				<th></th>	   -->
+				<!-- 				<th></th>	   -->
 			</tr>
-</thead>
+		</thead>
 
-			<c:choose>
-				<c:when test="${column != null }">
-					<c:set var="col" value="${column }" />
-					<td>${col.article_no }</td>
-					<td>${col.publish_time }</td>
-					<td>${col.user_id}</td>
-					<td>${col.author }</td>
-					<td>${col.role }</td>
-					<td>${col.subject }</td>
-					<td>${col.title }</td>
-<%-- 					<td>${col.contents }</td>	 --%>
-				</c:when>
+		<c:choose>
+			<c:when test="${column != null }">
+				<c:set var="col" value="${column }" />
+				<td>${col.article_no }</td>
+				<td>${col.publish_time }</td>
+				<td>${col.user_id}</td>
+				<td>${col.author }</td>
+				<td>${col.role }</td>
+				<td>${col.subject }</td>
+				<td>${col.title }</td>
+				<%-- 					<td>${col.contents }</td>	 --%>
+			</c:when>
 
-				<c:otherwise>
-					<%
-					List<ColumnBean> selectAllColumns = (List<ColumnBean>) request.getAttribute("queryall");
+			<c:otherwise>
+				<%
+				List<ColumnBean> selectAllColumns = (List<ColumnBean>) request.getAttribute("queryall");
 
-					for (ColumnBean c : selectAllColumns) {
-					%>
-					<tr>
+				for (ColumnBean c : selectAllColumns) {
+				%>
+				<tr>
 
-						<td><%=c.getArticle_no()%></td>
-						<td><%=c.getPublish_time()%></td>
-						<td><%=c.getUser_id()%></td>
-						<td><%=c.getAuthor()%></td>
-						<td><%=c.getRole()%></td>
-						<td><%=c.getSubject() %></td>
-						<td><%=c.getTitle() %></td>			
-						<td>							
-						<a href="Update?article_no=<%=c.getArticle_no()%>&publish_time=<%=c.getPublish_time()%>&user_id=<%=c.getUser_id()%>&author=<%=c.getAuthor()%>&role=<%=c.getRole()%>&subject=<%=c.getSubject()%>&title=<%=c.getTitle()%>&contents=<%=c.getContents()%>&picture=<%=c.getPicture()%>"><button
-									name="edit" value="edit">編輯</button></a>
-<!-- 					    </td> -->
+					<td><%=c.getArticle_no()%></td>
+					<td><%=c.getPublish_time()%></td>
+					<td><%=c.getUser_id()%></td>
+					<td><%=c.getAuthor()%></td>
+					<td><%=c.getRole()%></td>
+					<td><%=c.getSubject()%></td>
+					<td><%=c.getTitle()%></td>
+					<td><a
+						href="Update?article_no=<%=c.getArticle_no()%>&publish_time=<%=c.getPublish_time()%>&user_id=<%=c.getUser_id()%>&author=<%=c.getAuthor()%>&role=<%=c.getRole()%>&subject=<%=c.getSubject()%>&title=<%=c.getTitle()%>&contents=<%=c.getContents()%>&picture=<%=c.getPicture()%>"><button
+								name="edit" value="edit">編輯</button></a> <!-- 					    </td> -->
 
 
-						<form action="more?article_no=<%=c.getArticle_no()%>"
-							method="get">
+						<form action="more?article_no=<%=c.getArticle_no()%>" method="get">
 							<td><input type="submit" name="more" value="細節"> <input
 								type="hidden" name="article_no" value="<%=c.getArticle_no()%>">
-<!-- 							</td> -->
+								<!-- 							</td> -->
 						</form>
 
 						<form action="ColumnDelete?article_no=<%=c.getArticle_no()%>"
 							method="post" enctype="multipart/form-data">
-							<td><input type="submit" name="delete" value="刪除">
-<!-- 							</td>  -->
-							<input type="hidden" name="article_no" value="<%=c.getArticle_no()%>">
+							<td><input type="submit" name="delete" value="刪除"> <!-- 							</td>  -->
+								<input type="hidden" name="article_no"
+								value="<%=c.getArticle_no()%>">
 						</form>
-
-					</tr>
-					<%
-					}
-					%>
-				</c:otherwise>
-			</c:choose>
-		</table>
+				</tr>
+				<%
+				}
+				%>
+			</c:otherwise>
+		</c:choose>
+	</table>
 
 
 </body>

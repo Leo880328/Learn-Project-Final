@@ -150,12 +150,17 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
                         <div class="widget widget-categories">
                             <h3 class="widgettitle">Categories</h3>
                             <ul class="list-categories">
-                                <li><input type="checkbox" id="cb1"><label for="cb1" class="label-text">英文
-                                    </label></li>
-                                <li><input type="checkbox" id="cb2"><label for="cb2" class="label-text">多益</label>
-                                </li>
-                                <li><input type="checkbox" id="cb3"><label for="cb3" class="label-text">數學
-                                    </label></li>
+                            
+                          
+                            
+                            
+                                <li><a href="queryEnglish?subject="英文""><h6>英文</h6></a>
+                                    </li>
+                                    <li><h6><a href="queryToeic">多益</a></h6>
+                                    </li>
+                                    <li><h6><a href="queryMath">數學</a></h6>
+                                    </li>
+                          
                             </ul>
                         </div>
 
