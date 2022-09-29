@@ -1,7 +1,10 @@
 package fourth.controller;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,10 +17,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import fourth.bean.ActivityAttendeesBean;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import fourth.bean.ActivityBean;
-import fourth.service.ActivityImageService;
+import fourth.bean.MemberBean;
 import fourth.service.ActivityService;
+import fourth.service.MemberService;
 
 @Controller
 public class ActivityController {
@@ -25,23 +30,28 @@ public class ActivityController {
 	private final String MapKey_pageSize = "pageSize";
 	private final String MapKey_pageNo = "pageNo";
 	private final String MapKey_keyWord = "keyWord";
-	
-	
-	
-	
+	private final String MAPKEY_ACTIVITY_ID = "activityID";
+	private final String MAPKEY_ACTIVITY_REVIEW_MESSAGE = "ActivityReviewBeanMessage";
+
+	@GetMapping("ActivityeTest")
+	@ResponseBody
+	public String ActivitySelectTest() {
+		Map<String, Object> hashMap = new HashMap<String, Object>();
+		hashMap.put(MapKey_keyWord, hashMap);
+		return "";
+	}
+
 	@Autowired
 	private ActivityService activityService;
+
+	@Autowired
+	private MemberService memberService;
 
 	// Activity get
 	@GetMapping("/Activities")
 	public String ActivityPreviewUser() {
 		return "ActivityPreviewUser";
 	}
-
-//	@GetMapping("Activitye-{id}")
-//	public String ActivitySelectById() {
-//		return "ActivitySelectByID";
-//	}
 
 	// Activity_OP_test get
 	@GetMapping("/ActivitiesOP")
@@ -65,7 +75,7 @@ public class ActivityController {
 //	====================================================API區=============================================================================================
 //	======================================================================================================================================================
 	// 查詢所有API
-
+	// 請給
 	@PostMapping("/ActivitySelect")
 	@ResponseBody
 	public Page<ActivityBean> selectActivityAllByTitleLike(@RequestBody() Map<String, String> map) {
@@ -81,7 +91,6 @@ public class ActivityController {
 		}
 		Page<ActivityBean> selectAllActivity = activityService.selectAllActivity(pageable);
 		return selectAllActivity;
-
 	}
 
 	@GetMapping("/ActivitySelect-{id}")
@@ -90,14 +99,13 @@ public class ActivityController {
 		return activityService.selectActivityById(id);
 	}
 
-	//
-	// ========================================活動創辦者========================================================================================
-
 	// 新增
-//	@GetMapping("/Activity_OP_path")
 	@PostMapping("/Activity_OP")
 	@ResponseBody
 	public ActivityBean insertActivities(@RequestBody() ActivityBean activityBean) {
+
+		activityBean.setUserId(2);
+
 		ActivityBean insertActivities = activityService.insertActivities(activityBean);
 		return insertActivities;
 	}
@@ -106,15 +114,8 @@ public class ActivityController {
 	@PutMapping("/Activity_OP")
 	@ResponseBody
 	public ActivityBean updateActivities(@RequestBody() ActivityBean activityBean) {
-		ActivityBean updateActivities = activityService.updateActivities(activityBean);
-		return updateActivities;
+		activityBean.setUserId(2);
 
-	}
-
-	// 送審
-	@PutMapping("/Activity_OP")
-	@ResponseBody
-	public ActivityBean activitiesSubmitForReview(@RequestBody() ActivityBean activityBean) {
 		ActivityBean updateActivities = activityService.updateActivities(activityBean);
 		return updateActivities;
 
@@ -128,48 +129,38 @@ public class ActivityController {
 		return true;
 	}
 
-	// 參加活動=失敗
-	@PutMapping("/Activity_Participatefalse ")
-	public ActivityAttendeesBean ActivityParticipateIsFalse(@RequestBody() ActivityAttendeesBean activityAttendeesBean) {
-		activityAttendeesBean.setStatusCode(ActivityAttendeesBean.statusCode_False);
-		
-		return null;
-	}
-
-	// 參加活動=成功
-	@PutMapping("/Activity_ParticipateTrue ")
-	public ActivityAttendeesBean activityParticipateIsTrue(@RequestBody() ActivityAttendeesBean activityAttendeesBean) {
-		activityAttendeesBean.setStatusCode(ActivityAttendeesBean.statusCode_True);
-		
-		return null;
-	}
-
-	// ========================================活動參加者========================================================================================
-
-	// 參加活動
-	@PutMapping("/Activity_Participate ")
-	public ActivityBean participateActivity(@RequestBody() ActivityBean activityBean) {
-
-		ActivityBean updateActivities = activityService.updateActivities(activityBean);
-		return updateActivities;
-	}
-
-	// ========================================管理者========================================================================================
-
-	// 審核成功
-	@PutMapping("/Activity_ReviewSucceeded")
+	// =====================================================================================================
+	//請求審核
+	@PostMapping("/Activity-Reviewing")
 	@ResponseBody
-	public ActivityBean activityReviewSucceeded(@RequestBody() ActivityBean activityBean) {
-		ActivityBean updateActivities = activityService.updateActivities(activityBean);
-		return updateActivities;
+	public boolean activityReviewing(@RequestBody Map<String, String> map) {
+		String message = map.get(MAPKEY_ACTIVITY_REVIEW_MESSAGE);
+		int activityById = Integer.valueOf(map.get(MAPKEY_ACTIVITY_ID));
+		activityService.activityReviewing(activityById, message);
+		return true;
 	}
-
-	// 審核失敗
-	@PutMapping("/Activity_AuditFailure")
+	//失敗
+	@PostMapping("/Activity-ReviewFail")
 	@ResponseBody
-	public ActivityBean activityAuditFailure(@RequestBody() ActivityBean activityBean) {
-		ActivityBean updateActivities = activityService.updateActivities(activityBean);
-		return updateActivities;
+	public boolean activityReviewFail(@RequestBody Map<String, String> map) {
+		String message = map.get(MAPKEY_ACTIVITY_REVIEW_MESSAGE);
+		int activityById = Integer.valueOf(map.get(MAPKEY_ACTIVITY_ID));
+		activityService.activityReviewFail(activityById, message);
+		return true;
+	}
+//	審核成功
+	@PostMapping("/Activity-RviewSuccessful")
+	@ResponseBody
+	public boolean activityRviewSuccessful(@RequestBody Map<String, String> map) {
+		String message = map.get(MAPKEY_ACTIVITY_REVIEW_MESSAGE);
+		int activityById = Integer.valueOf(map.get(MAPKEY_ACTIVITY_ID));
+		activityService.activityRviewSuccessful(activityById, message);
+		return true;
 	}
 
+
+	// ========================================審核========================================================================================
+
+	
+	
 }

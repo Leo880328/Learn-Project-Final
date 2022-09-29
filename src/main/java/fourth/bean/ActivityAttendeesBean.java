@@ -2,10 +2,12 @@ package fourth.bean;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "activity_attendees")
+@IdClass(ActivityAttendeesId.class)
 @Component
 public class ActivityAttendeesBean implements Serializable {
 
@@ -30,6 +33,7 @@ public class ActivityAttendeesBean implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private MemberBean user;
+	
 	
 	private int statusCode;
 
