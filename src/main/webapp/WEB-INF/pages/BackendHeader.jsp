@@ -154,7 +154,7 @@
 							class="zmdi zmdi-format-underlined "></i>會員管理</a>
 						<ul>
 							<li><a href="memberList">會員資料</a></li>
-							<li><a href="memberList">審核會員</a></li>
+							<li><a href="checkteacherlist">待審核會員</a></li>
 						</ul></li>
 
 					<li class="navigation__sub"><a href=""><i

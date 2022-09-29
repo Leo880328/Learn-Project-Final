@@ -47,25 +47,23 @@ article {
 									</button>
 								</div>
 								<br>
-								<form method="post" action="checklogin.controller">
-									<div class=group>
-										<p>
-											<input type="text" name="email" id="email"
-												placeholder="*請輸入email" autocomplete="off">
-										<p>${errors.msg}</p>
-										<button id="forgot" class="forgot-pw">忘記密碼?</button>
-										</p>
-									</div>
-									<div class="">
-										如果已有帳號請按
-										<button type="button" class="btn btn-info btn--raised">
-											<a href="login.controller">登入</a>
-										</button>
-										回到登入畫面
-									</div>
-									<br>
 
-								</form>
+								<div class=group>
+									<p>
+										<input type="text" name="email" id="email"
+											placeholder="*請輸入email" autocomplete="off">
+										<button type="submit" id="forgot" class="forgot-pw">忘記密碼?</button>
+									</p>
+
+								</div>
+								<div class="">
+									如果已有帳號請按
+									<button type="button" class="btn btn-info btn--raised">
+										<a href="login.controller">登入</a>
+									</button>
+									回到登入畫面
+								</div>
+								<br>
 
 							</div>
 						</div>
@@ -75,6 +73,7 @@ article {
 		</div>
 	</article>
 </body>
+
 <script type="text/javascript">
 	$('#forgot').on("click", function() {
 		let mail = $('#email').val();
@@ -84,5 +83,13 @@ article {
 		});
 
 	})
+</script>
+<script>
+	$("#submit").click(function() {
+		Swal.fire({
+			icon : 'success',
+			title : '請至信箱確認驗證信'
+		})
+	});
 </script>
 </html>

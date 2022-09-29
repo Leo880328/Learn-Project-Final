@@ -48,10 +48,10 @@ article {
 
 								</div>
 								<form method="post" action="checklogin.controller">
-									<!-- 									<div class="social-account"> -->
-									<!-- 										<h6 class="title-social">其他登入方式</h6> -->
-									<!-- 										<div class="g-signin2" data-onsuccess="onSignIn"></div> -->
-									<!-- 									</div> -->
+																		<div class="social-account">
+																			<h6 class="title-social">其他登入方式</h6>
+																			<div class="g-signin2" data-onsuccess="onSignIn"></div>
+																		</div>
 									<br> <font face="微軟正黑體">使用快樂學習帳號密碼登入</font>
 									<div class=group>
 										<label for="account"><i class="fa-solid fa-user"></i>

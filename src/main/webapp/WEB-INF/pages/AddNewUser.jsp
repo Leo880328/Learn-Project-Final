@@ -356,7 +356,7 @@
 					function checkUpdate() {
 
 						Swal.fire({
-							title: '確定要儲存嗎?"',
+							title: '確定要儲存嗎?',
 							text: "",
 							icon: 'warning',
 							showCancelButton: true,

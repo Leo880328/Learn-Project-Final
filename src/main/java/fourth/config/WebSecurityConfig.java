@@ -19,7 +19,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		System.out.println("進入WebSecurity");
+//		System.out.println("進入WebSecurity");
 //		auth.userDetailsService(auDetailService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 

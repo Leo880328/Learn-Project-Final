@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import fourth.bean.MemberBean;
+import fourth.coursemail.JavaMail;
 import fourth.service.MemberMailService;
 import fourth.service.MemberService;
 
@@ -55,13 +57,12 @@ public class MemberController {
 		}
 	}
 
-	//切入忘記密碼畫面
+	// 切入忘記密碼畫面
 	@RequestMapping(path = "/forgetPassword.controller", method = RequestMethod.GET)
 	public String ForgetPWDController() {
 		return "ForgetPassword";
 	}
-	
-	
+
 	// 成為老師
 	@RequestMapping(path = "/becometeacher.controller", method = RequestMethod.GET)
 	public String becometeacherController() {
@@ -113,7 +114,10 @@ public class MemberController {
 			if (user.getStatus() == 3) {
 
 				return "redirect:/backendIndex";
-			} else {
+			} else if(user.getStatus()==5){
+				errors.put("msg", "<font color=red size=6 >帳號有問題!!</font>");
+				return "Login";
+			}else {
 				return "redirect:/Index";
 			}
 
@@ -132,8 +136,9 @@ public class MemberController {
 
 	// 註冊 ************************
 	@RequestMapping(path = "/newRegister", method = RequestMethod.POST)
-	public String newRegister(@ModelAttribute("register") MemberBean memberBean, BindingResult result, Model m,
-			Object mb) {
+	@ResponseBody
+	public String newRegister(@RequestBody MemberBean memberBean, BindingResult result, Model m, Object mb) {
+		System.out.println("進入註冊controller");
 		HashMap<String, String> errors = new HashMap<String, String>();
 		m.addAttribute("errors", errors);
 		String timeStamp = new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime());
@@ -146,24 +151,28 @@ public class MemberController {
 
 		MemberBean checkRegisterByEmail = memberService.checkRegister(memberBean.getEmail());
 		MemberBean checkRegisterByAccount = memberService.checkLogin(memberBean.getAccount());
+		System.out.println(checkRegisterByAccount);
+		System.out.println(checkRegisterByEmail);
+		return "信箱已經註冊";
+//		System.out.println("進入完service");
 
-		if (checkRegisterByEmail != null) {
-			if (checkRegisterByEmail.getEmail() != null) {
-				errors.put("RegisterError", "<font color=red size=4 >信箱已經註冊!!</font>");
-				return "Register";
-			}
-		}
-		if (checkRegisterByAccount != null) {
-			if (checkRegisterByAccount.getAccount() != null) {
-				errors.put("RegisterErrorAccount", "<font color=red size=4 >帳號已經註冊!!</font>");
-				return "Register";
-			}
-		}
+//		if (checkRegisterByEmail != null) {
+//			if (checkRegisterByEmail.getEmail() != null) {
+//				errors.put("RegisterError", "<font color=red size=4 >信箱已經註冊!!</font>");
+//				return "信箱已經註冊 幹你娘";
+//			}
+//		}
+//		if (checkRegisterByAccount != null) {
+//			if (checkRegisterByAccount.getAccount() != null) {
+//				errors.put("RegisterErrorAccount", "<font color=red size=4 >帳號已經註冊!!</font>");
+//				return "帳號已經註冊 幹你娘";
+//			}
+//		}
 
-		memberService.registerUser(memberBean);
-		m.addAttribute("register", mb);
-
-		return "Login";
+//		memberService.registerUser(memberBean);
+//		m.addAttribute("register", mb);
+//
+//		return "註冊成功";
 	}
 
 	// 查詢全部
@@ -172,6 +181,16 @@ public class MemberController {
 		List<MemberBean> listMembers = memberService.selectAllMembers();
 		m.addAttribute("listMembers", listMembers);
 		return "MemberList";
+
+	}
+
+	// 查詢待審核會員
+	@GetMapping("/checkteacherlist")
+	public String selectCheckTeacher(Model m) {
+		List<MemberBean> listCheck = memberService.selectAllCheck("%" + "4" + "%");
+		System.out.println(listCheck);
+		m.addAttribute("listCheck", listCheck);
+		return "CheckTeacherList";
 
 	}
 
@@ -195,44 +214,49 @@ public class MemberController {
 		m.addAttribute("mb", existingUser);
 		return "AddNewUser";
 	}
-	
+
 	// 審核更新會員
-		@GetMapping("/checkteacher")
-		public String checkTeacher(int userId, Model m) {
-			MemberBean existingUser = memberService.selectUserById(userId);
-			m.addAttribute("mb", existingUser);
-			return "CheckBecomeTeacher";
-		}
-		
-	//提出申請成為老師
-		@PostMapping("/becometeacher")
-		public String becomeTeacher(MemberBean memberBean,Model m) {
-			System.out.println("//////////////////////執行成為老師");
-			MemberBean user = (MemberBean) m.getAttribute("user");
-			MemberBean mem = memberService.checkLogin(user.getAccount());
-			System.out.println("mem: "+ mem);
-			mem.setStatus(4);
-			m.addAttribute("user", mem);
-			memberService.updateUser(memberBean);
-	System.out.println("memberBean: "+ memberBean);
-			return "redirect:/user.controller";
-		}
-		
-		
-		
-	
+	@GetMapping("/checkteacher")
+	public String checkTeacher(int userId, Model m) {
+		MemberBean existingUser = memberService.selectUserById(userId);
+		m.addAttribute("mb", existingUser);
+		return "CheckBecomeTeacher";
+	}
+
+	// 提出申請成為老師
+	@PostMapping("/becometeacher")
+	public String becomeTeacher(MemberBean memberBean, Model m) {
+		System.out.println("//////////////////////執行成為老師");
+		MemberBean user = (MemberBean) m.getAttribute("user");
+		MemberBean mem = memberService.checkLogin(user.getAccount());
+		System.out.println("mem: " + mem);
+		mem.setStatus(4);
+		m.addAttribute("user", mem);
+		memberService.updateUser(memberBean);
+		System.out.println("memberBean: " + memberBean);
+		return "redirect:/user.controller";
+	}
 
 	// 更新會員
 	@PostMapping("/updateUser")
-	public String updateUser(MemberBean memberBean, MultipartFile mf) throws IllegalStateException, IOException {
-//		String fileName = mf.getOriginalFilename();
-//		String saveFileDir = "D:\\webgit\\teamproject\\HappyLearning\\src\\main\\resources\\static\\images";
-//		File saveFileDirPath = new File(saveFileDir);
-//		saveFileDirPath.mkdirs();
-//
-//		File saveFile = new File(saveFileDirPath, fileName);
-//		mf.transferTo(saveFile);
-		memberService.updateUser(memberBean);
+	public String updateUser(MemberBean memberBean, MultipartFile mf, String account, int status)
+			throws IllegalStateException, IOException {
+		MemberBean member = memberService.checkLogin(account);
+		if (status == 1) {
+			memberService.updateUser(memberBean);
+			return "redirect:/memberList";
+		}
+		if (status == 2) {
+			memberService.updateUser(memberBean);
+			String txt = "<h2>" + "偉大的 " + memberBean.getNick() + " 您好 :" + "<br>" + "審核結果: 通過!! 恭喜你成為老師" + "<br>"
+					+ "<h2>";
+			JavaMail javaMail = new JavaMail();
+//			javaMail.setCustomer("fock360man@gmail.com");
+			javaMail.setCustomer("ch570981400@gmail.com");
+			javaMail.setSubject("好學生-EEIT49 身分審核通過!");
+			javaMail.setTxt(txt);
+			javaMail.sendMail();
+		}
 		return "redirect:/memberList";
 	}
 
@@ -255,7 +279,7 @@ public class MemberController {
 
 	// 刪除會員
 	@GetMapping("/deleteUser/{id}")
-	public String deleteUser(@PathVariable("id")  int userId) {
+	public String deleteUser(@PathVariable("id") int userId) {
 		memberService.deleteUser(userId);
 		return "redirect:/memberList";
 	}

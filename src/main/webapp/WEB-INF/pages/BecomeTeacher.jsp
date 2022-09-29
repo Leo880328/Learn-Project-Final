@@ -47,54 +47,57 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 										<p>
 											<span class="form-label">姓名(全名) *</span><span
 												class="form-control-wrap your-name"><input
-												placeholder="*必填" title="姓名" type="text" name="name" id="name"
-												size="40" class="form-control form-control-name"></span>
+												placeholder="*必填" title="姓名" type="text" name="name"
+												id="name" size="40" class="form-control form-control-name"></span>
 										</p>
 										<p>
 											<span class="form-label">電話 *</span><span
-												class="form-control-wrap your-phone"><input id="cellphone"
-												title="電話" type="text" name="cellphone" placeholder="*必填"
-												class="form-control form-control-phone"></span>
+												class="form-control-wrap your-phone"><input
+												id="cellphone" title="電話" type="text" name="cellphone"
+												placeholder="*必填" class="form-control form-control-phone"></span>
 										</p>
 										<p>
 											<span class="form-label">學歷 *</span><span
-												class="form-control-wrap your-name"><input title="學歷" id="education"
-												type="text" name="education" size="40"
+												class="form-control-wrap your-name"><input title="學歷"
+												id="education" type="text" name="education" size="40"
 												placeholder="*必填(請輸入最高學歷)"
 												class="form-control form-control-name"></span>
 										</p>
 										<p>
 											<span class="form-label">自我介紹 * </span><span
-												class="wpcf7-form-control-wrap your-message"><textarea id="userprofile"
-													title="自我介紹" name="userprofile" cols="40" rows="9"
-													placeholder="*必填" class="form-control your-textarea"></textarea></span>
+												class="wpcf7-form-control-wrap your-message"><textarea
+													id="userprofile" title="自我介紹" name="userprofile" cols="40"
+													rows="9" placeholder="*必填"
+													class="form-control your-textarea"></textarea></span>
 										</p>
 									</div>
 
-									<input type="hidden" name="userId" value="<%=memberBean.getuserId()%>" /> <input
-										id="imgPath" type="hidden" name="img" title="大頭貼"
+									<input type="hidden" name="userId"
+										value="<%=memberBean.getuserId()%>" /> <input id="imgPath"
+										type="hidden" name="img" title="大頭貼"
 										value="<%=memberBean.getImg()%>"> <input type="hidden"
 										value="<%=memberBean.getNick()%>" name="nick"
 										placeholder="請輸入最多10個字" maxlength="10" id="nick"
 										class="form-control"> <input type="hidden"
-										name="account" value="<%=memberBean.getAccount()%>"
-										title="帳號" id="account" class="form-control" placeholder="*必填">
-									<input type="hidden" name="birthday" id="birthday"
+										name="account" value="<%=memberBean.getAccount()%>" title="帳號"
+										id="account" class="form-control" placeholder="*必填"> <input
+										type="hidden" name="birthday" id="birthday"
 										value="<%=memberBean.getBirthday()%>" class="form-control"
 										placeholder=""> <input type="hidden" title="電子郵件"
 										value="<%=memberBean.getEmail()%>" id="email" name="email"
 										class="form-control"> <input type="hidden" title="密碼"
 										name="password" maxlength="20" placeholder="*必填"
-										value='<%=memberBean.getPassword()%>' /> 
-										<input type="hidden" name="joinDate" value="<%=memberBean.getJoinDate()%>" />
-										<input type="hidden" name="sex" value="<%=memberBean.getSex()%>" />
-										<input type="hidden" name="status" value="4" />
+										value='<%=memberBean.getPassword()%>' /> <input type="hidden"
+										name="joinDate" value="<%=memberBean.getJoinDate()%>" /> <input
+										type="hidden" name="sex" value="<%=memberBean.getSex()%>" />
+									<input type="hidden" name="status" value="4" />
 								</div>
 
 								<div class="product-details-description"></div>
 
 								<div class="quantity-add-to-cart">
-									<button class="single_add_to_cart_button button" onclick="if( !(confirm('資料送出後無法更改，確認送出嗎?') ) ) return false; alert('送出成功!')">申請成為老師</button>
+									<button class="single_add_to_cart_button button"
+										onclick="if( !(confirm('資料送出後無法更改，確認送出嗎?') ) ) return false; alert('送出成功!')">申請成為老師</button>
 									<button type="button" class="btn btn-primary " id="correct">輸入完整資料</button>
 								</div>
 							</div>
@@ -129,6 +132,30 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 
 	}
 </script>
+<script type="text/javascript">
+					function becometeacher() {
+						Swal.fire({
+							title: '確定要送出嗎?',
+							text: "",
+							icon: 'warning',
+							showCancelButton: true,
+							confirmButtonColor: '#3085d6',
+							cancelButtonColor: '#d33',
+							confirmButtonText: '確定',
+							cancelButtonText: '取消',
+						}).then((result) => {
+							if (result.isConfirmed) {
+								Swal.fire({
+									title: '儲存成功',
+									willClose: function () {
+										console.log($('.anu'));
+					                   $('.anu').submit();
+									}
+								})
+							}
+						})
+					}
+				</script>
 <script>
 	$(function() {
 
