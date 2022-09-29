@@ -42,7 +42,7 @@ article {
 									id="Register-form" onSubmit="return isValid(this);">
 									<input type="hidden" name="command" value="login">
 									<div class=group>
-										<label for="account"><i class="fa-solid fa-user"></i>
+										<label for=""><i class="fa-solid fa-user"></i>
 										</label> <input type="text" name="account" id="account"
 											placeholder="請輸入帳號" autocomplete="off" value="id" required>
 									</div>
@@ -50,8 +50,7 @@ article {
 										<label for="password"><i class="fa-solid fa-lock"></i>
 										</label><input type="password" name="password" id="password"
 											placeholder="請輸入密碼(大小寫有別)" autocomplete="off" value="pwd">
-										<span id="message1"
-											style="color: red"> </span>
+										<span id="message1" style="color: red"> </span>
 									</div>
 									<div class=group>
 										<label for="password"><i class="fa-solid fa-lock"></i>
@@ -59,7 +58,7 @@ article {
 											placeholder="重複輸入密碼" autocomplete="off" value="pwd">
 										<span id="message2" style="color: red"> </span>
 									</div>
-									<div >
+									<div>
 										<label for="email"><i class="fa-solid fa-envelope"></i></label><input
 											type="email" name="email" id="email" placeholder="請輸入電子信箱"
 											autocomplete="off" value="email@gmail.com">
@@ -67,7 +66,8 @@ article {
 									<p>
 										<span>${errors.RegisterError}</span> <span>${errors.RegisterErrorAccount}</span>
 									</p>
-									<input type="submit" name="signin" id="signin" value="註冊">
+									<button type="button" name="signin" id="signin" value="註冊"
+										onclick="register()">註冊</button>
 									<button type="button" class="btn btn-primary " id="correct">一鍵輸入</button>
 								</form>
 								<div>
@@ -191,6 +191,32 @@ article {
         }
         }
         </script>
-</body>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
+	<script type="text/javascript">
+	function register() {
+
+		Swal.fire({
+			title: '確定要儲存嗎?"',
+			text: "",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: '確定',
+			cancelButtonText: '取消',
+		}).then((result) => {
+			if (result.isConfirmed) {
+				Swal.fire({
+					title: '儲存成功',
+					willClose: function () {
+						console.log($('.'));
+	                   $('.anu').submit();
+					}
+				})
+			}
+		})
+	}
+        </script>
+</body>
 </html>

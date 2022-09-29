@@ -130,7 +130,7 @@
 	function del(id) {
 		console.log(id);
 		Swal.fire({
-			title: '確認刪除課程?"',
+			title: '確認刪除課程?',
 			text: "",
 			icon: 'warning',
 			showCancelButton: true,
