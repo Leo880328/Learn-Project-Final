@@ -24,37 +24,34 @@ public class ActivityBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	
-	public static final int STATUS_DRAFT= 0;
-	public static final int STATUS_REVIEWING= 1;
-	public static final int STATUS_FINAL= 2;
+	public static final int STATUS_UNFINISHED= 0;
+	public static final int STATUS_NON_PUBLICISE= 1;
+	public static final int STATUS_FINISHED= 2;
+	public static final int STATUS_PUBLIC= 3;
 	
 	
 	@Id @Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+	private int userId;
+	//活動標題
 	private String title;
-	
+	//活動圖片
 	private String previewImage;
-	
+	//活動內容
 	private String content;
-	
 	//人數限制
 	private int participantLimit;
-	//googleMap API
+	//google map 經度
 	private int LocationLongitude;
-	
+	//google map 緯度
 	private int LocationLatitude;
-	
-
+	//狀態碼
 	private int statusCode;
-	
-
-	private int userId;
-	
+	//活動開始時間
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone = "GMT+8")
 	private Date startTime;
-	
+	//活動結束時間
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone = "GMT+8")
 	private Date endTime;
 

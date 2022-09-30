@@ -86,7 +86,7 @@ public class ActivityController {
 		PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
 
 		if (keyWord != null) {
-			Page<ActivityBean> selectAllByTitleLike = activityService.selectAllByTitleLike(pageable, keyWord);
+			Page<ActivityBean> selectAllByTitleLike = activityService.selectActivityByTitleLike(pageable, keyWord);
 			return selectAllByTitleLike;
 		}
 		Page<ActivityBean> selectAllActivity = activityService.selectAllActivity(pageable);
@@ -115,7 +115,6 @@ public class ActivityController {
 	@ResponseBody
 	public ActivityBean updateActivities(@RequestBody() ActivityBean activityBean) {
 		activityBean.setUserId(2);
-
 		ActivityBean updateActivities = activityService.updateActivities(activityBean);
 		return updateActivities;
 
@@ -125,7 +124,7 @@ public class ActivityController {
 	@DeleteMapping("/Activity_OP")
 	@ResponseBody
 	public boolean deleteActivities(@RequestBody ActivityBean activityBean) {
-		activityService.deleteActivities(activityBean);
+		activityService.deleteActivities(activityBean.getId());
 		return true;
 	}
 
@@ -139,7 +138,7 @@ public class ActivityController {
 		activityService.activityReviewing(activityById, message);
 		return true;
 	}
-	//失敗
+	//審核失敗
 	@PostMapping("/Activity-ReviewFail")
 	@ResponseBody
 	public boolean activityReviewFail(@RequestBody Map<String, String> map) {

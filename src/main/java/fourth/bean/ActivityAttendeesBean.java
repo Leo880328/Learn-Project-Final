@@ -1,17 +1,18 @@
 package fourth.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "activity_attendees")
@@ -21,7 +22,9 @@ public class ActivityAttendeesBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	
 	public static final int statusCode_True = 1;
+	public static final int statusCode_default = 0;
 	public static final int statusCode_False = -1;
 	
 	@Id
@@ -34,6 +37,9 @@ public class ActivityAttendeesBean implements Serializable {
 	@JoinColumn(name = "user_id")
 	private MemberBean user;
 	
+	@Column(name = "request_time")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone = "GMT+8")
+	private Date RequestTime;
 	
 	private int statusCode;
 
