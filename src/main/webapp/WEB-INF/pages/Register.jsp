@@ -35,22 +35,26 @@ article {
 				<div class="content-area col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="site-main">
 						<div class="login-item">
-							<div class="sign1">
+							<div class="">
 								<h2 class="title">註冊</h2>
 								<!-- 								<form action="newRegister" method="post" -->
 								<!-- 									modelAttribute="register" class="register-form" -->
 								<!-- 									id="Register-form" onSubmit="return isValid(this);"> -->
 								<input type="hidden" name="command" value="login">
 								<div class=group>
-									<label for=""><i class="fa-solid fa-user"></i> </label> <input
+								
+									<i class="fa-solid fa-user"></i> <input
 										type="text" name="account" id="account" placeholder="請輸入帳號"
-										autocomplete="off" value="id" required>
+										autocomplete="off" value="id" required><div>
+										 <span
+										style='color: red' ; id='msgAccount'></span></div>
 								</div>
+
 								<div class=group>
 									<label for="password"><i class="fa-solid fa-lock"></i>
 									</label><input type="password" name="password" id="password"
 										placeholder="請輸入密碼(大小寫有別)" autocomplete="off" value="pwd">
-									<span id="message1" style="color: red"> </span>
+									<span id="" style="color: red"> </span>
 								</div>
 								<div class=group>
 									<label for="password"><i class="fa-solid fa-lock"></i>
@@ -61,7 +65,8 @@ article {
 								<div>
 									<label for="email"><i class="fa-solid fa-envelope"></i></label><input
 										type="email" name="email" id="email" placeholder="請輸入電子信箱"
-										autocomplete="off" value="email@gmail.com">
+										autocomplete="off" value="email@gmail.com"><div><span
+										id="msgEmail" style="color: red"> </span></div>
 								</div>
 								<p>
 									<span>${errors.RegisterError}</span> <span>${errors.RegisterErrorAccount}</span>
@@ -101,33 +106,39 @@ article {
 			let account = $('#account').val();
 			let password = $('#password').val();
 			let email = $('#email').val();
-			console.log(account)
-			console.log(password)
-			console.log(email)
+			$('#msgAccount').text("");
+			$('#msgEmail').text("");
 			let member = {
-				userId : null,
-				nick : "",
 				account : account,
 				password : password,
-				status : "",
-				name : "",
-				img : "",
 				email : email,
-				joinDate : null,
-				education : "",
-				userprofile : ""
 			}
-			$.ajax({
-				type : "POST",
-				url : 'newRegister',
-				dataType : "JSON",
-				contentType : 'application/json; charset=utf-8',
-				data : JSON.stringify(member),
-				success : function(data) {
-					console.log(200)
+			fetch("newRegister",{
+				method:'POST',
+				headers:{
+					'Content-Type':'application/json'
+				},
+				body:JSON.stringify(member) 
+			}).then(resp=>resp.json())
+			.then(res=>{
+				console.log(res)
+				if('1112'==res.account){
+					
+					$('#msgAccount').text('帳號已註冊');
 				}
+				if('1111'==res.email){
+					
+					$('#msgEmail').text('信箱已註冊');
+				}
+				if(res=='2222')
+				  Swal.fire({
+                      icon: 'success',
+                      title: '註冊成功',
+                      text: '註冊成功，即將前往登入畫面',
+                  }).then(function(){
+                	  location.href='login.controller';
+                  })
 			})
-
 		})
 	</script>
 	<!-- 	<script> -->

@@ -69,7 +69,7 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 										</button>
 									</c:if>
 									<form action="updateMyUser" method="post"
-										class="teamo-contact-fom" onSubmit="return checkNull(this)">
+										class="teamo-contact-fom us" >
 										<div class="row">
 											<div class="col-sm-6">
 												<%
@@ -141,13 +141,13 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 												<span class="form-label">身分</span><span
 													class="form-control-wrap "> <c:if
 														test="<%=memberBean.getStatus() == 1%>">
-															<option class="form-control  value="1">學生</option>
+														<option class="form-control  value="1">學生</option>
 													</c:if> <c:if test="<%=memberBean.getStatus() == 2%>">
 														<option class="form-control value="2">老師</option>
 													</c:if> <c:if test="<%=memberBean.getStatus() == 3%>">
 														<option class="form-control value="3">管理員</option>
 													</c:if> <c:if test="<%=memberBean.getStatus() == 4%>">
-															<option class="form-control value="4">審核中</option>
+														<option class="form-control value="4">審核中</option>
 													</c:if>
 												</span>
 											</div>
@@ -198,8 +198,8 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 
 
 										<p>
-											<input type="submit" value="更改資料"
-												class="form-control-submit button-submit">
+											<button type="button" onclick="checkNull(form)"
+												class="form-control-submit button-submit">更改資料</button>
 											<button type="button" class="btn btn-primary " id="correct">輸入完整資料</button>
 										</p>
 								</div>
@@ -262,19 +262,51 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 	<script type="text/javascript">
 		function checkNull(form) {
 			if (form.account.value == "") {
-				alert("【 " + form.account.title + " 】" + "不能為空!!!");
+				
+				Swal.fire({
+                    icon: 'error',
+                    title: '帳號必填',
+                    text: '請輸入帳號',
+                })
+				
 				return false;
 			}
 			if (form.password.value == "") {
-				alert("【 " + form.password.title + " 】" + "不能為空!!!");
+				Swal.fire({
+                    icon: 'error',
+                    title: '密碼必填',
+                    text: '請輸入密碼',
+                })
 				return false;
 			}
 			if (form.email.value == "") {
-				alert("【 " + form.email.title + " 】" + "不能為空!!!");
+				Swal.fire({
+                    icon: 'error',
+                    title: '信箱必填',
+                    text: '請輸入信箱',
+                })
 				return false;
 			}
-			alert("更改成功")
-
+			Swal.fire({
+				title: '確定要儲存嗎?',
+				text: "",
+				icon: 'submit',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: '確定',
+				cancelButtonText: '取消',
+			}).then((result) => {
+				if (result.isConfirmed) {
+					Swal.fire({
+						title: '儲存成功',
+						willClose: function () {
+							console.log($('.us'));
+		                   $('.us').submit();
+						}
+					})
+				}
+			})
 		}
 	</script>
 	<script>

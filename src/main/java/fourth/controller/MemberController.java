@@ -20,9 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
 
 import fourth.bean.MemberBean;
 import fourth.coursemail.JavaMail;
@@ -135,12 +138,12 @@ public class MemberController {
 	}
 
 	// 註冊 ************************
-	@RequestMapping(path = "/newRegister", method = RequestMethod.POST)
+	@PostMapping(path = "/newRegister")
 	@ResponseBody
 	public String newRegister(@RequestBody MemberBean memberBean, BindingResult result, Model m, Object mb) {
 		System.out.println("進入註冊controller");
-		HashMap<String, String> errors = new HashMap<String, String>();
-		m.addAttribute("errors", errors);
+		HashMap<String, String> errors =null;
+		
 		String timeStamp = new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime());
 //		String bcEncode = new BCryptPasswordEncoder().encode(memberBean.getPassword());
 //		System.out.println("bcEncode :" +bcEncode);
@@ -153,26 +156,36 @@ public class MemberController {
 		MemberBean checkRegisterByAccount = memberService.checkLogin(memberBean.getAccount());
 		System.out.println(checkRegisterByAccount);
 		System.out.println(checkRegisterByEmail);
-		return "信箱已經註冊";
-//		System.out.println("進入完service");
+	
+		System.out.println("進入完service");
 
-//		if (checkRegisterByEmail != null) {
-//			if (checkRegisterByEmail.getEmail() != null) {
-//				errors.put("RegisterError", "<font color=red size=4 >信箱已經註冊!!</font>");
-//				return "信箱已經註冊 幹你娘";
-//			}
-//		}
-//		if (checkRegisterByAccount != null) {
-//			if (checkRegisterByAccount.getAccount() != null) {
-//				errors.put("RegisterErrorAccount", "<font color=red size=4 >帳號已經註冊!!</font>");
-//				return "帳號已經註冊 幹你娘";
-//			}
-//		}
+		if (checkRegisterByEmail != null) {
+			if (checkRegisterByEmail.getEmail() != null) {
+				errors= new HashMap<String, String>();
+				 errors.put("email", "1111");
+			}
+		}
+		if (checkRegisterByAccount != null) {
+			if (checkRegisterByAccount.getAccount() != null) {
+				if(errors==null) {
+					errors=new HashMap<String, String>();
+				}
+				errors.put("account", "1112");
+				
+			}
+		}
+		
+		if(errors!=null) {
+			Gson gson=new Gson();
+			
+			return gson.toJson(errors);
+		}
+		
 
-//		memberService.registerUser(memberBean);
-//		m.addAttribute("register", mb);
-//
-//		return "註冊成功";
+		memberService.registerUser(memberBean);
+		m.addAttribute("register", mb);
+
+		return "2222";
 	}
 
 	// 查詢全部

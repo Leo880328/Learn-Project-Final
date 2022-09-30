@@ -97,7 +97,7 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 
 								<div class="quantity-add-to-cart">
 									<button class="single_add_to_cart_button button"
-										onclick="if( !(confirm('資料送出後無法更改，確認送出嗎?') ) ) return false; alert('送出成功!')">申請成為老師</button>
+										onclick="becometeacher()">申請成為老師</button>
 									<button type="button" class="btn btn-primary " id="correct">輸入完整資料</button>
 								</div>
 							</div>
@@ -111,51 +111,53 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 	</div>
 
 </body>
-<script type="text/javascript">
-	function checkNull(form) {
-		if (form.name.value == "") {
-			alert("【 " + form.name.title + " 】" + "不能為空!!!");
-			return false;
-		}
-		if (form.cellphone.value == "") {
-			alert("【 " + form.cellphone.title + " 】" + "不能為空!!!");
-			return false;
-		}
-		if (form.education.value == "") {
-			alert("【 " + form.education.title + " 】" + "不能為空!!!");
-			return false;
-		}
-		if (form.userprofile.value == "") {
-			alert("【 " + form.userprofile.title + " 】" + "不能為空!!!");
-			return false;
-		}
 
-	}
-</script>
 <script type="text/javascript">
-					function becometeacher() {
-						Swal.fire({
-							title: '確定要送出嗎?',
-							text: "",
-							icon: 'warning',
-							showCancelButton: true,
-							confirmButtonColor: '#3085d6',
-							cancelButtonColor: '#d33',
-							confirmButtonText: '確定',
-							cancelButtonText: '取消',
-						}).then((result) => {
-							if (result.isConfirmed) {
-								Swal.fire({
-									title: '儲存成功',
-									willClose: function () {
-										console.log($('.anu'));
-					                   $('.anu').submit();
-									}
-								})
-							}
-						})
-					}
-				</script>
+		$('#checkRegister').on("click", function() {
+			let name = $('#name').val();
+			let cellphone = $('#celllphone').val();
+			let education = $('#education').val();
+			let userprofile = $('#userprofile').val();
+			$('#msgName').text("");
+			$('#msgCellphone').text("");
+			let member = {
+					name:name,
+					cellphone:cellphone,
+					education:education,
+					userprofile:userprofile,
+					account : account,
+					password : password,
+					email : email,
+			}
+			fetch("newRegister",{
+				method:'POST',
+				headers:{
+					'Content-Type':'application/json'
+				},
+				body:JSON.stringify(member) 
+			}).then(resp=>resp.json())
+			.then(res=>{
+				console.log(res)
+				if('1112'==res.account){
+					
+					$('#msgAccount').text('帳號已註冊');
+					 
+				}
+				if('1111'==res.email){
+					
+					$('#msgEmail').text('信箱已註冊');
+					 return false;
+				}
+				  Swal.fire({
+                      icon: 'success',
+                      title: '註冊成功',
+                      text: '註冊成功，請前往登入畫面',
+                  }).then(function(){
+                	  location.href='logir';
+                  })
+			})
+		})
+	</script>
 <script>
 	$(function() {
 
