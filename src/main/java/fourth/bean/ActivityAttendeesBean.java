@@ -23,23 +23,21 @@ public class ActivityAttendeesBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	
-	public static final int statusCode_True = 1;
 	public static final int statusCode_default = 0;
-	public static final int statusCode_False = -1;
+	public static final int statusCode_False = 1;
+	public static final int statusCode_True = 2;
 	
 	@Id
 	@OneToOne
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "activity_id")
 	private ActivityBean activity;
 
 	@Id
-	@OneToOne
-	@JoinColumn(name = "user_id")
-	private MemberBean user;
+	private int userId;
 	
 	@Column(name = "request_time")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone = "GMT+8")
-	private Date RequestTime;
+	private Date requestTime;
 	
 	private int statusCode;
 
@@ -55,12 +53,21 @@ public class ActivityAttendeesBean implements Serializable {
 		this.activity = activity;
 	}
 
-	public MemberBean getUser() {
-		return user;
+
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setUser(MemberBean user) {
-		this.user = user;
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public Date getRequestTime() {
+		return requestTime;
+	}
+
+	public void setRequestTime(Date requestTime) {
+		requestTime = requestTime;
 	}
 
 	public int getStatusCode() {

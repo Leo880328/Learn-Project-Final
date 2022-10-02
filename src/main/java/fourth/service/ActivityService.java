@@ -1,7 +1,6 @@
 package fourth.service;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import fourth.bean.ActivityAttendeesBean;
 import fourth.bean.ActivityBean;
 import fourth.bean.ActivityReviewBean;
-import fourth.bean.MemberBean;
 import fourth.dao.ActivityAttendeesRepository;
 import fourth.dao.ActivityRepository;
 import fourth.dao.ActivityReviewRepository;
@@ -61,25 +59,23 @@ public class ActivityService {
 	}
 
 	// 新增活動資料
-	public ActivityBean insertActivities(ActivityBean activity) {
+	public ActivityBean insertActivity(ActivityBean activity) {
 		if (activity != null) {
-			activity.setStatusCode(ActivityBean.STATUS_UNFINISHED);
 			return activityRepository.save(activity);
 		}
 		return null;
 	}
 
 	// 調用資料庫更新活動
-	public ActivityBean updateActivities(ActivityBean activity) {
+	public ActivityBean updateActivity(ActivityBean activity) {
 		if (activity != null) {
-			activity.setStatusCode(ActivityBean.STATUS_UNFINISHED);
 			return activityRepository.save(activity);
 		}
 		return null;
 	}
 
 	// 調用資料庫刪除活動
-	public boolean deleteActivities(int activityId) {
+	public boolean deleteActivity(int activityId) {
 		Optional<ActivityBean> activity = activityRepository.findById(activityId);
 
 		if (activity.isPresent()) {
@@ -91,77 +87,78 @@ public class ActivityService {
 
 	// ======================================================================================================
 
-	// 辦理活動者查看狀態
+	public Page<ActivityBean> selectAllActivityByUserId(Pageable pageable, int userId) {
+		return activityRepository.findAllByUserId(pageable, userId);
+	}
+
+	public Page<ActivityBean> selectPublicActivityByUserId(Pageable pageable, int userId) {
+		return activityRepository.findAllByUserIdAndStatusCode(pageable, userId, ActivityBean.STATUS_PUBLIC);
+	}
+
+	// 辦理活動者查看狀態紀錄
 	public Page<ActivityReviewBean> selectReviewByActivityId(Pageable pageable, int activityId) {
 		return activityReviewRepository.findAllByActivityId(pageable, activityId);
 	}
 
+	// 讀取參加者名單
+	public Page<ActivityAttendeesBean> selectAttendeesByActivityId(Pageable pageable, int activityId) {
+		return activityAttendeesRepository.findAllByActivityID(pageable, activityId);
+
+	}
+
+	// 讀取有效參加者名單
+	public Page<ActivityAttendeesBean> selectEffectiveAttendeesByActivityId(Pageable pageable, int activityId) {
+		return activityAttendeesRepository.findRegisterEffectiveByUserID(pageable, activityId);
+
+	}
+
+	// 調取使用者參加活動名單
+	public Page<ActivityAttendeesBean> selectAttendeesByUserId(Pageable pageable, int userId) {
+		return activityAttendeesRepository.findAllByUserID(pageable, userId);
+
+	}
+
+	// 拿取目前參加者數量
+	public int getActivityFindEffectiveNumber(int activityId) {
+		return  activityAttendeesRepository.findEffectiveNumberByActivityID(activityId);
+	}
+
+	// =======================================================================================================
 	// 管理者查看需要審核
-	public Page<ActivityReviewBean> selectReviewByActivityReviewing(Pageable pageable) {
-		return activityReviewRepository.findAllByStatusCode(pageable, ActivityReviewBean.STATUS_REVIEW_ING);
-	}
-
-	// 活動送審核
-	public String activityReviewing(int activityById, String message) {
-		ActivityBean selectActivityById = this.selectActivityById(activityById);
-		// log
-		ActivityReviewBean activityReviewBean = new ActivityReviewBean(activityById, message,
-				ActivityReviewBean.STATUS_REVIEW_ING);
-		activityReviewRepository.save(activityReviewBean);
-		this.updateActivities(selectActivityById);
-		return "true";
+	public Page<ActivityBean> selectReviewingActivity(Pageable pageable) {
+		return activityRepository.findAllByStatusCode(pageable, ActivityBean.STATUS_REVIEW_ING);
 	}
 
 	// 活動審核失敗
-	public String activityReviewFail(int activityById, String message) {
+	public String activityReviewFalse(int activityById, String message) {
 		ActivityBean selectActivityById = this.selectActivityById(activityById);
+		selectActivityById.setStatusCode(ActivityBean.STATUS_REVIEW_FAIL);
 		// log
-		activityReviewRepository
-				.save(new ActivityReviewBean(activityById, message, ActivityReviewBean.STATUS_REVIEW_FAIL));
-		this.updateActivities(selectActivityById);
+		this.updateActivity(selectActivityById);
 		return "true";
 	}
 
-	// 活動審核失敗
-	public String activityRviewSuccessful(int activityById, String message) {
+	// 活動審核成功
+	public String activityRviewTrue(int activityById) {
 		ActivityBean selectActivityById = this.selectActivityById(activityById);
 		selectActivityById.setStatusCode(ActivityBean.STATUS_PUBLIC);
 		// log
-		activityReviewRepository
-				.save(new ActivityReviewBean(activityById, message, ActivityReviewBean.STATUS_REVIEW_SUCCESSFUL));
-		this.updateActivities(selectActivityById);
+		this.updateActivity(selectActivityById);
 		return "true";
 	}
 
 	// =================================================================================================================
-	// 讀取參加者名單
-	public List<ActivityAttendeesBean> selectAttendeesByActivityId(int activityId) {
-		List<ActivityAttendeesBean> findAttendeesByActivityID = activityAttendeesRepository
-				.findAllByActivityID(activityId);
-		return findAttendeesByActivityID;
-	}
 
-	public List<ActivityAttendeesBean> selectAttendeesByUserId(int userId) {
-		List<ActivityAttendeesBean> findAttendeesByActivityID = activityAttendeesRepository.findAllByUserID(userId);
-		return findAttendeesByActivityID;
-	}
-
-//	拿取目前參加者數量
-	public int getActivityParticipantsNumber(int activityId) {
-		List<ActivityAttendeesBean> selectAttendeesByActivityId = selectAttendeesByActivityId(activityId);
-		return selectAttendeesByActivityId.size();
-	}
-
-//	報名活動
-	public String insertActivityAttendees(ActivityBean activityBean, MemberBean memberBean) {
-		if (activityBean.getParticipantLimit() > getActivityParticipantsNumber(activityBean.getId())) {
+	// 報名活動
+	public String insertActivityAttendees(ActivityBean activityBean, int userId) {
+		if (activityBean.getNumberLimit() > getActivityFindEffectiveNumber(activityBean.getId())) {
 			ActivityAttendeesBean activityAttendeesBean = new ActivityAttendeesBean();
 			activityAttendeesBean.setActivity(activityBean);
-			activityAttendeesBean.setUser(memberBean);
+			activityAttendeesBean.setUserId(userId);
 			activityAttendeesRepository.save(activityAttendeesBean);
 
-			if (getActivityParticipantsNumber(activityBean.getId()) >= activityBean.getParticipantLimit()) {
-				activityBean.setStatusCode(ActivityBean.STATUS_FINISHED);
+			if (getActivityFindEffectiveNumber(activityBean.getId()) >= activityBean.getNumberLimit()) {
+				activityBean.setStatusCode(ActivityBean.STATUS_NON_PUBLIC);
 			}
 			return "報名成功";
 		}

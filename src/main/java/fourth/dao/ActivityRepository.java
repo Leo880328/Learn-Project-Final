@@ -20,6 +20,10 @@ public interface ActivityRepository extends JpaRepository<ActivityBean, Integer>
 	
 	public Page<ActivityBean> findAllByStatusCode(Pageable pageable,int activityStatus);
 	
+	public Page<ActivityBean> findAllByUserId(Pageable pageable,int userId);
+	
+	public Page<ActivityBean> findAllByUserIdAndStatusCode(Pageable pageable,int userId,int statusCode);
+	
 	public Page<ActivityBean> findAllByTitleLike(Pageable pageable,String keyWord);
 	
 	

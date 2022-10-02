@@ -7,22 +7,24 @@ public class ActivityAttendeesId implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private int activity;
-	private int user;
+	
+	private int userId;
+
+	
 	public int getActivity() {
 		return activity;
 	}
+
 	public void setActivity(int activity) {
 		this.activity = activity;
 	}
-	public int getUser() {
-		return user;
+
+	public int getUserId() {
+		return userId;
 	}
-	public void setUser(int user) {
-		this.user = user;
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	
-	
-	
-	
 	
 }

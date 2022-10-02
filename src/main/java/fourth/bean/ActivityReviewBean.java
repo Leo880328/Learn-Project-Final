@@ -21,11 +21,6 @@ public class ActivityReviewBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	public static final int STATUS_REVIEW_FAIL=-1;
-	public static final int STATUS_REVIEW_ING= 0;
-	public static final int STATUS_REVIEW_SUCCESSFUL=1;
-	
-	
 	public ActivityReviewBean() {
 		
 	}
@@ -47,6 +42,9 @@ public class ActivityReviewBean implements Serializable{
 	
 	@Column(name = "activity_id")
 	private int activityId;
+	
+	
+	private String activityTitle;
 	
 	@Column(name = "message")
 	private String message;
@@ -79,6 +77,18 @@ public class ActivityReviewBean implements Serializable{
 
 	public void setActivityId(int activityId) {
 		this.activityId = activityId;
+	}
+
+
+
+	public String getActivityTitle() {
+		return activityTitle;
+	}
+
+
+
+	public void setActivityTitle(String activityTitle) {
+		this.activityTitle = activityTitle;
 	}
 
 
