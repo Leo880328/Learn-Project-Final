@@ -91,7 +91,10 @@ public class OrderController {
 		return orderUserList;
 	}
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 	@ResponseBody
 	@GetMapping(path = "order/{id}")
 	public OrderUser OrderById(@PathVariable("id") String cartID) {
@@ -139,12 +142,19 @@ public class OrderController {
 	public String updateOrder(
 			@PathVariable(required = false , value = "status")	int status,
 			@PathVariable(required = false, value="orderId") String orderId,
+<<<<<<< HEAD
 			@PathVariable(value = "number",required = false) String number,
+=======
+>>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 			Model m,HttpServletRequest request) throws SQLException  {
 		String url =request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 		+ request.getContextPath();
 		MemberBean user = (MemberBean)m.getAttribute("user");
+<<<<<<< HEAD
 		orderService.updateOrder(user.getStatus(), status, orderId,url,number);
+=======
+		orderService.updateOrder(user.getStatus(), status, orderId,url);
+>>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 		return "redirect:/orderList";
 	}
 	
@@ -194,6 +204,7 @@ public class OrderController {
 		List<OrderUser> searchStatust = orderService.searchStatust(user.getuserId(), status);
 		return searchStatust;
 	}
+<<<<<<< HEAD
 	
 	
 
@@ -226,4 +237,6 @@ public class OrderController {
 		m.addAttribute("logs",logs);
 		return "log";
 	}
+=======
+>>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 }

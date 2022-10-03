@@ -95,6 +95,7 @@
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.9.4</version>
+<<<<<<< HEAD
 
 		</dependency>
 		<dependency>
@@ -109,6 +110,22 @@
 			<version>2.17.1</version>
 		</dependency>
 
+=======
+		
+		</dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+		<version>1.6.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.17.1</version>
+		</dependency>
+		
+>>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 
 
 
@@ -132,6 +149,7 @@
 			<version>7.2.0</version>
 			<type>pom</type>
 		</dependency>
+<<<<<<< HEAD
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
@@ -141,6 +159,9 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.12.0</version>
 		</dependency>
+=======
+
+>>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 	</dependencies>
 
 	<build>

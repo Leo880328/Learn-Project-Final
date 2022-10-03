@@ -121,10 +121,17 @@
 				</td>
 				</c:if>
 				<c:if test="${course.course_status == 2}">
+<<<<<<< HEAD
 <%-- 				<td><a href="course.delete?courseId=${course.courseId}"><button --%>
 <!-- 							onclick="if( !(confirm('確認刪除?') ) ) return false; alert('刪除成功!')" -->
 <!-- 							id='delete' type="submit" name="delete" value="刪除課程"> <i class="fa-solid fa-trash"></i>  刪除</button></a></td> -->
 				<td><button onclick="del(${course.courseId})"
+=======
+<%-- 				<td><a href="course.delete?course_id=${course.course_id}"><button --%>
+<!-- 							onclick="if( !(confirm('確認刪除?') ) ) return false; alert('刪除成功!')" -->
+<!-- 							id='delete' type="submit" name="delete" value="刪除課程"> <i class="fa-solid fa-trash"></i>  刪除</button></a></td> -->
+				<td><button onclick="del(${course.course_id})"
+>>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 							id='delete' type="submit" name="delete" value="刪除課程"> <i class="fa-solid fa-trash"></i>  刪除</button></td>
 				</c:if>
 			</tr>

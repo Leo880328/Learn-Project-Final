@@ -112,6 +112,7 @@
 							<c:choose>
 								<c:when test="${queryResult != null }">
 									<c:forEach var="course" items="${queryResult}">
+<<<<<<< HEAD
 										<c:if test="${course.course_status == 2}">
 											<li
 												class="product-item style-list col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12">
@@ -425,6 +426,8 @@
 										<h3 class="custom_blog_title">已審核課程</h3>
 									</div>
 									<c:forEach var="course" items="${queryResult5}">
+=======
+>>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 										<c:if test="${course.course_status == 2}">
 											<li
 												class="product-item style-list col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12">
@@ -498,6 +501,319 @@
 																$
 																<c:out value="${course.course_price}" />
 															</div>
+															<form class="cart">
+																<div class="single_variation_wrap">
+																	<div class="quantity">
+																		<div class="control">
+																			<a class="btn-number qtyminus quantity-minus"
+																				href="#">-</a><input type="text" data-step="1"
+																				data-min="0" value="1" title="Qty"
+																				class="input-qty qty" size="4"><a href="#"
+																				class="btn-number qtyplus quantity-plus">+</a>
+																		</div>
+																	</div>
+																	<c:if test="${course.course_status == 2}">
+																		<button class="single_add_to_cart_button button">
+																			加入購物車 <i class="fa-solid fa-cart-shopping"></i>
+																		</button>
+																	</c:if>
+																</div>
+															</form>
+														</div>
+													</div>
+												</div>
+											</li>
+										</c:if>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<c:forEach var="course" items="${list}">
+										<c:if test="${course.course_status == 1}">
+											<div>
+												<h3 class="custom_blog_title">待審核課程</h3>
+											</div>
+											<li
+												class="product-item style-list col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12">
+												<div class="product-inner equal-element">
+													<div class="product-top"></div>
+													<div class="products-bottom-content">
+														<div class="product-thumb">
+															<div class="thumb-inner">
+																<img src="<c:out value="${course.course_picture}"/>"
+																	alt="img">
+															</div>
+														</div>
+														<div class="product-info-left">
+															<div class="yith-wcwl-add-to-wishlist">
+																<div class="yith-wcwl-add-button">
+																	<a href="#">Add to Wishlist</a>
+																</div>
+															</div>
+															<h5 class="product-name product_title">
+																<c:if test="${course.course_status == 1}">
+																	<c:out value="${course.course_name}" />
+																</c:if>
+																<c:if test="${course.course_status == 2}">
+																	<a
+																		href="coursefront.details?course_id=${course.course_id}">
+																		<c:out value="${course.course_name}" />
+																	</a>
+																</c:if>
+															</h5>
+															<br>
+															<ul class="product-attributes">
+																<li>課程編號:</li>
+																<li><c:out value="${course.course_id}" /></li>
+															</ul>
+															<ul class="product-attributes">
+																<li>課程講師:</li>
+																<li><c:out value="${course.lecturer_name}" /></li>
+															</ul>
+															<ul class="attributes-display">
+																<li class="swatch-color">已購買人數:</li>
+																<li class="swatch-color"><c:out
+																		value="${course.enrollment}" /></li>
+
+															</ul>
+															<ul class="attributes-display">
+																<li class="swatch-text-label">上架日期:</li>
+																<li class="swatch-text-label"><c:out
+																		value="${course.course_date}" /></li>
+
+															</ul>
+															<ul class="attributes-display">
+																<li class="swatch-text-label">狀態:</li>
+																<c:if test="${course.course_status == 1}">
+																	<li class="swatch-text-label" style="color:red">未審核</li>
+																</c:if>
+																<c:if test="${course.course_status == 2}">
+																	<li class="swatch-text-label" >審核完成</li>
+																</c:if>
+															</ul>
+														</div>
+														<div class="product-info-right">
+															<br>
+															<div class="product-list-message">課程價格</div>
+															<div class="price">
+																$
+																<c:out value="${course.course_price}" />
+															</div>
+															<div class="single_variation_wrap">
+																<div class="quantity">
+																	<div class="control">
+																		<a class="btn-number qtyminus quantity-minus" href="#">-</a><input
+																			type="text" data-step="1" data-min="0" value="1"
+																			title="Qty" class="input-qty qty" size="4"><a
+																			href="#" class="btn-number qtyplus quantity-plus">+</a>
+																	</div>
+																</div>
+																<c:if test="${course.course_status == 1}">
+																	<button
+																				onclick="del(${course.course_id})"
+																				class="single_add_to_cart_button button"
+																				style="background-color: red">
+																				  刪除課程  <i class="fa-solid fa-trash"></i>
+																			</button>
+																</c:if>
+															</div>
+														</div>
+													</div>
+												</div>
+											</li>
+										</c:if>
+									</c:forEach>
+									<c:forEach var="course" items="${list}">
+										<c:if test="${course.course_status == 3}">
+											<div>
+												<h3 class="custom_blog_title">已駁回課程</h3>
+											</div>
+											<li
+												class="product-item style-list col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12">
+												<div class="product-inner equal-element">
+													<div class="product-top"></div>
+													<div class="products-bottom-content">
+														<div class="product-thumb">
+															<div class="thumb-inner">
+																<a href="coursefront.show?course_id=${course.course_id}"><img
+																	src="<c:out value="${course.course_picture}"/>"
+																	alt="img"></a>
+															</div>
+														</div>
+														<div class="product-info-left">
+															<div class="yith-wcwl-add-to-wishlist">
+																<div class="yith-wcwl-add-button">
+																	<a href="#">Add to Wishlist</a>
+																</div>
+															</div>
+															<h5 class="product-name product_title">
+																<c:if
+																	test="${course.course_status == 1 || course.course_status == 3}">
+																	<a
+																		href="coursefront.show?course_id=${course.course_id}">
+																		<c:out value="${course.course_name}" />
+																	</a>
+																</c:if>
+																<c:if test="${course.course_status == 2}">
+																	<a
+																		href="coursefront.details?course_id=${course.course_id}">
+																		<c:out value="${course.course_name}" />
+																	</a>
+																</c:if>
+															</h5>
+															<div class="stars-rating">
+																<c:if test="${course.course_status == 3}">
+																</c:if>
+															</div>
+															<ul class="product-attributes">
+																<li>課程編號:</li>
+																<li><c:out value="${course.course_id}" /></li>
+															</ul>
+															<ul class="product-attributes">
+																<li>課程講師:</li>
+																<li><c:out value="${course.lecturer_name}" /></li>
+															</ul>
+															<ul class="attributes-display">
+																<li class="swatch-color">已購買人數:</li>
+																<li class="swatch-color"><c:out
+																		value="${course.enrollment}" /></li>
+
+															</ul>
+															<ul class="attributes-display">
+																<li class="swatch-text-label">上架日期:</li>
+																<li class="swatch-text-label"><c:out
+																		value="${course.course_date}" /></li>
+
+															</ul>
+															<ul class="attributes-display">
+																<li class="swatch-text-label">狀態:</li>
+																<c:if test="${course.course_status == 1}">
+																	<li class="swatch-text-label" style="color:red">未審核</li>
+																</c:if>
+																<c:if test="${course.course_status == 2}">
+																	<li class="swatch-text-label">審核完成</li>
+																</c:if>
+																<c:if test="${course.course_status == 3}">
+																	<li class="swatch-text-label" style="color:red">已駁回</li>
+																</c:if>
+															</ul>
+															<br>
+															<ul class="attributes-display">
+																<a href="coursefront.show?course_id=${course.course_id}">
+																	<li class="swatch-text-label" style="color: red"><i
+																		class="fa-solid fa-circle-info"></i></i></li>
+																	<li class="swatch-text-label" style="color: red">可修改課程資訊並重新送出審核</li>
+																</a>
+															</ul>
+
+
+														</div>
+														<div class="product-info-right">
+															<br>
+															<div class="product-list-message">課程價格</div>
+															<div class="price">
+																$
+																<c:out value="${course.course_price}" />
+															</div>
+																<div class="single_variation_wrap">
+																	<div class="quantity">
+																		<div class="control">
+																			<a class="btn-number qtyminus quantity-minus"
+																				href="#">-</a><input type="text" data-step="1"
+																				data-min="0" value="1" title="Qty"
+																				class="input-qty qty" size="4"><a href="#"
+																				class="btn-number qtyplus quantity-plus">+</a>
+																		</div>
+																	</div>
+																<button
+																				onclick="del(${course.course_id})"
+																				class="single_add_to_cart_button button"
+																				style="background-color: red">
+																				  刪除課程  <i class="fa-solid fa-trash"></i>
+																			</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</li>
+										</c:if>
+									</c:forEach>
+									<div>
+										<h3 class="custom_blog_title">已審核課程</h3>
+									</div>
+									<c:forEach var="course" items="${queryResult5}">
+										<c:if test="${course.course_status == 2}">
+											<li
+												class="product-item style-list col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12">
+												<div class="product-inner equal-element">
+													<div class="product-top"></div>
+													<div class="products-bottom-content">
+														<div class="product-thumb">
+															<div class="thumb-inner">
+																<a href="#"><img
+																	src="<c:out value="${course.course_picture}"/>"
+																	alt="img"></a>
+															</div>
+														</div>
+														<div class="product-info-left">
+															<div class="yith-wcwl-add-to-wishlist">
+																<div class="yith-wcwl-add-button">
+																	<a href="#">Add to Wishlist</a>
+																</div>
+															</div>
+															<h5 class="product-name product_title">
+																<c:if test="${course.course_status == 1}">
+																	<c:out value="${course.course_name}" />
+																</c:if>
+																<c:if test="${course.course_status == 2}">
+																	<a
+																		href="coursefront.details?course_id=${course.course_id}">
+																		<c:out value="${course.course_name}" />
+																	</a>
+																</c:if>
+															</h5>
+															<div class="stars-rating">
+																<div class="star-rating">
+																	<span class="star-5"></span>
+																</div>
+																<div class="count-star">(5)</div>
+															</div>
+															<ul class="product-attributes">
+																<li>課程編號:</li>
+																<li><c:out value="${course.course_id}" /></li>
+															</ul>
+															<ul class="product-attributes">
+																<li>課程講師:</li>
+																<li><c:out value="${course.lecturer_name}" /></li>
+															</ul>
+															<ul class="attributes-display">
+																<li class="swatch-color">已購買人數:</li>
+																<li class="swatch-color"><c:out
+																		value="${course.enrollment}" /></li>
+
+															</ul>
+															<ul class="attributes-display">
+																<li class="swatch-text-label">上架日期:</li>
+																<li class="swatch-text-label"><c:out
+																		value="${course.course_date}" /></li>
+
+															</ul>
+															<ul class="attributes-display">
+																<li class="swatch-text-label">狀態:</li>
+																<c:if test="${course.course_status == 1}">
+																	<li class="swatch-text-label" style="color:red">未審核</li>
+																</c:if>
+																<c:if test="${course.course_status == 2}">
+																	<li class="swatch-text-label">審核完成</li>
+																</c:if>
+															</ul>
+														</div>
+														<div class="product-info-right">
+															<br>
+															<div class="product-list-message">課程價格</div>
+															<div class="price">
+																$
+																<c:out value="${course.course_price}" />
+															</div>
 																<div class="single_variation_wrap">
 																	<div class="quantity">
 																		<div class="control">
@@ -513,7 +829,11 @@
 																			加入購物車 <i class="fa-solid fa-cart-shopping"></i>
 																		</button>
 																		<br>
+<<<<<<< HEAD
 <%-- 																		<a href="coursefront.delete?courseId=${course.courseId}"> --%>
+=======
+<%-- 																		<a href="coursefront.delete?course_id=${course.course_id}"> --%>
+>>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 <!-- 																			<button -->
 <!-- 																				onclick="if( !(confirm('確認刪除?') ) ) return false; alert('刪除成功!')" -->
 <!-- 																				class="single_add_to_cart_button button" -->
@@ -521,7 +841,11 @@
 <!-- 																				  刪除課程  <i class="fa-solid fa-trash"></i> -->
 <!-- 																			</button> -->
                                                                              <button
+<<<<<<< HEAD
 																				onclick="del(${course.courseId})"
+=======
+																				onclick="del(${course.course_id})"
+>>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 																				class="single_add_to_cart_button button"
 																				style="background-color: red">
 																				  刪除課程  <i class="fa-solid fa-trash"></i>

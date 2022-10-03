@@ -67,7 +67,11 @@
 
 </head>
 <html>
+<<<<<<< HEAD
 <body >
+=======
+<body>
+>>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 	<c:if test="${sessionScope.user == null}">
 		<% request.getRequestDispatcher("/Login.jsp").forward(request, response); %>
 	</c:if>
@@ -82,9 +86,13 @@
 		<c:otherwise>
 			<jsp:include page="Header.jsp" />
 
+<<<<<<< HEAD
 <%-- 			<jsp:include page="orderUser.jsp" /> --%>
 
 			<jsp:include page="newOrderUser.jsp" />
+=======
+			<jsp:include page="orderUser.jsp" />
+>>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 
 		</c:otherwise>
 	</c:choose>
