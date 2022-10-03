@@ -172,7 +172,7 @@ public class OrderUser implements Serializable{
 
 	public void setorderItems(List<OrderItem> orderItems) {
 		this.orderItems = orderItems;
-<<<<<<< HEAD
+
 	}
 
 	
@@ -184,18 +184,15 @@ public class OrderUser implements Serializable{
 
 	public void setVoucher(Voucher voucher) {
 		this.voucher = voucher;
-=======
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
 	}
 
 	@Override
 	public String toString() {
 		return "OrderUser [orderId=" + orderId  + ", date=" + date + ", status=" + status
-<<<<<<< HEAD
+
 				+ ", totoalcount=" + totoalcount + ", voucher=" + voucher + ", totoalprice=" + totoalprice + "]" + memberBean;
-=======
-				+ ", totoalcount=" + totoalcount + ", discount=" + discount + ", totoalprice=" + totoalprice + "]" + memberBean;
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
 	}
 	
 	public void addorderItems(OrderItem item) {

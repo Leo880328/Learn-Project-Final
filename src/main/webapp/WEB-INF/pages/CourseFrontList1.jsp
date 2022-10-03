@@ -1,4 +1,4 @@
-z<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.*,fourth.*"%>
 <!DOCTYPE html>
@@ -129,11 +129,9 @@ border-radius: 5px;
 								<c:when test="${queryResult != null }">
 									<c:forEach var="course" items="${queryResult}">
 									  <c:if test="${course.course_status == 2}">
-<<<<<<< HEAD
-											<%-- <input type="hidden" name="courseId" value='<c:out value="${course.courseId}"/>'> --%>
-=======
-											<%-- <input type="hidden" name="course_id" value='<c:out value="${course.course_id}"/>'> --%>
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
+											<input type="hidden" name="courseId" value='<c:out value="${course.courseId}"/>'>
+
 											<li
 												class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
 												<div class="product-inner equal-element">
@@ -214,11 +212,9 @@ border-radius: 5px;
 																</ins>
 															</div>
 															<br> 
-<<<<<<< HEAD
+
 															<button class="fa-solid fa-cart-shopping" onclick="add(${course.courseId})">加入購物車</button>
-=======
-															<button class="fa-solid fa-cart-shopping" onclick="add(${course.course_id})">加入購物車</button>
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
 														</div>
 													</div>
 												</div>

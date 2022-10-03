@@ -206,7 +206,7 @@
 					</div>
 
 				</c:if>
-<<<<<<< HEAD
+
 				
 				
 						<c:if test="${order.status.id == 1}">
@@ -224,19 +224,7 @@
 								<form action="goEcpay" method="post" id="ecpay">
 									<input type="hidden" name="orderID" value="${order.orderId}" />
 									<input type="hidden" name="number"  />
-=======
-						<c:if test="${order.status.id == 1}">
-<!-- 							//"updateOrder/5/" + orderId -->
-							<div style="margin: auto; width: 88px;">
-							
-							
-<%-- 								<form action="updateOrder/2/${order.orderId}"  method="get"> --%>
-<!-- 									<button class="btn btn-success"  onclick="if( !(confirm('確認付款?') ) ) return false ; ">確認付款</button> -->
-<!-- 								</form> -->
 
-								<form action="goEcpay" method="post">
-									<input type="hidden" name="orderID" value="${order.orderId}" />
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 									<button class="btn btn-success"  onclick="if( !(confirm('確認付款?') ) ) return false ; ">確認付款</button>
 								</form>
 								

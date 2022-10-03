@@ -21,25 +21,12 @@
 </style>
 <script>
 	$(function(){
-<<<<<<< HEAD
+
 			if(${order.voucher != null}){
 				$("#sum").html("$"+Math.round(${order.totoalprice * order.voucher.discount}));
 				$("#bar").css("text-decoration","line-through");
 			}
-=======
-// 		$("#up").click(function(){
-// 			var status = $("#status").val();
-// 			$.ajax({
-// 				async : false,
-// 				type:"GET",
-// 				url:"updateOrder/"+status+"/${order.orderId }",
-// 				success:function(data){
-// 					window.location.href="${path}/orderList";
-// 					console.log(data);
-// 				}
-// 			})
-// 		})
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
 	})
 </script>
 </head>

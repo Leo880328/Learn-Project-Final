@@ -58,7 +58,6 @@ public class CartController {
 	@PostMapping(path = "/cartadd/{id}")
 	public String addCart(Model m,@PathVariable("id") String courseID) throws SQLException {
 		MemberBean user = (MemberBean)m.getAttribute("user");
-<<<<<<< HEAD
 		CartItem cartItem = cartService.findsameCourse(courseID,user.getuserId());
 		if(cartItem != null) {
 			return "exist";
@@ -66,21 +65,8 @@ public class CartController {
 			cartService.cartAdd(courseID,user.getuserId());
 		}
 		return "add Ok";
-=======
-		cartService.cartAdd(courseID,user.getuserId());
-//<<<<<<< HEAD
-//		CourseBean cbean = cService.findByCourseId(WebUtils.paseInt(courseID));
-//		m.addAttribute("cbean", cbean); 
-//		return "Details";
-//=======
 
-		return "add Ok";
 
-//		CourseBean cbean = cService.findByCourseId(WebUtils.paseInt(courseID));
-//		m.addAttribute("cbean", cbean); 
-//		return "Details";
-
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 	}
 	
 	@SystemControllerLog(description = "刪除購物車品項")
@@ -91,11 +77,8 @@ public class CartController {
 		return "deleteOK";
 	}
 
-<<<<<<< HEAD
+
 	@SystemControllerLog(description = "清空購物車")
-=======
-	
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 	@ResponseBody
 	@PostMapping(path = "/cart/clearCart")
 	public String clearCart(Model m) {

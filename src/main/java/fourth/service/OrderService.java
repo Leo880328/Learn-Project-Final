@@ -160,11 +160,9 @@ public class OrderService {
 	}
 
 	// @Override
-<<<<<<< HEAD
+
 	public void updateOrder(int userStatus, int status, String orderId ,String url,String number) throws SQLException {
-=======
-	public void updateOrder(int userStatus, int status, String orderId ,String url) throws SQLException {
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
 		OrderUser orderUser = orderRepository.findById(orderId).get();
 		OrderStatus orderStatus = orderStatusRepository.findById(status).get();
 		orderUser.setStatus(orderStatus);
@@ -246,7 +244,6 @@ public class OrderService {
 	}
 
 	public void sendbuyMail(OrderUser orderUser,String url) {
-<<<<<<< HEAD
 		
 		double total = orderUser.getTotoalprice();
 		
@@ -257,11 +254,7 @@ public class OrderService {
 		String txt = "<h2>" + "訂單編號: " + orderUser.getOrderId() + "<br>" + "訂單生成日期: " + orderUser.getDate() + "<br>"
 				+ "購買人姓名: " + orderUser.getMemberBean().getName() + "<br>" + "購買人信箱: "
 				+ orderUser.getMemberBean().getEmail() + "<br>" + "總金額: " + total + "<br>"
-=======
-		String txt = "<h2>" + "訂單編號: " + orderUser.getOrderId() + "<br>" + "訂單生成日期: " + orderUser.getDate() + "<br>"
-				+ "購買人姓名: " + orderUser.getMemberBean().getName() + "<br>" + "購買人信箱: "
-				+ orderUser.getMemberBean().getEmail() + "<br>" + "總金額: " + orderUser.getTotoalprice() + "<br>"
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
 				+ "審核結果: 付款完成"+"<br>"
 				+"網站連結: <a href="+url +">EEIT49 好學生</a>"+"<h2>";
 		JavaMail javaMail = new JavaMail();
@@ -271,7 +264,7 @@ public class OrderService {
 		javaMail.sendMail();
 	}
 	public void sendbackMail(OrderUser orderUser,String url) {
-<<<<<<< HEAD
+
 		
 		double total = orderUser.getTotoalprice();
 		
@@ -281,25 +274,16 @@ public class OrderService {
 		String txt = "<h2>" + "訂單編號: " + orderUser.getOrderId() + "<br>" + "訂單生成日期: " + orderUser.getDate() + "<br>"
 				+ "購買人姓名: " + orderUser.getMemberBean().getName() + "<br>" + "購買人信箱: "
 				+ orderUser.getMemberBean().getEmail() + "<br>" + "總金額: " + total +"<br>"
-=======
-		String txt = "<h2>" + "訂單編號: " + orderUser.getOrderId() + "<br>" + "訂單生成日期: " + orderUser.getDate() + "<br>"
-				+ "購買人姓名: " + orderUser.getMemberBean().getName() + "<br>" + "購買人信箱: "
-				+ orderUser.getMemberBean().getEmail() + "<br>" + "總金額: " + orderUser.getTotoalprice()+"<br>"
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 				+ "審核結果: 已退款"+"<br>"
 				+"網站連結: <a href="+url +">EEIT49 好學生</a>"+"<h2>";
 		JavaMail javaMail = new JavaMail();
 		javaMail.setCustomer("ggyy45529441@gmail.com");
-<<<<<<< HEAD
 		javaMail.setSubject("好學生-EEIT49");
-=======
-		javaMail.setSubject("好學生-EEIT49 申請退款已成功!");
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 		javaMail.setTxt(txt);
 		javaMail.sendMail();
 	}
 	public void sendTurnMail(OrderUser orderUser,String url) {
-<<<<<<< HEAD
+
 		double total = orderUser.getTotoalprice();
 		
 		if(orderUser.getVoucher()!= null) {
@@ -308,20 +292,11 @@ public class OrderService {
 		String txt = "<h2>" + "訂單編號: " + orderUser.getOrderId() + "<br>" + "訂單生成日期: " + orderUser.getDate() + "<br>"
 				+ "購買人姓名: " + orderUser.getMemberBean().getName() + "<br>" + "購買人信箱: "
 				+ orderUser.getMemberBean().getEmail() + "<br>" + "總金額: " + total + "<br>"
-=======
-		String txt = "<h2>" + "訂單編號: " + orderUser.getOrderId() + "<br>" + "訂單生成日期: " + orderUser.getDate() + "<br>"
-				+ "購買人姓名: " + orderUser.getMemberBean().getName() + "<br>" + "購買人信箱: "
-				+ orderUser.getMemberBean().getEmail() + "<br>" + "總金額: " + orderUser.getTotoalprice() + "<br>"
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 				+"審核結果: 已駁回" +"<br>"
 				+"網站連結: <a href="+url +">EEIT49 好學生</a>"+"<h2>";
 		JavaMail javaMail = new JavaMail();
 		javaMail.setCustomer("ggyy45529441@gmail.com");
-<<<<<<< HEAD
 		javaMail.setSubject("好學生-EEIT49");
-=======
-		javaMail.setSubject("好學生-EEIT49 申請退款已駁回!");
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 		javaMail.setTxt(txt);
 		javaMail.sendMail();
 	}

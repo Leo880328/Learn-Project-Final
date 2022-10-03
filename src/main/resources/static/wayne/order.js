@@ -45,12 +45,9 @@ function del(id) {
 				url: "order/" + id,
 				success: function(data) {
 					$(`#${id}`).remove();
-<<<<<<< HEAD
 					count = $(`.or`).length;
 					$("#count").html(count);
-=======
 
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 				}
 			})
 		}
@@ -78,10 +75,7 @@ function order(status) {
 					            <th>會員信箱</th>
 					            <th>訂單生成日期</th>
 					            <th>總數</th>
-<<<<<<< HEAD
 					            <th>優惠碼</th>
-=======
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 					            <th>訂單金額</th>
 					            <th>訂單狀態</th>
 					            <th></th>
@@ -105,11 +99,8 @@ function order(status) {
 				
 				$.each(data, function(i, n) {
 					memberStatus = n.status.id;
-<<<<<<< HEAD
 					$("#userbody").append(`<div id="${n.orderId}" class="or">`+orderListUser(n)+`</div>`);
-=======
-					$("#userbody").append(orderListUser(n));
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
 				})
 				
 			}
@@ -121,7 +112,7 @@ function order(status) {
 
 function orderList(order) {
 
-<<<<<<< HEAD
+
 	var sum = order.totoalprice;
 
 	var num = '無';
@@ -130,8 +121,7 @@ function orderList(order) {
 		num = order.voucher.number;
 		sum = Math.round(order.totoalprice * order.voucher.discount);
 	}
-=======
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
 
 
 	let data = `
@@ -142,12 +132,10 @@ function orderList(order) {
                 <td>${order.memberBean.email}</td>
                 <td>${formatDate(new Date(order.date))}</td>
                 <td>${order.totoalcount}</td>
-<<<<<<< HEAD
+
                 <td>${num}</td>
                 <td>$${sum}</td>
-=======
-                <td>$${order.totoalprice}</td>
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
                 <td class="${order.orderId}"></td>
 
 
@@ -188,11 +176,6 @@ function orderButton(order) {
 	if (order.status.id == 1) {
 		bt = `<span class="badge badge-secondary" >${order.status.status}</span>`
 		$(`#${order.orderId}`).find(".btn-success").remove();
-<<<<<<< HEAD
-		//		$(`#${order.orderId}`).find(".btn-warning").attr("disabled", true);
-=======
-//		$(`#${order.orderId}`).find(".btn-warning").attr("disabled", true);
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 		$(`#${order.orderId}`).find(".btn-warning").remove();
 	};
 
@@ -218,7 +201,7 @@ function orderButton(order) {
 }
 function orderListUser(order) {
 
-<<<<<<< HEAD
+
 	var num = '無';
 	var sum = order.totoalprice;
 
@@ -290,50 +273,6 @@ function orderListUser(order) {
 						</div>
 						<ul
 							class="row list-products auto-clear equal-container product-list">
-=======
-	part = "";
-	memberStatus = order.status.id;
-	if (memberStatus == 1) {
-		part = `<td>
-						<form action="orderDetail" method="post">
-							<input type="hidden" name="cartID" value="${order.orderId}" />
-							<button class="btn btn-success">結帳</button>
-						</form>
-				</td>
-				<td ><button onclick="del(${order.orderId})" class="btn btn-danger">刪除</button></td>`;
-
-	} else if (memberStatus == 2) {
-		part = `<td><button id="btn" disabled class="btn btn-secondary">已付款</button></td>
-				<td><button  class="btn btn-info" onclick="backpay(${order.orderId})">退款申請</button></td>`;
-
-	} else if (memberStatus == 3) {
-		part = `<td >
-					<button type="button" class="btn btn-warning">${order.status.status}</button>
-				</td><td ></td>`;
-
-	} else if (memberStatus == 4) {
-		part = `<td>
-					<form action="orderDetail" method="post">
-							<input type="hidden" name="cartID" value="${order.orderId}" />
-							<button class="btn btn-primary">詳細</button>
-					</form>
-				</td><td ></td>`;
-
-	} else if (memberStatus == 5 || memberStatus == 6) {
-		part = `<td>
-					<button type="button" class="btn btn-info">${order.status.status}</button>
-				</td><td ></td>`;
-
-	}
-	let data = `
-            <tr id="${order.orderId}">
-				<td>${order.orderId}</td>
-				<td>${formatDate(new Date(order.date))}</td>
-				<td>${order.totoalcount}</td>
-				<td>$${order.totoalprice}</td>
-				<td>${order.status.status}</td>` + part + "</tr>";
-
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 
 							<li
 								class="product-item style-list col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12">
@@ -395,10 +334,9 @@ function orderListUser(order) {
 	return content;
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
+
 function backpay(orderId) {
 	Swal.fire({
 		title: '確認申請退款?',
@@ -424,7 +362,6 @@ function backpay(orderId) {
 				url: "updateOrder/3/" + orderId,
 				success: function(data) {
 					$(`#${orderId}`).empty();
-<<<<<<< HEAD
 
 					var order = orderUser(orderId);
 					var num = '無';
@@ -435,15 +372,7 @@ function backpay(orderId) {
 					}
 					console.log($(`#${orderId}`));
 					$(`#${orderId}`).append(orderListUser(order));
-=======
-					var order = orderUser(orderId);
-					orderListUser(order);
-					$(`#${orderId}`).append(`<td>${order.orderId}</td>
-											<td>${formatDate(new Date(order.date))}</td>
-											<td>${order.totoalcount}</td>
-											<td>$${order.totoalprice}</td>
-											<td>${order.status.status}</td>` + part);
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
 				}
 			})
 		}
@@ -507,7 +436,7 @@ function orderUser(orderId) {
 
 
 function orderAdminContent(order) {
-<<<<<<< HEAD
+
 	var sum = order.totoalprice;
 
 	var num = '無';
@@ -517,20 +446,16 @@ function orderAdminContent(order) {
 		sum = Math.round(order.totoalprice * order.voucher.discount);
 	}
 
-=======
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 	var data = `<td>${order.orderId}</td>
 				<td>${order.memberBean.account}</td>
                 <td>${order.memberBean.name}</td>
                 <td>${order.memberBean.email}</td>
                 <td>${formatDate(new Date(order.date))}</td>
                 <td>${order.totoalcount}</td>
-<<<<<<< HEAD
+
                 <td>${num}</td>
                 <td>$${sum}</td>
-=======
-                <td>$${order.totoalprice}</td>
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
                 <td class="${order.orderId}"></td>
 
 
@@ -613,12 +538,10 @@ function selectStatus(e) {
 		type: "GET",
 		url: "searchStatus/" + st,
 		success: function(data) {
-<<<<<<< HEAD
+
 			count = data.length;
 			$("#count").html(count);
-=======
-			console.log(data);
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
 			$("#not").remove();
 			$("#userbody").empty();
 			if (data.length == 0) {
@@ -630,24 +553,13 @@ function selectStatus(e) {
 			}
 			$.each(data, function(i, n) {
 				memberStatus = n.status.id;
-<<<<<<< HEAD
 				$("#userbody").append(`<div id="${n.orderId}" class="or">`+orderListUser(n)+`</div>`);
-
-=======
-				$("#userbody").append(orderListUser(n));
-				
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
-
 			})
 		}
 	})
 }
 function htmlToPdf() {
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 	var doc = new jsPDF('p', 'pt', 'letter');
 	var htmlstring = '';
 	var tempVarToCheckPageHeight = 0;
@@ -683,18 +595,17 @@ function htmlToPdf() {
 			},
 			2: {
 				cellWidth: 55,
-<<<<<<< HEAD
+
 			},
 			6: {
 				cellWidth: 50,
-=======
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
 			}
 		},
 		styles: {
 			minCellHeight: 10,
 			font: 'SourceHanSansCN-Bold',
-<<<<<<< HEAD
+
 			fontStyle: 'normal',
 		},
 		headerStyles: {
@@ -704,17 +615,7 @@ function htmlToPdf() {
 		tableWidth: 'wrap',
 
 		margin: { left: 0, right: 200 }
-=======
-            fontStyle: 'normal',
-		},
-		headerStyles: {
-				font: 'SourceHanSansCN-Bold',
-				fontStyle: 'normal'
-		},
-		tableWidth: 'wrap',
-		
-		margin: {left:0, right:200}
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
 	})
 	doc.save('好學生 訂單資料.pdf');
 }

@@ -112,7 +112,7 @@
 							<c:choose>
 								<c:when test="${queryResult != null }">
 									<c:forEach var="course" items="${queryResult}">
-<<<<<<< HEAD
+
 										<c:if test="${course.course_status == 2}">
 											<li
 												class="product-item style-list col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12">
@@ -426,8 +426,7 @@
 										<h3 class="custom_blog_title">已審核課程</h3>
 									</div>
 									<c:forEach var="course" items="${queryResult5}">
-=======
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
 										<c:if test="${course.course_status == 2}">
 											<li
 												class="product-item style-list col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12">
@@ -525,7 +524,7 @@
 											</li>
 										</c:if>
 									</c:forEach>
-								</c:when>
+								</c:otherwise>
 								<c:otherwise>
 									<c:forEach var="course" items="${list}">
 										<c:if test="${course.course_status == 1}">
@@ -829,11 +828,9 @@
 																			加入購物車 <i class="fa-solid fa-cart-shopping"></i>
 																		</button>
 																		<br>
-<<<<<<< HEAD
+
 <%-- 																		<a href="coursefront.delete?courseId=${course.courseId}"> --%>
-=======
-<%-- 																		<a href="coursefront.delete?course_id=${course.course_id}"> --%>
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
 <!-- 																			<button -->
 <!-- 																				onclick="if( !(confirm('確認刪除?') ) ) return false; alert('刪除成功!')" -->
 <!-- 																				class="single_add_to_cart_button button" -->
@@ -841,11 +838,9 @@
 <!-- 																				  刪除課程  <i class="fa-solid fa-trash"></i> -->
 <!-- 																			</button> -->
                                                                              <button
-<<<<<<< HEAD
+
 																				onclick="del(${course.courseId})"
-=======
-																				onclick="del(${course.course_id})"
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
 																				class="single_add_to_cart_button button"
 																				style="background-color: red">
 																				  刪除課程  <i class="fa-solid fa-trash"></i>

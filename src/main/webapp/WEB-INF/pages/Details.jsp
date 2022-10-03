@@ -4,7 +4,6 @@
 <%@ page import="fourth.bean.CourseBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.*,fourth.*"%>
 <%
 response.setContentType("text/html;charset=UTF-8");
@@ -296,19 +295,13 @@ CourseBean courseBean = (CourseBean) request.getAttribute("cbean");
 									<!-- 										<div class="quantity"></div> -->
 									<!-- 										<button class="single_add_to_cart_button button">加入購物車</button> -->
 									<!-- 									</div> -->
-<<<<<<< HEAD
+
 									<button class="single_add_to_cart_button button" onclick="add(${cbean.courseId})">加入購物車</button>
 									
 									<%-- 										<form action="cart/addCart/<%=courseBean.getcourseId()%>>" method="post"> --%>
 									<!-- 											<input type="hidden" name="courseID" -->
 									<%-- 												value="<%=courseBean.getcourseId()%>"> --%>
-=======
-									<button class="single_add_to_cart_button button" onclick="add(${cbean.course_id})">加入購物車</button>
-									
-									<%-- 										<form action="cart/addCart/<%=courseBean.getCourse_id()%>>" method="post"> --%>
-									<!-- 											<input type="hidden" name="courseID" -->
-									<%-- 												value="<%=courseBean.getCourse_id()%>"> --%>
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
 
 									<!-- 											<button class="single_add_to_cart_button button">加入購物車</button> -->
 									<!-- 										</form> -->

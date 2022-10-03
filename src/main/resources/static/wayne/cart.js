@@ -26,19 +26,12 @@ function cartList() {
 			
 			        </tr>
 			    
-<<<<<<< HEAD
+
 			    	<tr>
 			        <td colspan="8" style="text-align:center;" ><a href="coursefront1.list" style="color: red"><input type="hidden" name="return"
 			                value="前往探索更多課程~">前往探索更多課程~</a></td></tr>
 			        <tr id="moneytext">`+totmoney+`
-=======
-			        <td colspan="8"><a href="coursefront1.list" style="color: red"><input type="hidden" name="return"
-			                value="前往探索更多課程~">前往探索更多課程~</a></td>
-			        <tr>
-			        
-			        <td colspan="7"></td>
-			            <th id="total">總金額: $${total}</th>
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
+
 			        </tr>   `)
 		}
 	})
@@ -46,11 +39,7 @@ function cartList() {
 
 
 function cart(cart) {
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
 	let data = `
         <tr id="${cart.id}" >
             <td style="text-align:center;" ><img src="${cart.courseBean.course_picture}" alt=""

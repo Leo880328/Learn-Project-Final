@@ -242,16 +242,8 @@ public class CourseBean implements Serializable{
 
 	@Override
 	public String toString() {
-<<<<<<< HEAD
-		return "CourseBean [courseId=" + courseId + ", user_id=" + user_id + ", subject_id=" + subject_id
-=======
-		return "CourseBean [course_id=" + course_id + ", user_id=" + user_id + ", subject_id=" + subject_id
->>>>>>> a6386826bc6e5337e61e829c67c65829d8fb589a
-				+ ", education_id=" + education_id + ", course_name=" + course_name + ", course_introduction="
-				+ course_introduction + ", course_price=" + course_price + ", course_duration=" + course_duration
-				+ ", enrollment=" + enrollment + ", course_date=" + course_date + ", lecturer_name=" + lecturer_name
-				+ ", lecturer_email=" + lecturer_email + ", course_status=" + course_status + ", course_picture="
-				+ course_picture + "]";
+
+		return "CourseBean [courseId=" + courseId + ", user_id=" + user_id + ", subject_id=" + subject_id;
 	}
 
 }
