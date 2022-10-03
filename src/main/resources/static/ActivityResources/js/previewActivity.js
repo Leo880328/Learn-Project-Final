@@ -66,7 +66,7 @@ function creatActivity(activityBean) {
 
   let startDay = `報名結束時間:${activitytime.getFullYear()}/${activitytime.getMonth() + 1}/${activitytime.getDate()}`;
 
-  let imgPath = '../assets/images/blog2.jpg';
+  let imgPath = 'assets/images/product-item-1.jpg';
   if (activityBean.imgPath != 'null' && activityBean.imgPath != null) {
     imgPath = activityBean.imgPath;
   }
@@ -81,7 +81,7 @@ function creatActivity(activityBean) {
       </div>
       <div class="product-thumb preview-image">
           <div class="thumb-inner"><a href="#"><img
-                      src="assets/images/product-item-1.jpg" alt="img"></a>
+                      src="${imgPath}" alt="img"></a>
 
           </div>
       </div>

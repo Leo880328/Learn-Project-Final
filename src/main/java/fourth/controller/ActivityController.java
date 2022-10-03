@@ -35,12 +35,10 @@ public class ActivityController {
 	private final String MAPKEY_ACTIVITY_ID = "activityID";
 	private final String MAPKEY_ACTIVITY_REVIEW_MESSAGE = "ActivityReviewBeanMessage";
 
-	@GetMapping("ActivityeTest")
-	@ResponseBody
-	public String ActivitySelectTest() {
-		Map<String, Object> hashMap = new HashMap<String, Object>();
-		hashMap.put(MapKey_keyWord, hashMap);
-		return "";
+	@GetMapping("/Activitytest1")
+	public String Activitytest() {
+		return "Activitytest";
+		
 	}
 
 	@Autowired

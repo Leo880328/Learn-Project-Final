@@ -28,6 +28,8 @@ public class ActivityOperatorController {
 	@Autowired
 	private ActivityService activityService;
 
+	@PostMapping("/all")
+	@ResponseBody
 	public Page<ActivityBean> requestReviewingActivity(@RequestBody() Map<String, String> map) {
 		Integer pageNo = Integer.valueOf(map.get(MapKey_pageNo));
 		Integer pageSize = Integer.valueOf(map.get(MapKey_pageSize));

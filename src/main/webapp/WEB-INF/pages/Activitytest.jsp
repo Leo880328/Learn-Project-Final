@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,6 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="<%=request.getContextPath()%>/">
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png" />
     <link
         href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap"
@@ -120,8 +123,6 @@
             </div>
         </div>
     </div>
-
-
     <script src="assets/js/jquery-1.12.4.min.js"></script>
     <script src="assets/js/jquery.plugin-countdown.min.js"></script>
     <script src="assets/js/jquery-countdown.min.js"></script>
