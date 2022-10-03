@@ -160,7 +160,7 @@
 							<tr>
 								<td class="actions"><c:if test="${order.status.id == 1 }">
 										<form action="shoppingcart.html" class="cart-form"
-											style="width: 59%;" method="post">
+											style="width: 70%;" method="post">
 											<div class="coupon">
 												<label class="coupon_code">優惠碼:</label> <input type="text" 
 													class="input-text" placeholder="輸入優惠碼"
