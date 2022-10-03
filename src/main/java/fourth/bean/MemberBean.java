@@ -116,12 +116,16 @@ public class MemberBean {
 	// 一個用戶對多個訂單
 	@JsonIgnore
 	@OneToMany(mappedBy = "memberBean", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH })
+			CascadeType.REFRESH ,CascadeType.REMOVE})
 	List<OrderUser> orderUsers;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "memberBean", cascade = CascadeType.ALL)
 	private List<CartItem> cartItems;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "memberBeans", cascade = CascadeType.ALL)
+	private List<CourseCollect> courseCollect;
 
 	public MemberBean(Integer userId, String nick, String account, String password, int status, String name, String img,
 			String sex, String birthday, String cellphone, String email, String joinDate) {
@@ -276,6 +280,16 @@ public class MemberBean {
 
 	public void setCartItems(List<CartItem> cartItems) {
 		this.cartItems = cartItems;
+	}
+	
+	
+
+	public List<CourseCollect> getCourseCollect() {
+		return courseCollect;
+	}
+
+	public void setCourseCollect(List<CourseCollect> courseCollect) {
+		this.courseCollect = courseCollect;
 	}
 
 	@Override

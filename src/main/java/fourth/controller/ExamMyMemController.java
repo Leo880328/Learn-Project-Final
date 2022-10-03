@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import fourth.bean.ExamBean;
 import fourth.bean.ExamQuesBean;
+import fourth.bean.ExamRecord;
 import fourth.bean.ExamReserve;
 import fourth.bean.MemberBean;
 import fourth.dao.ExamDaoInterface;
@@ -50,9 +51,9 @@ public class ExamMyMemController {
 	}
 	
 	
-	@PostMapping("/ExamMyMemSe")
+	@GetMapping("/ExamMyMemSe")
 	@ResponseBody
-	public List<ExamReserve> processAction(
+	public List<ExamReserve> processActionSe(
 			//考試相關(queryAll的參數)
 			@RequestParam(defaultValue = "") String quSubject,@RequestParam(defaultValue = "") String quEducation) {
 		
@@ -60,11 +61,41 @@ public class ExamMyMemController {
 		List<ExamReserve> ExamReserves= new ArrayList<ExamReserve>();
 		
 		
-		ExamReserves = examMyMemService.selectAll();
+		ExamReserves = examMyMemService.resSelectAll();
 
 		
 		return ExamReserves;
 	};
+	
+	
+	@PostMapping("/ExamMyMemDe")
+	@ResponseBody
+	public void processActionDe(@RequestParam(defaultValue = "") String Id ) {
+		
+		System.err.println("刪除ID"+Id);
+		
+//		examMyMemService.delete(Integer.valueOf(Id));
+		
+		examMyMemService.resDelete(Integer.valueOf(Id));
+	};
+	
+	@PostMapping("/ExamMyMemRecordSe")
+	@ResponseBody
+	public List<ExamRecord> processActionReSe(Model m) {
+		
+		MemberBean user = (MemberBean) m.getAttribute("user");
+		
+		Integer userId = user.getuserId();
+		
+		List<ExamRecord> examRecords = examMyMemService.ExamRecordSelectAll(userId);
+
+		
+		return examRecords;
+	};
+	
+	
+	
+	
 	
 }	
 

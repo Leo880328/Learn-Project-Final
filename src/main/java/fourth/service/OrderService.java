@@ -193,7 +193,7 @@ public class OrderService {
 		for(CartItem item : carList) {
 			OrderItem orderItem = new OrderItem();
 			orderItem.setOrder_id(orderID);
-			orderItem.setItem_id(item.getCourseBean().getCourse_id());
+			orderItem.setItem_id(item.getCourseBean().getcourseId());
 			orderItem.setName(item.getItemName());
 			orderItem.setCount(item.getCount());
 			orderItem.setPrice(item.getCourseBean().getCourse_price());

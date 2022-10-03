@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>課程列表</title>
+<link rel="shortcut icon" type="image/x-icon" href="images/smalllogo.png" />
 </head>
 <body class="inblog-page">
 
@@ -137,7 +138,7 @@
 																</c:if>
 																<c:if test="${course.course_status == 2}">
 																	<a
-																		href="coursefront.details?course_id=${course.course_id}">
+																		href="coursefront.details?courseId=${course.courseId}">
 																		<c:out value="${course.course_name}" />
 																	</a>
 																</c:if>
@@ -150,7 +151,7 @@
 															</div>
 															<ul class="product-attributes">
 																<li>課程編號:</li>
-																<li><c:out value="${course.course_id}" /></li>
+																<li><c:out value="${course.courseId}" /></li>
 															</ul>
 															<ul class="product-attributes">
 																<li>課程講師:</li>
@@ -211,10 +212,11 @@
 									</c:forEach>
 								</c:when>
 								<c:otherwise>
+								<h3 class="custom_blog_title">待審核課程</h3>
 									<c:forEach var="course" items="${list}">
 										<c:if test="${course.course_status == 1}">
 											<div>
-												<h3 class="custom_blog_title">待審核課程</h3>
+<!-- 												<h3 class="custom_blog_title">待審核課程</h3> -->
 											</div>
 											<li
 												class="product-item style-list col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12">
@@ -239,7 +241,7 @@
 																</c:if>
 																<c:if test="${course.course_status == 2}">
 																	<a
-																		href="coursefront.details?course_id=${course.course_id}">
+																		href="coursefront.details?courseId=${course.courseId}">
 																		<c:out value="${course.course_name}" />
 																	</a>
 																</c:if>
@@ -247,7 +249,7 @@
 															<br>
 															<ul class="product-attributes">
 																<li>課程編號:</li>
-																<li><c:out value="${course.course_id}" /></li>
+																<li><c:out value="${course.courseId}" /></li>
 															</ul>
 															<ul class="product-attributes">
 																<li>課程講師:</li>
@@ -293,7 +295,7 @@
 																</div>
 																<c:if test="${course.course_status == 1}">
 																	<button
-																				onclick="del(${course.course_id})"
+																				onclick="del(${course.courseId})"
 																				class="single_add_to_cart_button button"
 																				style="background-color: red">
 																				  刪除課程  <i class="fa-solid fa-trash"></i>
@@ -318,7 +320,7 @@
 													<div class="products-bottom-content">
 														<div class="product-thumb">
 															<div class="thumb-inner">
-																<a href="coursefront.show?course_id=${course.course_id}"><img
+																<a href="coursefront.show?courseId=${course.courseId}"><img
 																	src="<c:out value="${course.course_picture}"/>"
 																	alt="img"></a>
 															</div>
@@ -333,13 +335,13 @@
 																<c:if
 																	test="${course.course_status == 1 || course.course_status == 3}">
 																	<a
-																		href="coursefront.show?course_id=${course.course_id}">
+																		href="coursefront.show?courseId=${course.courseId}">
 																		<c:out value="${course.course_name}" />
 																	</a>
 																</c:if>
 																<c:if test="${course.course_status == 2}">
 																	<a
-																		href="coursefront.details?course_id=${course.course_id}">
+																		href="coursefront.details?courseId=${course.courseId}">
 																		<c:out value="${course.course_name}" />
 																	</a>
 																</c:if>
@@ -350,7 +352,7 @@
 															</div>
 															<ul class="product-attributes">
 																<li>課程編號:</li>
-																<li><c:out value="${course.course_id}" /></li>
+																<li><c:out value="${course.courseId}" /></li>
 															</ul>
 															<ul class="product-attributes">
 																<li>課程講師:</li>
@@ -382,7 +384,7 @@
 															</ul>
 															<br>
 															<ul class="attributes-display">
-																<a href="coursefront.show?course_id=${course.course_id}">
+																<a href="coursefront.show?courseId=${course.courseId}">
 																	<li class="swatch-text-label" style="color: red"><i
 																		class="fa-solid fa-circle-info"></i></i></li>
 																	<li class="swatch-text-label" style="color: red">可修改課程資訊並重新送出審核</li>
@@ -409,7 +411,7 @@
 																		</div>
 																	</div>
 																<button
-																				onclick="del(${course.course_id})"
+																				onclick="del(${course.courseId})"
 																				class="single_add_to_cart_button button"
 																				style="background-color: red">
 																				  刪除課程  <i class="fa-solid fa-trash"></i>
@@ -450,7 +452,7 @@
 																</c:if>
 																<c:if test="${course.course_status == 2}">
 																	<a
-																		href="coursefront.details?course_id=${course.course_id}">
+																		href="coursefront.details?courseId=${course.courseId}">
 																		<c:out value="${course.course_name}" />
 																	</a>
 																</c:if>
@@ -463,7 +465,7 @@
 															</div>
 															<ul class="product-attributes">
 																<li>課程編號:</li>
-																<li><c:out value="${course.course_id}" /></li>
+																<li><c:out value="${course.courseId}" /></li>
 															</ul>
 															<ul class="product-attributes">
 																<li>課程講師:</li>
@@ -513,7 +515,7 @@
 																			加入購物車 <i class="fa-solid fa-cart-shopping"></i>
 																		</button>
 																		<br>
-<%-- 																		<a href="coursefront.delete?course_id=${course.course_id}"> --%>
+<%-- 																		<a href="coursefront.delete?courseId=${course.courseId}"> --%>
 <!-- 																			<button -->
 <!-- 																				onclick="if( !(confirm('確認刪除?') ) ) return false; alert('刪除成功!')" -->
 <!-- 																				class="single_add_to_cart_button button" -->
@@ -521,7 +523,7 @@
 <!-- 																				  刪除課程  <i class="fa-solid fa-trash"></i> -->
 <!-- 																			</button> -->
                                                                              <button
-																				onclick="del(${course.course_id})"
+																				onclick="del(${course.courseId})"
 																				class="single_add_to_cart_button button"
 																				style="background-color: red">
 																				  刪除課程  <i class="fa-solid fa-trash"></i>

@@ -129,7 +129,7 @@ border-radius: 5px;
 								<c:when test="${queryResult != null }">
 									<c:forEach var="course" items="${queryResult}">
 									  <c:if test="${course.course_status == 2}">
-											<%-- <input type="hidden" name="course_id" value='<c:out value="${course.course_id}"/>'> --%>
+											<%-- <input type="hidden" name="courseId" value='<c:out value="${course.courseId}"/>'> --%>
 											<li
 												class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
 												<div class="product-inner equal-element">
@@ -137,7 +137,7 @@ border-radius: 5px;
 													<div class="product-thumb">
 														<div class="thumb-inner">
 															<a
-																href="coursefront.details?course_id=${course.course_id}"><img
+																href="coursefront.details?courseId=${course.courseId}"><img
 																src="<c:out value="${course.course_picture}" />"
 																alt="img"></a>
 															<div class="thumb-group"></div>
@@ -146,7 +146,7 @@ border-radius: 5px;
 													<div class="product-info">
 														<h5 class="product-name product_title">
 															<a
-																href="coursefront.details?course_id=${course.course_id}"><c:out
+																href="coursefront.details?courseId=${course.courseId}"><c:out
 																	value="${course.course_name}" /></a>
 														</h5>
 														<div class="group-info">
@@ -176,7 +176,7 @@ border-radius: 5px;
 								<c:otherwise>
 									<c:forEach var="course" items="${list}">
 										<c:if test="${course.course_status == 2}">
-											<%-- 								 <input type="hidden" name="course_id" value='<c:out value="${course.course_id}"/>'> --%>
+											<%-- 								 <input type="hidden" name="courseId" value='<c:out value="${course.courseId}"/>'> --%>
 											<li
 												class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
 												<div class="product-inner equal-element">
@@ -184,7 +184,7 @@ border-radius: 5px;
 													<div class="product-thumb">
 														<div class="thumb-inner">
 															<a
-																href="coursefront.details?course_id=${course.course_id}"><img
+																href="coursefront.details?courseId=${course.courseId}"><img
 																src="<c:out value="${course.course_picture}" />"
 																alt="img"></a>
 															<div class="thumb-group"></div>
@@ -193,7 +193,7 @@ border-radius: 5px;
 													<div class="product-info">
 														<h5 class="product-name product_title">
 															<a
-																href="coursefront.details?course_id=${course.course_id}"><c:out
+																href="coursefront.details?courseId=${course.courseId}"><c:out
 																	value="${course.course_name}" /></a>
 														</h5>
 														<div class="group-info">
@@ -210,7 +210,7 @@ border-radius: 5px;
 																</ins>
 															</div>
 															<br> 
-															<button class="fa-solid fa-cart-shopping" onclick="add(${course.course_id})">加入購物車</button>
+															<button class="fa-solid fa-cart-shopping" onclick="add(${course.courseId})">加入購物車</button>
 														</div>
 													</div>
 												</div>

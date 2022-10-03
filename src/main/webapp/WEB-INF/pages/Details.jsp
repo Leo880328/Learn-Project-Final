@@ -1,11 +1,9 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
-<%@ page import="fourth.dao.CourseDao"%>
 <%@ page import="java.util.List"%>
-<%@ page import="fourth.bean.CourseBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.*,fourth.*"%>
+<%@ page import="fourth.bean.MemberBean"%>
 <%
 response.setContentType("text/html;charset=UTF-8");
 response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1
@@ -63,12 +61,6 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 </style>
 </head>
 <jsp:include page="Header.jsp"/>
-<%
-CourseBean courseBean = (CourseBean) request.getAttribute("cbean");
-%>
-
-
-
 <body class="details-page">
 
 
@@ -280,30 +272,27 @@ CourseBean courseBean = (CourseBean) request.getAttribute("cbean");
 								</div>
 
 								<div class="group-button">
-									<div class="yith-wcwl-add-to-wishlist">
-										<div class="yith-wcwl-add-button">
-											<a href="#">加入收藏</a>
-
-										</div>
+									<div class="yith-wcwl-add-to-wishlist collect">
+<%-- 									<c:forEach var="collect" items="${cList}"> --%>
+<%--                                     <c:set var="collect" value="${cList}"> --%>
+<%-- 									<c:if test="${collect.courseId == null }"> --%>
+<%-- 										<div class="yith-wcwl-add-button addcollect"  onclick="addcollect(${cbean.courseId})"> --%>
+<!-- 											<i class=" fa-regular fa-heart">  加入收藏</i> -->
+<!-- 										</div> -->
+<%-- 									</c:if> --%>
+<%-- <%-- 									</c:set> --%>
+<%-- 									<c:if test="${collect.courseId != null}"> --%>
+<%-- 										<div class="yith-wcwl-add-button addcollect"  onclick="addcollect(${cbean.courseId})"> --%>
+<!-- 											<i class="fa-solid fa-heart">  加入收藏</i> -->
+<!-- 										</div> -->
+<%-- 									</c:if> --%>
+<%--                                     </c:forEach> --%>
 									</div>
 									<div class="availability">課程價格:</div>
 									<div class="price">
 										<span>$ ${cbean.course_price}</span>
-									</div>
-
-
-									<!-- 									<div class="quantity-add-to-cart"> -->
-									<!-- 										<div class="quantity"></div> -->
-									<!-- 										<button class="single_add_to_cart_button button">加入購物車</button> -->
-									<!-- 									</div> -->
-									<button class="single_add_to_cart_button button" onclick="add(${cbean.course_id})">加入購物車</button>
-									
-									<%-- 										<form action="cart/addCart/<%=courseBean.getCourse_id()%>>" method="post"> --%>
-									<!-- 											<input type="hidden" name="courseID" -->
-									<%-- 												value="<%=courseBean.getCourse_id()%>"> --%>
-
-									<!-- 											<button class="single_add_to_cart_button button">加入購物車</button> -->
-									<!-- 										</form> -->
+								</div>
+									<button class="single_add_to_cart_button button" onclick="add(${cbean.courseId})">加入購物車</button>
 								</div>
 							</div>
 						</div>
@@ -346,14 +335,14 @@ CourseBean courseBean = (CourseBean) request.getAttribute("cbean");
 						<div class="product-thumb">
 							<div class="thumb-inner">
 
-								<a href="coursefront.details?course_id=${course.course_id}"><img src="<c:out value="${course.course_picture}" />"
+								<a href="coursefront.details?courseId=${course.courseId}"><img src="<c:out value="${course.course_picture}" />"
 									alt="img"></a>
 
 							</div>
 						</div>
 						<div class="product-info">
 							<h5 class="product-name product_title">
-								<a href="coursefront.details?course_id=${course.course_id}"><c:out value="${course.course_name}" /></a>
+								<a href="coursefront.details?courseId=${course.courseId}"><c:out value="${course.course_name}" /></a>
 							</h5>
 							<div class="group-info">
 								<div class="stars-rating">
@@ -427,6 +416,7 @@ CourseBean courseBean = (CourseBean) request.getAttribute("cbean");
 <!-- 		<script src="./js/frontend-plugin.js"></script> -->
 <jsp:include page="Footer.jsp"/>
 <script src="wayne/cart.js"></script>
+<script src="xiang/coursefront.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

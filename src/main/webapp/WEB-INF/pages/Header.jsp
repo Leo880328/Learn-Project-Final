@@ -5,14 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="shortcut icon" type="image/x-icon"
-	href="images/smalllogo.png" />
-<link
-	href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap"
-	rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="images/smalllogo.png" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <link rel="stylesheet" href="./css/font-awesome.min.css">
 <link rel="stylesheet" href="./css/owl.carousel.min.css">
@@ -187,6 +182,8 @@
 								<li class="menu-item "><a title="Accessories" href="Activities"
 									class="teamo-menu-item-title">我的活動</a><span
 									class="toggle-submenu"></span></li>
+								<li class="menu-item"><a title="Variegated" href="coursefront.collectAll"
+									class="teamo-menu-item-title">我的收藏</a></li>
 								<li class="menu-item"><a title="Variegated" href="cart"
 									class="teamo-menu-item-title">我的購物車</a></li>
 								<li class="menu-item"><a title="Variegated"
@@ -239,8 +236,6 @@
 			</div>
 		</div>
 	</header>
-
-
 	<script src="./js/jquery-1.12.4.min.js"></script>
 	<script src="./js/jquery.plugin-countdown.min.js"></script>
 	<script src="./js/jquery-countdown.min.js"></script>

@@ -2,6 +2,7 @@ package fourth.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,14 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import fourth.bean.CartItem;
 import fourth.bean.CourseBean;
+import fourth.bean.CourseCollect;
 import fourth.bean.CourseEdu;
 import fourth.bean.CourseSub;
+import fourth.bean.MemberBean;
 import fourth.bean.OrderUser;
-import fourth.dao.CourseDao;
+import fourth.dao.CourseCollectRepository;
 import fourth.dao.CourseEduRepository;
 import fourth.dao.CourseRepository;
 import fourth.dao.CourseSubRepository;
+import fourth.dao.MemberRepository;
+import fourth.util.WebUtils;
 import fourth.coursemail.JavaMail;
 
 @Service
@@ -31,6 +37,12 @@ public class CourseService {
 
 	@Autowired
 	private CourseEduRepository courseEduRepository;
+	
+	@Autowired
+	private CourseCollectRepository courseCollectRepository;
+	
+	@Autowired
+	private MemberRepository memberRepository;
 
 	public CourseBean insert(CourseBean courseBean, Integer subId, Integer eduId) {
 		CourseSub courseSub = courseSubRepository.findById(subId).get();
@@ -41,8 +53,8 @@ public class CourseService {
 		return theCos;
 	}
 
-	public CourseBean findByCourseId(int course_id) {
-		Optional<CourseBean> optional = cosRep.findById(course_id);
+	public CourseBean findByCourseId(int courseId) {
+		Optional<CourseBean> optional = cosRep.findById(courseId);
 		if (optional.isPresent()) {
 			return optional.get();
 		}
@@ -79,25 +91,48 @@ public class CourseService {
 		return theCos;
 	}
 
-	public void deleteOne(int course_id) {
-		cosRep.deleteById(course_id);
-		System.err.println(course_id);
+	public void deleteOne(int courseId) {
+		cosRep.deleteById(courseId);
+		System.err.println(courseId);
 	}
 
-	public void updateCourse(CourseBean courseBean, Integer subId, Integer eduId, int course_id) throws SQLException {
-		CourseService cService = new CourseService();
-		CourseBean fbc = cService.findByCourseId(course_id);
-		cService.updateOne(courseBean, subId, eduId);
-		
-		String txt = "<h2>" + "偉大的" + fbc.getLecturer_name() + "您好 :"
-		        + "<br>" + "課程名稱: " + fbc.getCourse_name() + "<br>" + "上架日期: " + fbc.getCourse_date() + "<br>"
-				+ "<br>" + "購買人信箱: "+ fbc.getLecturer_email() + "<br>" + "課程價格:"  + fbc.getCourse_price() + "<h2>";
-		JavaMail javaMail = new JavaMail();
-		javaMail.setCustomer("fock360man@gmail.com");
-		javaMail.setSubject("好學生-EEIT49 課程審核通過!");
-		javaMail.setTxt(txt);
-		javaMail.sendMail();
+	public void collectAdd(String courseId,int id, String courseName) throws SQLException{
+		System.out.println(courseId);
+		CourseBean course = cosRep.findById(WebUtils.paseInt(courseId)).get();
+		MemberBean memberBean = memberRepository.findById(id).get();
+		CourseCollect collect = new CourseCollect();
+		collect.setCourseBeans(course);
+		collect.setCollectName(course.getCourse_name());
+		collect.setMemberBeans(memberBean);
+		collect.setCollectStatus("已收藏");
+		courseCollectRepository.save(collect);
+	}
+	
+	public List<CourseCollect> collectList(int id){
+		List<CourseCollect> collectList = courseCollectRepository.findByMemberBeans_UserId(id);
+		return collectList;
+	}
+
+	public boolean haveCollect(int userId, int courseId) {
+		int haveCollect = courseCollectRepository.haveCollect(userId, courseId);
+		if(haveCollect>0) {
+			System.out.println(1);
+			return true;
+		}
+		System.out.println(0);
+		return false;
+	}
+	
+	public void collectDelete(String id){
+		courseCollectRepository.deleteById(WebUtils.paseInt(id));
 
 	}
+	
+	public void deleteByUserIdAndCourseId(int userId, int courseId) {
+		System.err.println(userId);
+		System.err.println(courseId);
+		courseCollectRepository.deleteByMemberBeans_UserIdAndCourseBeans_CourseId(userId, courseId);
+	}
+	
 
 }

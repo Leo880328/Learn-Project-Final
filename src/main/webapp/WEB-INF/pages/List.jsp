@@ -7,8 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>課程功能列表</title>
-<link rel="shortcut icon" type="image/x-icon"
-	href="images/smalllogo.png" />
+<link rel="shortcut icon" type="image/x-icon" href="images/smalllogo.png" />
 <style>
  .tb { 
  	border-collapse: collapse;  
@@ -79,7 +78,7 @@
 
 		<c:forEach var="course" items="${list}">
 			<tr>
-				<td><h4><center><c:out value="${course.course_id}" /></center></h4></td>
+				<td><h4><center><c:out value="${course.courseId}" /></center></h4></td>
 				<td><img src="<c:out value="${course.course_picture}" />" alt="" title="" width="150" height="150"></td>
 				<td><c:out value="${course.course_name}" /></td>
 				<c:if test="${course.coursesub.subject_id == '1'}"><td><center>數學</center></td></c:if>
@@ -105,26 +104,26 @@
 				</c:if>
 <!-- 				<td> -->
 <%-- 					request.setAttribute("bean", courseBean); <a --%>
-<%-- 					href="course.details?course_id=${course.course_id}"><input --%>
+<%-- 					href="course.details?courseId=${course.courseId}"><input --%>
 <!-- 						type="submit" name="details" value="查看詳情"></a> -->
 <!-- 				</td> -->
                 <c:if test="${course.course_status == 2}">
 				<td>
-					<a href="course.show?course_id=${course.course_id}"><button
+					<a href="course.show?courseId=${course.courseId}"><button
 						type="submit" name="update" value="修改課程" style="border-radius: 10px">修改課程</button></a>
 				</td>
 				</c:if>
 				<c:if test="${course.course_status == 1}">
 				<td>
-					<a href="course.show?course_id=${course.course_id}"><button
+					<a href="course.show?courseId=${course.courseId}"><button
 						type="submit" name="update" value="審核課程" style="border-radius: 10px">審核課程</button></a>
 				</td>
 				</c:if>
 				<c:if test="${course.course_status == 2}">
-<%-- 				<td><a href="course.delete?course_id=${course.course_id}"><button --%>
+<%-- 				<td><a href="course.delete?courseId=${course.courseId}"><button --%>
 <!-- 							onclick="if( !(confirm('確認刪除?') ) ) return false; alert('刪除成功!')" -->
 <!-- 							id='delete' type="submit" name="delete" value="刪除課程"> <i class="fa-solid fa-trash"></i>  刪除</button></a></td> -->
-				<td><button onclick="del(${course.course_id})"
+				<td><button onclick="del(${course.courseId})"
 							id='delete' type="submit" name="delete" value="刪除課程"> <i class="fa-solid fa-trash"></i>  刪除</button></td>
 				</c:if>
 			</tr>

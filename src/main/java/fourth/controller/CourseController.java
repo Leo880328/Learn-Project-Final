@@ -60,23 +60,23 @@ public class CourseController {
 	
 
 	@GetMapping("/course.details")
-	public String showDetails(int course_id, Model m) {
-		CourseBean cbean = cService.findByCourseId(course_id);
+	public String showDetails(int courseId, Model m) {
+		CourseBean cbean = cService.findByCourseId(courseId);
 		m.addAttribute("cbean", cbean);
 		return "Details";
 	}
 
 	@GetMapping("/course.show")
-	public String updateDetails(int course_id, Model m) {
-		CourseBean bean = cService.findByCourseId(course_id);
+	public String updateDetails(int courseId, Model m) {
+		CourseBean bean = cService.findByCourseId(courseId);
 		m.addAttribute("bean", bean);
 		return "Update";
 	}
 
 	@PostMapping("/course.update")
-	public String updateCourse(@RequestParam("course_status") Integer course_status, CourseBean courseBean, Integer subject_id, Integer education_id, int course_id)
+	public String updateCourse(@RequestParam("course_status") Integer course_status, CourseBean courseBean, Integer subject_id, Integer education_id, int courseId)
 			throws SQLException {
-		CourseBean bean = cService.findByCourseId(course_id);
+		CourseBean bean = cService.findByCourseId(courseId);
 		
 		if(course_status == bean.getCourse_status()) {
 			cService.updateOne(courseBean, subject_id, education_id);
@@ -85,7 +85,7 @@ public class CourseController {
 		if(course_status == 2) {
 			cService.updateOne(courseBean, subject_id, education_id);
 			String txt = "<h2>" + "偉大的 " + courseBean.getLecturer_name() + " 您好 :" + "<br>" + "課程編號: "
-					+ courseBean.getCourse_id() + "<br>" + "課程名稱: " + courseBean.getCourse_name() + "<br>" + "購買人信箱: "
+					+ courseBean.getcourseId() + "<br>" + "課程名稱: " + courseBean.getCourse_name() + "<br>" + "購買人信箱: "
 					+ courseBean.getLecturer_email() + "<br>" + "課程價格:" + courseBean.getCourse_price() + "<br>" + "<br>"
 					+ "審核結果: 通過!!" + "<h2>";
 			JavaMail javaMail = new JavaMail();
@@ -96,54 +96,22 @@ public class CourseController {
 			return "redirect:/course.list";
 		}else if(course_status == 3) {
 			cService.updateOne(courseBean, subject_id, education_id);
-			String txt = "<h2>" + "偉大的 " + courseBean.getLecturer_name() + " 您好 :" + "<br>" + "課程編號: "
-					+ courseBean.getCourse_id() + "<br>" + "課程名稱: " + courseBean.getCourse_name() + "<br>" + "購買人信箱: "
-					+ courseBean.getLecturer_email() + "<br>" + "課程價格:" + courseBean.getCourse_price() + "<br>" + "<br>"
-					+ "審核結果: 駁回!!" + "<br>" + "駁回原因: 課程名稱或圖片帶有敏感資訊" + "<h2>";
-			JavaMail javaMail = new JavaMail();
-			javaMail.setCustomer("fock360man@gmail.com");
-			javaMail.setSubject("好學生-EEIT49 課程駁回通知");
-			javaMail.setTxt(txt);
-			javaMail.sendMail();
+//			String txt = "<h2>" + "偉大的 " + courseBean.getLecturer_name() + " 您好 :" + "<br>" + "課程編號: "
+//					+ courseBean.getcourseId() + "<br>" + "課程名稱: " + courseBean.getCourse_name() + "<br>" + "購買人信箱: "
+//					+ courseBean.getLecturer_email() + "<br>" + "課程價格:" + courseBean.getCourse_price() + "<br>" + "<br>"
+//					+ "審核結果: 駁回!!" + "<br>" + "駁回原因: 課程名稱或圖片帶有敏感資訊" + "<h2>";
+//			JavaMail javaMail = new JavaMail();
+//			javaMail.setCustomer("fock360man@gmail.com");
+//			javaMail.setSubject("好學生-EEIT49 課程駁回通知");
+//			javaMail.setTxt(txt);
+//			javaMail.sendMail();
 			return "redirect:/course.list";
 		}
 		
 		return "redirect:/course.list";
 	}
 
-	@GetMapping(value = "coursemail.success")
-	public String JavaMailSuccess(CourseBean courseBean, Integer subject_id, Integer education_id, int course_id) {
-		
-		CourseBean bean = cService.findByCourseId(course_id);
-		cService.updateOne(courseBean, subject_id, education_id);
-		String txt = "<h2>" + "偉大的 " + courseBean.getLecturer_name() + " 您好 :" + "<br>" + "課程編號: "
-				+ courseBean.getCourse_id() + "<br>" + "課程名稱: " + courseBean.getCourse_name() + "<br>" + "購買人信箱: "
-				+ courseBean.getLecturer_email() + "<br>" + "課程價格:" + courseBean.getCourse_price() + "<br>" + "<br>"
-				+ "審核結果: 通過!!" + "<h2>";
-		JavaMail javaMail = new JavaMail();
-		javaMail.setCustomer("fock360man@gmail.com");
-//		javaMail.setCustomer("ggyy45529441@gmail.com");
-		javaMail.setSubject("好學生-EEIT49 課程審核通過!");
-		javaMail.setTxt(txt);
-		javaMail.sendMail();
-		return "redirect:/course.list";
-	}
 	
-	@GetMapping(value = "coursemail.failed")
-	public String JavaMailFailed(int course_id) {
-		CourseBean courseBean = cService.findByCourseId(course_id);
-		String txt = "<h2>" + "偉大的 " + courseBean.getLecturer_name() + " 您好 :" + "<br>" + "課程編號: "
-				+ courseBean.getCourse_id() + "<br>" + "課程名稱: " + courseBean.getCourse_name() + "<br>" + "購買人信箱: "
-				+ courseBean.getLecturer_email() + "<br>" + "課程價格:" + courseBean.getCourse_price() + "<br>" + "<br>"
-				+ "審核結果: 駁回!!" + "<br>" + "駁回原因: 課程名稱或圖片帶有敏感資訊" + "<h2>";
-		JavaMail javaMail = new JavaMail();
-		javaMail.setCustomer("fock360man@gmail.com");
-//		javaMail.setCustomer("ggyy45529441@gmail.com");
-		javaMail.setSubject("好學生-EEIT49 課程駁回通知");
-		javaMail.setTxt(txt);
-		javaMail.sendMail();
-		return "redirect:/course.list";
-	}
 
 	@PostMapping("/course.qid")
 	public String queryId(@RequestParam("keyword") String keyword, Model m) {
@@ -188,14 +156,14 @@ public class CourseController {
 
 //	@ResponseBody
 	@GetMapping("/course.delete/{id}")
-	public String delete(@PathVariable("id") int course_id) {
-		cService.deleteOne(course_id);
+	public String delete(@PathVariable("id") int courseId) {
+		cService.deleteOne(courseId);
 		return "redirect:/course.list";
 	}
 	
 //	@GetMapping("/course.delete")
-//	public String delete(int course_id) {
-//		cService.deleteOne(course_id);
+//	public String delete(int courseId) {
+//		cService.deleteOne(courseId);
 //		return "redirect:/course.list";
 //	}
 

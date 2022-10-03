@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<link rel="shortcut icon" type="image/x-icon" href="images/smalllogo.png" />
 <style>
 .tb{
    	border-collapse: collapse;
@@ -38,7 +38,7 @@
 <table class=tb align='center'>
 
 <tr>
-   <input type="hidden" name="course_id" value="${bean.course_id}">
+   <input type="hidden" name="courseId" value="${bean.courseId}">
 </tr>       
 <!-- <tr> -->
 <!--     <td>使用者名稱:</td> -->

@@ -15,8 +15,8 @@ public class JavaMail {
 //	private String password="rwzgvzouoxtqemik";
 	private String password="fvterzcvzuhnggsn";
 	//private String password="wayne85423";
-	private String customer="fock360man@gmail.com";
-//	private String customer = "ggyy45529441@gmail.com";
+//	private String customer="fock360man@gmail.com";
+	private String customer = "ggyy45529441@gmail.com";
 	private String subject="";
 	private String txt="信件內容文字";
 	

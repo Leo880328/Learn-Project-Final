@@ -29,7 +29,47 @@ function del(id) {
 		}
 	})
 }
+$().ready(
+	function () {
+		getCourseId();
+		haveCollect();
+	}
+)
+let course = {
+	courseId: null
+}
+function getCourseId() {
+	let idIndexOf = window.location.href.indexOf('=');
+	course.courseId = window.location.href.substring(idIndexOf + 1);
+}
 
+
+function haveCollect() {
+	$.ajax({
+
+		type: "POST",
+		url: "haveCollect",
+		contentType: 'application/json; charset=utf-8',
+		data: JSON.stringify(course),
+		success: function (data) {
+			console.log(data)
+			if (data) {
+				$(`.collect`).html(`
+				<div class="yith-wcwl-add-button addcollect"onclick="delCollect(${course.courseId})">
+				<i class="fa-solid fa-heart"> 已加入收藏</i></div>
+				`)
+			} else {
+				$(`.collect`).html(`
+			<div class="yith-wcwl-add-button addcollect"onclick="addcollect(${course.courseId})">
+			<i class=" fa-regular fa-heart"> 加入收藏</i></div>
+			`)
+
+			}
+
+			// 					history.go(0);
+		}
+	})
+}
 function checkUpdate() {
 
 	Swal.fire({
@@ -51,4 +91,73 @@ function checkUpdate() {
 			})
 		}
 	})
+}
+
+
+function addcollect(id) {
+	Swal.fire({
+
+		icon: 'success',
+		title: '已加入收藏!',
+		showConfirmButton: false,
+		timer: 1500
+	})
+	$.ajax({
+		async: false,
+		type: "POST",
+		url: "coursefront.cadd/" + id,
+		success: function (data) {
+			console.log(data);
+		}
+	}).then(function () {
+		$(".collect").html(`<div class="yith-wcwl-add-button addcollect"onclick="delCollect(${course.courseId})">
+		<i class="fa-solid fa-heart"> 已加入收藏</i></div>`)
+	})
+}
+
+function delCollect(id) {
+	Swal.fire({
+
+		icon: 'success',
+		title: '已取消收藏!',
+		showConfirmButton: false,
+		timer: 1500
+	})
+	$.ajax({
+		async: false,
+		type: "DELETE",
+		url: "coursefront.cdelete/" + id,
+		success: function (data) {
+			console.log(data);
+			$(`#${id}`).remove();
+		}
+	}).then(function () {
+		$(".collect").html(`<div class="yith-wcwl-add-button addcollect"onclick="addcollect(${course.courseId})">
+		<i class=" fa-regular fa-heart"> 加入收藏</i></div>`)
+	})
+}
+
+function delCollectById(id) {
+	console.log(id);
+	Swal.fire({
+
+		//		icon: 'success',
+		title: '已取消收藏!',
+		//		showConfirmButton: false,
+		//		timer: 1500
+
+		willClose: function () {
+			$.ajax({
+				async: false,
+				type: "DELETE",
+				url: "coursefront.ciddelete/" + id,
+				success: function (data) {
+					console.log(data);
+					$(`#${id}`).remove();
+					window.location.assign(window.location.href);
+				}
+			})
+		}
+	})
+	//	myFunction();
 }
