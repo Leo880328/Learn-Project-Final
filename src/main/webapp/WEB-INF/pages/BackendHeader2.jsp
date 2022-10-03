@@ -22,7 +22,7 @@
 <link rel="stylesheet"
 	href="backend/vendors/fullcalendar/fullcalendar.min.css">
 <!-- App styles -->
-<link rel="stylesheet" href="backend/css/app.min.css">
+<link rel="stylesheet" href="backend/css/app.min2.css">
 <title>好學生後台管理首頁</title>
 </head>
 <body data-ma-theme="green">
@@ -221,7 +221,7 @@
 	<script src="backend/demo/js/jqvmap.js"></script>
 	<script src="backend/demo/js/demo.js"></script>
 	<!-- App functions and actions -->
-	<script src="backend/js/app.min.js"></script>
+	<script src="backend/js/app.min2.js"></script>
 	<script src="https://kit.fontawesome.com/9d965cf88e.js" crossorigin="anonymous"></script>
 	<!-- 	dataTable jQuery -->
 	<script type="text/javascript" charset="utf8"

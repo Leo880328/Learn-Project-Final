@@ -21,18 +21,10 @@
 </style>
 <script>
 	$(function(){
-// 		$("#up").click(function(){
-// 			var status = $("#status").val();
-// 			$.ajax({
-// 				async : false,
-// 				type:"GET",
-// 				url:"updateOrder/"+status+"/${order.orderId }",
-// 				success:function(data){
-// 					window.location.href="${path}/orderList";
-// 					console.log(data);
-// 				}
-// 			})
-// 		})
+			if(${order.voucher != null}){
+				$("#sum").html("$"+Math.round(${order.totoalprice * order.voucher.discount}));
+				$("#bar").css("text-decoration","line-through");
+			}
 	})
 </script>
 </head>
@@ -47,11 +39,11 @@
 					<tr>
 						<td colspan="8">
 							<table class="table mb-0" >
-
-								<th>訂單編號</th>
-								<th>訂單生成日期</th>
-								<th>訂單狀態</th>
-
+								<tr>
+									<th>訂單編號</th>
+									<th>訂單生成日期</th>
+									<th>訂單狀態</th>
+								</tr>
 								<tr>
 									<td>${order.orderId }</td>
 									<td>${order.date }</td>
@@ -79,11 +71,13 @@
 					<tr>
 						<td colspan="8">
 							<table class="table mb-0">
-
-								<th>會員帳號</th>
-								<th>會員姓名</th>
-								<th>會員信箱</th>
-								<th>會員手機</th>
+								
+								<tr>
+									<th>會員帳號</th>
+									<th>會員姓名</th>
+									<th>會員信箱</th>
+									<th>會員手機</th>
+								</tr>
 								<tr>
 									<td>${order.memberBean.account}</td>
 									<td>${order.memberBean.name}</td>
@@ -96,12 +90,12 @@
 					<tr>
 						<td colspan="8">
 							<table class="table mb-0">
-
-								<th>商品編號</th>
-								<th>商品名稱</th>
-								<th>商品數量</th>
-								<th>商品價錢</th>
-
+								<tr>
+									<th>商品編號</th>
+									<th>商品名稱</th>
+									<th>商品數量</th>
+									<th>商品價錢</th>
+								</tr>
 								<tr>
 									<c:forEach items="${itemList}" var="item">
 										<tr>
@@ -127,21 +121,21 @@
 						<td></td>
 						<td></td>
 						<th>總價</th>
-						<td>$${order.totoalprice }</td>
+						<td id="bar">$${order.totoalprice }</td>
 					</tr>
 					<tr>
 						<td colspan="7"></td>
 						<td></td>
 						<td></td>
 						<th>折扣</th>
-						<td>${order.discount }</td>
+						<td>${order.voucher.discount }</td>
 					</tr>
 					<tr>
 						<td colspan="7"></td>
 						<td></td>
 						<td></td>
 						<th>合計</th>
-						<td>$${order.totoalprice }</td>
+						<td id="sum">$${order.totoalprice }</td>
 					</tr>
 				</table>
 				<div style="margin: auto; width: 88px;">

@@ -45,7 +45,8 @@ function del(id) {
 				url: "order/" + id,
 				success: function(data) {
 					$(`#${id}`).remove();
-
+					count = $(`.or`).length;
+					$("#count").html(count);
 				}
 			})
 		}
@@ -60,6 +61,8 @@ function order(status) {
 		type: "GET",
 		url: "orderListAll",
 		success: function(data) {
+			count = data.length;
+			$("#count").html(count);
 			if (status == 3) {
 
 				$(".table-responsive").append(`<table id="data-table" class="table table-bordered">
@@ -71,6 +74,7 @@ function order(status) {
 					            <th>會員信箱</th>
 					            <th>訂單生成日期</th>
 					            <th>總數</th>
+					            <th>優惠碼</th>
 					            <th>訂單金額</th>
 					            <th>訂單狀態</th>
 					            <th></th>
@@ -91,11 +95,12 @@ function order(status) {
 				})
 			} else {
 				console.log("會員訂單");
+				
 				$.each(data, function(i, n) {
 					memberStatus = n.status.id;
-					$("#userbody").append(orderListUser(n));
+					$("#userbody").append(`<div id="${n.orderId}" class="or">`+orderListUser(n)+`</div>`);
 				})
-
+				
 			}
 		}
 	})
@@ -104,6 +109,15 @@ function order(status) {
 
 
 function orderList(order) {
+
+	var sum = order.totoalprice;
+
+	var num = '無';
+
+	if (order.voucher != null) {
+		num = order.voucher.number;
+		sum = Math.round(order.totoalprice * order.voucher.discount);
+	}
 
 
 	let data = `
@@ -114,7 +128,8 @@ function orderList(order) {
                 <td>${order.memberBean.email}</td>
                 <td>${formatDate(new Date(order.date))}</td>
                 <td>${order.totoalcount}</td>
-                <td>$${order.totoalprice}</td>
+                <td>${num}</td>
+                <td>$${sum}</td>
                 <td class="${order.orderId}"></td>
 
 
@@ -155,7 +170,7 @@ function orderButton(order) {
 	if (order.status.id == 1) {
 		bt = `<span class="badge badge-secondary" >${order.status.status}</span>`
 		$(`#${order.orderId}`).find(".btn-success").remove();
-//		$(`#${order.orderId}`).find(".btn-warning").attr("disabled", true);
+		//		$(`#${order.orderId}`).find(".btn-warning").attr("disabled", true);
 		$(`#${order.orderId}`).find(".btn-warning").remove();
 	};
 
@@ -181,52 +196,138 @@ function orderButton(order) {
 }
 function orderListUser(order) {
 
+	var num = '無';
+	var sum = order.totoalprice;
+
+	if (order.voucher != null) {
+		num = order.voucher.number;
+		sum = Math.round(order.totoalprice * order.voucher.discount);
+	}
+
 	part = "";
+	userStatus = "";
+
 	memberStatus = order.status.id;
 	if (memberStatus == 1) {
-		part = `<td>
-						<form action="orderDetail" method="post">
-							<input type="hidden" name="cartID" value="${order.orderId}" />
-							<button class="btn btn-success">結帳</button>
-						</form>
-				</td>
-				<td ><button onclick="del(${order.orderId})" class="btn btn-danger">刪除</button></td>`;
+		part = `<form action="orderDetail" method="post" style="display: inline-block;">
+					<input type="hidden" name="cartID" value="${order.orderId}" />
+					<button class="btn btn-success" style="margin-left: 25px; border-radius: 100px">結帳</button>
+				</form>
+				<button onclick="del(${order.orderId})" class="btn btn-danger" style="margin-left: 25px; border-radius: 100px">刪除</button>`;
+		userStatus = `<div style="padding: 10px;margin-left:20px" >
+												<span class="badge rounded-pill bg-secondary"
+													style="font-size: 15px;">${order.status.status}</span>
+											</div>`;
 
 	} else if (memberStatus == 2) {
-		part = `<td><button id="btn" disabled class="btn btn-secondary">已付款</button></td>
-				<td><button  class="btn btn-info" onclick="backpay(${order.orderId})">退款申請</button></td>`;
+		part = `<form action="orderDetail" method="post" style="display: inline-block;">
+											<input type="hidden" name="cartID" value="${order.orderId}" />
+											<button class="btn btn-primary" style="margin-left: 25px; border-radius: 100px">詳細</button>
+									</form><button  class="btn btn-info" onclick="backpay(${order.orderId})" style="margin-left: 25px; border-radius: 100px">退款申請</button>`;
+		userStatus = `<div style="padding: 10px;margin-left:20px" >
+												<span class="badge rounded-pill bg-success"
+													style="font-size: 15px;">${order.status.status}</span>
+											</div>`;
 
 	} else if (memberStatus == 3) {
-		part = `<td >
-					<button type="button" class="btn btn-warning">${order.status.status}</button>
-				</td><td ></td>`;
+		part=`<form action="orderDetail" method="post" style="display: inline-block;">
+											<input type="hidden" name="cartID" value="${order.orderId}" />
+											<button class="btn btn-primary" style="margin-left: 25px; border-radius: 100px">詳細</button>
+									</form>`;
+		userStatus = `<div style="padding: 10px;margin-left:20px" >
+												<span class="badge rounded-pill bg-warning text-dark"
+													style="font-size: 15px;">${order.status.status}</span>
+											</div>`;
 
 	} else if (memberStatus == 4) {
-		part = `<td>
-					<form action="orderDetail" method="post">
-							<input type="hidden" name="cartID" value="${order.orderId}" />
-							<button class="btn btn-primary">詳細</button>
-					</form>
-				</td><td ></td>`;
+		part=`<form action="orderDetail" method="post" style="display: inline-block;">
+											<input type="hidden" name="cartID" value="${order.orderId}" />
+											<button class="btn btn-primary" style="margin-left: 25px; border-radius: 100px">詳細</button>
+									</form>`;
+		userStatus = `<div style="padding: 10px;margin-left:20px">
+												<span class="badge rounded-pill bg-primary"
+													style="font-size: 15px;">${order.status.status}</span>
+											</div>`;
 
 	} else if (memberStatus == 5 || memberStatus == 6) {
-		part = `<td>
-					<button type="button" class="btn btn-info">${order.status.status}</button>
-				</td><td ></td>`;
+		part=`<form action="orderDetail" method="post" style="display: inline-block;">
+											<input type="hidden" name="cartID" value="${order.orderId}" />
+											<button class="btn btn-primary" style="margin-left: 25px; border-radius: 100px">詳細</button>
+									</form>`;
+		userStatus = `<div style="padding:10px;margin-left:20px" >
+												<span class="badge rounded-pill bg-dark"
+													style="font-size: 15px;">${order.status.status}</span>
+											</div>`;
 
 	}
-	let data = `
-            <tr id="${order.orderId}">
-				<td>${order.orderId}</td>
-				<td>${formatDate(new Date(order.date))}</td>
-				<td>${order.totoalcount}</td>
-				<td>$${order.totoalprice}</td>
-				<td>${order.status.status}</td>` + part + "</tr>";
+	
+		content = `
+					<div style="background-color: #DEFFDE">
+							訂單編號:<span style="padding-left:10px">  ${order.orderId}</span>
+						</div>
+						<ul
+							class="row list-products auto-clear equal-container product-list">
 
+							<li
+								class="product-item style-list col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12">
+								<div class="product-inner equal-element">
 
+									<div class="products-bottom-content">
 
-	return data;
+										<div class="product-info-left" style="padding-top: 10px">
+
+											<div>
+												<ul class="product-attributes"
+													style="display: inline-block; width: 300px">
+													<li>訂單生成日期:</li>
+													<li>${formatDate(new Date(order.date))}</li>
+
+												</ul>
+												<ul class="attributes-display"
+													style="display: inline-block;">
+													<li class="swatch-color">購買數量:</li>
+													<li class="swatch-color">${order.totoalcount}</li>
+
+												</ul>
+											</div>
+											<div>
+												<ul class="attributes-display"
+													style="display: inline-block; width: 300px">
+													<li class="swatch-text-label">優惠碼:</li>
+													<li class="swatch-text-label">${num}</li>
+
+												</ul>
+												<ul class="attributes-display"
+													style="display: inline-block;">
+													<li class="swatch-text-label">付款方式:</li>
+													<li class="swatch-text-label">線上支付</li>
+
+												</ul>
+											</div>
+
+										</div>
+
+										<div class="product-info-right" style="height: 60px;padding-top: 15px;width:200px">`
+										+userStatus+
+										`</div>
+									</div>
+									<hr style="border: 1px solid;">
+									<div>
+									`
+									+part+
+									`</div>
+									<div style="display: inline-block; margin-left: 650px;">
+										訂單金額：<span class="text-md strongfont text-primary">$${sum}</span>
+									</div>
+								</div>
+							</li>
+						</ul>
+					
+            `;
+			
+	return content;
 }
+
 
 function backpay(orderId) {
 	Swal.fire({
@@ -253,13 +354,16 @@ function backpay(orderId) {
 				url: "updateOrder/3/" + orderId,
 				success: function(data) {
 					$(`#${orderId}`).empty();
+
 					var order = orderUser(orderId);
-					orderListUser(order);
-					$(`#${orderId}`).append(`<td>${order.orderId}</td>
-											<td>${formatDate(new Date(order.date))}</td>
-											<td>${order.totoalcount}</td>
-											<td>$${order.totoalprice}</td>
-											<td>${order.status.status}</td>` + part);
+					var num = '無';
+					var sum = order.totoalprice;
+					if (order.voucher != null) {
+						num = order.voucher.number;
+						sum = Math.round(order.totoalprice * order.voucher.discount);
+					}
+					console.log($(`#${orderId}`));
+					$(`#${orderId}`).append(orderListUser(order));
 				}
 			})
 		}
@@ -323,13 +427,23 @@ function orderUser(orderId) {
 
 
 function orderAdminContent(order) {
+	var sum = order.totoalprice;
+
+	var num = '無';
+
+	if (order.voucher != null) {
+		num = order.voucher.number;
+		sum = Math.round(order.totoalprice * order.voucher.discount);
+	}
+
 	var data = `<td>${order.orderId}</td>
 				<td>${order.memberBean.account}</td>
                 <td>${order.memberBean.name}</td>
                 <td>${order.memberBean.email}</td>
                 <td>${formatDate(new Date(order.date))}</td>
                 <td>${order.totoalcount}</td>
-                <td>$${order.totoalprice}</td>
+                <td>${num}</td>
+                <td>$${sum}</td>
                 <td class="${order.orderId}"></td>
 
 
@@ -412,7 +526,8 @@ function selectStatus(e) {
 		type: "GET",
 		url: "searchStatus/" + st,
 		success: function(data) {
-			console.log(data);
+			count = data.length;
+			$("#count").html(count);
 			$("#not").remove();
 			$("#userbody").empty();
 			if (data.length == 0) {
@@ -424,15 +539,15 @@ function selectStatus(e) {
 			}
 			$.each(data, function(i, n) {
 				memberStatus = n.status.id;
-				$("#userbody").append(orderListUser(n));
-				
+				$("#userbody").append(`<div id="${n.orderId}" class="or">`+orderListUser(n)+`</div>`);
+
 
 			})
 		}
 	})
 }
 function htmlToPdf() {
-	
+
 	var doc = new jsPDF('p', 'pt', 'letter');
 	var htmlstring = '';
 	var tempVarToCheckPageHeight = 0;
@@ -468,20 +583,23 @@ function htmlToPdf() {
 			},
 			2: {
 				cellWidth: 55,
+			},
+			6: {
+				cellWidth: 50,
 			}
 		},
 		styles: {
 			minCellHeight: 10,
 			font: 'SourceHanSansCN-Bold',
-            fontStyle: 'normal',
+			fontStyle: 'normal',
 		},
 		headerStyles: {
-				font: 'SourceHanSansCN-Bold',
-				fontStyle: 'normal'
+			font: 'SourceHanSansCN-Bold',
+			fontStyle: 'normal'
 		},
 		tableWidth: 'wrap',
-		
-		margin: {left:0, right:200}
+
+		margin: { left: 0, right: 200 }
 	})
 	doc.save('好學生 訂單資料.pdf');
 }

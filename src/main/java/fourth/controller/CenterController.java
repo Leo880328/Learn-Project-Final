@@ -13,12 +13,14 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import fourth.bean.MemberBean;
 import fourth.service.MemberService;
+import fourth.service.VoucherService;
 
 @Controller
 @SessionAttributes(names = {"user"})
 public class CenterController {
 	
-	
+	@Autowired
+	VoucherService service ;
 	
 	
 	
@@ -34,6 +36,7 @@ public class CenterController {
 	public String Index(HttpServletRequest request,Model m) {
 		request.getSession().setAttribute("pageStatus","1");
 		System.out.println("前台");
+		//service.insertVoucher();
 		return "Index";
 	}
 	
