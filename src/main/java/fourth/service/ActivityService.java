@@ -125,15 +125,17 @@ public class ActivityService {
 
 	// =======================================================================================================
 	// 管理者查看需要審核
-	public Page<ActivityBean> selectReviewingActivity(Pageable pageable) {
-		return activityRepository.findAllByStatusCode(pageable, ActivityBean.STATUS_REVIEW_ING);
+	public Page<ActivityReviewBean> selectReviewingActivity(Pageable pageable) {
+		return activityReviewRepository.findNewestByStatusCode(pageable, ActivityBean.STATUS_REVIEW_ING);
 	}
 
 	// 活動審核失敗
 	public String activityReviewFalse(int activityById, String message) {
 		ActivityBean selectActivityById = this.selectActivityById(activityById);
 		selectActivityById.setStatusCode(ActivityBean.STATUS_REVIEW_FAIL);
-		// log
+		//log
+		ActivityReviewBean activityReviewBean = new ActivityReviewBean(activityById, message, ActivityBean.STATUS_REVIEW_FAIL);
+		activityReviewRepository.save(activityReviewBean);
 		this.updateActivity(selectActivityById);
 		return "true";
 	}
@@ -142,7 +144,10 @@ public class ActivityService {
 	public String activityRviewTrue(int activityById) {
 		ActivityBean selectActivityById = this.selectActivityById(activityById);
 		selectActivityById.setStatusCode(ActivityBean.STATUS_PUBLIC);
-		// log
+		//log
+		ActivityReviewBean activityReviewBean = new ActivityReviewBean(activityById, null, ActivityBean.STATUS_REVIEW_FAIL);
+		activityReviewRepository.save(activityReviewBean);
+		
 		this.updateActivity(selectActivityById);
 		return "true";
 	}

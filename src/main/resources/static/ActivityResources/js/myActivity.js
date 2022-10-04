@@ -45,12 +45,13 @@ function requestEffectiveAttendees() {
     dataType: "JSON",
     contentType: 'application/json; charset=utf-8',
     data: JSON.stringify(effectiveAttendeesPage),
-    success: function (activityPageArray) {
-      activityPageArray.content.forEach(function (activity, index, array) {
-        $(jquery.effectiveAttendees).append(createEffectiveAttendeesInformation(activity))
+    success: function (attendeesPageArray) {
+      console.log(attendeesPageArray)
+      attendeesPageArray.content.forEach(function (attendees, index, array) {
+        $(jquery.effectiveAttendees).append(createEffectiveAttendeesInformation(attendees))
       });
 
-      effectiveAttendeesPage.totalPages = activityPageArray.totalPages;
+      effectiveAttendeesPage.totalPages = attendeesPageArray.totalPages;
       if (effectiveAttendeesPage.pageNo < effectiveAttendeesPage.totalPages) {
         $(jquery.readMoreEffectiveButton).css('visibility', 'visible')
       } else {
@@ -60,14 +61,14 @@ function requestEffectiveAttendees() {
     error: function (err) { alert("資料獲取失敗，請刷新網頁!") },
   })
 }
-function createEffectiveAttendeesInformation(activity) {
-  let title = activity.title;
-  let time = activity.startTime + "~" + activity.endTime;
-  let place = activity.place;
+function createEffectiveAttendeesInformation(attendees) {
+  let title = attendees.activity.title;
+  let time = attendees.activity.startTime + "~" + attendees.activity.endTime;
+  let place = attendees.activity.place;
   let activityInformation =
     `
     <tr style="height: 50px;">
-    <td class="u-border-1 u-border-grey-40 u-table-cell"><a>${activity.title}</a></td>
+    <td class="u-border-1 u-border-grey-40 u-table-cell"><a>${title}</a></td>
     <td class="u-border-1 u-border-grey-40 u-table-cell">${time}</td>
     <td class="u-border-1 u-border-grey-40 u-table-cell">${place}</td>
     </tr>

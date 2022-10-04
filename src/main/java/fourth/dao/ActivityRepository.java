@@ -11,21 +11,20 @@ import org.springframework.data.repository.query.Param;
 import fourth.bean.ActivityBean;
 
 public interface ActivityRepository extends JpaRepository<ActivityBean, Integer> {
-	
+
 //	@Query(value = "select * from acticities where start_time <= :today and :today <= end_time and status_code ="+ActivityBean.STATUS_PUBLIC+";"  ,nativeQuery = true)
 //	public Page<ActivityBean> findAllByBetweenActivityTime(Pageable pageable,@Param("today") Date date);
-	
-	@Query(value = "select * from acticities where start_time >:today  status_code ="+ActivityBean.STATUS_PUBLIC+";"  ,nativeQuery = true)
-	public Page<ActivityBean> findAllByBetweenActivityTime(Pageable pageable,@Param("today") Date date);
-	
-	public Page<ActivityBean> findAllByStatusCode(Pageable pageable,int activityStatus);
-	
-	public Page<ActivityBean> findAllByUserId(Pageable pageable,int userId);
-	
-	public Page<ActivityBean> findAllByUserIdAndStatusCode(Pageable pageable,int userId,int statusCode);
-	
-	public Page<ActivityBean> findAllByTitleLike(Pageable pageable,String keyWord);
-	
-	
-	
+
+	@Query(value = "select * from acticities where start_time >:today  status_code =" + ActivityBean.STATUS_PUBLIC
+			+ ";", nativeQuery = true)
+	public Page<ActivityBean> findAllByBetweenActivityTime(Pageable pageable, @Param("today") Date date);
+
+	public Page<ActivityBean> findAllByStatusCode(Pageable pageable, int activityStatus);
+
+	public Page<ActivityBean> findAllByUserId(Pageable pageable, int userId);
+
+	public Page<ActivityBean> findAllByUserIdAndStatusCode(Pageable pageable, int userId, int statusCode);
+
+	public Page<ActivityBean> findAllByTitleLike(Pageable pageable, String keyWord);
+
 }

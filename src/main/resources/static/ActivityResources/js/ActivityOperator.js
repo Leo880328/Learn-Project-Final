@@ -20,7 +20,6 @@ function listener() {
     });
 
 }
-
 function requestReviewingActivities() {
     $.ajax({
         url: "ActivityOperator/all",
@@ -31,8 +30,6 @@ function requestReviewingActivities() {
         success: function (activityArray) {
             activityArray.content.forEach(function (activity, index, array) {
                 let table = $('.table').DataTable();
-                // console.log($.fn.dataTable.tables());
-                // console.log(table);
                 table.row.add(createReviewingActivityInformation(activity)).draw();
                 // $(jquery.reviewingActivity).append(createReviewingActivityInformation(activity))
             });
@@ -51,24 +48,9 @@ function createReviewingActivityInformation(activity) {
     let title = activity.title;
     let time = activity.startTime + "~" + activity.endTime;
     let place = activity.place;
-    let activityInformation =
-        `
-    <tr>
-        <td><a href="">${title}</a> </td>
-        <td>${time}</td>
-        <td>15</td>
-        <td>${place}</td>
-    </tr>
-    `
-    // let activityBean = {
-    //     title: activity.title,
-    //     time: activity.startTime + "~" + activity.endTime,
-    //     number: 15,
-    //     place: activity.place
-    // }
-    let activityBean = [`<a href="">${title}</a>`, activity.startTime + "~" + activity.endTime, 15, activity.place]
+    [1, 2, 3, 4,]
 
-    // return activityInformation
+    let activityBean = [`<a href="">${title}</a>`, activity.startTime + "~" + activity.endTime, 15, activity.place]
     return activityBean;
 }
 function readMoreReviewingActivities() {
