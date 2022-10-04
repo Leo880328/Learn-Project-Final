@@ -45,7 +45,7 @@ public class MemberController {
 	@GetMapping(path = "/forgotpassword/{mail}")
 	public void forgotPWD(@PathVariable String mail) {
 		MemberBean member = memberService.checkRegister(mail);
-		System.out.println("member: " + mail);
+		System.out.println("member: " + member);
 		if (member != null) {
 			String pwd = memberMailService.givenUsingJava8_whenGeneratingRandomAlphanumericString_thenCorrect();
 			System.out.println("pwd:" + pwd);
@@ -235,20 +235,75 @@ public class MemberController {
 		return "CheckBecomeTeacher";
 	}
 
+//	// 提出申請成為老師
+//	@PostMapping("/becometeacher")
+//	public String becomeTeacher(MemberBean memberBean, Model m) {
+//		System.out.println("//////////////////////執行成為老師");
+//		MemberBean user = (MemberBean) m.getAttribute("user");
+//		MemberBean mem = memberService.checkLogin(user.getAccount());
+//		System.out.println("mem: " + mem);
+//		mem.setStatus(4);
+//		m.addAttribute("user", mem);
+//		memberService.updateUser(memberBean);
+//		System.out.println("memberBean: " + memberBean);
+//		return "redirect:/user.controller";
+//	}
+
 	// 提出申請成為老師
 	@PostMapping("/becometeacher")
-	public String becomeTeacher(MemberBean memberBean, Model m) {
+	@ResponseBody
+	public String becomeTeacher(@RequestBody MemberBean memberBean, Model m) {
 		System.out.println("//////////////////////執行成為老師");
-		MemberBean user = (MemberBean) m.getAttribute("user");
-		MemberBean mem = memberService.checkLogin(user.getAccount());
-		System.out.println("mem: " + mem);
-		mem.setStatus(4);
-		m.addAttribute("user", mem);
-		memberService.updateUser(memberBean);
-		System.out.println("memberBean: " + memberBean);
-		return "redirect:/user.controller";
-	}
+		HashMap<String, String> errors = null;
+//		MemberBean user = (MemberBean) m.getAttribute("user");
+//		MemberBean mem = memberService.checkLogin(memberBean.getAccount());
+		System.out.println("memberBean: "+memberBean);
+		memberBean.setStatus(4);
+//		m.addAttribute("user", mem);
+//		System.out.println("user: "+user);
+//		System.out.println("mem: " + mem);
+		MemberBean updateUser = memberService.updateUser(memberBean);
+		System.out.println("updateUser: " + updateUser);
+		if (updateUser != null) {
+//			if (updateUser.getName() != null) {
+//				errors = new HashMap<String, String>();
+//				errors.put("name", "1111");
+//			}
+//			if (updateUser.getCellphone() !=null) {
+//				errors = new HashMap<String, String>();
+//				errors.put("cellphone", "1112");
+//			}
+//			if (updateUser.getEducation() !=null) {
+//				errors = new HashMap<String, String>();
+//				errors.put("education", "1113");
+//			}
+//			if (updateUser.getUserprofile() !=null) {
+//				errors = new HashMap<String, String>();
+//				errors.put("userprofile", "1114");
+//			}
+			
+		}
+//		if (checkRegisterByAccount != null) {
+//			if (checkRegisterByAccount.getAccount() != null) {
+//				if (errors == null) {
+//					errors = new HashMap<String, String>();
+//				}
+//				errors.put("account", "1112");
+//
+//			}
+//		}
+		if (errors != null) {
+			Gson gson = new Gson();
 
+			return gson.toJson(errors);
+		}
+
+		return "3000";
+	}
+	
+	
+	
+	
 	// 更新會員
 	@PostMapping("/updateUser")
 	public String updateUser(MemberBean memberBean, MultipartFile mf, String account, int status)

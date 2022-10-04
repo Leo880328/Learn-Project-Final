@@ -98,7 +98,7 @@ article {
 	$(function() {
 		$('#correct').click(function() {
 			$('#account').val("edward");
-			$('#password').val("test123");
+			$('#password').val("edward");
 		})
 	})
 </script>
