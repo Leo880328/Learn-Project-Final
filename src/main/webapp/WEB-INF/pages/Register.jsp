@@ -94,8 +94,8 @@ article {
 		$(function() {
 			$('#correct').click(function() {
 				$('#account').val("edward");
-				$('#password').val("test123");
-				$('#password1').val("test123");
+				$('#password').val("edward");
+				$('#password1').val("edward");
 				$('#email').val("ch570981400@gmail.com");
 			})
 		})
@@ -141,13 +141,5 @@ article {
 			})
 		})
 	</script>
-	<!-- 	<script> -->
-	<!-- // 		$("#submit").click(function() { -->
-	<!-- // 			Swal.fire({ -->
-	<!-- // 				icon : 'success', -->
-	<!-- // 				title : '註冊成功' -->
-	<!-- // 			}) -->
-	<!-- // 		}); -->
-	<!-- 	</script> -->
 </body>
 </html>

@@ -31,7 +31,7 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 					</div>
 				</div>
 			</div>
-			<form action="becometeacher" method="post">
+<!-- 			<form action="becometeacher" method="post"> -->
 				<div class="row">
 					<div
 						class="content-area content-details full-width col-lg-9 col-md-8 col-sm-12 col-xs-12">
@@ -72,11 +72,11 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 										</p>
 									</div>
 
-									<input type="hidden" name="userId"
+									<input type="hidden" name="userId" id="userId"
 										value="<%=memberBean.getuserId()%>" /> <input id="imgPath"
 										type="hidden" name="img" title="大頭貼"
 										value="<%=memberBean.getImg()%>"> <input type="hidden"
-										value="<%=memberBean.getNick()%>" name="nick"
+										value="<%=memberBean.getNick()%>" name="nick" 
 										placeholder="請輸入最多10個字" maxlength="10" id="nick"
 										class="form-control"> <input type="hidden"
 										name="account" value="<%=memberBean.getAccount()%>" title="帳號"
@@ -85,7 +85,7 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 										value="<%=memberBean.getBirthday()%>" class="form-control"
 										placeholder=""> <input type="hidden" title="電子郵件"
 										value="<%=memberBean.getEmail()%>" id="email" name="email"
-										class="form-control"> <input type="hidden" title="密碼"
+										class="form-control"> <input type="hidden" title="密碼" id="password"
 										name="password" maxlength="20" placeholder="*必填"
 										value='<%=memberBean.getPassword()%>' /> <input type="hidden"
 										name="joinDate" value="<%=memberBean.getJoinDate()%>" /> <input
@@ -96,8 +96,8 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 								<div class="product-details-description"></div>
 
 								<div class="quantity-add-to-cart">
-									<button class="single_add_to_cart_button button"
-										onclick="becometeacher()">申請成為老師</button>
+									<button class="single_add_to_cart_button button" type="button"
+										id="checkTeacher" onclick="">申請成為老師</button>
 									<button type="button" class="btn btn-primary " id="correct">輸入完整資料</button>
 								</div>
 							</div>
@@ -106,18 +106,45 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 
 				</div>
 		</div>
-		</form>
+<!-- 		</form> -->
 	</div>
 	</div>
 
 </body>
 
 <script type="text/javascript">
-		$('#checkRegister').on("click", function() {
+		$('#checkTeacher').on("click", function() {
+			
+			let userId = $('#userId').val();
+			let nick = $('#nick').val();
+			let account = $('#account').val();
+			let password = $('#password').val();
+			let status = $('#status').val();
 			let name = $('#name').val();
+			let img = $('#img').val();
+			let sex = $('#sex').val();
+			let birthday = $('#birthday').val();
 			let cellphone = $('#celllphone').val();
+			let email = $('#email').val();
+			let joinDate = $('#joinDate').val();
 			let education = $('#education').val();
 			let userprofile = $('#userprofile').val();
+			let reason = $('#reason').val();
+			console.log(userId)
+			console.log(nick)
+			console.log(account)
+			console.log(password)
+			console.log(status)
+			console.log(name)
+			console.log(img)
+			console.log(sex)
+			console.log(birthday)
+			console.log(cellphone)
+			console.log(email)
+			console.log(joinDate)
+			console.log(education)
+			console.log(userprofile)
+			console.log(reason)
 			$('#msgName').text("");
 			$('#msgCellphone').text("");
 			let member = {
@@ -129,33 +156,33 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 					password : password,
 					email : email,
 			}
-			fetch("newRegister",{
-				method:'POST',
-				headers:{
-					'Content-Type':'application/json'
-				},
-				body:JSON.stringify(member) 
-			}).then(resp=>resp.json())
-			.then(res=>{
-				console.log(res)
-				if('1112'==res.account){
+// 			fetch("newRegister",{
+// 				method:'POST',
+// 				headers:{
+// 					'Content-Type':'application/json'
+// 				},
+// 				body:JSON.stringify(member) 
+// 			}).then(resp=>resp.json())
+// 			.then(res=>{
+// 				console.log(res)
+// 				if('3333'==res.account){
 					
-					$('#msgAccount').text('帳號已註冊');
+// 					$('#msgAccount').text('帳號已註冊');
 					 
-				}
-				if('1111'==res.email){
+// 				}
+// 				if('4444'==res.email){
 					
-					$('#msgEmail').text('信箱已註冊');
-					 return false;
-				}
-				  Swal.fire({
-                      icon: 'success',
-                      title: '註冊成功',
-                      text: '註冊成功，請前往登入畫面',
-                  }).then(function(){
-                	  location.href='logir';
-                  })
-			})
+// 					$('#msgEmail').text('信箱已註冊');
+// 					 return false;
+// 				}
+// 				  Swal.fire({
+//                       icon: 'success',
+//                       title: '註冊成功',
+//                       text: '註冊成功，請前往登入畫面',
+//                   }).then(function(){
+//                 	  location.href='logir';
+//                   })
+// 			})
 		})
 	</script>
 <script>

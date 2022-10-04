@@ -30,7 +30,7 @@
 	%>
 	<c:if test="${mb != null}">
 		<%
-		action = "updateUser";
+		action = "adminUpdateUser";
 		%>
 	</c:if>
 	<c:if test="${mb == null}">
@@ -108,13 +108,18 @@
 								</div>
 							</div>
 							<div class="col-md-6">
-								<div class="form-group">
-									<label>密碼</label><input type="text" title="密碼" name="password"
-										id="password" value="<c:out value='${mb.password}' />"
-										class="form-control" placeholder="*必填"> <font
-										color="red"><span id="sp5" class="msg"></span></font><i
-										class="form-group__bar"></i>
-								</div>
+								<c:if test="${mb == null}">
+									<div class="form-group">
+										<label>密碼</label><input type="text" title="密碼" name="password"
+											id="password" value="<c:out value='${mb.password}' />"
+											class="form-control" placeholder="*必填"><font
+											color="red"><span id="sp5" class="msg"></span></font><i
+											class="form-group__bar"></i>
+									</div>
+								</c:if>
+								<input type="hidden" title="密碼" name="password"
+											id="password" value="<c:out value='${mb.password}' />"
+											class="form-control" placeholder="*必填">
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
@@ -187,7 +192,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label>學歷 </label><input type="text" name="education"
-											size="50" id="education"
+											id="education" size="50" id="education"
 											value="<c:out value='${mb.education}' />"
 											class="form-control" placeholder=""><i
 											class="form-group__bar"></i>
@@ -240,12 +245,13 @@
 					$(function () {
 
 						$('#correct').click(function () {
-							$('#nick').val("smalllucy");
+							$('#nick').val("小希");
 							$('#account').val("lucy");
 							$('#password').val("lucy");
-							$('#status').val("1");
+							$('#status').val("3");
 							$('#name').val("Lucu Wang");
 							$('#sex').val("女生");
+							$('#education').val("EEIT49");
 							$('#birthday').val("1999-03-02");
 							$('#cellphone').val("0922404678");
 							$('#email').val("lucy@gmail.com");
@@ -272,85 +278,87 @@
 
 							}
 						</script> -->
-<script type="text/javascript">
+<!-- <!-- <script type="text/javascript"> -->
+-->
 
-					//檢查信箱 非空/不能有中文/序列4以上含有'@' 觸發：onblur onsubmit
-					$('#email').on('blur', function () {
-						checkAccount()
-					})
-					function checkAccount() {
-						let account = $('#email').val()
-						if (typeof account === "string") {
-							if (account == null || account == "") {
-								var msg = "信箱必須填寫";
-								$('#sp4').text(msg);
-								return false
-							} else {
-								if (account.indexOf("@") > 4) {
-									var eng = new RegExp("[a-zA-z]"); //要改成有中文不行
-									if (eng.test(account)) {
-										var msg = "OK";
-										$('#sp4').text(msg);
-										return true
-									} else {
-										var msg = "請輸入英文字母";
-										$('#sp4').text(msg);
-										return false
-									}
-								} else {
-									var msg = "請輸入有效信箱";
-									$('#sp4').text(msg);
-									return false
-								}
-							}
-						} else {
-							var msg = "請輸入有效信箱";
-							$('#sp4').text(msg);
-							return false
-						}
-					}
+<!-- // 					//檢查信箱 非空/不能有中文/序列4以上含有'@' 觸發：onblur onsubmit -->
+<!-- // 					$('#email').on('blur', function () { -->
+<!-- // 						checkAccount() -->
+<!-- // 					}) -->
+<!-- // 					function checkAccount() { -->
+<!-- // 						let account = $('#email').val() -->
+<!-- // 						if (typeof account === "string") { -->
+<!-- // 							if (account == null || account == "") { -->
+<!-- // 								var msg = "信箱必須填寫"; -->
+<!-- // 								$('#sp4').text(msg); -->
+<!-- // 								return false -->
+<!-- // 							} else { -->
+<!-- // 								if (account.indexOf("@") > 4) { -->
+<!-- // 									var eng = new RegExp("[a-zA-z]"); //要改成有中文不行 -->
+<!-- // 									if (eng.test(account)) { -->
+<!-- // 										var msg = "OK"; -->
+<!-- // 										$('#sp4').text(msg); -->
+<!-- // 										return true -->
+<!-- // 									} else { -->
+<!-- // 										var msg = "請輸入英文字母"; -->
+<!-- // 										$('#sp4').text(msg); -->
+<!-- // 										return false -->
+<!-- // 									} -->
+<!-- // 								} else { -->
+<!-- // 									var msg = "請輸入有效信箱"; -->
+<!-- // 									$('#sp4').text(msg); -->
+<!-- // 									return false -->
+<!-- // 								} -->
+<!-- // 							} -->
+<!-- // 						} else { -->
+<!-- // 							var msg = "請輸入有效信箱"; -->
+<!-- // 							$('#sp4').text(msg); -->
+<!-- // 							return false -->
+<!-- // 						} -->
+<!-- // 					} -->
 
 
 
-					//檢查密碼 判斷 非空/不能有中文/須為8-16個字 觸發:onblur onsubmit
-					$('#password').on('blur',
-						function () {
-							checkPassword()
-						}
-					)
-					function checkPassword() {
-						let password = $('#password').val()
-						if (typeof password === "string") {
-							if (password == null || password == "") {
-								var msg = "密碼必須填寫";
-								$('#sp5').text(msg);
-								return false
-							} else {
-								var eng = new RegExp("[a-zA-z]"); //要改成有中文不行
-								if (eng.test(password)) {
-									if (password.length <= 7 || password.length >= 17) {
-										var msg = "密碼須為6至16字含英文數字";
-										$('#sp5').text(msg);
-										return false
-									} else {
-										var msg = "OK ";
-										$('#sp5').text(msg);
-										return true
-									}
-								} else {
-									var msg = "密碼須為6至16字含英文數字";
-									$('#sp5').text(msg);
-									return false
-								}
+<!-- // 					//檢查密碼 判斷 非空/不能有中文/須為8-16個字 觸發:onblur onsubmit -->
+<!-- // 					$('#password').on('blur', -->
+<!-- // 						function () { -->
+<!-- // 							checkPassword() -->
+<!-- // 						} -->
+<!-- // 					) -->
+<!-- // 					function checkPassword() { -->
+<!-- // 						let password = $('#password').val() -->
+<!-- // 						if (typeof password === "string") { -->
+<!-- // 							if (password == null || password == "") { -->
+<!-- // 								var msg = "密碼必須填寫"; -->
+<!-- // 								$('#sp5').text(msg); -->
+<!-- // 								return false -->
+<!-- // 							} else { -->
+<!-- // 								var eng = new RegExp("[a-zA-z]"); //要改成有中文不行 -->
+<!-- // 								if (eng.test(password)) { -->
+<!-- // 									if (password.length <= 7 || password.length >= 17) { -->
+<!-- // 										var msg = "密碼須為6至16字含英文數字"; -->
+<!-- // 										$('#sp5').text(msg); -->
+<!-- // 										return false -->
+<!-- // 									} else { -->
+<!-- // 										var msg = "OK "; -->
+<!-- // 										$('#sp5').text(msg); -->
+<!-- // 										return true -->
+<!-- // 									} -->
+<!-- // 								} else { -->
+<!-- // 									var msg = "密碼須為6至16字含英文數字"; -->
+<!-- // 									$('#sp5').text(msg); -->
+<!-- // 									return false -->
+<!-- // 								} -->
 
-							}
-						} else {
-							var msg = "密碼須為6至16字含英文數字";
-							$('#sp5').text(msg);
-							return false
-						}
-					}
-				</script>
+<!-- // 							} -->
+<!-- // 						} else { -->
+<!-- // 							var msg = "密碼須為6至16字含英文數字"; -->
+<!-- // 							$('#sp5').text(msg); -->
+<!-- // 							return false -->
+<!-- // 						} -->
+<!-- // 					} -->
+<!-- <!-- 				</script> -->
+-->
 
 <script type="text/javascript">
 					function checkUpdate() {
@@ -376,7 +384,7 @@
 							}
 						})
 					}
-				</script>
+</script>
 </body>
 
 </html>

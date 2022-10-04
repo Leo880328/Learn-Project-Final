@@ -14,7 +14,7 @@
 .tb {
 	border-collapse: collapse;
 	margin-left: 300px;
-	width: 1600px;
+	width: 1000px;
 	/*自動斷行*/
 	word-wrap: break-word;
 	table-layout: fixed;
@@ -50,21 +50,21 @@
 	<div>
 		<h3>會員查詢</h3>
 	</div>
-	<table class="tb"  border='1'>
+	<table class="tb"  border='1' style="background-color:white;">
 		<thead>
 			<tr>
 				<th>ID</th>
-				<th>暱稱</th>
+<!-- 				<th>暱稱</th> -->
 				<th>帳號</th>
 				<!-- <th>密碼</th> -->
 				<th>身分</th>
 				<th>姓名</th>
 				<th>大頭貼</th>
-				<th>性別</th>
-				<th>生日</th>
+<!-- 				<th>性別</th> -->
+<!-- 				<th>生日</th> -->
 				<th>手機號碼</th>
 				<th>信箱</th>
-				<th>註冊日期</th>
+<!-- 				<th>註冊日期</th> -->
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -75,7 +75,7 @@
 		<tbody>
 			<tr>
 				<td><%=memberBean.getuserId()%></td>
-				<td><%=memberBean.getNick()%></td>
+<%-- 				<td><%=memberBean.getNick()%></td> --%>
 				<td><%=memberBean.getAccount()%></td>
 				<!-- <td><c:out value="${mb.password}" /></td> -->
 				<td><c:choose>
@@ -99,11 +99,11 @@
 				<td><%=memberBean.getName()%></td>
 				<td><img src="<%=memberBean.getImg()%>" width="150"
 					height="100"></td>
-				<td><%=memberBean.getSex()%></td>
-				<td><%=memberBean.getBirthday()%></td>
+<%-- 				<td><%=memberBean.getSex()%></td> --%>
+<%-- 				<td><%=memberBean.getBirthday()%></td> --%>
 				<td><%=memberBean.getCellphone()%></td>
 				<td><%=memberBean.getEmail()%></td>
-				<td><%=memberBean.getJoinDate()%></td>
+<%-- 				<td><%=memberBean.getJoinDate()%></td> --%>
 				<<td><a class="btn btn-warning" href="showEditUser?userId=<%=memberBean.getuserId()%> ">修改</a> <a
 						class="btn btn-danger btn--raised"
 						onclick="if( !(confirm('確認刪除?') ) ) return false";alert(刪除成功)

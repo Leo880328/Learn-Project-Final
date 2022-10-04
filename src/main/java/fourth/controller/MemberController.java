@@ -53,9 +53,9 @@ public class MemberController {
 			MemberBean registerUser = memberService.registerUser(member);
 			System.out.println("registerUser: " + registerUser);
 			System.out.println("email:" + member.getEmail());
-			memberMailService.sendMail(member.getEmail(), "[ 快樂學習(你快樂嗎?) ]忘記密碼通知信",
+			memberMailService.sendMail(member.getEmail(), "好學生-EEIT49  忘記密碼通知信",
 					"親愛的會員您好:<br><br>您的帳號:" + member.getAccount() + " 申請忘記密碼通知，" + "系統發送新密碼為:" + pwd + "，"
-							+ "請使用新密碼登入，並至個人資料重新修改密碼。<br> <br> <br>  快樂學習團隊 敬上");
+							+ "請使用新密碼登入，並至個人資料重新修改密碼。<br> <br> <br>  好學生團隊 敬上");
 
 		}
 	}
@@ -117,10 +117,10 @@ public class MemberController {
 			if (user.getStatus() == 3) {
 
 				return "redirect:/backendIndex";
-			} else if(user.getStatus()==5){
+			} else if (user.getStatus() == 5) {
 				errors.put("msg", "<font color=red size=6 >帳號有問題!!</font>");
 				return "Login";
-			}else {
+			} else {
 				return "redirect:/Index";
 			}
 
@@ -142,8 +142,8 @@ public class MemberController {
 	@ResponseBody
 	public String newRegister(@RequestBody MemberBean memberBean, BindingResult result, Model m, Object mb) {
 		System.out.println("進入註冊controller");
-		HashMap<String, String> errors =null;
-		
+		HashMap<String, String> errors = null;
+
 		String timeStamp = new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime());
 //		String bcEncode = new BCryptPasswordEncoder().encode(memberBean.getPassword());
 //		System.out.println("bcEncode :" +bcEncode);
@@ -156,31 +156,30 @@ public class MemberController {
 		MemberBean checkRegisterByAccount = memberService.checkLogin(memberBean.getAccount());
 		System.out.println(checkRegisterByAccount);
 		System.out.println(checkRegisterByEmail);
-	
+
 		System.out.println("進入完service");
 
 		if (checkRegisterByEmail != null) {
 			if (checkRegisterByEmail.getEmail() != null) {
-				errors= new HashMap<String, String>();
-				 errors.put("email", "1111");
+				errors = new HashMap<String, String>();
+				errors.put("email", "1111");
 			}
 		}
 		if (checkRegisterByAccount != null) {
 			if (checkRegisterByAccount.getAccount() != null) {
-				if(errors==null) {
-					errors=new HashMap<String, String>();
+				if (errors == null) {
+					errors = new HashMap<String, String>();
 				}
 				errors.put("account", "1112");
-				
+
 			}
 		}
-		
-		if(errors!=null) {
-			Gson gson=new Gson();
-			
+
+		if (errors != null) {
+			Gson gson = new Gson();
+
 			return gson.toJson(errors);
 		}
-		
 
 		memberService.registerUser(memberBean);
 		m.addAttribute("register", mb);
@@ -257,11 +256,18 @@ public class MemberController {
 		MemberBean member = memberService.checkLogin(account);
 		if (status == 1) {
 			memberService.updateUser(memberBean);
-			return "redirect:/memberList";
+			String txt = "<h2>" + "親愛的 " + memberBean.getNick() + " 您好 :" + "<br>" + "審核結果: 失敗!! 失敗原因： "
+					+ memberBean.getReason() + "<br>" + "<h2>";
+			JavaMail javaMail = new JavaMail();
+//			javaMail.setCustomer("fock360man@gmail.com");
+			javaMail.setCustomer("ch570981400@gmail.com");
+			javaMail.setSubject("好學生-EEIT49 身分審核失敗!");
+			javaMail.setTxt(txt);
+			javaMail.sendMail();
 		}
 		if (status == 2) {
 			memberService.updateUser(memberBean);
-			String txt = "<h2>" + "偉大的 " + memberBean.getNick() + " 您好 :" + "<br>" + "審核結果: 通過!! 恭喜你成為老師" + "<br>"
+			String txt = "<h2>" + "親愛的 " + memberBean.getNick() + " 您好 :" + "<br>" + "審核結果: 通過!! 恭喜你成為老師" + "<br>"
 					+ "<h2>";
 			JavaMail javaMail = new JavaMail();
 //			javaMail.setCustomer("fock360man@gmail.com");
@@ -270,6 +276,14 @@ public class MemberController {
 			javaMail.setTxt(txt);
 			javaMail.sendMail();
 		}
+		return "redirect:/memberList";
+	}
+
+	// 管理員更新會員
+	@PostMapping("/adminUpdateUser")
+	public String adminUpdateUser(MemberBean memberBean, MultipartFile mf, String account, int status)
+			throws IllegalStateException, IOException {
+		memberService.updateUser(memberBean);
 		return "redirect:/memberList";
 	}
 
@@ -290,11 +304,27 @@ public class MemberController {
 
 	}
 
+//	// 刪除會員
+//	@GetMapping("/deleteUser/{id}")
+//	public String deleteUser(@PathVariable("id") int userId) {
+//		memberService.deleteUser(userId);
+//		return "redirect:/memberList";
+//	}
+
 	// 刪除會員
 	@GetMapping("/deleteUser/{id}")
-	public String deleteUser(@PathVariable("id") int userId) {
+	public String deleteUser(@PathVariable("id") int userId, String account, MemberBean memberBean) {
 		memberService.deleteUser(userId);
+		String txt = "<h2>" + "親愛的會員您好 :" + "<br>" + "您因為違反規定，帳號已被移除，如有疑問請洽詢管理員" + "<br> <br> <br>  好學生團隊 敬上" + "<h2>";
+		JavaMail javaMail = new JavaMail();
+//		javaMail.setCustomer("fock360man@gmail.com");
+		javaMail.setCustomer("ch570981400@gmail.com");
+		javaMail.setSubject("好學生-EEIT49 帳號已被移除!");
+		javaMail.setTxt(txt);
+		javaMail.sendMail();
+
 		return "redirect:/memberList";
+
 	}
 
 	// 使用者自己更新資料
