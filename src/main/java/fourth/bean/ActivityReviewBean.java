@@ -44,8 +44,6 @@ public class ActivityReviewBean implements Serializable{
 	private int activityId;
 	
 	
-	private String activityTitle;
-	
 	@Column(name = "message")
 	private String message;
 	
@@ -81,15 +79,6 @@ public class ActivityReviewBean implements Serializable{
 
 
 
-	public String getActivityTitle() {
-		return activityTitle;
-	}
-
-
-
-	public void setActivityTitle(String activityTitle) {
-		this.activityTitle = activityTitle;
-	}
 
 
 

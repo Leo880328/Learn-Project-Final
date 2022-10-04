@@ -125,8 +125,8 @@ public class ActivityService {
 
 	// =======================================================================================================
 	// 管理者查看需要審核
-	public Page<ActivityReviewBean> selectReviewingActivity(Pageable pageable) {
-		return activityReviewRepository.findNewestByStatusCode(pageable, ActivityBean.STATUS_REVIEW_ING);
+	public Page<ActivityBean> selectReviewingActivity(Pageable pageable) {
+		return activityRepository.findAllByStatusCode(pageable, ActivityBean.STATUS_REVIEW_ING);
 	}
 
 	// 活動審核失敗

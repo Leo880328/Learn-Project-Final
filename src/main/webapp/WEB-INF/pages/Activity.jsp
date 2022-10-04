@@ -1,11 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Teamo - Home</title>
+    <title>活動</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="<%=request.getContextPath()%>/">
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png" />
     <link
         href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap"
@@ -39,24 +42,14 @@
                             <div class="post-infor">
                                 <div class="post-format"><img src="assets/images/blog1.jpg" alt="img"></div>
                                 <div class="category-blog">活動說明</div>
-                                <h3 class="post-title">New Designer Outdoor Cars</h3>
-                                <div class="main-info-post">
-                                    <p>Duis quis porta enim. Nunc molestie porta elit,sit amet mattis lectus mollis et.
-                                        Phasellus condimentum nulla a arcu lacinia,a venenatis ex congue. Mauris nec
-                                        ante magna. Duis lacus massa,consequat at mollis gravida,ornare vel mi. Nam
-                                        dignissim sagittis quam nec consequat. Maecenas vel nulla eleifend,euismod magna
-                                        sed,tristique velit. Nam sed eleifend dui,eu eleifend leo. </p>
-                                    <p>Mauris ornare eros quis placerat mollis. Duis ornare euismod risus at dictum.
-                                        Proin at porttitor metus. Nunc luctus nisl suscipit,hendrerit ligula non,mattis
-                                        dolor. In sit amet enim in odio viverra maximus luctus vitae orci. Nunc faucibus
-                                        ipsum vel massa venenatis pretium. Suspendisse volutpat ac nisi at commodo.
-                                    </p>
-                                    <p>
-                                        活動時間:0000/00/00 10:00 ~ 0000/00/00 00:00<br>
-                                        地點:台北市萬華區
-                                    </p>
+                                <h3 class="post-title activityTitle"></h3>
+                                <div class="main-info-post activityContent">
+
 
                                 </div>
+                                <p class="activityInformation">
+                                    
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -94,7 +87,7 @@
     <script src="assets/js/jquery.scrollbar.min.js"></script>
     <script src='http://www.google.cn/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script>
     <script src="assets/js/frontend-plugin.js"></script>
-
+	<script src="ActivityResources/js/Activity.js"></script>
 </body>
 
 </html>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,7 +37,8 @@ public class ActivityController {
 	private final String MAPKEY_ACTIVITY_REVIEW_MESSAGE = "ActivityReviewBeanMessage";
 
 	@GetMapping("/Activitytest1")
-	public String Activitytest() {
+	public String Activitytest(Model m) {
+		m.addAttribute("test", "123456645548841");
 		return "Activitytest";
 		
 	}
@@ -51,8 +53,8 @@ public class ActivityController {
 	}
 
 	// Activity_OP_test get
-	@GetMapping("/ActivitiesOP")
-	public String ActivityPreviewOP() {
+	@GetMapping("/MyActivities")
+	public String MyActivities() {
 		return "ActivityPreviewOP";
 	}
 
@@ -62,10 +64,10 @@ public class ActivityController {
 		return "ActivityUpdate";
 	}
 
-	@PostMapping("/ActivityOPUpdate-{id}")
+	@GetMapping("/Activity-{id}")
 	public String updateActivities() {
 		// 應插入權限判斷
-		return "ActivityUpdate";
+		return "Activity";
 	}
 
 //	======================================================================================================================================================
@@ -99,7 +101,7 @@ public class ActivityController {
 	}
 	
 	//	查看活動
-	@GetMapping("/{id}")
+	@PostMapping("/Activity{id}")
 	@ResponseBody
 	public ActivityBean selectActivity(@PathVariable Integer id) {
 		return activityService.selectActivityById(id);

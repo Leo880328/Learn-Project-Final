@@ -31,7 +31,7 @@ public class ActivityOperatorController {
 
 	@PostMapping("/all")
 	@ResponseBody
-	public Page<ActivityReviewBean> requestReviewingActivity(@RequestBody() Map<String, String> map) {
+	public Page<ActivityBean> requestReviewingActivity(@RequestBody() Map<String, String> map) {
 		Integer pageNo = Integer.valueOf(map.get(MapKey_pageNo));
 		Integer pageSize = Integer.valueOf(map.get(MapKey_pageSize));
 		PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);

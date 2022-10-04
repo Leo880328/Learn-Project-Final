@@ -146,6 +146,8 @@
     <script>
         $(".createOrAddActivityMode").load("ActivityResources/createOrAddActivityMode.html");
         $(".advertiseMode").load("ActivityResources/advertiseMode.html");
+        let test = [${test}];
+        console.log(test)
     </script>
     <script src="ActivityResources/js/myActivity.js"></script>
 </body>

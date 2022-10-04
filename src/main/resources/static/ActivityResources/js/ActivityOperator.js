@@ -27,10 +27,11 @@ function requestReviewingActivities() {
         dataType: "JSON",
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(reviewingActivityPage),
-        success: function (activityArray) {
-            activityArray.content.forEach(function (activity, index, array) {
+        success: function (reviewingArray) {
+            reviewingArray.content.forEach(function (attendees, index, array) {
+                console.log(attendees)
                 let table = $('.table').DataTable();
-                table.row.add(createReviewingActivityInformation(activity)).draw();
+                table.row.add(createReviewingActivityInformation(attendees)).draw();
                 // $(jquery.reviewingActivity).append(createReviewingActivityInformation(activity))
             });
 
