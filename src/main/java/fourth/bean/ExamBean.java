@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
@@ -40,35 +41,72 @@ public class ExamBean implements Serializable
 	@JoinColumn(name="EDUCATIONLEVEL")
     private ExamEduBean education;
 	
-	@JsonManagedReference
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "exam")
-    private  List<ExamTest> examTests = new ArrayList<ExamTest>() ;
-	
 	@Column(name = "EXAMNAME")
     private String examName;
 
 	@Column(name = "EXAMDATE")	
     private Date examdate;
 	
+	@Transient
+	private String stringDate;
+	
 	@Column(name = "EXAMPIC")	
 	private String examPic;
 	
+	@ManyToOne
+	@JoinColumn(name="MEMBERID")
+    private MemberBean member;
+	
+	@Column(name = "DIFFICULTY")	
+	private String difficulty;
+	
+	@Column(name = "EXAMSTATUS")	
+	private Integer examStatus;
+	
+	@Column(name = "TESTNUMBER")	
+	private Integer testNumber;
 
+	@Column(name = "AVGSCORE")	
+	private Integer avgScore;
+	
+	
+	@JsonManagedReference
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "exam")
+    private  List<ExamTest> examTests = new ArrayList<ExamTest>() ;
+	
+	@JsonManagedReference
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "exam")
+    private  List<ExamQuesBean> examQueses = new ArrayList<ExamQuesBean>() ;
+	
+	
 	public ExamBean() {
 		super();
 	}
+	
+	
 
-	public ExamBean(ExamSubBean subject, ExamEduBean education, String examName, Date examdate, String examPic) {
+
+	public ExamBean(ExamSubBean subject, ExamEduBean education, String examName,Date examdate, String examPic, 
+			MemberBean member, String difficulty,Integer testNumber, Integer avgScore,Integer examStatus) {
 		super();
 		this.subject = subject;
 		this.education = education;
 		this.examName = examName;
 		this.examdate = examdate;
 		this.examPic = examPic;
+		this.member = member;
+		this.difficulty = difficulty;
+		this.testNumber = testNumber;
+		this.avgScore = avgScore;
+		this.examStatus = examStatus;
 	}
 
+
+
 	public ExamBean(Integer examID, ExamSubBean subject, ExamEduBean education, String examName, Date examdate,
-			String examPic) {
+			String examPic, MemberBean member, String difficulty,Integer testNumber, Integer avgScore
+			,Integer examStatus) {
+		
 		super();
 		this.examID = examID;
 		this.subject = subject;
@@ -76,13 +114,27 @@ public class ExamBean implements Serializable
 		this.examName = examName;
 		this.examdate = examdate;
 		this.examPic = examPic;
+		this.member = member;
+		this.difficulty = difficulty;
+		this.testNumber = testNumber;
+		this.avgScore = avgScore;
+		this.examStatus = examStatus;
 	}
+
+
+
 
 	@Override
 	public String toString() {
 		return "ExamBean [examID=" + examID + ", subject=" + subject + ", education=" + education + ", examName="
-				+ examName + ", examdate=" + examdate + ", examPic=" + examPic + "]";
+				+ examName + ", examdate=" + examdate + ", stringDate=" + stringDate + ", examPic=" + examPic
+				+ ", member=" + member + ", difficulty=" + difficulty + ", examStatus=" + examStatus + ", testNumber="
+				+ testNumber + ", avgScore=" + avgScore + ", examTests=" + examTests + ", examQueses=" + examQueses
+				+ "]";
 	}
+
+
+
 
 	public Integer getExamID() {
 		return examID;
@@ -139,7 +191,103 @@ public class ExamBean implements Serializable
 	public void setExamTests(List<ExamTest> examTests) {
 		this.examTests = examTests;
 	}
+
+	public MemberBean getMember() {
+		return member;
+	}
+
+	public void setMember(MemberBean member) {
+		this.member = member;
+	}
+
 	
-  
+
+	public String getDifficulty() {
+		return difficulty;
+	}
+
+
+
+	public void setDifficulty(String difficulty) {
+		this.difficulty = difficulty;
+	}
+
+
+
+
+	public Integer getExamStatus() {
+		return examStatus;
+	}
+
+
+
+
+	public void setExamStatus(Integer examStatus) {
+		this.examStatus = examStatus;
+	}
+
+
+
+
+	public Integer getTestNumber() {
+		return testNumber;
+	}
+
+
+
+
+	public void setTestNumber(Integer testNumber) {
+		this.testNumber = testNumber;
+	}
+
+
+
+
+	public Integer getAvgScore() {
+		return avgScore;
+	}
+
+
+
+
+	public void setAvgScore(Integer avgScore) {
+		this.avgScore = avgScore;
+	}
+
+
+
+
+	public List<ExamQuesBean> getExamQueses() {
+		return examQueses;
+	}
+
+
+
+
+	public void setExamQueses(List<ExamQuesBean> examQueses) {
+		this.examQueses = examQueses;
+	}
+
+
+
+
+	public String getStringDate() {
+		return stringDate;
+	}
+
+
+
+
+	public void setStringDate(String stringDate) {
+		this.stringDate = stringDate;
+	}
+
+
+
+
+
+
+
+	
 
 }

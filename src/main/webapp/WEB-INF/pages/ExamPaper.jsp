@@ -36,7 +36,7 @@
     <jsp:include page="Header.jsp" />
 
     <div class="Div1">
-        <form action="ExamController" method="post">
+        <form action=ExamTestSubmit method="post">
             <table class="tb">
                 <tr>
                     <td><label>考卷名稱:</label></td>

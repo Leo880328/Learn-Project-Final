@@ -18,7 +18,7 @@
  	word-wrap: break-word;
   	table-layout: fixed; 
    	background-color: white; 
-   border-radius: 20px;  
+    border-radius: 20px;  
  } 
 
 #delete{

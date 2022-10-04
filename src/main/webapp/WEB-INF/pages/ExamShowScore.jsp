@@ -34,7 +34,7 @@
     <jsp:include page="Header.jsp" />
 
     <div class="Div1">
-        <form action="ExamController" method="post">
+        <form action="ExamTestPreserve" method="post">
 
             <table class="tb">
 	            	<tr>

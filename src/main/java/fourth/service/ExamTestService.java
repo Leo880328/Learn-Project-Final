@@ -75,11 +75,10 @@ public class ExamTestService  {
 		
 		//看是哪張考卷
 		ExamBean examBean = examRes.findById(Integer.valueOf(examID)).get(); 
-		System.err.println(examBean);
-		System.err.println(examID);
-		//找出考題
-		List<ExamQuesBean> examQuesList = examQuRes.findQues(examBean.getSubject().getSubjectId(),examBean.getEducation().getEducationId());
 		
+		//找出考題
+//		List<ExamQuesBean> examQuesList = examQuRes.findQues(examBean.getSubject().getSubjectId(),examBean.getEducation().getEducationId());
+		List<ExamQuesBean> examQuesList = examQuRes.findByExam_ExamID(Integer.valueOf(examID));
 		//建立考試紀錄
 		ExamTest examTest = new ExamTest(examBean);
 		examTestRes.save(examTest);
@@ -98,6 +97,7 @@ public class ExamTestService  {
 		testMap.put("examQueList", examQuesList); //那些題目
 		
 		return testMap;
+
 	}
 	
 	
@@ -118,17 +118,17 @@ public class ExamTestService  {
 		
 		//對答案
 		int ctCount =0;
-		
+		Integer score = 0;
 		for(int i=0;i<examQueList.size();i++) {
 			if (examQueList.get(i).getChooseAns().equals(examQueList.get(i).getQuesAnswer())) {
 				ctCount++;
+				score += examQueList.get(i).getQuesScore();
 			}else {
 				wrongNumList.add(String.valueOf(i));
 			}
 		}
 		
 		//checkAns對答案，算分數
-		Integer score = 20*ctCount;
 		testMap.put("examScore", score);
 		
 		//抓取是哪次考試

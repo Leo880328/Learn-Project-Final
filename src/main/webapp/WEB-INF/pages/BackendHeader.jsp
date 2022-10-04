@@ -154,14 +154,8 @@
 					<li><a href="memberList"><i
 							class="zmdi zmdi-format-underlined"></i>會員管理</a></li>
 
-					<li class="navigation__sub"><a href=""><i
-							class="zmdi zmdi-view-week"></i>試卷管理</a>
-						<ul>
-							<li><a href="firstExamController">全部試卷</a></li>
-							<li><a href="firstExamController">國中</a></li>
-							<li><a href="firstExamController">高中</a></li>
-							<li><a href="firstExamController">成人</a></li>
-						</ul></li>
+					<li><a href="ExamBackController"><i class="zmdi zmdi-view-week"></i>試卷管理</a>
+
 					<li class=""><a href="course.list"><i
 							class="zmdi zmdi-view-list"></i>課程管理</a>
 <!-- 						<ul> -->
