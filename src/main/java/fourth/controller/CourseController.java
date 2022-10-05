@@ -85,7 +85,7 @@ public class CourseController {
 		if(course_status == 2) {
 			cService.updateOne(courseBean, subject_id, education_id);
 			String txt = "<h2>" + "偉大的 " + courseBean.getLecturer_name() + " 您好 :" + "<br>" + "課程編號: "
-					+ courseBean.getCourse_id() + "<br>" + "課程名稱: " + courseBean.getCourse_name() + "<br>" + "購買人信箱: "
+					+ courseBean.getcourseId() + "<br>" + "課程名稱: " + courseBean.getCourse_name() + "<br>" + "購買人信箱: "
 					+ courseBean.getLecturer_email() + "<br>" + "課程價格:" + courseBean.getCourse_price() + "<br>" + "<br>"
 					+ "審核結果: 通過!!" + "<h2>";
 			JavaMail javaMail = new JavaMail();
@@ -98,7 +98,7 @@ public class CourseController {
 		}else if(course_status == 3) {
 			cService.updateOne(courseBean, subject_id, education_id);
 			String txt = "<h2>" + "偉大的 " + courseBean.getLecturer_name() + " 您好 :" + "<br>" + "課程編號: "
-					+ courseBean.getCourse_id() + "<br>" + "課程名稱: " + courseBean.getCourse_name() + "<br>" + "購買人信箱: "
+					+ courseBean.getcourseId() + "<br>" + "課程名稱: " + courseBean.getCourse_name() + "<br>" + "購買人信箱: "
 					+ courseBean.getLecturer_email() + "<br>" + "課程價格:" + courseBean.getCourse_price() + "<br>" + "<br>"
 					+ "審核結果: 駁回!!" + "<br>" + "駁回原因: 課程名稱或圖片帶有敏感資訊" + "<h2>";
 			JavaMail javaMail = new JavaMail();
@@ -119,7 +119,7 @@ public class CourseController {
 		CourseBean bean = cService.findByCourseId(course_id);
 		cService.updateOne(courseBean, subject_id, education_id);
 		String txt = "<h2>" + "偉大的 " + courseBean.getLecturer_name() + " 您好 :" + "<br>" + "課程編號: "
-				+ courseBean.getCourse_id() + "<br>" + "課程名稱: " + courseBean.getCourse_name() + "<br>" + "購買人信箱: "
+				+ courseBean.getcourseId() + "<br>" + "課程名稱: " + courseBean.getCourse_name() + "<br>" + "購買人信箱: "
 				+ courseBean.getLecturer_email() + "<br>" + "課程價格:" + courseBean.getCourse_price() + "<br>" + "<br>"
 				+ "審核結果: 通過!!" + "<h2>";
 		JavaMail javaMail = new JavaMail();
@@ -135,7 +135,7 @@ public class CourseController {
 	public String JavaMailFailed(int course_id) {
 		CourseBean courseBean = cService.findByCourseId(course_id);
 		String txt = "<h2>" + "偉大的 " + courseBean.getLecturer_name() + " 您好 :" + "<br>" + "課程編號: "
-				+ courseBean.getCourse_id() + "<br>" + "課程名稱: " + courseBean.getCourse_name() + "<br>" + "購買人信箱: "
+				+ courseBean.getcourseId() + "<br>" + "課程名稱: " + courseBean.getCourse_name() + "<br>" + "購買人信箱: "
 				+ courseBean.getLecturer_email() + "<br>" + "課程價格:" + courseBean.getCourse_price() + "<br>" + "<br>"
 				+ "審核結果: 駁回!!" + "<br>" + "駁回原因: 課程名稱或圖片帶有敏感資訊" + "<h2>";
 		JavaMail javaMail = new JavaMail();

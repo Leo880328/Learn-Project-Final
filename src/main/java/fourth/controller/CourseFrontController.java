@@ -45,8 +45,8 @@ public class CourseFrontController {
 	}
 
 	@GetMapping("/coursefront.details")
-	public String showFrontDetails(int course_id, Model m) {
-		CourseBean cbean = cService.findByCourseId(course_id);
+	public String showFrontDetails(int courseId, Model m) {
+		CourseBean cbean = cService.findByCourseId(courseId);
 		m.addAttribute("cbean", cbean);
 		List<CourseBean> list = cService.selectAll();
 		m.addAttribute("list", list);
@@ -143,7 +143,7 @@ public class CourseFrontController {
 	@PostMapping("/coursefront.update")
 	public String updateCourse(CourseBean courseBean, Integer subject_id, Integer education_id) {
 		cService.updateOne(courseBean, subject_id, education_id);
-		System.out.println(courseBean.getCourse_id());
+		System.out.println(courseBean.getcourseId());
 		return "redirect:/coursefront2.list";
 	}
 	

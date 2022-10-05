@@ -38,7 +38,7 @@ public class ActivityController {
 	private ActivityService activityService;
 
 	// Activity get
-	@GetMapping()
+	@GetMapping("")
 	public String ActivityPreviewUser() {
 		return "activity";
 	}

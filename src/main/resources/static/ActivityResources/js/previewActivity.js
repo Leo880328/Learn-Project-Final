@@ -24,6 +24,8 @@ $().ready(
 )
 function listener() {
   $(jquery.readMoreButton).click(readMoreActivities);
+
+
 }
 
 function selectAll() {

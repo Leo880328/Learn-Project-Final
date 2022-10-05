@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.resource.transaction.internal.SynchronizationRegistryStandardImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,11 +27,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fourth.bean.CourseBean;
+import fourth.bean.Log;
 import fourth.bean.MemberBean;
 import fourth.bean.OrderItem;
 import fourth.bean.OrderUser;
+import fourth.bean.Voucher;
 import fourth.ecpay.payment.integration.domain.AioCheckOutALL;
+import fourth.service.LogService;
 import fourth.service.OrderService;
+import fourth.service.VoucherService;
+import fourth.util.SystemControllerLog;
 
 @Controller
 @SessionAttributes(names = {"user"})
@@ -38,7 +44,12 @@ public class OrderController {
 	
 	@Autowired
 	private OrderService orderService;
-
+	
+	@Autowired
+	private VoucherService voucherService;
+	
+	@Autowired
+	private LogService logService;
 	
 	@ResponseBody
 	@GetMapping(path = "/orderListAll")
@@ -49,6 +60,7 @@ public class OrderController {
 		System.out.println(orderList);
 		return orderList;
 	}
+	
 	@GetMapping(path = "/orderList")
 	public String orderList(HttpServletRequest request,Model m) {
 		return "order";
@@ -61,6 +73,7 @@ public class OrderController {
 		return orderList;
 	}
 	
+	@SystemControllerLog(description = "生成訂單")
 	@PostMapping(path = "/orderAdd")
 	public String addOrder(Model m) {
 		MemberBean user = (MemberBean)m.getAttribute("user");
@@ -68,13 +81,17 @@ public class OrderController {
 		return "redirect:/orderList";
 	}
 	
+	@SystemControllerLog(description = "刪除訂單")
 	@ResponseBody
 	@DeleteMapping(path = "order/{id}")
-	public String deleteOrder(@PathVariable("id") String cartID) {
+	public List<OrderUser> deleteOrder(@PathVariable("id") String cartID,Model m) {
+		MemberBean user = (MemberBean)m.getAttribute("user");
 		orderService.deleteOrder(cartID);
-		return "delete Ok";
+		List<OrderUser> orderUserList = orderService.orderUserList(user.getuserId());
+		return orderUserList;
 	}
 	
+
 	@ResponseBody
 	@GetMapping(path = "order/{id}")
 	public OrderUser OrderById(@PathVariable("id") String cartID) {
@@ -89,31 +106,45 @@ public class OrderController {
 		OrderUser orderItemUser = orderService.orderItemUser(cartID);
 		m.addAttribute("itemList",orderItemList);
 		m.addAttribute("order",orderItemUser);
-		String[] status = {" ","未付款","已付款","待審核","完成訂單"};
-		m.addAttribute("statusArr",status);
+		System.out.println(orderItemUser);
 		return "orderUpdate";
 	}
+	
+	@SystemControllerLog(description = "會員進行付款操作")
 	@PostMapping(path = "/goEcpay")
-	public String goEcpay(HttpServletRequest request, String orderID,Model m) {
+	public String goEcpay(HttpServletRequest request, String orderID,Model m,@RequestParam(value = "number",required = false) String number) {
 		String url =request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 		+ request.getContextPath();
 		AioCheckOutALL obj = new AioCheckOutALL();
-		String ecPay = orderService.ecPay(orderID, url, obj);
+		String ecPay = orderService.ecPay(orderID, url, obj,number);
 		m.addAttribute("ecpay",ecPay);
 		return "ecpay";
 	}
+	
+//	@PostMapping(path = "/goEcpay")
+//	public String goEcpay(HttpServletRequest request, String orderID,Model m,@RequestParam(value = "number",required = false) String number) {
+//		String url =request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+//		+ request.getContextPath();
+//		AioCheckOutALL obj = new AioCheckOutALL();
+//		
+//		System.out.println(number.toString() +"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+//		String ecPay = orderService.ecPay(orderID, url, obj,number);
+//		m.addAttribute("ecpay",ecPay);
+//		return "forward:/updateOrder/2/"+orderID+"/"+number;
+//	}
 
 	
-	
-	@GetMapping(path = "/updateOrder/{status}/{orderId}")
+	@SystemControllerLog(description = "更改訂單狀態")
+	@GetMapping(path = {"/updateOrder/{status}/{orderId}/{number}","/updateOrder/{status}/{orderId}"})
 	public String updateOrder(
 			@PathVariable(required = false , value = "status")	int status,
 			@PathVariable(required = false, value="orderId") String orderId,
+			@PathVariable(value = "number",required = false) String number,
 			Model m,HttpServletRequest request) throws SQLException  {
 		String url =request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 		+ request.getContextPath();
 		MemberBean user = (MemberBean)m.getAttribute("user");
-		orderService.updateOrder(user.getStatus(), status, orderId,url);
+		orderService.updateOrder(user.getStatus(), status, orderId,url,number);
 		return "redirect:/orderList";
 	}
 	
@@ -163,4 +194,38 @@ public class OrderController {
 		List<OrderUser> searchStatust = orderService.searchStatust(user.getuserId(), status);
 		return searchStatust;
 	}
+
+	
+	
+
+	@ResponseBody
+	@GetMapping(path = "/order/voucher/{number}")
+	public Voucher checkVoucher(@PathVariable(required = false,value = "number") String number) {
+		
+		Voucher voucher = voucherService.findByNumber(number);
+		return voucher;
+	}
+	
+	@ResponseBody
+	@GetMapping(path = "/order/voucher")
+	public Voucher oneKey() {
+		Voucher randomVoucher = voucherService.randomVoucher();
+		return randomVoucher;
+	}
+	
+	@ResponseBody
+	@GetMapping(path = "/order/voucher/use")
+	public Voucher use() {
+		Voucher randomVoucher = voucherService.randomVoucherUse();
+		return randomVoucher;
+	}
+	
+	@GetMapping(path = "/backDairy")
+	public String log(Model m) {
+		List<Log> logs = logService.findAll();
+		System.out.println(logs);
+		m.addAttribute("logs",logs);
+		return "log";
+	}
+
 }
