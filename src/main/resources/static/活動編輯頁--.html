@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="assets/css/mobile-menu.css">
     <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="ActivityResources/css/ActivitiesEdit.css">
 </head>
 
 <body class="inblog-page">
@@ -48,67 +49,58 @@
                         <div class="">
                             <div class="shipping-address">
                                 <h3 class="custom_blog_title">我的活動</h3>
-                                <p class="form-row "><label class="text">活動圖片</label><img
-                                        src="ActivityResources\Images\default-image.jpg" alt=""
-                                        style="height: 450px;width: 870px;;">
-                                    <input type="file" accept=".jpg">
+                                <p class="form-row "><label class="text">活動圖片</label>
+                                    <img class="activityActivityImage" src="ActivityResources\Images\default-image.jpg"
+                                        alt="" style="height: 450px;width: 870px;;">
+                                    <input type="file" class="activityActivityInput" accept=".jpg">
                                 </p>
-                                <p class="form-row "><label class="text">活動標題</label><input title="first" type="text"
-                                        class="input-text"></p>
+                                <p class="form-row "><label class="text ">活動標題</label>
+                                    <input title="first" type="text" class="input-text activityTitle">
+                                </p>
                                 <br>
 
                                 <p class="form-row ">
                                     <label class="text">活動內容</label>
-                                    <textarea name="" id="" cols="30" rows="10"
+                                    <textarea class="activityContent"
                                         style="min-width: 100%; min-height:400px"></textarea>
                                 </p>
-                                <p class="form-row "><label class="text">活動預覽圖片</label><img
+                                <p class="form-row "><label class="text">活動預覽圖片</label><img class="activityPreviewImage"
                                         src="ActivityResources\Images\default-image.jpg" alt=""
                                         style="height: 275px;width: 270px;;">
-                                    <input type="file" accept=".jpg">
+                                    <input type="file" class="activityPreviewInput" accept=".jpg">
                                 </p>
-                                <p class="form-row forn-row-col forn-row-col-1"><label class="text">活動形式</label><select
-                                        title="country" data-placeholder="United Kingdom" class="chosen-select"
-                                        tabindex="1">
-                                        <option value="United States">線上活動</option>
-                                        <option value="United Kingdom">線下活動</option>
+                                <p class="form-row forn-row-col forn-row-col-1"><label class="text">活動形式</label>
+                                    <select title="country" data-placeholder="United Kingdom"
+                                        class="chosen-select activitySelectPlace" tabindex="1">
+                                        <option value="on-line">線上活動</option>
+                                        <option value="offline">線下活動</option>
 
-                                    </select></p>
+                                    </select>
+                                </p>
                                 <br>
-
-                                <br>
-                                <p class="form-row form-row-first" style="width: 27%;"><label
-                                        class="text">縣市</label><input title="zip" type="text" class="input-text">
+                                <div class="activityPlaceDiv" style="display: none;">
+                                    <p class="form-row form-row-first" style="width: 27%;"><label
+                                            class="text">縣市</label>
+                                        <input type="text" class="input-text activityPlace">
+                                    </p>
+                                    <p class="form-row  form-row-last" style="width: 70%;"><label
+                                            class="text">地址或網址</label>
+                                        <input type="text" class="input-text activityAddress">
+                                    </p>
+                                </div>
+                                <p class="form-row "><label class="text">可參加人數</label>
+                                    <input title="first" type="number" class="input-text activityNumberLimit">
                                 </p>
-                                <p class="form-row  form-row-last" style="width: 70%;"><label
-                                        class="text">地址或網址</label><input title="zip" type="text" class="input-text">
+                                <p class="form-row form-row-first"><label class="text">活動開始時間</label><input
+                                        type="datetime-local" class="input-text activityStartTime">
                                 </p>
-                                <p class="form-row "><label class="text">可參加人數</label><input title="first" type="number"
-                                        class="input-text" style="height: 42px;
-                                    border-radius: 0; border: 1px solid #eee;
-padding: 7px 20px;
-max-width: 280px;
-background: 0"></p>
-                                <p class="form-row form-row-first"><label class="text">活動開始時間</label><input title="zip"
-                                        type="datetime-local" class="input-text" style="height: 42px;
-                                        border-radius: 0; border: 1px solid #eee;
-    padding: 7px 20px;
-    max-width: 100%;
-    background: 0">
-                                </p>
-                                <p class="form-row form-row-last"><label class="text">活動結束時間</label><input title="zip"
-                                        type="datetime-local" class="input-text" style="height: 42px;
-                                        border-radius: 0; border: 1px solid #eee;
-    padding: 7px 20px;
-    max-width: 100%;
-    background: 0">
+                                <p class="form-row form-row-last"><label class="text">活動結束時間</label><input
+                                        type="datetime-local" class="input-text activityEndTime">
                                 </p>
                             </div>
                         </div>
-
-                    </div><a href="#" class="button button-payment">送出</a>
+                    </div><a class="button button-payment saveActivityButton">送出</a>
                 </div>
-
             </div>
         </div>
     </div>
@@ -134,6 +126,8 @@ background: 0"></p>
     <script src="assets/js/jquery.scrollbar.min.js"></script>
     <script src='http://www.google.cn/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script>
     <script src="assets/js/frontend-plugin.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="ActivityResources/js/ActivitiesEdit.js"></script>
 
 </body>
 
