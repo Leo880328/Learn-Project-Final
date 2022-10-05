@@ -70,6 +70,8 @@ public class ExamControllerAjax {
 		return examTable;
 	}
 	
+	
+	
 	@PostMapping(path = "/ExamDe")
 	@ResponseBody
 	public boolean processDeAction(@RequestParam(defaultValue = "") String examId ) {

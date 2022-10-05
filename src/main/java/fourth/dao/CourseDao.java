@@ -28,7 +28,7 @@ public class CourseDao{
 	public CourseBean insert(CourseBean cosBean) {
 		Session session = entityManager.unwrap( Session.class );
 		//Session session = factory.getCurrentSession();
-		CourseBean courseBean = session.get(CourseBean.class, cosBean.getCourse_id());
+		CourseBean courseBean = session.get(CourseBean.class, cosBean.getcourseId());
 		if (courseBean == null) {
 			session.save(cosBean);
 			return cosBean;

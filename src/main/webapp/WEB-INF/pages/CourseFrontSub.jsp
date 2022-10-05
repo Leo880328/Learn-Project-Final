@@ -95,7 +95,7 @@ border-radius: 5px;
 												<div class="product-thumb">
 													<div class="thumb-inner">
 														<a
-															href="coursefront.details?course_id=${course.course_id}"><img
+															href="coursefront.details?courseId=${course.courseId}"><img
 															src="<c:out value="${course.course_picture}" />"
 															alt="img"></a>
 														<div class="thumb-group"></div>
@@ -104,7 +104,7 @@ border-radius: 5px;
 												<div class="product-info">
 													<h5 class="product-name product_title">
 														<a
-															href="coursefront.details?course_id=${course.course_id}"><c:out
+															href="coursefront.details?courseId=${course.courseId}"><c:out
 																value="${course.course_name}" /></a>
 													</h5>
 													<div class="group-info">
@@ -140,7 +140,7 @@ border-radius: 5px;
 												<div class="product-thumb">
 													<div class="thumb-inner">
 														<a
-															href="coursefront.details?course_id=${course.course_id}"><img
+															href="coursefront.details?courseId=${course.courseId}"><img
 															src="<c:out value="${course.course_picture}" />"
 															alt="img"></a>
 														<div class="thumb-group"></div>
@@ -149,7 +149,7 @@ border-radius: 5px;
 												<div class="product-info">
 													<h5 class="product-name product_title">
 														<a
-															href="coursefront.details?course_id=${course.course_id}"><c:out
+															href="coursefront.details?courseId=${course.courseId}"><c:out
 																value="${course.course_name}" /></a>
 													</h5>
 													<div class="group-info">
@@ -186,7 +186,7 @@ border-radius: 5px;
 												<div class="product-thumb">
 													<div class="thumb-inner">
 														<a
-															href="coursefront.details?course_id=${course.course_id}"><img
+															href="coursefront.details?courseId=${course.courseId}"><img
 															src="<c:out value="${course.course_picture}" />"
 															alt="img"></a>
 														<div class="thumb-group"></div>
@@ -195,7 +195,7 @@ border-radius: 5px;
 												<div class="product-info">
 													<h5 class="product-name product_title">
 														<a
-															href="coursefront.details?course_id=${course.course_id}"><c:out
+															href="coursefront.details?courseId=${course.courseId}"><c:out
 																value="${course.course_name}" /></a>
 													</h5>
 													<div class="group-info">
@@ -231,14 +231,14 @@ border-radius: 5px;
 											<div class="product-top"></div>
 											<div class="product-thumb">
 												<div class="thumb-inner">
-													<a href="coursefront.details?course_id=${course.course_id}"><img
+													<a href="coursefront.details?courseId=${course.courseId}"><img
 														src="<c:out value="${course.course_picture}" />" alt="img"></a>
 													<div class="thumb-group"></div>
 												</div>
 											</div>
 											<div class="product-info">
 												<h5 class="product-name product_title">
-													<a href="coursefront.details?course_id=${course.course_id}"><c:out
+													<a href="coursefront.details?courseId=${course.courseId}"><c:out
 															value="${course.course_name}" /></a>
 												</h5>
 												<div class="group-info">
@@ -274,7 +274,7 @@ border-radius: 5px;
 												<div class="product-thumb">
 													<div class="thumb-inner">
 														<a
-															href="coursefront.details?course_id=${course.course_id}"><img
+															href="coursefront.details?courseId=${course.courseId}"><img
 															src="<c:out value="${course.course_picture}" />"
 															alt="img"></a>
 														<div class="thumb-group"></div>
@@ -283,7 +283,7 @@ border-radius: 5px;
 												<div class="product-info">
 													<h5 class="product-name product_title">
 														<a
-															href="coursefront.details?course_id=${course.course_id}"><c:out
+															href="coursefront.details?courseId=${course.courseId}"><c:out
 																value="${course.course_name}" /></a>
 													</h5>
 													<div class="group-info">
@@ -320,14 +320,14 @@ border-radius: 5px;
 											<div class="product-top"></div>
 											<div class="product-thumb">
 												<div class="thumb-inner">
-													<a href="coursefront.details?course_id=${course.course_id}"><img
+													<a href="coursefront.details?courseId=${course.courseId}"><img
 														src="<c:out value="${course.course_picture}" />" alt="img"></a>
 													<div class="thumb-group"></div>
 												</div>
 											</div>
 											<div class="product-info">
 												<h5 class="product-name product_title">
-													<a href="coursefront.details?course_id=${course.course_id}"><c:out
+													<a href="coursefront.details?courseId=${course.courseId}"><c:out
 															value="${course.course_name}" /></a>
 												</h5>
 												<div class="group-info">

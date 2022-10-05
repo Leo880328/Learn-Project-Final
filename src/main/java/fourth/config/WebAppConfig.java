@@ -12,7 +12,7 @@ public class WebAppConfig implements WebMvcConfigurer {
 		registry.addViewController("/").setViewName("Index");
 		registry.addViewController("/ExamMember").setViewName("ExamMember");
 		registry.addViewController("/chart").setViewName("chart");
-
+		registry.addViewController("/ExamFront").setViewName("ExamFront");
 		
 	}
 	

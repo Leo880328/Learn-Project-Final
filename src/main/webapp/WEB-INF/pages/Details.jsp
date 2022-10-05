@@ -4,7 +4,6 @@
 <%@ page import="fourth.bean.CourseBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.*,fourth.*"%>
 <%
 response.setContentType("text/html;charset=UTF-8");
@@ -296,11 +295,13 @@ CourseBean courseBean = (CourseBean) request.getAttribute("cbean");
 									<!-- 										<div class="quantity"></div> -->
 									<!-- 										<button class="single_add_to_cart_button button">加入購物車</button> -->
 									<!-- 									</div> -->
-									<button class="single_add_to_cart_button button" onclick="add(${cbean.course_id})">加入購物車</button>
+
+									<button class="single_add_to_cart_button button" onclick="add(${cbean.courseId})">加入購物車</button>
 									
-									<%-- 										<form action="cart/addCart/<%=courseBean.getCourse_id()%>>" method="post"> --%>
+									<%-- 										<form action="cart/addCart/<%=courseBean.getcourseId()%>>" method="post"> --%>
 									<!-- 											<input type="hidden" name="courseID" -->
-									<%-- 												value="<%=courseBean.getCourse_id()%>"> --%>
+									<%-- 												value="<%=courseBean.getcourseId()%>"> --%>
+
 
 									<!-- 											<button class="single_add_to_cart_button button">加入購物車</button> -->
 									<!-- 										</form> -->
@@ -346,14 +347,14 @@ CourseBean courseBean = (CourseBean) request.getAttribute("cbean");
 						<div class="product-thumb">
 							<div class="thumb-inner">
 
-								<a href="coursefront.details?course_id=${course.course_id}"><img src="<c:out value="${course.course_picture}" />"
+								<a href="coursefront.details?courseId=${course.courseId}"><img src="<c:out value="${course.course_picture}" />"
 									alt="img"></a>
 
 							</div>
 						</div>
 						<div class="product-info">
 							<h5 class="product-name product_title">
-								<a href="coursefront.details?course_id=${course.course_id}"><c:out value="${course.course_name}" /></a>
+								<a href="coursefront.details?courseId=${course.courseId}"><c:out value="${course.course_name}" /></a>
 							</h5>
 							<div class="group-info">
 								<div class="stars-rating">
