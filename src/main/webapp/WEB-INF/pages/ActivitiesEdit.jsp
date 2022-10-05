@@ -1,11 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Teamo - Checkout</title>
+    <title>活動編輯</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="<%=request.getContextPath()%>/">
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png" />
     <link
         href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap"
@@ -30,7 +33,7 @@
 </head>
 
 <body class="inblog-page">
-
+<jsp:include page="Header.jsp"/>
     <div class="main-content main-content-checkout">
         <div class="container">
             <div class="row">
@@ -38,7 +41,7 @@
                     <div class="breadcrumb-trail breadcrumbs">
                         <ul class="trail-items breadcrumb">
                             <li class="trail-item trail-begin"><a href="index.html">Home</a></li>
-                            <li class="trail-item trail-end active">Checkout </li>
+                            <li class="trail-item trail-end active">管理活動 </li>
                         </ul>
                     </div>
                 </div>
@@ -70,7 +73,7 @@
                                     <input type="file" class="activityPreviewInput" accept=".jpg">
                                 </p>
                                 <p class="form-row forn-row-col forn-row-col-1"><label class="text">活動形式</label>
-                                    <select data-placeholder="United Kingdom" class="chosen-select activitySelectPlace"
+                                    <select data-placeholder="United Kingdom" class=" activitySelectPlace"
                                         tabindex="1">
                                         <option value="on-line">線上活動</option>
                                         <option value="offline">線下活動</option>

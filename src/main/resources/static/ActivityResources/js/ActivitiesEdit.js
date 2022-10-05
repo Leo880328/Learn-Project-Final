@@ -91,14 +91,15 @@ function listener() {
     let today = new Date().toISOString().split("T")[0];
     $(jquery.activityStartTime).attr("min", today + " 00:00")
     $(jquery.activityStartTime).change(function (e) {
-        activityBean.startTime = $(jquery.activityStartTime).val()
-        $(jquery.activityEndTime).val(null)
-        $(jquery.activityEndTime).attr("min", $(jquery.activityStartTime).val())
+        activityBean.startTime = $(jquery.activityStartTime).val().replace('T', " ").replaceAll('-', "/");
+        $(jquery.activityEndTime).val(null);
+        activityBean.endTime = null;
+        $(jquery.activityEndTime).attr("min", $(jquery.activityStartTime).val());
         console.log($(jquery.activityEndTime))
 
     })
     $(jquery.activityEndTime).change(function (e) {
-        activityBean.endTime = $(jquery.activityEndTime).val();
+        activityBean.endTime = $(jquery.activityEndTime).val().replace('T', " ").replaceAll('-', "/");
     })
 
     $(jquery.activityNumberLimit).attr("min", 0)
@@ -252,29 +253,29 @@ function saveActivityBean() {
         }
     } else {
         console.log(activityBean);
-        // let reqMethod = "POST";
-        // if (activityBean.id > 0) {
-        //     reqMethod = "PUT"
-        // }
+        let reqMethod = "POST";
+        if (activityBean.id > 0) {
+            reqMethod = "PUT"
+        }
 
-        // $.ajax({
-        //     url: "Activity_OP",
-        //     method: reqMethod,
-        //     dataType: "JSON",
-        //     contentType: 'application/json; charset=utf-8',
-        //     data: JSON.stringify(activityBean),
-        //     success: function (res) {
-        //         $("body").append($(`<form action="ActivitiesOP" method="GET" id="onlyPost"></form>`))
-        //         $("#onlyPost").submit()
-        //     },
-        //     error: function (err) {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: '上傳失敗',
-        //             text: err
-        //         })
-        //     },
-        // });
+        $.ajax({
+            url: "ManageActivities/insert",
+            method: "POST",
+            dataType: "JSON",
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(activityBean),
+            success: function (res) {
+                $("body").append($(`<form action="ActivitiesOP" method="GET" id="onlyPost"></form>`))
+                $("#onlyPost").submit()
+            },
+            error: function (err) {
+                Swal.fire({
+                    icon: 'error',
+                    title: '上傳失敗',
+                    text: err
+                })
+            },
+        });
     }
 
 

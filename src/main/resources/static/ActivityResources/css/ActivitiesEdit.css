@@ -6,3 +6,7 @@
     max-width: 100%;
     background: 0
 }
+
+.checkout-wrapp .shipping-address-form-wrapp * {
+    border-color: rgba(0, 0, 0, 0.419);
+}

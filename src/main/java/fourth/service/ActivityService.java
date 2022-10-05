@@ -99,6 +99,10 @@ public class ActivityService {
 	public Page<ActivityReviewBean> selectReviewByActivityId(Pageable pageable, int activityId) {
 		return activityReviewRepository.findAllByActivityId(pageable, activityId);
 	}
+	
+	public ActivityReviewBean insertActivityReviewBean(ActivityReviewBean activityReviewBean) {
+		return activityReviewRepository.save(activityReviewBean);
+	}
 
 	// 讀取參加者名單
 	public Page<ActivityAttendeesBean> selectAttendeesByActivityId(Pageable pageable, int activityId) {

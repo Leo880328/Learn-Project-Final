@@ -29,6 +29,11 @@ public class ActivityUserController {
 	@Autowired
 	private ActivityService activityService;
 	
+	@GetMapping()
+	public String MyActivity() {
+		return "Activity-MyActivity";
+	}
+	
 	@PostMapping("/all")
 	@ResponseBody
 	public Page<ActivityAttendeesBean> responseAttendeesByUserId(@RequestBody() Map<String, String> map) {

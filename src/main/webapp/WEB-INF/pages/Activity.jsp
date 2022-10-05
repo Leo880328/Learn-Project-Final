@@ -4,7 +4,7 @@
 <html lang="en">
 
 <head>
-    <title>活動</title>
+    <title>Teamo-GridBlog</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,49 +24,68 @@
     <link rel="stylesheet" href="assets/css/pe-icon-7-stroke.css">
     <link rel="stylesheet" href="assets/css/magnific-popup.min.css">
     <link rel="stylesheet" href="assets/css/lightbox.min.css">
-    <link rel="stylesheet" href="assets/js/fancybox/source/jquery.fancybox.css">
     <link rel="stylesheet" href="assets/css/jquery.scrollbar.min.css">
     <link rel="stylesheet" href="assets/css/mobile-menu.css">
     <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="ActivityResources/css/Activity.css">
+    <link rel="stylesheet" href="ActivityResources/css/activityPreview.css">
+
 </head>
 
-<body class="home" style="margin-top: 100px;">
-    <div>
-        <div class="container" style="width: 870px; ">
-            <div class="row ">
-                <div class="content-area content-blog " style="width: 870px; ">
-                    <div class="site-main">
-                        <div class="post-item">
-                            <div class="post-infor">
-                                <div class="post-format"><img src="assets/images/blog1.jpg" alt="img"></div>
-                                <div class="category-blog">活動說明</div>
-                                <h3 class="post-title activityTitle"></h3>
-                                <div class="main-info-post activityContent">
-
-
+<body class="inblog-page">
+<jsp:include page="Header.jsp"/>
+    <!-- ===================================================================================================================== -->
+    <div class="fullwidth-template announcementMode" style="margin-top: 100px;">
+    </div>
+    <!-- ===================================================================================================================== -->
+    <div class="grid no-sidebar selectActivityMode previewActivity">
+        <div>
+            <div class="fullwidth-template">
+                <div class="teamo-tabs  default ">
+                    <div class="container">
+                        <div class="tab-head">
+                            <ul class="tab-link">
+                                <li class="active">活動預覽</li>
+                            </ul>
+                        </div>
+                        <div class="tab-container">
+                            <div id="bestseller" class="tab-panel active">
+                                <div class="teamo-product">
+                                    <ul class="row list-products auto-clear equal-container product-grid activityJoin">
+                                    </ul>
                                 </div>
-                                <p class="activityInformation">
-                                    
-                                </p>
+                                <div class="banner-wrapp rows-space-65">
+                                    <div class="">
+                                        <div class="banner">
+                                            <div class="item-banner style17">
+                                                <div>
+                                                    <div class=" justify-content-center" style="display: flex;
+                                                        justify-content: center; 
+                                                        align-items: center; ">
+                                                        <a
+                                                            class="button btn-view-collection read-More-Button readMoreButton">查看更多活動</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <br>
-                    <div class=" justify-content-center" style="display: flex;
-                    justify-content: center; 
-                    align-items: center; ">
-                        <a class="button btn-view-collection">報名活動</a>
-                    </div>
-
                 </div>
             </div>
         </div>
-
     </div>
+    <!-- ===================================================================================================================== -->
+    <div class="banner-wrapp createOrAddActivityMode">
+    </div>
+    <!-- ===================================================================================================================== -->
+    <div class="banner-wrapp rows-space-65 advertise">
+    </div>
+    <!-- ===================================================================================================================== -->
 
-    </div><a href="#" class="backtotop"><i class="fa fa-angle-double-up"></i></a>
     <script src="assets/js/jquery-1.12.4.min.js"></script>
     <script src="assets/js/jquery.plugin-countdown.min.js"></script>
     <script src="assets/js/jquery-countdown.min.js"></script>
@@ -81,13 +100,17 @@
     <script src="assets/js/slick.js"></script>
     <script src="assets/js/jquery.elevateZoom.min.js"></script>
     <script src="assets/js/jquery.actual.min.js"></script>
-    <script src="assets/js/fancybox/source/jquery.fancybox.js"></script>
     <script src="assets/js/lightbox.min.js"></script>
     <script src="assets/js/owl.thumbs.min.js"></script>
     <script src="assets/js/jquery.scrollbar.min.js"></script>
     <script src='http://www.google.cn/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script>
     <script src="assets/js/frontend-plugin.js"></script>
-	<script src="ActivityResources/js/Activity.js"></script>
+    <script>
+        $(".announcementMode").load("ActivityResources/announcementMode.html");
+        $(".createOrAddActivityMode").load("ActivityResources/createOrAddActivityMode.html");
+        $(".advertiseMode").load("ActivityResources/advertiseMode.html");
+    </script>
+    <script src="ActivityResources/js/previewActivity.js"></script>
 </body>
 
 </html>

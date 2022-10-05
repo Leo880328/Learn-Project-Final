@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import fourth.bean.ActivityBean;
+import fourth.bean.ActivityReviewBean;
 import fourth.service.ActivityService;
 
 @Controller
@@ -23,25 +24,28 @@ import fourth.service.ActivityService;
 public class ActivityUserBackendController {
 	private final String MapKey_pageSize = "pageSize";
 	private final String MapKey_pageNo = "pageNo";
-	private final String MapKey_keyWord = "keyWord";
-	private final String MAPKEY_ACTIVITY_ID = "activityID";
-	private final String MAPKEY_ACTIVITY_REVIEW_MESSAGE = "ActivityReviewBeanMessage";
+
 
 	@Autowired
 	private ActivityService activityService;
 
-	@GetMapping("/vities")
-	@ResponseBody
-	public String test() {
-		
-		return "0";
+	@GetMapping()
+	public String Backend() {
+		return "ActivitiesManage";
+	}
+	@GetMapping("/createActivity")
+	public String createActivity() {
+		return "ActivitiesEdit";
+	}
+	@GetMapping("/update/{id}")
+	public String updateActivity() {
+		return "ActivitiesEdit";
 	}
 	
 	@PostMapping("/Public")
 	@ResponseBody
 	public Page<ActivityBean> responsePublicActivityByUser(@RequestBody() Map<String, String> map) {
 		int userId = 2;
-
 		Integer pageNo = Integer.valueOf(map.get(MapKey_pageNo));
 		Integer pageSize = Integer.valueOf(map.get(MapKey_pageSize));
 		PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
@@ -53,7 +57,6 @@ public class ActivityUserBackendController {
 	@ResponseBody
 	public Page<ActivityBean> responseAllActivityByUser(@RequestBody() Map<String, String> map) {
 		int userId = 2;
-
 		Integer pageNo = Integer.valueOf(map.get(MapKey_pageNo));
 		Integer pageSize = Integer.valueOf(map.get(MapKey_pageSize));
 		PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
@@ -61,35 +64,46 @@ public class ActivityUserBackendController {
 		return activityService.selectAllActivityByUserId(pageable, userId);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/Activity-{id}")
 	@ResponseBody
 	public ActivityBean selectActivity(@PathVariable Integer id) {
 		return activityService.selectActivityById(id);
 	}
+	
+	@GetMapping("/{id}")
+	@ResponseBody
+	public Page<ActivityReviewBean> responseActivityReviewBean(@PathVariable Integer id) {
+		PageRequest pageable = PageRequest.of(0, 10);
+		return activityService.selectReviewByActivityId(pageable,id);
+	}
+	
 
 	// 新增
-	@PostMapping("/Activity_OP")
+	@PostMapping("/insertActivityBean")
 	@ResponseBody
 	public ActivityBean insertActivities(@RequestBody() ActivityBean activityBean) {
-
 		activityBean.setUserId(2);
-
+		activityBean.setStatusCode(0);
 		ActivityBean insertActivities = activityService.insertActivity(activityBean);
+		//log
+		activityService.insertActivityReviewBean(new ActivityReviewBean(insertActivities.getId(), null, 0));
 		return insertActivities;
 	}
 
 	// 修改
-	@PutMapping("/Activity_OP")
+	@PutMapping("/updateActivityBean")
 	@ResponseBody
 	public ActivityBean updateActivities(@RequestBody() ActivityBean activityBean) {
 		activityBean.setUserId(2);
+		activityBean.setStatusCode(0);
 		ActivityBean updateActivities = activityService.updateActivity(activityBean);
+		activityService.insertActivityReviewBean(new ActivityReviewBean(updateActivities.getId(), null, 0));
 		return updateActivities;
 
 	}
 
 	// 刪除
-	@DeleteMapping("/Activity_OP")
+	@DeleteMapping("/deleteActivityBean")
 	@ResponseBody
 	public boolean deleteActivities(@RequestBody ActivityBean activityBean) {
 		activityService.deleteActivity(activityBean.getId());

@@ -33,35 +33,14 @@ public class ActivityController {
 	private final String MapKey_pageSize = "pageSize";
 	private final String MapKey_pageNo = "pageNo";
 	private final String MapKey_keyWord = "keyWord";
-	private final String MAPKEY_ACTIVITY_ID = "activityID";
-	private final String MAPKEY_ACTIVITY_REVIEW_MESSAGE = "ActivityReviewBeanMessage";
-
-	@GetMapping("/Activitytest1")
-	public String Activitytest(Model m) {
-		m.addAttribute("test", "123456645548841");
-		return "Activitytest";
-		
-	}
 
 	@Autowired
 	private ActivityService activityService;
 
 	// Activity get
-	@GetMapping("/Activities")
+	@GetMapping()
 	public String ActivityPreviewUser() {
-		return "ActivityPreviewUser";
-	}
-
-	// Activity_OP_test get
-	@GetMapping("/MyActivities")
-	public String MyActivities() {
-		return "ActivityPreviewOP";
-	}
-
-	// Activity_OP/insert post
-	@PostMapping("/ActivityOPInsert")
-	public String insertActivities() {
-		return "ActivityUpdate";
+		return "activity";
 	}
 
 	@GetMapping("/Activity-{id}")
@@ -69,6 +48,9 @@ public class ActivityController {
 		// 應插入權限判斷
 		return "Activity";
 	}
+	
+
+	
 
 //	======================================================================================================================================================
 //	====================================================API區=============================================================================================
