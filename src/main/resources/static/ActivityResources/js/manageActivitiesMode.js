@@ -18,12 +18,14 @@ let allActivityPage = {
     pageSize: 4,
     pageNo: 1
 }
+
 $().ready(
     // 取直並將ActivityBean送出等待回應
     function () {
         requestPublicActivities();
         requestAllActivities();
-        listener()
+        listener();
+
     }
 )
 function listener() {

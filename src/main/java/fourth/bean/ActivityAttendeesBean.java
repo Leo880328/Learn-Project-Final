@@ -44,6 +44,21 @@ public class ActivityAttendeesBean implements Serializable {
 	// =======================================================================================
 	// =======================================================================================
 	// =======================================================================================
+	public ActivityAttendeesBean() {
+		
+	}
+	
+	
+	
+	public ActivityAttendeesBean(ActivityBean activity, int userId) {
+		super();
+		this.activity = activity;
+		this.userId = userId;
+		this.requestTime = new Date();
+		this.statusCode = 0;
+	}
+
+
 
 	public ActivityBean getActivity() {
 		return activity;

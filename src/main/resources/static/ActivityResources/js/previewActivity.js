@@ -81,15 +81,16 @@ function creatActivity(activityBean) {
           <div class="flash"><span class="onnew"><span class="text">new
                   </span></span></div>
       </div>
+      <a href="Activity/${activityBean.id}">
       <div class="product-thumb preview-image">
-          <div class="thumb-inner"><a href="#">
-          <img src="${imgPath}" class="preview-image" alt="img"></a>
+      <div class="thumb-inner">
+          <img src="${imgPath}" class="preview-image" alt="img">
 
           </div>
       </div>
       <div class="product-info">
           <P>
-          <h5 class=" product_title"><a href="#">${activityBean.title}</a>
+          <h5 class=" product_title">${activityBean.title}
           </h5>
           </P>
           <div class="group-info ">
@@ -100,6 +101,7 @@ function creatActivity(activityBean) {
               </div>
           </div>
       </div>
+      </a>
   </div>
 </li>
   

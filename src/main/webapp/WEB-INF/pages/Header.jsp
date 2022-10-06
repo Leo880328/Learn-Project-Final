@@ -281,6 +281,6 @@
 		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 		<script src="https://kit.fontawesome.com/9d965cf88e.js" crossorigin="anonymous"></script>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		    <script src="./ActivityResources/js/ActiveMenuPatch.js"></script>
+
 </body>
 </html>

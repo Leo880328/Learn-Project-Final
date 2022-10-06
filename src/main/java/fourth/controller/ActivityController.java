@@ -40,10 +40,10 @@ public class ActivityController {
 	// Activity get
 	@GetMapping("")
 	public String ActivityPreviewUser() {
-		return "activity";
+		return "ActivityPreview";
 	}
 
-	@GetMapping("/Activity-{id}")
+	@GetMapping("/{id}")
 	public String updateActivities() {
 		// 應插入權限判斷
 		return "Activity";
