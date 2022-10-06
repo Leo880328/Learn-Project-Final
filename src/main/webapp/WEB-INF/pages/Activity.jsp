@@ -35,7 +35,7 @@
 <body class="home" style="margin-top: 100px;">
 <jsp:include page="Header.jsp"/>
     <div>
-        <div class="container" style="width: 870px; ">
+        <div class="container" style="width: 870px; padding-bottom: 200px;">
             <div class="row ">
                 <div class="content-area content-blog " style="width: 870px; ">
                     <div class="site-main">

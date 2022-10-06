@@ -216,6 +216,7 @@ function selectByID(id) {
         error: function (err) { alert("資料獲取失敗，請刷新網頁!") },
     });
 }
+let placeIsonline = $(jquery.activitySelectPlace).val() == "on-line";
 
 function saveActivityBean() {
     console.log(activityBean);
@@ -243,14 +244,13 @@ function saveActivityBean() {
             title: '上傳失敗',
             text: "人數"
         })
-    } else if ($(jquery.activitySelectPlace).val() != "on-line") {
-        if (!activityBean.place || !activityBean.address) {
-            Swal.fire({
-                icon: 'error',
-                title: '上傳失敗',
-                text: "地區為空"
-            })
-        }
+    } else if (!activityBean.place && !placeIsonline || !activityBean.address && !placeIsonline) {
+        Swal.fire({
+            icon: 'error',
+            title: '上傳失敗',
+            text: "地區為空"
+        })
+
     } else {
         console.log(activityBean);
         let reqMethod = "POST";
@@ -259,13 +259,13 @@ function saveActivityBean() {
         }
 
         $.ajax({
-            url: "ManageActivities/insert",
+            url: "ManageActivities/insertActivityBean",
             method: "POST",
             dataType: "JSON",
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(activityBean),
             success: function (res) {
-                $("body").append($(`<form action="ActivitiesOP" method="GET" id="onlyPost"></form>`))
+                $("body").append($(`<form action="ManageActivities" method="GET" id="onlyPost"></form>`))
                 $("#onlyPost").submit()
             },
             error: function (err) {

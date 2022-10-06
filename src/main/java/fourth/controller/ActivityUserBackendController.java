@@ -86,7 +86,7 @@ public class ActivityUserBackendController {
 		activityBean.setStatusCode(0);
 		ActivityBean insertActivities = activityService.insertActivity(activityBean);
 		//log
-		activityService.insertActivityReviewBean(new ActivityReviewBean(insertActivities.getId(), null, 0));
+		activityService.insertActivityReviewBean(new ActivityReviewBean(insertActivities.getId(), "使用者新增", 0));
 		return insertActivities;
 	}
 
@@ -97,7 +97,7 @@ public class ActivityUserBackendController {
 		activityBean.setUserId(2);
 		activityBean.setStatusCode(0);
 		ActivityBean updateActivities = activityService.updateActivity(activityBean);
-		activityService.insertActivityReviewBean(new ActivityReviewBean(updateActivities.getId(), null, 0));
+		activityService.insertActivityReviewBean(new ActivityReviewBean(updateActivities.getId(), "使用者修改", 0));
 		return updateActivities;
 
 	}

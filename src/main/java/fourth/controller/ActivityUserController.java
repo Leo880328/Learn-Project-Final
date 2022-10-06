@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,12 +42,11 @@ public class ActivityUserController {
 	
 	@PostMapping("/join{id}")
 	@ResponseBody
-	public String responseJoinAttendees(@PathParam("id")int activityId) {
+	public ActivityAttendeesBean responseJoinAttendees(@PathVariable("id")int activityId) {
 		int userId = 1;
 		ActivityBean selectActivityById = activityService.selectActivityById(activityId);
-		new ActivityAttendeesBean(selectActivityById, userId);
-		
-		return activityService.insertActivityAttendees(selectActivityById,userId);
+		ActivityAttendeesBean insertActivityAttendees = activityService.insertActivityAttendees(selectActivityById,userId);
+		return insertActivityAttendees ;
 	}
 	
 	@PostMapping("/all")

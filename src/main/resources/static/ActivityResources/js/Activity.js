@@ -5,7 +5,7 @@ const jquery = {
     activityInformation: ".activityInformation",
 
 }
-let activitiesId
+let activitiesId;
 $().ready(
     function () {
         let idIndexOf = window.location.href.split("/");
@@ -31,6 +31,7 @@ function requestActivity() {
     })
 }
 function joinActivity() {
+    console.log(`myActivities/join${activitiesId}`)
     $.ajax({
         url: `myActivities/join${activitiesId}`,
         method: "POST",
@@ -38,7 +39,10 @@ function joinActivity() {
         success: function (data) {
             console.log(data);
         },
-        error: function (err) { alert("參加失敗!") },
+        error: function (err) {
+            alert("參加失敗!");
+            console.log(err)
+        },
     })
 }
 function updateView(activity) {

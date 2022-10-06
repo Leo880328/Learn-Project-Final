@@ -32,6 +32,7 @@ public class ActivityReviewBean implements Serializable{
 		this.activityId = activityId;
 		this.message = illustrate;
 		this.statusCode = statusCode;
+		this.RequestTime = new Date();
 	}
 
 

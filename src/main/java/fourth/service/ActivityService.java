@@ -159,18 +159,16 @@ public class ActivityService {
 	// =================================================================================================================
 
 	// 報名活動
-	public String insertActivityAttendees(ActivityBean activityBean, int userId) {
+	public ActivityAttendeesBean insertActivityAttendees(ActivityBean activityBean, int userId) {
 		if (activityBean.getNumberLimit() > getActivityFindEffectiveNumber(activityBean.getId())) {
-			ActivityAttendeesBean activityAttendeesBean = new ActivityAttendeesBean();
-			activityAttendeesBean.setActivity(activityBean);
-			activityAttendeesBean.setUserId(userId);
-			activityAttendeesRepository.save(activityAttendeesBean);
+			ActivityAttendeesBean activityAttendeesBean = new ActivityAttendeesBean(activityBean,userId);
+			ActivityAttendeesBean save = activityAttendeesRepository.save(activityAttendeesBean);
 
 			if (getActivityFindEffectiveNumber(activityBean.getId()) >= activityBean.getNumberLimit()) {
 				activityBean.setStatusCode(ActivityBean.STATUS_NON_PUBLIC);
 			}
-			return "報名成功";
+			return save;
 		}
-		return "人數已滿";
+		return null;
 	}
 }
