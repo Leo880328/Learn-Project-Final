@@ -136,7 +136,7 @@
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="">${sessionScope.user.name }</a><a class="dropdown-item"
 							href="user.controller">查看個人檔案</a><a class="dropdown-item"
-							href="logout.controller">登出</a>
+							href="logout">登出</a>
 					</div>
 
 

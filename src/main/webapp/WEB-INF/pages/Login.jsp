@@ -47,7 +47,7 @@ article {
 									</button>
 
 								</div>
-								<form method="post" action="checklogin.controller">
+								<form method="post" action="loginsuccess">
 									<!-- 									<div class="social-account"> -->
 									<!-- 										<h6 class="title-social">其他登入方式</h6> -->
 									<!-- 										<div class="g-signin2" data-onsuccess="onSignIn"></div> -->
@@ -55,7 +55,7 @@ article {
 									<br> <font face="微軟正黑體">使用快樂學習帳號密碼登入</font>
 									<div class=group>
 										<label for="account"><i class="fa-solid fa-user"></i>
-										</label> <input type="text" name="account" id="account"
+										</label> <input type="text" name="username" id="account"
 											placeholder="請輸入帳號" autocomplete="off" value=account>
 									</div>
 									<div class=group>
