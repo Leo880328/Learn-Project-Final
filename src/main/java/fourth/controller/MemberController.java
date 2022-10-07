@@ -42,9 +42,30 @@ public class MemberController {
 	@Autowired
 	private MemberMailService memberMailService;
 
-	@GetMapping(path = "/forgotpassword/{mail}")
-	public void forgotPWD(@PathVariable String mail) {
-		MemberBean member = memberService.checkRegister(mail);
+//	@GetMapping(path = "/forgotpassword/{mail}")
+//	public void forgotPWD(@PathVariable String mail) {
+//		Map<String, String> errors = new HashMap<String, String>();
+//		MemberBean member = memberService.checkRegister(mail);
+//		System.out.println("member: " + member);
+//		if (member != null) {
+//			String pwd = memberMailService.givenUsingJava8_whenGeneratingRandomAlphanumericString_thenCorrect();
+//			System.out.println("pwd:" + pwd);
+//			member.setPassword(pwd);
+//			MemberBean registerUser = memberService.registerUser(member);
+//			System.out.println("registerUser: " + registerUser);
+//			System.out.println("email:" + member.getEmail());
+//			memberMailService.sendMail(member.getEmail(), "好學生-EEIT49  忘記密碼通知信",
+//					"親愛的會員您好:<br><br>您的帳號:" + member.getAccount() + " 申請忘記密碼通知，" + "系統發送新密碼為:" + pwd + "，"
+//							+ "請使用新密碼登入，並至個人資料重新修改密碼。<br> <br> <br>  好學生團隊 敬上");
+//
+//		}
+//	}
+
+	@PostMapping(path = "/forgotpassword")
+	@ResponseBody
+	public String forgotPWD(@RequestBody MemberBean memberBean) {
+		System.out.println("進入forgot controller");
+		MemberBean member = memberService.checkRegister(memberBean.getEmail());
 		System.out.println("member: " + member);
 		if (member != null) {
 			String pwd = memberMailService.givenUsingJava8_whenGeneratingRandomAlphanumericString_thenCorrect();
@@ -56,8 +77,9 @@ public class MemberController {
 			memberMailService.sendMail(member.getEmail(), "好學生-EEIT49  忘記密碼通知信",
 					"親愛的會員您好:<br><br>您的帳號:" + member.getAccount() + " 申請忘記密碼通知，" + "系統發送新密碼為:" + pwd + "，"
 							+ "請使用新密碼登入，並至個人資料重新修改密碼。<br> <br> <br>  好學生團隊 敬上");
-
+			return "2222";
 		}
+		return "1111";
 	}
 
 	// 切入忘記密碼畫面
@@ -257,7 +279,7 @@ public class MemberController {
 		HashMap<String, String> errors = null;
 //		MemberBean user = (MemberBean) m.getAttribute("user");
 //		MemberBean mem = memberService.checkLogin(memberBean.getAccount());
-		System.out.println("memberBean: "+memberBean);
+		System.out.println("memberBean: " + memberBean);
 		memberBean.setStatus(4);
 //		m.addAttribute("user", mem);
 //		System.out.println("user: "+user);
@@ -281,7 +303,7 @@ public class MemberController {
 //				errors = new HashMap<String, String>();
 //				errors.put("userprofile", "1114");
 //			}
-			
+
 		}
 //		if (checkRegisterByAccount != null) {
 //			if (checkRegisterByAccount.getAccount() != null) {
@@ -300,10 +322,7 @@ public class MemberController {
 
 		return "3000";
 	}
-	
-	
-	
-	
+
 	// 更新會員
 	@PostMapping("/updateUser")
 	public String updateUser(MemberBean memberBean, MultipartFile mf, String account, int status)

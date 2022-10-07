@@ -123,13 +123,13 @@ article {
 		console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 	}
 
-	$('#forgot').on("click", function() {
-		let mail = $('#email').val();
-		console.log(mail)
-		fetch("/HappyLearning/forgotpassword/" + mail, {
-			method : 'GET'
-		});
+// 	$('#forgot').on("click", function() {
+// 		let mail = $('#email').val();
+// 		console.log(mail)
+// 		fetch("/HappyLearning/forgotpassword/" + mail, {
+// 			method : 'GET'
+// 		});
 
-	})
+// 	})
 </script>
 </html>

@@ -52,7 +52,9 @@ article {
 									<p>
 										<input type="text" name="email" id="email"
 											placeholder="*請輸入email" autocomplete="off">
-										<button type="submit" id="forgot" class="forgot-pw">忘記密碼?</button>
+											<span
+										id="msgEmail" style="color: red"> </span>
+										<button type="button" id="forgot" class="forgot-pw">忘記密碼?</button>
 									</p>
 
 								</div>
@@ -73,23 +75,39 @@ article {
 		</div>
 	</article>
 </body>
-
-<script type="text/javascript">
-	$('#forgot').on("click", function() {
-		let mail = $('#email').val();
-		console.log(mail)
-		fetch("/HappyLearning/forgotpassword/" + mail, {
-			method : 'GET'
-		});
-
-	})
-</script>
-<script>
-	$("#submit").click(function() {
-		Swal.fire({
-			icon : 'success',
-			title : '請至信箱確認驗證信'
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	<!------------------------判斷是否帳號信箱存在--------------------->
+	<script type="text/javascript">
+		$('#forgot').on("click", function() {
+			let email = $('#email').val();
+			console.log(email)
+			$('#msgEmail').text("");
+			let member = {
+				email : email,
+			}
+			fetch("forgotpassword",{
+				method:'POST',
+				headers:{
+					'Content-Type':'application/json'
+				},
+				body:JSON.stringify(member) 
+			}).then(resp=>resp.json())
+			.then(res=>{
+				console.log(res)
+				if('1111'==res.email){
+					
+					$('#msgEmail').text('信箱已註冊');
+				}
+				if(res=='2222')
+				  Swal.fire({
+                      icon: 'success',
+                      title: '請至信箱確認驗證信',
+                      text: '註冊成功，即將前往登入畫面',
+                  })
+//                   .then(function(){
+//                 	  location.href='login.controller';
+//                   })
+			})
 		})
-	});
-</script>
+	</script>
 </html>

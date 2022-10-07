@@ -63,13 +63,19 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 							<div class="col-lg-8 no-padding">
 								<div class="form-message">
 									<h2 class="title">我的檔案</h2>
-									<c:if test="<%=memberBean.getStatus() == 1%>">
+									<c:if test="<%=memberBean.getStatus() == 1 && memberBean.getReason() ==null %>" >
 										<button type="submit">
 											<a href="becometeacher.controller">申請成為老師</a>
 										</button>
 									</c:if>
+									<c:if test="<%=memberBean.getReason() !=null && memberBean.getStatus() ==1  %>">
+										<button type="submit">
+											<a href="becometeacher.controller">重新申請為老師</a>
+										</button>
+											<font color=red size=6>原因：<span ><%=memberBean.getReason()%></span></font>
+									</c:if>
 									<form action="updateMyUser" method="post"
-										class="teamo-contact-fom us" >
+										class="teamo-contact-fom us">
 										<div class="row">
 											<div class="col-sm-6">
 												<%
