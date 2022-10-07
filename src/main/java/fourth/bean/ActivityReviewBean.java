@@ -32,7 +32,7 @@ public class ActivityReviewBean implements Serializable{
 		this.activityId = activityId;
 		this.message = illustrate;
 		this.statusCode = statusCode;
-		this.RequestTime = new Date();
+		this.requestTime = new Date();
 	}
 
 
@@ -53,7 +53,7 @@ public class ActivityReviewBean implements Serializable{
 	
 	@Column(name = "request_time")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone = "GMT+8")
-	private Date RequestTime;
+	private Date requestTime;
 
 
 	public int getId() {
@@ -108,13 +108,13 @@ public class ActivityReviewBean implements Serializable{
 
 
 	public Date getRequestTime() {
-		return RequestTime;
+		return requestTime;
 	}
 
 
 
 	public void setRequestTime(Date requestTime) {
-		RequestTime = requestTime;
+		this.requestTime = requestTime;
 	}
 
 

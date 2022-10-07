@@ -64,13 +64,13 @@ public class ActivityUserBackendController {
 		return activityService.selectAllActivityByUserId(pageable, userId);
 	}
 	
-	@GetMapping("/Activity-{id}")
+	@GetMapping("/Activity/{id}")
 	@ResponseBody
 	public ActivityBean selectActivity(@PathVariable Integer id) {
 		return activityService.selectActivityById(id);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/Review/{id}")
 	@ResponseBody
 	public Page<ActivityReviewBean> responseActivityReviewBean(@PathVariable Integer id) {
 		PageRequest pageable = PageRequest.of(0, 10);

@@ -37,6 +37,12 @@ function joinActivity() {
         method: "POST",
         dataType: "JSON",
         success: function (data) {
+            Swal.fire({
+                icon: 'success',
+                title: '報名成功',
+                html: '報名成功，請去<a href="myActivities">[我的活動]</a>確認',
+                width: "300px",
+            })
             console.log(data);
         },
         error: function (err) {
@@ -54,8 +60,8 @@ function updateView(activity) {
         place = `${activity.place} ${activity.address}`;
     }
     $(jquery.activityInformation).html(`
-    可報名人數:${activity.numberLimit}<br>
-    活動時間:${activity.startTime} ~ ${activity.endTime}<br>
-    活動地點:${place}
+    可報名人數: ${activity.numberLimit}<br>
+    活動時間: ${activity.startTime} ~ ${activity.endTime}<br>
+    活動地點: ${place}
     `)
 }
