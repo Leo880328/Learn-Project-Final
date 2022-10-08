@@ -82,7 +82,7 @@ public class ActivityAttendeesBean implements Serializable {
 	}
 
 	public void setRequestTime(Date requestTime) {
-		requestTime = requestTime;
+		this.requestTime = requestTime;
 	}
 
 	public int getStatusCode() {

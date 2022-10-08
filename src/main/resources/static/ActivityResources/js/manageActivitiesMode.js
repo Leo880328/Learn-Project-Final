@@ -61,13 +61,18 @@ function requestPublicActivities() {
     })
 }
 function createPublicActivityInformation(activity) {
+    let place = activity.place;
+    if (!place) {
+        place = "線上"
+    }
+
     let activityInformation =
         `
     <tr style="height: 50px;">
-        <td class="u-border-1 u-border-grey-40 u-table-cell"><a>${activity.title}</a></td>
+        <td class="u-border-1 u-border-grey-40 u-table-cell"><a href="Activity/${activity.id}">${activity.title}</a></td>
         <td class="u-border-1 u-border-grey-40 u-table-cell">${activity.startTime}~${activity.endTime}</td>
         <td class="u-border-1 u-border-grey-40 u-table-cell"><a>${activity.numberLimit}</a></td>
-        <td class="u-border-1 u-border-grey-40 u-table-cell">${activity.place}</td>
+        <td class="u-border-1 u-border-grey-40 u-table-cell">${place}</td>
     </tr>
     `
     return activityInformation
@@ -104,14 +109,13 @@ function createAllActivityInformation(activity) {
     if (!place) {
         place = "線上"
     }
-
-
     let activityInformation =
         `
     <tr style="height: 50px;">
-        <td class="u-border-1 u-border-grey-40 u-table-cell"><a>${activity.title}</a></td>
+        <td class="u-border-1 u-border-grey-40 u-table-cell"><a href="Activity/${activity.id}">${activity.title}</a></td>
         <td class="u-border-1 u-border-grey-40 u-table-cell">${activity.startTime}~${activity.endTime}</td>
         <td class="u-border-1 u-border-grey-40 u-table-cell"><a class="button" onclick="selectReviewByActivitiesID(${activity.id})">${activityStatusCode[activity.statusCode]}</a></td>
+
         <td class="u-border-1 u-border-grey-40 u-table-cell">${place}</td>
     </tr>
     `
@@ -138,12 +142,15 @@ function selectReviewByActivitiesID(id) {
             Swal.fire({
                 width: "600px",
                 html: createTable(reviewPageArray),
+
+
                 stopKeydownPropagation: false
             })
         },
         error: function (err) { alert("資料獲取失敗，請刷新網頁!") },
     });
 }
+
 
 
 
@@ -183,6 +190,7 @@ function createTable(reviewPageArray) {
 }
 
 function createReviewInformation(review) {
+
     let reviewArrayInformation =
         `
     <tr style="height: 50px;">
@@ -193,3 +201,4 @@ function createReviewInformation(review) {
     `
     return reviewArrayInformation
 }
+

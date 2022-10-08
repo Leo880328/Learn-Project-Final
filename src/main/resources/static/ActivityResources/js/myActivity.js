@@ -65,10 +65,14 @@ function createEffectiveAttendeesInformation(attendees) {
   let title = attendees.activity.title;
   let time = attendees.activity.startTime + "~" + attendees.activity.endTime;
   let place = attendees.activity.place;
+  if (!place) {
+    place = '線上'
+  }
+  let activityId = attendees.activity.id;
   let activityInformation =
     `
     <tr style="height: 50px;">
-    <td class="u-border-1 u-border-grey-40 u-table-cell"><a>${title}</a></td>
+    <td class="u-border-1 u-border-grey-40 u-table-cell"><a href="Activity/${activityId}">${title}</a></td>
     <td class="u-border-1 u-border-grey-40 u-table-cell">${time}</td>
     <td class="u-border-1 u-border-grey-40 u-table-cell">${place}</td>
     </tr>
@@ -106,10 +110,11 @@ function requestAllAttendees() {
 function createAllAttendeesInformation(attendees) {
   let title = attendees.activity.title;
   let time = attendees.activity.startTime + "~" + attendees.activity.endTime;
+  let activityId = attendees.activity.id;
   let activityInformation =
     `
     <tr class="banner-content" style="height: 50px;">
-      <td class="u-border-1 u-border-grey-40 u-table-cell"><a>${title}</a></td>
+      <td class="u-border-1 u-border-grey-40 u-table-cell"><a href="Activity/${activityId}">${title}</a></td>
       <td class="u-border-1 u-border-grey-40 u-table-cell">${time}</td>
       <td class="u-border-1 u-border-grey-40 u-table-cell">${activityStatusCode[attendees.statusCode]}</td>
       <td class="u-border-1 u-border-grey-40 u-table-cell">${attendees.requestTime}</td>
@@ -121,3 +126,4 @@ function readMoreAllAttendees() {
   AllAttendeesPage.pageNo++;
   requestAllAttendees();
 }
+//===================================================================================

@@ -70,6 +70,7 @@ public class ActivityUserBackendController {
 		return activityService.selectActivityById(id);
 	}
 	
+
 	@PostMapping("/Review/{id}")
 	@ResponseBody
 	public Page<ActivityReviewBean> responseActivityReviewBean(@PathVariable Integer id) {
