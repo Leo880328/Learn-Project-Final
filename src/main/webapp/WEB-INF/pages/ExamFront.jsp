@@ -11,143 +11,91 @@
     <meta http-equiv="X-UA-compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		 
+	<style>
+	.sortCss{
+		margin-left:20px;
+		background-color:white;
+		width:30%;
+		
+	
+	}
+	
+	
+	
 	</style>
+		 
+
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
      <script type="text/javascript">
      </script>
+     
 </head>
 
 <body class="inblog-page">
  	<jsp:include page="Header.jsp" /> 
-    <div class="header-device-mobile">
-        <div class="wapper">
-            <div class="item mobile-logo">
-                <div class="logo"><a href="#"><img src="assets/images/logo.png" alt="img"></a></div>
-            </div>
-            <div class="item item mobile-search-box has-sub"><a href="#"><span class="icon"><i class="fa fa-search"
-                            aria-hidden="true"></i></span></a>
-                <div class="block-sub"><a href="#" class="close"><i class="fa fa-times" aria-hidden="true"></i></a>
-                    <div class="header-searchform-box">
-                        <form class="header-searchform">
-                            <div class="searchform-wrap"><input type="text" class="search-input"
-                                    placeholder="Enter keywords to search..."><input type="submit" class="submit button"
-                                    value="Search"></div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="item mobile-settings-box has-sub"><a href="#"><span class="icon"><i class="fa fa-cog"
-                            aria-hidden="true"></i></span></a>
-                <div class="block-sub"><a href="#" class="close"><i class="fa fa-times" aria-hidden="true"></i></a>
-                    <div class="block-sub-item">
-                        <h5 class="block-item-title">Currency</h5>
-                        <form class="currency-form teamo-language">
-                            <ul class="teamo-language-wrap">
-                                <li class="active"><a href="#"><span>English(USD) </span></a></li>
-                                <li><a href="#"><span>French(EUR) </span></a></li>
-                                <li><a href="#"><span>Japanese(JPY) </span></a></li>
-                            </ul>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="item menu-bar"><a class=" mobile-navigation  menu-toggle"
-                    href="#"><span></span><span></span><span></span></a></div>
-        </div>
-    </div>
+<!--     <div class="header-device-mobile"> -->
+<!--         <div class="wapper"> -->
+<!--             <div class="item mobile-logo"> -->
+<!--                 <div class="logo"><a href="#"><img src="assets/images/logo.png" alt="img"></a></div> -->
+<!--             </div> -->
+<!--             <div class="item item mobile-search-box has-sub"><a href="#"><span class="icon"><i class="fa fa-search" -->
+<!--                             aria-hidden="true"></i></span></a> -->
+<!--                 <div class="block-sub"><a href="#" class="close"><i class="fa fa-times" aria-hidden="true"></i></a> -->
+<!--                     <div class="header-searchform-box"> -->
+<!--                         <form class="header-searchform"> -->
+<!--                             <div class="searchform-wrap"><input type="text" class="search-input" -->
+<!--                                     placeholder="Enter keywords to search..."><input type="submit" class="submit button" -->
+<!--                                     value="Search"></div> -->
+<!--                         </form> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--             <div class="item mobile-settings-box has-sub"><a href="#"><span class="icon"><i class="fa fa-cog" -->
+<!--                             aria-hidden="true"></i></span></a> -->
+<!--                 <div class="block-sub"><a href="#" class="close"><i class="fa fa-times" aria-hidden="true"></i></a> -->
+<!--                     <div class="block-sub-item"> -->
+<!--                         <h5 class="block-item-title">Currency</h5> -->
+<!--                         <form class="currency-form teamo-language"> -->
+<!--                             <ul class="teamo-language-wrap"> -->
+<!--                                 <li class="active"><a href="#"><span>English(USD) </span></a></li> -->
+<!--                                 <li><a href="#"><span>French(EUR) </span></a></li> -->
+<!--                                 <li><a href="#"><span>Japanese(JPY) </span></a></li> -->
+<!--                             </ul> -->
+<!--                         </form> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--             <div class="item menu-bar"><a class=" mobile-navigation  menu-toggle" -->
+<!--                     href="#"><span></span><span></span><span></span></a></div> -->
+<!--         </div> -->
+<!--     </div> -->
     <div class="main-content main-content-product no-sidebar">
         <div class="container">
             <div class="row">
                 <div class="content-area  shop-grid-content full-width col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="site-main">
                         <div class="shop-top-control">
-                            <form class="select-item select-form" style="width:40%"><span class="title">Sort</span><select title="sort"
-                                    data-placeholder="12 Products/Page" class="chosen-select">
-                                    <option value="1">12 Products/Page</option>
-                                    <option value="2">9 Products/Page</option>
-                                    <option value="3">10 Products/Page</option>
-                                    <option value="4">8 Products/Page</option>
-                                    <option value="5">6 Products/Page</option>
-                                </select></form>
-                            <form class="filter-choice select-form"><span class="title">Sort by</span><select title="by"
-                                    data-placeholder="Price: Low to High" class="chosen-select">
-                                    <option value="1">Default sorting</option>
-                                    <option value="2">Sort by popularity</option>
-                                    <option value="3">Sort by average rating</option>
-                                    <option value="4">Sort by newness</option>
-                                    <option value="5">Sort by price:low to high</option>
-                                </select></form>
-                            <div class="grid-view-mode">
-
+                            <div class="select-item select-form" ><span class="title">Sort</span>
+                            	<select style="background-color:white" id="quSub" title="sort">
+                                    <option value="數學">數學</option>
+                                    <option value="英文">英文</option>
+                                    <option value="國文">國文</option>
+                                </select>
                             </div>
+                            <div class="filter-choice select-form"><span class="title">Sort by</span>
+                            	<select style="background-color:white" id="quEdu" title="by" >
+					                <option value="國中">國中</option>
+					                <option value="高中">高中</option>
+					                <option value="成人">成人</option>
+                                </select>
+                            </div>
+							<button id="query">查詢</button>
                         </div>
-                        <h3 class="custom_blog_title">List Products </h3>
-                        <ul class="row list-products auto-clear equal-container product-list">
-                            <li
-                                class="product-item style-list col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12">
-                                <div class="product-inner equal-element">
-                                    <div class="product-top">
-                                        <div class="flash"><span class="onnew"><span class="text">熱門</span></span>
-                                        </div>
-                                    </div>
-                                    <div class="products-bottom-content">
-                                        <div class="product-thumb">
-                                            <div class="thumb-inner"><a href="#"><img
-                                                        src="assets/images/product-item-4.jpg" alt="img"></a><a href="#"
-                                                    class="button quick-wiew-button">Quick View</a></div>
-                                        </div>
-                                        <div class="product-info-left">
-                                            <div class="yith-wcwl-add-to-wishlist">
-                                                <div class="yith-wcwl-add-button"><a href="#">Add to Wishlist</a></div>
-                                            </div>
-                                            <h5 class="product-name product_title"><a href="#">European Pan Palm</a>
-                                            </h5>
-                                            <div class="stars-rating">
-                                                <div class="star-rating"><span class="star-3"></span></div>
-                                                <div class="count-star">(3) </div>
-                                            </div>
-                                            <ul class="product-attributes">
-                                                <li>Material:</li>
-                                                <li><a href="#">Plastic</a></li>
-                                                <li><a href="#">Woody</a></li>
-                                            </ul>
-                                            <ul class="attributes-display">
-                                                <li class="swatch-color">Color:</li>
-                                                <li class="swatch-color"><a href="#">Black</a></li>
-                                                <li class="swatch-color"><a href="#">White</a></li>
-                                                <li class="swatch-color"><a href="#">Brown</a></li>
-                                            </ul>
-                                            <ul class="attributes-display">
-                                                <li class="swatch-text-label">Pots Size:</li>
-                                                <li class="swatch-text-label"><a href="#">XS</a></li>
-                                                <li class="swatch-text-label"><a href="#">S</a></li>
-                                                <li class="swatch-text-label"><a href="#">M</a></li>
-                                                <li class="swatch-text-label"><a href="#">L</a></li>
-                                                <li class="swatch-text-label"><a href="#">XL</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product-info-right">
-                                            <div class="price">$45 </div>
-                                            <div class="product-list-message"><i class="icon fa fa-truck"
-                                                    aria-hidden="true"></i>UK Free Delivery </div>
-                                            <form class="cart">
-                                                <div class="single_variation_wrap">
-                                                    <div class="quantity">
-                                                        <div class="control"><a
-                                                                class="btn-number qtyminus quantity-minus"
-                                                                href="#">-</a><input type="text" data-step="1"
-                                                                data-min="0" value="1" title="Qty" class="input-qty qty"
-                                                                size="4"><a href="#"
-                                                                class="btn-number qtyplus quantity-plus">+</a></div>
-                                                    </div><button class="single_add_to_cart_button button">Add to
-                                                        cart</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                        <h3 class="custom_blog_title">考卷 </h3>
+                        
+                        
+                        <ul id="table" class="row list-products auto-clear equal-container product-list">
+ 
 
                         </ul>
                         <div class="pagination clearfix style2">
@@ -251,28 +199,40 @@
                             class="fa fa-user" aria-hidden="true"></i></span>Account </a></div>
         </div>
     </div><a href="#" class="backtotop"><i class="fa fa-angle-double-up"></i></a>
-    <script src="assets/js/jquery-1.12.4.min.js"></script>
-    <script src="assets/js/jquery.plugin-countdown.min.js"></script>
-    <script src="assets/js/jquery-countdown.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/magnific-popup.min.js"></script>
-    <script src="assets/js/isotope.min.js"></script>
-    <script src="assets/js/jquery.scrollbar.min.js"></script>
-    <script src="assets/js/jquery-ui.min.js"></script>
-    <script src="assets/js/mobile-menu.js"></script>
-    <script src="assets/js/chosen.min.js"></script>
-    <script src="assets/js/slick.js"></script>
-    <script src="assets/js/jquery.elevateZoom.min.js"></script>
-    <script src="assets/js/jquery.actual.min.js"></script>
-    <script src="assets/js/fancybox/source/jquery.fancybox.js"></script>
-    <script src="assets/js/lightbox.min.js"></script>
-    <script src="assets/js/owl.thumbs.min.js"></script>
-    <script src="assets/js/jquery.scrollbar.min.js"></script>
-    <script src='http://www.google.cn/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script>
-    <script src="assets/js/frontend-plugin.js"></script>
+    
+<!--     一進來就載入queryall -->
+    <script type="text/javascript" src="kai/ExamFrontPageLoad.js"></script>
+<!--     <script src="kai/examMenuPlugin.js"></script> -->
 </body>
 
 
 
 </html>
+
+
+
+
+
+
+
+
+<!--     <script src="assets/js/jquery-1.12.4.min.js"></script> -->
+<!--     <script src="assets/js/jquery.plugin-countdown.min.js"></script> -->
+<!--     <script src="assets/js/jquery-countdown.min.js"></script> -->
+<!--     <script src="assets/js/bootstrap.min.js"></script> -->
+<!--     <script src="assets/js/owl.carousel.min.js"></script> -->
+<!--     <script src="assets/js/magnific-popup.min.js"></script> -->
+<!--     <script src="assets/js/isotope.min.js"></script> -->
+<!--     <script src="assets/js/jquery.scrollbar.min.js"></script> -->
+<!--     <script src="assets/js/jquery-ui.min.js"></script> -->
+<!--     <script src="assets/js/mobile-menu.js"></script> -->
+<!--     <script src="assets/js/chosen.min.js"></script> -->
+<!--     <script src="assets/js/slick.js"></script> -->
+<!--     <script src="assets/js/jquery.elevateZoom.min.js"></script> -->
+<!--     <script src="assets/js/jquery.actual.min.js"></script> -->
+<!--     <script src="assets/js/fancybox/source/jquery.fancybox.js"></script> -->
+<!--     <script src="assets/js/lightbox.min.js"></script> -->
+<!-- <!--     <script src="assets/js/owl.thumbs.min.js"></script> --> -->
+<!--     <script src="assets/js/jquery.scrollbar.min.js"></script> -->
+<!--     <script src='http://www.google.cn/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script> -->
+<!--     <script src="assets/js/frontend-plugin.js"></script> -->

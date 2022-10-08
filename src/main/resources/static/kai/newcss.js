@@ -35,6 +35,16 @@ function examQueryAll() {
 
 
 function createExam(exam, index) {
+	var status = `${exam.examStatus}`;
+	if( status == "0"){
+		status=`<button class='review btn btn-primary' class='btn btn-primary'>未審查</button>`;
+		
+	} else {
+		status=`<button class='review btn btn-primary' class='btn btn-primary'>審查</button>`;
+		
+	};
+	
+	
     let examContent = [
         `${(index + 1)}`,
         `<img src="${exam.examPic}" width='100'>`,
@@ -46,20 +56,21 @@ function createExam(exam, index) {
         `${exam.difficulty}`,
         `${exam.testNumber}`,
         `${exam.avgScore}`,
-        `${exam.examStatus}`,
+        status,
         // "<td style='display:none''>" + exam.examID + "</td>" ,
 
 
-        `<button class='del' class='btn btn-primary' value="${exam.examID}" >Del</button>`,
-
+        `<button class='del btn btn-primary' 
+        value="${exam.examID}" >Del</button>`,
+		
         `<form action='examUpdate' method='post'>
         <input type='hidden' name='examId' value='${exam.examID}'>
-        <input type='submit' value='更新'>
+        <input type='submit' class='btn btn-primary' value='更新'>
         </form></td>`,
 
         `<td><form action='ExamEstaTest' method='post'>
         <input type='hidden' name='examId' value='${exam.examID}'>
-        <input type='submit' value='考試'>
+        <input type='submit' class='btn btn-primary' value='考試'>
         </form></td>`
     ]
 

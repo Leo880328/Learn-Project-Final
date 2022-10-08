@@ -51,7 +51,7 @@ public class ExamMyMemController {
 	}
 	
 	
-	@GetMapping("/ExamMyMemSe")
+	@PostMapping("/ExamMyMemSe")
 	@ResponseBody
 	public List<ExamReserve> processActionSe(
 			//考試相關(queryAll的參數)
@@ -79,6 +79,7 @@ public class ExamMyMemController {
 		examMyMemService.resDelete(Integer.valueOf(Id));
 	};
 	
+	//調出考卷
 	@PostMapping("/ExamMyMemRecordSe")
 	@ResponseBody
 	public List<ExamRecord> processActionReSe(Model m) {

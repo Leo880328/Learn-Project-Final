@@ -25,6 +25,10 @@
             color: red;
         }
     	
+    	.prevw{
+    		text-align:center;
+    		margin:auto;
+    	}
     	
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -37,9 +41,13 @@
     <form action="examInsert" method="post" enctype="multipart/form-data" onsubmit="return check()">
     
         <table class="tb">
+     	     <colgroup>
+                <col width="20.00%">
+                <col width="80.00%">
+            </colgroup>
             <tr>
                 <td><label>考卷名稱:</label></td>
-                <td><input type="text" name="examName" id="name" size="10" maxlength="10"><span class="alert" id="spExamName"></span></td>
+                <td><input type="text" name="examName" id="examName" size="10" maxlength="10"><span class="alert" id="spExamName"></span></td>
             </tr>
             <tr>
                 <td><label>考卷科目:</label></td>
@@ -67,7 +75,7 @@
             </tr>
             <tr>
                 <td><label>考卷題數:</label></td>
-                <td><input type="text" name="quNumber" id="quNumber" size="3" maxlength="10" onchange="create(this.value)"></td>
+                <td><input type="text" name="quNumber" id="quNumber" size="3" maxlength="10" onchange="create(this.value)"><span class="alert" id="spQuNumber"></span></td>
             </tr>
             <tr>
                 <td><label>日期:</label></td>
@@ -75,12 +83,23 @@
             </tr>
             <tr>
                 <td><label>圖片:</label></td>
-                <td><input style="width:300px" type="file" name="myfile" id="pictureInput"></td>
+                <td><input style="display:inline;width:200px;" type="file" name="myfile" id="pictureInput"><span class="alert" id="spExamPic"></span></td>
             </tr>
             <tr>
-            	<td><img id="preview_pictureInput_img" src="" /></td>
+            	<td style=" margin:auto;text-align:center">
+	            		<img  class="prevw" id="preview_pictureInput_img" src="" />
+            	</td>
             </tr>
 
+            <tr>
+<!--                <td><button type="submit" value="insert" onclick="check()">insert</td> -->
+               <td style="text-align:center" colspan="2">
+               		<button type="submit" value="insert" onclick="check()">insert</button>
+               		<button type="button" value="insert" onclick="inertData()">一鍵輸入</button>
+               </td>		
+<!--                <<button type="button" value="insert" onclick="wrongData()">一鍵錯誤</td> -->
+           </tr>
+           
         </table>
         <br><br>
         
@@ -91,21 +110,14 @@
         
         </div>
         
-            <tr>
-               <td colspan="2">
-                   <center>
-                       <input type="submit" name="todo" value="insert" onclick="if( !(confirm('確認新增?') ) ) return false">
-                   </center>
-               </td>
-           </tr>
            
     </form>
     
-	<script type="text/javascript" src="${pageContext.request.contextPath}/ExamFrontCheck.js"></script>
+	
 	<script src="kai/inserttable.js"></script>
 	<script src="kai/imgPreview.js"></script>
-
-	
+	<script src="kai/ExamFrontCheck.js"></script>
+	<script src="kai/oneClick.js"></script>
 
 </body>
 </html>

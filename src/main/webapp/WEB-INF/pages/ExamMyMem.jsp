@@ -8,7 +8,7 @@
         <style>
         .divform {
 
-            width: 700px;
+            width: 1000px;
             margin: auto;
         }
 
@@ -34,7 +34,7 @@
         }
         
         .pre{
-        	height: 500px;
+			min-height: 500px; 
         
         }
         
@@ -59,7 +59,7 @@
             var resultText = "";
 
             $.ajax({
-                type: 'get',
+                type: 'post',
                 url: 'ExamMyMemSe',
                 dataType: 'json',
                 success: function (data) {
@@ -94,15 +94,19 @@
                     	console.log(optContent);
                     	
                         let content =
+                        	
                             "<tr>" +
-                            "<td style='text-align:left'>" + data[i].examQues.quesContent + "</td>" +
-                            "<td>" + optContent + "</td>" +
+                            
+	                            "<td style='text-align:left'>" + data[i].examQues.quesContent + "</td>" +
+	                            "<td style='display:none'>" + data[i].examReserveID + "</td>" +
+	                            //                             "<input type='hidden' id='k' value="+data[i].examReserveID+">"+
+	                            "<td><button class='ans'>答案</button></td>" +
+	                            "<td><button class='del'>刪除</button></td>" +
                             //                             "<td>" + data[i].examReserveID + "</td>" +
-                            "<td style='display:none'>" + data[i].examReserveID + "</td>" +
-                            //                             "<input type='hidden' id='k' value="+data[i].examReserveID+">"+
-                            "<td><button class='del'>Del</button></td>" +
+                            "</tr>"+
+                            "<tr>" +
+                            	"<td style='display:none'>" + optContent + "</td>" +
                             "</tr>";
-
 
                         $('#restb').append(content);
 
@@ -135,10 +139,32 @@
                     }
                 })
             })
+			
+			$('#restb').on('click', '.ans', function () {
+			
+			    var a = $(this).closest('tr').next().children('td');
+				
+			    console.log(a.text());
+			    console.log(a.css("display"));
+			    
+			    
+			    if(a.css("display")=="none" ){
+			    	
+			    	a.css("display", "block");
+			    	
+			    }else if(a.css("display")=="block" ){
+			    	
+			    	a.css("display", "none");
+			    	
+			    }
 
+			
+			})
+            
 
         });
-
+		
+        //調出考卷
         $('#paperbtn').click(function () {
 
             $.ajax({
@@ -153,6 +179,7 @@
                     let thead =
                         "<th>卷名</th>" +
                         "<th>分數</th>" +
+                        "<th>重考</th>"+
                         "<th>刪除</th>"
 
                     $('#paperth').empty();
@@ -163,7 +190,8 @@
 
                         let content =
                             "<tr>" +
-                         	"<td style='text-align:left'><a href="+"/HappyLearning/ExamMember"+">"+data[i].examName+"</a></td>" +
+                         	"<td style='text-align:left'>"+data[i].examName+"</td>" +
+                         	"<td><button class='testAgain'>重考</button></td>" +
                             "<td>" + data[i].examscore + "</td>" +
                             "<td style='display:none'>" + data[i].examMemRecordId + "</td>" +
                             "<td><button class='del'>Del</button></td>" +
@@ -220,7 +248,8 @@
 	            <thead id="paperth">
 	            </thead>
 	            <tbody id="papertb">
-                          <col width="80.00%">
+                          <col width="70.00%">
+                          <col width="10.00%">
                           <col width="10.00%">
                           <col width="10.00%">
 	            </tbody>

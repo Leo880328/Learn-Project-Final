@@ -35,6 +35,11 @@
 		 	td,tbody{
 		 		border:1px solid #9c9c9c;
 		 	}
+		 	
+		 	.titleLb{
+			 	font-size: 34px;
+	            font-style: bold;
+		 	}
 		 
 	</style>
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -53,8 +58,10 @@
 	        
 			<div>
 				<form action="examUpload" method="post">
-					<h2 style= "display:inline-block ; width:200px">試卷名稱</h2>
-					<input type="submit" class="btn btn-primary" value="上傳">
+					<div>
+						<label class="titleLb">試卷名稱
+						<input type="submit" class="btn btn-primary" style="font-size:20px" value="上傳"></label>
+					</div>
 				</form>
 				
 			</div>
@@ -64,16 +71,16 @@
 				<table  class="tb " id="data-table" >
                 <thead>
                     <tr>
-                        <th width="120">項次</th>
+                        <th width="80">項次</th>
                         <th width="120">圖片</th>
-                        <th width="120">科目</th>
-                        <th width="120">程度</th>
+                        <th width="80">科目</th>
+                        <th width="80">程度</th>
                         <th width="120">名稱</th>
                         <th width="120">年度</th>
                         <th width="120">出題者</th>
-                        <th width="120">難度</th>
-                        <th width="120">考試人數</th>
-                        <th width="120">平均分數</th>
+                        <th width="80">難度</th>
+                        <th width="80">考試人數</th>
+                        <th width="80">平均分數</th>
                         <th width="100">審核狀態</th>
                         <th width="100">刪除</th>
                         <th width="100">更新</th>

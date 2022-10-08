@@ -206,7 +206,7 @@
 <!-- 								<li class="menu-item "><a href="Exam.jsp" -->
 								<li><a href="coursefront1.list" class="teamo-menu-item-title"
 									title="Home">課程</a><span class="toggle-submenu"></span>
-								<li class="menu-item "><a href="firstExamController"
+								<li class="menu-item "><a href="ExamFrontController"
 									class="teamo-menu-item-title" title="Shop">試卷</a><span
 									class="toggle-submenu"></span>
 								<li><a href="Activities" class="teamo-menu-item-title"
@@ -269,5 +269,6 @@
 		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 		<script src="https://kit.fontawesome.com/9d965cf88e.js" crossorigin="anonymous"></script>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		
 </body>
 </html>

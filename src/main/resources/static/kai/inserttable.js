@@ -1,36 +1,31 @@
 function create(input) {
 
-//     console.log("function" + input);
-//
-//     $('#quBox').val(input);
-
-	 
 	 var content="";
 	 $('#quArea').empty();
 	 for (var i = 0; i < input; i++) {
 		 
 	     content +=
-	        "<table class='tb qutb' id='quTable'>"+
+	        "<table class='tb qutb' id='quTable' style='width:1000px'>"+
 	            "<tbody>"+
 	                "<tr>"+
 	                    "<td colspan='6'>題目內容:</td>"+
 	                "</tr>"+
 	                "<tr>"+
-	                    "<td colspan='6'><textarea name='content' cols='100' rows='10'></textarea></td>"+
+	                    "<td colspan='6'><textarea name='content' cols='100' rows='10' required></textarea></td>"+
 	                "</tr>"+
 	                "<tr>"+
 	                    "<td rowspan='2'>選項文字:</td>"+
-	                    "<td>A:<input type='text' name='optA' size='40'></td>"+
-	                    "<td>B:<input type='text' name='optB' size='40'></td>"+
+	                    "<td>A:<input type='text' name='optA' size='40' required></td>"+
+	                    "<td>B:<input type='text' name='optB' size='40' required></td>"+
 	                "</tr>"+
 	                "<tr>"+
-	                    "<td>C:<input type='text' name='optC' size='40'></td>"+
-	                    "<td>D:<input type='text' name='optD' size='40'></td>"+
+	                    "<td>C:<input type='text' name='optC' size='40' required></td>"+
+	                    "<td>D:<input type='text' name='optD' size='40' required></td>"+
 	                "</tr>"+
 	                "<tr>"+
 	                    "<td colspan='3'>"+
 	                        "<label>答案:"+
-	                            "<select name='answer' size='1' style='width: 80px;'>"+
+	                            "<select name='answer' size='1' style='width: 150px;'>"+
 	                                "<option value='A'>A</option>"+
 	                                "<option value='B'>B</option>"+
 	                                "<option value='C'>C</option>"+
@@ -38,13 +33,12 @@ function create(input) {
 	                            "</select>"+
 	                        "</label>"+
 	                        "<label class='test'>"+
-	                            "配分:<input type='text' name='score' size='10'>"+
+	                            "配分:<input type='text' class='score' name='score' size='10' required>"+
 	                        "</label>"+
-	
 	                    "</td>"+
 	                "</tr>"+
 	                "<tr>"+
-	                	"<td><button type='button' class='del'>Del</button></td>" +
+	                	"<td style='text-align:center' colspan='6'><button type='button' class='del'>Del</button></td>" +
 	                "</tr>"+
 	            "</tbody>"+
 	        "</table>"+
@@ -62,7 +56,6 @@ function create(input) {
 //        console.log("quTable數量"+tableNum);
 
         $('#quNumber').val(tableNum);
-        
         
 	
 	})
