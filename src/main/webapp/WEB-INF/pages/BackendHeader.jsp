@@ -175,7 +175,7 @@
 					
 					<li><a href="QueryAll"><i class="zmdi zmdi-collection-text"></i>專欄管理</a></li>
 					
-					<li><a href="ActivitiesOP"><i class="zmdi zmdi-calendar"></i>活動管理</a></li>
+					<li><a href="ActivityOperator"><i class="zmdi zmdi-calendar"></i>活動管理</a></li>
 
 					<li><a href="orderList"><i class="zmdi zmdi-widgets"></i>訂單管理</a></li>
 					

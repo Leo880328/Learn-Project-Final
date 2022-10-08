@@ -1,5 +1,6 @@
 package fourth.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,11 +43,20 @@ public class ActivityUserController {
 	
 	@PostMapping("/join{id}")
 	@ResponseBody
-	public ActivityAttendeesBean responseJoinAttendees(@PathVariable("id")int activityId) {
+	public Map<String, String> responseJoinAttendees(@PathVariable("id")int activityId) {
 		int userId = 1;
+		
+		HashMap<String, String> response = new HashMap<String,String >();
 		ActivityBean selectActivityById = activityService.selectActivityById(activityId);
+		if (userId == selectActivityById.getUserId()) {
+			response.put("error", "不可以加入自己的活動");
+			return response;
+		}
 		ActivityAttendeesBean insertActivityAttendees = activityService.insertActivityAttendees(selectActivityById,userId);
-		return insertActivityAttendees ;
+		if (insertActivityAttendees==null) {
+			response.put("error", "人數已滿");
+		}
+		return response ;
 	}
 	
 	@PostMapping("/all")

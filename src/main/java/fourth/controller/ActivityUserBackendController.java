@@ -64,13 +64,13 @@ public class ActivityUserBackendController {
 		return activityService.selectAllActivityByUserId(pageable, userId);
 	}
 	
-	@GetMapping("/Activity-{id}")
+	@GetMapping("/Activity/{id}")
 	@ResponseBody
 	public ActivityBean selectActivity(@PathVariable Integer id) {
 		return activityService.selectActivityById(id);
 	}
 	
-	@GetMapping("/{id}")
+	@PostMapping("/Review/{id}")
 	@ResponseBody
 	public Page<ActivityReviewBean> responseActivityReviewBean(@PathVariable Integer id) {
 		PageRequest pageable = PageRequest.of(0, 10);
@@ -84,6 +84,9 @@ public class ActivityUserBackendController {
 	public ActivityBean insertActivities(@RequestBody() ActivityBean activityBean) {
 		activityBean.setUserId(2);
 		activityBean.setStatusCode(0);
+		if (activityBean.getPlace()==null) {
+			activityBean.setPlace("線上");
+		}
 		ActivityBean insertActivities = activityService.insertActivity(activityBean);
 		//log
 		activityService.insertActivityReviewBean(new ActivityReviewBean(insertActivities.getId(), "使用者新增", 0));
