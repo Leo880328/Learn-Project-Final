@@ -95,7 +95,7 @@ public class ActivityUserBackendController {
 	}
 
 	// 修改
-	@PutMapping("/updateActivityBean")
+	@PostMapping("/updateActivityBean")
 	@ResponseBody
 	public ActivityBean updateActivities(@RequestBody() ActivityBean activityBean) {
 		activityBean.setUserId(2);

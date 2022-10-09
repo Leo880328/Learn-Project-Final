@@ -1,4 +1,4 @@
-
+'use strict'
 let activityStatusCode = [
     "審核中", "審核失敗", "已完成", "上架中"
 ]
@@ -112,7 +112,7 @@ function createAllActivityInformation(activity) {
     let activityInformation =
         `
     <tr style="height: 50px;">
-        <td class="u-border-1 u-border-grey-40 u-table-cell"><a href="Activity/${activity.id}">${activity.title}</a></td>
+        <td class="u-border-1 u-border-grey-40 u-table-cell"><a href="ManageActivities/update/${activity.id}">${activity.title}(點擊編輯)</a></td>
         <td class="u-border-1 u-border-grey-40 u-table-cell">${activity.startTime}~${activity.endTime}</td>
         <td class="u-border-1 u-border-grey-40 u-table-cell"><a class="button" onclick="selectReviewByActivitiesID(${activity.id})">${activityStatusCode[activity.statusCode]}</a></td>
 
@@ -142,8 +142,6 @@ function selectReviewByActivitiesID(id) {
             Swal.fire({
                 width: "600px",
                 html: createTable(reviewPageArray),
-
-
                 stopKeydownPropagation: false
             })
         },

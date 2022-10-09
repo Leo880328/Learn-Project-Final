@@ -149,7 +149,7 @@ public class ActivityService {
 		ActivityBean selectActivityById = this.selectActivityById(activityById);
 		selectActivityById.setStatusCode(ActivityBean.STATUS_PUBLIC);
 		//log
-		ActivityReviewBean activityReviewBean = new ActivityReviewBean(activityById, null, ActivityBean.STATUS_REVIEW_FAIL);
+		ActivityReviewBean activityReviewBean = new ActivityReviewBean(activityById, "審核成功", ActivityBean.STATUS_PUBLIC);
 		activityReviewRepository.save(activityReviewBean);
 		
 		this.updateActivity(selectActivityById);

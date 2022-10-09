@@ -46,10 +46,10 @@ $().ready(
     // 取直並將ActivityBean送出等待回應
     function () {
         listener();
-        let idIndexOf = window.location.href.indexOf('-');
-        let id = window.location.href.substring(idIndexOf + 1);
-        if (id > 1) {
-            selectByID(id)
+        let idIndexOf = window.location.href.split("/");
+        let activitiesId = idIndexOf[idIndexOf.length - 1];
+        if (activitiesId > 1) {
+            selectByID(activitiesId)
         }
     },
 )
@@ -158,10 +158,10 @@ function changeHtml() {
 
 
     if (activityBean.title) {
-        $(jquery.activityTitle).html(activityBean.title);
+        $(jquery.activityTitle).val(activityBean.title);
     }
     if (activityBean.content) {
-        $(jquery.activityContent).html(activityBean.content);
+        $(jquery.activityContent).val(activityBean.content);
     }
     if (activityBean.previewImage) {
         $(jquery.activityPreviewImage).attr('src', activityBean.previewImage)
@@ -172,17 +172,14 @@ function changeHtml() {
 
 
     if (activityBean.startTime) {
-        $(jquery.activityStartTime).attr('value', activityBean.activityStartTime)
+        $(jquery.activityStartTime).attr('value', new Date(activityBean.startTime).toISOString().substring(0, 16));
     }
     if (activityBean.endTime) {
-        $(jquery.activityEndTime).attr('value', activityBean.endTime)
+        $(jquery.activityEndTime).attr('value', new Date(activityBean.endTime).toISOString().substring(0, 16));
     }
-
     if (activityBean.numberLimit) {
-        $(jquery.activityEndTime).attr('value', activityBean.numberLimit)
+        $(jquery.activityNumberLimit).attr('value', activityBean.numberLimit)
     }
-
-
     if (activityBean.place) {
         $(jquery.activityPlace).attr('value', activityBean.place)
     }
@@ -206,7 +203,7 @@ function mouseEventBorder() {
 //送出請求
 function selectByID(id) {
     $.ajax({
-        url: "http://localhost:8080/HappyLearning/ActivitySelect-" + id,
+        url: "ActivityOperator/Activity/" + id,
         method: "GET",
         dataType: "JSON",
         success: function (activity) {
@@ -253,13 +250,13 @@ function saveActivityBean() {
 
     } else {
         console.log(activityBean);
-        let reqMethod = "POST";
+        let reqMethod = "ManageActivities/insertActivityBean";
         if (activityBean.id > 0) {
-            reqMethod = "PUT"
+            reqMethod = "ManageActivities/updateActivityBean";
         }
 
         $.ajax({
-            url: "ManageActivities/insertActivityBean",
+            url: reqMethod,
             method: "POST",
             dataType: "JSON",
             contentType: 'application/json; charset=utf-8',

@@ -3,7 +3,7 @@ let jquery = {
     readMoreReviewingButton: ".readMoreReviewingButton",
 }
 let reviewingActivityPage = {
-    pageSize: 4,
+    pageSize: 100,
     pageNo: 1,
     totalPages: 1
 }
@@ -13,12 +13,12 @@ $().ready(
         requestReviewingActivities();
         listener();
     }
+
 )
 function listener() {
     $(jquery.readMoreReviewingButton).click(() => {
         readMoreReviewingActivities();
     });
-
 }
 function requestReviewingActivities() {
     $.ajax({
@@ -28,8 +28,8 @@ function requestReviewingActivities() {
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(reviewingActivityPage),
         success: function (reviewingArray) {
+            $('.table').DataTable().clear()
             reviewingArray.content.forEach(function (attendees, index, array) {
-                console.log(attendees)
                 let table = $('.table').DataTable();
                 table.row.add(createReviewingActivityInformation(attendees)).draw();
                 // $(jquery.reviewingActivity).append(createReviewingActivityInformation(activity))
@@ -51,10 +51,19 @@ function createReviewingActivityInformation(activity) {
     let place = activity.place;
     [1, 2, 3, 4,]
 
-    let activityBean = [`<a href="">${title}</a>`, activity.startTime + "~" + activity.endTime, 15, activity.place]
+    let activityBean = [`<a  href="javascript:void(0);"  onclick="windowOpen(${activity.id})">${title}</a>`, activity.startTime + "~" + activity.endTime, 15, activity.place]
     return activityBean;
 }
 function readMoreReviewingActivities() {
     reviewingActivityPage.pageNo++;
     requestReviewingActivities();
+}
+function windowOpen(activityId) {
+    let new_window = window.open(`ActivityOperator/activity/${activityId}`, "活動預覽", config = 'height=500,width=1000,toolbar=no,status=no');
+    let windowClosed = setInterval(function () {
+        if (new_window.closed) {
+            clearInterval(windowClosed);
+            requestReviewingActivities();
+        }
+    }, 1000);
 }

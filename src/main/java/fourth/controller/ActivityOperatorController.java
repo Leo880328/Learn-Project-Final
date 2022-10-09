@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +24,7 @@ public class ActivityOperatorController {
 
 	private final String MapKey_pageSize = "pageSize";
 	private final String MapKey_pageNo = "pageNo";
-	private final String MapKey_keyWord = "keyWord";
-	private final String MAPKEY_ACTIVITY_ID = "activityID";
+	private final String MAPKEY_ACTIVITY_ID = "activityId";
 	private final String MAPKEY_ACTIVITY_REVIEW_MESSAGE = "ActivityReviewBeanMessage";
 
 	@Autowired
@@ -33,6 +33,10 @@ public class ActivityOperatorController {
 	@GetMapping()
 	public String activityOperator() {
 		return "ActivityOperator";
+	}
+	@GetMapping("/activity/{id}")
+	public String updateActivity() {
+		return "ActivityBackgroundPreview";
 	}
 	
 
@@ -63,4 +67,11 @@ public class ActivityOperatorController {
 		activityService.activityRviewTrue(activityById);
 		return true;
 	}
+	
+	@GetMapping("/Activity/{id}")
+	@ResponseBody
+	public ActivityBean selectActivity(@PathVariable Integer id) {
+		return activityService.selectActivityById(id);
+	}
+	
 }
