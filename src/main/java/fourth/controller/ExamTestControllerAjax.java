@@ -70,8 +70,12 @@ public class ExamTestControllerAjax {
 		System.err.println("保存Idx"+reserveQuIdx);
 		
 		
+		String pageStatus = (String)request.getSession().getAttribute("pageStatus");
+		String nextPage="ExamFront";
 		
-		return "Exam";
+		if (pageStatus.equals("3") ) {nextPage="Exam";};
+		
+		return nextPage;
 	}
 	
 }

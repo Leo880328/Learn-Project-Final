@@ -83,7 +83,6 @@ public class ExamBean implements Serializable
 		super();
 	}
 	
-	
 
 
 	public ExamBean(ExamSubBean subject, ExamEduBean education, String examName,Date examdate, String examPic, 
@@ -120,20 +119,6 @@ public class ExamBean implements Serializable
 		this.avgScore = avgScore;
 		this.examStatus = examStatus;
 	}
-
-
-
-
-	@Override
-	public String toString() {
-		return "ExamBean [examID=" + examID + ", subject=" + subject + ", education=" + education + ", examName="
-				+ examName + ", examdate=" + examdate + ", stringDate=" + stringDate + ", examPic=" + examPic
-				+ ", member=" + member + ", difficulty=" + difficulty + ", examStatus=" + examStatus + ", testNumber="
-				+ testNumber + ", avgScore=" + avgScore + ", examTests=" + examTests + ", examQueses=" + examQueses
-				+ "]";
-	}
-
-
 
 
 	public Integer getExamID() {

@@ -37,11 +37,9 @@ function examQueryAll() {
 function createExam(exam, index) {
 	var status = `${exam.examStatus}`;
 	if( status == "0"){
-		status=`<button class='review btn btn-primary' class='btn btn-primary'>未審查</button>`;
-		
+		updateBtn=`<input type='submit' class='btn btn-danger' value='審查/更新'>`;
 	} else {
-		status=`<button class='review btn btn-primary' class='btn btn-primary'>審查</button>`;
-		
+		updateBtn=`<input type='submit' class='btn btn-success' value='更新'>`;
 	};
 	
 	
@@ -56,7 +54,6 @@ function createExam(exam, index) {
         `${exam.difficulty}`,
         `${exam.testNumber}`,
         `${exam.avgScore}`,
-        status,
         // "<td style='display:none''>" + exam.examID + "</td>" ,
 
 
@@ -65,7 +62,7 @@ function createExam(exam, index) {
 		
         `<form action='examUpdate' method='post'>
         <input type='hidden' name='examId' value='${exam.examID}'>
-        <input type='submit' class='btn btn-primary' value='更新'>
+        ${updateBtn}
         </form></td>`,
 
         `<td><form action='ExamEstaTest' method='post'>
@@ -82,18 +79,18 @@ $('.tb').on('click', '.del', function () {
     var params = { "examId": `${id}` }
     console.log(params)
     console.log($(this).closest("tr"))
-    // $.ajax({
-    //     type: 'post',
-    //     url: 'ExamDe',
-    //     data: params,
-    //     dataType: 'json',
-    //     success: function (dataDe) {
-    //         let table = $('.tb').DataTable();
-    //         table.row().delete();
-    //     }, error: function (e) {
-    //         alert(e);
-    //     }
-    // })
+     $.ajax({
+         type: 'post',
+         url: 'ExamDe',
+         data: params,
+         dataType: 'json',
+         success: function (dataDe) {
+             let table = $('.tb').DataTable();
+             table.row().delete();
+         }, error: function (e) {
+             alert(e);
+         }
+     })
     let table = $('.tb').DataTable();
     console.log(table)
     $(this).closest("tr").remove();

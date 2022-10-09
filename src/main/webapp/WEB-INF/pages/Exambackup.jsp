@@ -182,7 +182,7 @@
     </div>
     
 <%--     <script type="text/javascript" src="${pageContext.request.contextPath}/ExamFrontCheck.js"></script> --%>
-    <script type="text/javascript" src="kai/newcss.js"></script>
+    <script type="text/javascript" src="kai/ExamBackPageLoad.js"></script>
     
 </body>
 

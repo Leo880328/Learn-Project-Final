@@ -140,8 +140,11 @@ public class ExamControllerAjax {
 						   content,optA,optB,optC,optD,answer,score);
 		
 		
+		String pageStatus = (String)request.getSession().getAttribute("pageStatus");
+		String nextPage="ExamFront";
 		
-		String nextPage="Exam";
+		if (pageStatus.equals("3") ) {nextPage="Exam";};
+		
 		
 		return nextPage;
 	}
@@ -184,7 +187,7 @@ public class ExamControllerAjax {
 			,@RequestParam(defaultValue = "") String subject,@RequestParam(defaultValue = "") String education
 			,@RequestParam(defaultValue = "") String examName,@RequestParam(defaultValue = "") String examDate
 			,@RequestParam(required = false) MultipartFile myfile,@RequestParam(defaultValue = "") String difficulty
-			
+			,@RequestParam(defaultValue = "") String review
 			
 			//考題Insert
 			,@RequestParam(defaultValue = "") String[] examQuId
@@ -200,6 +203,7 @@ public class ExamControllerAjax {
 		
 		System.err.println(fileLocalPath);
 		System.err.println(myfile);
+		System.err.println(review);
 		
 		if (!myfile.isEmpty()) {
 			String saveFileSubPath = "static/images";
@@ -213,7 +217,7 @@ public class ExamControllerAjax {
 		}
 
 		
-		examService.update(examId,subject, education, examName, examDate,fileLocalPath,Integer.valueOf(userId),difficulty,
+		examService.update(examId,subject, education, examName, examDate,fileLocalPath,Integer.valueOf(userId),difficulty,review,
 							examQuId,content,optA,optB,optC,optD,answer,score);
 		
 		return "Exam";

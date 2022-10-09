@@ -68,8 +68,6 @@
 </head>
 
 
-
-
 <body>
 
 	<jsp:include page="Header.jsp"/>
@@ -112,6 +110,13 @@
             <tr>
                 <td><label>日期:</label></td>
                 <td><input type="date" name="examDate" id="examDate" value="${upBean.stringDate}"><span class="alert" id="spExamDate" ></span></td>
+            </tr>
+            <tr>
+            	<td><label>審查狀態:</label></td>
+            	<td><select id="choReview" name="review" size="1">
+                        <option value="0">未通過</option>
+                        <option value="1">通過</option>
+                    </select></td>
             </tr>
             <tr>
 <!--                 <td><label>圖片:</label></td> -->

@@ -35,8 +35,10 @@
 </head>
 <body>
 
-	<jsp:include page="Header.jsp"/>
 
+		<jsp:include page="Header.jsp" />
+
+	
 
     <form action="examInsert" method="post" enctype="multipart/form-data" onsubmit="return check()">
     

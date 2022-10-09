@@ -81,9 +81,8 @@
                         <th width="80">難度</th>
                         <th width="80">考試人數</th>
                         <th width="80">平均分數</th>
-                        <th width="100">審核狀態</th>
                         <th width="100">刪除</th>
-                        <th width="100">更新</th>
+                        <th width="100">狀態</th>
                         <th width="100">考試</th>
                     </tr>
                 </thead>
@@ -97,7 +96,7 @@
     </div>
     
 <%--     <script type="text/javascript" src="${pageContext.request.contextPath}/ExamFrontCheck.js"></script> --%>
-    <script type="text/javascript" src="kai/newcss.js"></script>
+    <script type="text/javascript" src="kai/ExamBackPageLoad.js"></script>
     
 </body>
 

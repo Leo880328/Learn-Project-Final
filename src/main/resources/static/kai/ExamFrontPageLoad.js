@@ -7,8 +7,41 @@ $().ready(
     }
 )
 
-
-
+function examQuery(){
+	
+		var sub = $('#quSub').val();
+		var edu = $('#quEdu').val();
+		
+		console.log(sub);
+		console.log(edu);
+		
+		var params = { "subject": "" + sub, "education": "" + edu}
+		
+		$.ajax({
+	        type: 'post',
+	        url: 'examFrontQuery',
+	        data: params,
+	        dataType: 'json',
+	        success: function (data) {
+	
+	            console.log(data);
+				$('#table').empty();
+	            data.forEach(function (exam, index, array) {
+					
+					if ( exam.examStatus == 0){
+						return;
+					}
+					
+	                $('#table').append(createExam(exam, index));
+	
+	            });
+	
+	        }, error: function (e) {
+	            console.log(e);
+	        }
+	
+	    });
+}
 
 function examQueryAll() {
 
@@ -19,9 +52,15 @@ function examQueryAll() {
         success: function (data) {
 
             console.log(data);
-
+            
+			$('#table').empty();
+			
             data.forEach(function (exam, index, array) {
-
+				
+				if ( exam.examStatus == 0){
+					return;
+				}
+				
                 $('#table').append(createExam(exam, index));
 
             });
@@ -36,6 +75,8 @@ function examQueryAll() {
 
 
 function createExam(exam, index) {
+	
+	
     let examContent = [
         `<li
         class="product-item style-list col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12">
@@ -96,7 +137,8 @@ function createExam(exam, index) {
                                         data-min="0" value="1" title="Qty" class="input-qty qty"
                                         size="4"><a href="#"
                                         class="btn-number qtyplus quantity-plus">+</a></div>
-                            </div><button class="single_add_to_cart_button button">Test</button>
+                            </div>
+                            <button class="single_add_to_cart_button button">Test</button>
                             <input type='hidden' name='examId' value='${exam.examID}'>
                         </div>
                     </form>

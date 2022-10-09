@@ -16,10 +16,8 @@
 		margin-left:20px;
 		background-color:white;
 		width:30%;
-		
 	
 	}
-	
 	
 	
 	</style>
@@ -75,21 +73,29 @@
                 <div class="content-area  shop-grid-content full-width col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="site-main">
                         <div class="shop-top-control">
-                            <div class="select-item select-form" ><span class="title">Sort</span>
-                            	<select style="background-color:white" id="quSub" title="sort">
+                            <div class="select-item select-form" style="width:327px"><span class="title">Sort</span>
+                            	<select style="background-color:white;height:27px;width:144px" id="quSub" title="sort">
                                     <option value="數學">數學</option>
                                     <option value="英文">英文</option>
                                     <option value="國文">國文</option>
                                 </select>
                             </div>
-                            <div class="filter-choice select-form"><span class="title">Sort by</span>
-                            	<select style="background-color:white" id="quEdu" title="by" >
+                            <div class="filter-choice select-form" style="width:527px"><span class="title">Sort by</span>
+                            	<select style="background-color:white;height:27px;width:144px" id="quEdu" title="by" >
 					                <option value="國中">國中</option>
 					                <option value="高中">高中</option>
 					                <option value="成人">成人</option>
                                 </select>
                             </div>
-							<button id="query">查詢</button>
+							
+							<form action="examUpload" method="post">
+								<div>
+									<button type="button" id="query"  onclick="examQuery()" style="font-size:15px">查詢</button>
+<!-- 									<button id="submit" style="font-size:15px;background-color: #111;">上傳</button> -->
+									<button id="submit" class="fa-solid fa-plus" style="font-size:15px;background-color: #111;height: 42px;">上傳</button>
+								</div>
+							</form>
+							
                         </div>
                         <h3 class="custom_blog_title">考卷 </h3>
                         
