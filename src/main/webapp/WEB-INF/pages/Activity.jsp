@@ -55,6 +55,7 @@
 								<p class="activityInformation">
 									活動時間:0000/00/00 10:00 ~ 0000/00/00 00:00<br> 地點:台北市萬華區
 								</p>
+								
 							</div>
 						</div>
 					</div>

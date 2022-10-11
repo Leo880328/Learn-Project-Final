@@ -56,12 +56,24 @@ function updateView(activity) {
     $(jquery.activityTitle).html(activity.title)
     $(jquery.activityContent).html(activity.content)
     let place = "線上"
-    if (activity.place) {
+    if (activity.address) {
         place = `${activity.place} ${activity.address}`;
+        $(jquery.activityInformation).html(`
+        可報名人數: ${activity.numberLimit}<br>
+        活動時間: ${activity.startTime} ~ ${activity.endTime}<br>
+        活動地點: ${place}<br>
+        (請已詳細地址為準)
+        <iframe width="870" height="250" frameborder="0" class="map"style="border-radius:10px;"
+		    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAebEgcRugex4c_DH0B8HVeB0qwwpuA6DI&q=${place}"
+	    allowfullscreen> </iframe>
+        `)
+    } else {
+        $(jquery.activityInformation).html(`
+            可報名人數: ${activity.numberLimit}<br>
+            活動時間: ${activity.startTime} ~ ${activity.endTime}<br>
+            活動地點: 線上<br>
+        `)
     }
-    $(jquery.activityInformation).html(`
-    可報名人數: ${activity.numberLimit}<br>
-    活動時間: ${activity.startTime} ~ ${activity.endTime}<br>
-    活動地點: ${place}
-    `)
+
+
 }
