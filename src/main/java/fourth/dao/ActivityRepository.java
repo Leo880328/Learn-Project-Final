@@ -15,9 +15,9 @@ public interface ActivityRepository extends JpaRepository<ActivityBean, Integer>
 //	@Query(value = "select * from acticities where start_time <= :today and :today <= end_time and status_code ="+ActivityBean.STATUS_PUBLIC+";"  ,nativeQuery = true)
 //	public Page<ActivityBean> findAllByBetweenActivityTime(Pageable pageable,@Param("today") Date date);
 
-	@Query(value = "select * from acticities where start_time >:today  status_code =" + ActivityBean.STATUS_PUBLIC
+	@Query(value = "select * from acticities where start_time >  GETDATE() and  status_code =" + ActivityBean.STATUS_PUBLIC
 			+ ";", nativeQuery = true)
-	public Page<ActivityBean> findAllByBetweenActivityTime(Pageable pageable, @Param("today") Date date);
+	public Page<ActivityBean> findAllByAfterToday(Pageable pageable);
 
 	public Page<ActivityBean> findAllByStatusCode(Pageable pageable, int activityStatus);
 

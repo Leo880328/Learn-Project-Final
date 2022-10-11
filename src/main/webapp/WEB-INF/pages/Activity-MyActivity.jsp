@@ -45,7 +45,7 @@
                     <div class="tab-head">
                         <ul class="tab-link">
                             <li class="active">
-                                <a data-toggle="tab" aria-expanded="true" href="#bestseller">報名成功</a>
+                                <a data-toggle="tab" aria-expanded="true" href="#bestseller">即將到來</a>
                             </li>
                             <li class="">
                                 <a data-toggle="tab" aria-expanded="true" href="#top-rated">報名紀錄</a>
@@ -101,7 +101,7 @@
                                                 <h5>活動時間</h5>
                                             </th>
                                             <th class="u-border-1 u-border-grey-50 u-table-cell u-table-cell-1">
-                                                <h5>活動狀態</h5>
+                                                <h5>活動地點</h5>
                                             </th>
                                             <th class="u-border-1 u-border-grey-50 u-table-cell u-table-cell-1">
                                                 <h5>報名時間</h5>

@@ -78,7 +78,7 @@ public class ActivityController {
 
 		PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
 
-		Page<ActivityBean> selectAllActivity = activityService.selectAllActivity(pageable);
+		Page<ActivityBean> selectAllActivity = activityService.selectActivityByAfterToday(pageable);
 		return selectAllActivity;
 	}
 	

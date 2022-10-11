@@ -72,7 +72,7 @@ function createEffectiveAttendeesInformation(attendees) {
   let activityInformation =
     `
     <tr style="height: 50px;">
-    <td class="u-border-1 u-border-grey-40 u-table-cell"><a href="Activity/${activityId}">${title}</a></td>
+    <td class="u-border-1 u-border-grey-40 u-table-cell"><a href="Activity/${activityId}">${title}(查看活動頁面)</a></td>
     <td class="u-border-1 u-border-grey-40 u-table-cell">${time}</td>
     <td class="u-border-1 u-border-grey-40 u-table-cell">${place}</td>
     </tr>
@@ -111,12 +111,16 @@ function createAllAttendeesInformation(attendees) {
   let title = attendees.activity.title;
   let time = attendees.activity.startTime + "~" + attendees.activity.endTime;
   let activityId = attendees.activity.id;
+  let place = attendees.activity.place;
+  if (!place) {
+    place = '線上'
+  }
   let activityInformation =
     `
     <tr class="banner-content" style="height: 50px;">
       <td class="u-border-1 u-border-grey-40 u-table-cell"><a href="Activity/${activityId}">${title}</a></td>
       <td class="u-border-1 u-border-grey-40 u-table-cell">${time}</td>
-      <td class="u-border-1 u-border-grey-40 u-table-cell">${activityStatusCode[attendees.statusCode]}</td>
+      <td class="u-border-1 u-border-grey-40 u-table-cell">${place}</td>
       <td class="u-border-1 u-border-grey-40 u-table-cell">${attendees.requestTime}</td>
     </tr>
   `

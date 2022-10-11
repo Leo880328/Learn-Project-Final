@@ -43,9 +43,9 @@ public class ActivityService {
 	}
 
 	// 顯示在期限內
-	public Page<ActivityBean> selectActivityByTodayInTerm(Pageable pageable) {
+	public Page<ActivityBean> selectActivityByAfterToday(Pageable pageable) {
 		Page<ActivityBean> findAllByStartTimeAfterAndEndTimeBefore = activityRepository
-				.findAllByBetweenActivityTime(pageable, new Date());
+				.findAllByAfterToday(pageable);
 		return findAllByStartTimeAfterAndEndTimeBefore;
 	}
 

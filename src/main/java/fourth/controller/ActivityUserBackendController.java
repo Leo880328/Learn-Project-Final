@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import fourth.bean.ActivityAttendeesBean;
 import fourth.bean.ActivityBean;
 import fourth.bean.ActivityReviewBean;
 import fourth.service.ActivityService;
@@ -77,8 +78,13 @@ public class ActivityUserBackendController {
 		PageRequest pageable = PageRequest.of(0, 10);
 		return activityService.selectReviewByActivityId(pageable,id);
 	}
+	@PostMapping("/Attendees/Activity{id}")
+	@ResponseBody
+	public Page<ActivityAttendeesBean> responseAttendeesByActivityId(@PathVariable Integer id){
+		PageRequest pageable = PageRequest.of(0, 10);
+		return activityService.selectAttendeesByActivityId(pageable,id);
+	}
 	
-
 	// 新增
 	@PostMapping("/insertActivityBean")
 	@ResponseBody

@@ -19,9 +19,9 @@ public interface ActivityAttendeesRepository extends JpaRepository<ActivityAtten
 	@Query(value = "select COUNT(*) as effective_number from activity_attendees where activity_id = :activity_id",nativeQuery = true)
 	public int findEffectiveNumberByActivityID(@Param("activity_id") Integer acticityId);
 	
-	@Query(value = "select * from activity_attendees where user_id = :user_id",nativeQuery = true)
+	@Query(value = "select * from activity_attendees where user_id = :user_id order by request_time desc",nativeQuery = true)
 	public Page<ActivityAttendeesBean> findAllByUserID(Pageable pageable,@Param("user_id") Integer userId);
 	
-	@Query(value = "select * from activity_attendees where user_id = :user_id and status_code = "+ActivityAttendeesBean.statusCode_True,nativeQuery = true)
+	@Query(value = "select * from activity_attendees where user_id = :user_id and activity_id in (select id from acticities where [start_time] > GETDATE() ) order by request_time desc",nativeQuery = true)
 	public Page<ActivityAttendeesBean> findRegisterEffectiveByUserID(Pageable pageable,@Param("user_id") Integer userId);
 }

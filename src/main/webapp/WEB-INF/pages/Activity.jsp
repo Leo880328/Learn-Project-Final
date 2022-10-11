@@ -69,18 +69,6 @@
 		</div>
 
 	</div>
-	<div align="center">
-		<script async
-			src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2661571895884229"
-			crossorigin="anonymous"></script>
-		<!-- test2 -->
-		<ins class="adsbygoogle"
-			style="display: inline-block; width: 120px; height: 600px"
-			data-ad-client="ca-pub-2661571895884229" data-ad-slot="5252351432"></ins>
-		<script>
-			(adsbygoogle = window.adsbygoogle || []).push({});
-		</script>
-	</div>
 	<script src="ActivityResources/js/Activity.js"></script>
 </body>
 
