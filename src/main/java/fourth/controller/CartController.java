@@ -1,8 +1,11 @@
 package fourth.controller;
 
 import java.io.IOException;
+import java.net.http.HttpRequest;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,11 +24,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import fourth.bean.CartItem;
 import fourth.bean.CourseBean;
 import fourth.bean.MemberBean;
 import fourth.service.CartService;
 import fourth.service.CourseService;
+import fourth.util.SystemControllerLog;
 import fourth.util.WebUtils;
 
 @Controller
@@ -34,10 +39,6 @@ public class CartController {
 	
 	@Autowired
 	private CartService cartService;
-	
-	@Autowired
-	private CourseService cService;
-	
 	
 	@ResponseBody
 	@GetMapping(path = "/cartAll")
@@ -52,25 +53,23 @@ public class CartController {
 		return "Cart";
 	}
 
+	@SystemControllerLog(description = "添加商品到購物車")
 	@ResponseBody
 	@PostMapping(path = "/cartadd/{id}")
 	public String addCart(Model m,@PathVariable("id") String courseID) throws SQLException {
 		MemberBean user = (MemberBean)m.getAttribute("user");
-		cartService.cartAdd(courseID,user.getuserId());
-//<<<<<<< HEAD
-//		CourseBean cbean = cService.findByCourseId(WebUtils.paseInt(courseID));
-//		m.addAttribute("cbean", cbean); 
-//		return "Details";
-//=======
-
+		CartItem cartItem = cartService.findsameCourse(courseID,user.getuserId());
+		if(cartItem != null) {
+			return "exist";
+		}else {
+			cartService.cartAdd(courseID,user.getuserId());
+		}
 		return "add Ok";
 
-//		CourseBean cbean = cService.findByCourseId(WebUtils.paseInt(courseID));
-//		m.addAttribute("cbean", cbean); 
-//		return "Details";
 
 	}
 	
+	@SystemControllerLog(description = "刪除購物車品項")
 	@ResponseBody
 	@DeleteMapping(path = "/cart/{cartID}")
 	public String deleteCart(@PathVariable("cartID") String cartID) {
@@ -78,7 +77,8 @@ public class CartController {
 		return "deleteOK";
 	}
 
-	
+
+	@SystemControllerLog(description = "清空購物車")
 	@ResponseBody
 	@PostMapping(path = "/cart/clearCart")
 	public String clearCart(Model m) {

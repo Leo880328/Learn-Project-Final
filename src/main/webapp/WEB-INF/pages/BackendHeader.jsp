@@ -133,9 +133,11 @@
 					</div>
 
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="">${sessionScope.user.name }</a><a
-							class="dropdown-item" href="user.controller">查看個人檔案</a><a
-							class="dropdown-item" href="logout.controller">登出</a>
+
+						<a class="dropdown-item" href="">${sessionScope.user.name }</a><a class="dropdown-item"
+							href="user.controller">查看個人檔案</a><a class="dropdown-item"
+							href="logout">登出</a>
+
 					</div>
 
 
@@ -181,6 +183,8 @@
 
 					<li><a href="chart"><i class="zmdi zmdi-trending-up"></i>營收圖表</a></li>
 
+                            
+					<li><a href="backDairy"><i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i>後台日誌</a></li>
 				</ul>
 			</div>
 

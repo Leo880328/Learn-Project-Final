@@ -40,7 +40,7 @@
 <table class=tb align='center'>
 
 <tr>
-   <input type="hidden" name="course_id" value="${bean.course_id}">
+   <input type="hidden" name="courseId" value="${bean.courseId}">
 </tr>       
 
     <td><input type="hidden" name="user_id" value="${bean.user_id}"></td>
@@ -124,7 +124,7 @@
 <table class=tb align='center'>
 
 
-   <input type="hidden" name="course_id" value="${bean.course_id}">
+   <input type="hidden" name="courseId" value="${bean.courseId}">
       
 <tr>
     <td>使用者名稱:</td>

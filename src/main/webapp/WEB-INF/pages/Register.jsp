@@ -113,6 +113,7 @@ article {
 				password : password,
 				email : email,
 			}
+			console.log(member)
 			fetch("newRegister",{
 				method:'POST',
 				headers:{

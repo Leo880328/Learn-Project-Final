@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -96,45 +99,87 @@ public class MemberController {
 	public String logoutController(Model m, SessionStatus status) {
 		m.addAttribute("user", null);
 		status.setComplete();
+		System.out.println("登出");
 		return "Login";
 	}
 
 	// 登入檢查 //**************************
-	@RequestMapping(path = "/checklogin.controller", method = RequestMethod.POST)
-	public String processAction(@RequestParam("account") String account, @RequestParam("password") String password,
-			Model m, SessionStatus status) {
-		Map<String, String> errors = new HashMap<String, String>();
+//	@RequestMapping(path = "/checklogin.controller", method = RequestMethod.POST)
+//	public String processAction(@RequestParam("account") String account, @RequestParam("password") String password,
+//			Model m, SessionStatus status) {
+//		Map<String, String> errors = new HashMap<String, String>();
+//
+//		m.addAttribute("errors", errors);
+//		if (account == null || account.length() == 0) {
+//		}
+//		if (password == null || password.length() == 0) {
+//		}
+//		if (errors != null && !errors.isEmpty()) {
+//			return "Login";
+//		}
+//		MemberBean user = memberService.checkLogin(account);
+//		System.out.println("執行user");
+//		System.out.println(user);
+//		m.addAttribute("user", user);
+//		if (user != null && user.getPassword().equals(password)) {
+//			if (user.getStatus() == 3) {
+//
+//				return "redirect:/backendIndex";
+//			} else if (user.getStatus() == 5) {
+//				errors.put("msg", "<font color=red size=6 >帳號有問題!!</font>");
+//				return "Login";
+//			} else {
+//				return "redirect:/Index";
+//			}
+//
+//		} else {
+//			errors.put("msg", "<font color=red size=6 >帳號或密碼有誤!!</font>");
+//			return "Login";
+//		}
+//
+//	}
 
-		m.addAttribute("errors", errors);
-		if (account == null || account.length() == 0) {
-		}
-		if (password == null || password.length() == 0) {
-		}
-		if (errors != null && !errors.isEmpty()) {
-			return "Login";
-		}
-		MemberBean user = memberService.checkLogin(account);
-		System.out.println("執行user");
-		System.out.println(user);
-		m.addAttribute("user", user);
-		if (user != null && user.getPassword().equals(password)) {
-			if (user.getStatus() == 3) {
+//// 登入檢查 //**************************
+@RequestMapping(path = "/checklogin.controller", method = RequestMethod.GET)
+public String processAction(@RequestParam(value = "username",required = false) String account, @RequestParam(value = "password",required = false) String password,
+		Model m, SessionStatus status,Authentication authentication) {
+	
+	
+	MemberBean user = memberService.checkLogin(authentication.getName());
+	System.out.println("執行user");
+	System.out.println(user);
+	m.addAttribute("user", user);
+//<<<<<<< HEAD
+//	if (user != null && user.getPassword().equals(password)) {
+//		if (user.getStatus() == 3) {
+//
+//			return "redirect:/backendIndex";
+//		} else if (user.getStatus() == 5) {
+//			errors.put("msg", "<font color=red size=6 >帳號有問題!!</font>");
+//			return "Login";
+//		} else {
+//			return "redirect:/Index";
+//		}
+//	}
 
-				return "redirect:/backendIndex";
-			} else if (user.getStatus() == 5) {
-				errors.put("msg", "<font color=red size=6 >帳號有問題!!</font>");
-				return "Login";
-			} else {
-				return "redirect:/Index";
-			}
+	if (user.getStatus() == 3) {
+		return "redirect:/backendIndex";
 
-		} else {
-			errors.put("msg", "<font color=red size=6 >帳號或密碼有誤!!</font>");
-			return "Login";
-		}
-
+	} else {
+		return "redirect:/Index";
 	}
 
+}
+
+	// 帳號密碼錯誤頁面
+	@RequestMapping(path = "/logfail", method = RequestMethod.GET)
+	public String logFail(Model m) {
+		Map<String, String> errors = new HashMap<String, String>();
+		errors.put("msg", "<font color=red size=6 >帳號或密碼有誤!!</font>");
+		m.addAttribute("errors", errors);
+		return "Login";
+	}
+	
 	// 切入註冊畫面
 	@RequestMapping(path = "/register.controller", method = RequestMethod.GET)
 	public String registerController() {

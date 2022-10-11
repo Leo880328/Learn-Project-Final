@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>統計圖表頁面</title>
 <jsp:include page="BackendHeader.jsp" />
 <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"
 	rel="stylesheet">
@@ -67,7 +67,11 @@
 				var total =0;
 				var count = 0;
 				$.each(data, function(i, item) {
-					total += item.totoalprice;
+					if(item.voucher != null){
+						total += Math.round(item.totoalprice * item.voucher.discount);
+					}else{
+						total +=item.totoalprice ;
+					}
 					console.log(item);
 				});
 					console.log(total);
@@ -121,7 +125,11 @@
 					lab.push(i);
 					var total = 0;
 					$.each(item, function(i, o) {
-						total += o.totoalprice;
+						if(o.voucher != null){
+							total += Math.round(o.totoalprice * o.voucher.discount);
+						}else{
+							total += o.totoalprice ;
+						}
 					});
 					val.push(total+'');
 					rangeMoney += total;

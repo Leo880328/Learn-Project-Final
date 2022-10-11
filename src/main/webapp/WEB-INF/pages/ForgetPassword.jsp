@@ -111,7 +111,7 @@ article {
 				console.log(res)
 				if(res=='1111'){
 					
-					$('#msgEmail').text('信箱已註冊');
+					$('#msgEmail').text('查無此信箱');
 					return false;
 				}
 				if(res=='2222')

@@ -47,15 +47,23 @@ article {
 									</button>
 
 								</div>
-								<form method="post" action="checklogin.controller">
-<!-- 																		<div class="social-account"> -->
-<!-- 																			<h6 class="title-social">其他登入方式</h6> -->
-<!-- 																			<div class="g-signin2" data-onsuccess="onSignIn"></div> -->
-<!-- 																		</div> -->
+<!-- <<<<<<< HEAD -->
+<!-- 								<form method="post" action="checklogin.controller"> -->
+<!-- <!-- 																		<div class="social-account"> --> 
+<!-- <!-- 																			<h6 class="title-social">其他登入方式</h6> --> 
+<!-- <!-- 																			<div class="g-signin2" data-onsuccess="onSignIn"></div> --> 
+<!-- <!-- 																		</div> --> 
+<!-- ======= -->
+								<form method="post" action="loginsuccess">
+									<!-- 									<div class="social-account"> -->
+									<!-- 										<h6 class="title-social">其他登入方式</h6> -->
+									<!-- 										<div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+									<!-- 									</div> -->
+
 									<br> <font face="微軟正黑體">使用快樂學習帳號密碼登入</font>
 									<div class=group>
 										<label for="account"><i class="fa-solid fa-user"></i>
-										</label> <input type="text" name="account" id="account"
+										</label> <input type="text" name="username" id="account"
 											placeholder="請輸入帳號" autocomplete="off" value=account>
 									</div>
 									<div class=group>
@@ -80,7 +88,10 @@ article {
 											id="signin" value="登入">
 										<button type="button" class="btn btn-primary " id="winnie">老師登入</button>
 										<button type="button" class="btn btn-primary " id="correct">新會員登入</button>
-										<button type="button" class="btn btn-primary " id="tony">tony</button>
+
+										<button type="button" class="btn btn-primary " id="tony">學生登入</button>
+
+
 									</div>
 									<br>
 									<p>${errors.msg}</p>

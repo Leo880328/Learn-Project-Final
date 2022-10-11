@@ -56,7 +56,11 @@
 <script src="backend/vendors/jquery/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		order(${sessionScope.pageStatus});
+		st="";
+		selectStatusFun = "";
+		currentpage = 1;
+		pageStatus = ${sessionScope.pageStatus};
+		order(pageStatus,currentpage);
 	});
 </script>
 <link rel="shortcut icon" type="image/x-icon"
@@ -67,7 +71,9 @@
 
 </head>
 <html>
-<body>
+
+<body >
+
 	<c:if test="${sessionScope.user == null}">
 		<% request.getRequestDispatcher("/Login.jsp").forward(request, response); %>
 	</c:if>
@@ -82,7 +88,10 @@
 		<c:otherwise>
 			<jsp:include page="Header.jsp" />
 
-			<jsp:include page="orderUser.jsp" />
+<%-- 			<jsp:include page="orderUser.jsp" /> --%>
+
+			<jsp:include page="newOrderUser.jsp" />
+
 
 		</c:otherwise>
 	</c:choose>
