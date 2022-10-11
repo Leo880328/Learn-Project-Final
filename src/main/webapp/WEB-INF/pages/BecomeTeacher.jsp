@@ -49,6 +49,8 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 											class="form-control-wrap your-name"><input
 											placeholder="*必填" title="姓名" type="text" name="name"
 											id="name" size="40" class="form-control form-control-name"></span>
+											<span
+										id="msgName" style="color: red"> </span>
 									</p>
 									<p>
 										<span class="form-label">電話 *</span><span

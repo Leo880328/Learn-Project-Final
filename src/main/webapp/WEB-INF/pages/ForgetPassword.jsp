@@ -52,10 +52,10 @@ article {
 									<p>
 										<input type="text" name="email" id="email"
 											placeholder="*請輸入email" autocomplete="off">
-											<span
-										id="msgEmail" style="color: red"> </span>
 										<button type="button" id="forgot" class="forgot-pw">忘記密碼?</button>
 									</p>
+											<span
+										id="msgEmail" style="color: red"> </span>
 
 								</div>
 								<div class="">
@@ -65,6 +65,8 @@ article {
 									</button>
 									回到登入畫面
 								</div>
+								<button type="button" class="btn error " id="correct">正確</button>
+								<button type="button" class="btn btn-primary " id="error">錯誤</button>
 								<br>
 
 							</div>
@@ -76,6 +78,19 @@ article {
 	</article>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	<!------------------------一鍵輸入---------------------- -->
+	<script>
+		$(function() {
+			$('#correct').click(function() {
+				$('#email').val("ch570981400@gmail.com");
+			})
+		})
+		$(function() {
+			$('#error').click(function() {
+				$('#email').val("erroremail@gmail.com");
+			})
+		})
+	</script>
 	<!------------------------判斷是否帳號信箱存在--------------------->
 	<script type="text/javascript">
 		$('#forgot').on("click", function() {
@@ -94,9 +109,10 @@ article {
 			}).then(resp=>resp.json())
 			.then(res=>{
 				console.log(res)
-				if('1111'==res.email){
+				if(res=='1111'){
 					
 					$('#msgEmail').text('信箱已註冊');
+					return false;
 				}
 				if(res=='2222')
 				  Swal.fire({
@@ -104,9 +120,9 @@ article {
                       title: '請至信箱確認驗證信',
                       text: '註冊成功，即將前往登入畫面',
                   })
-//                   .then(function(){
-//                 	  location.href='login.controller';
-//                   })
+                  .then(function(){
+                	  location.href='login.controller';
+                  })
 			})
 		})
 	</script>

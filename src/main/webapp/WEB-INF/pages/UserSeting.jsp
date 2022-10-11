@@ -63,16 +63,24 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 							<div class="col-lg-8 no-padding">
 								<div class="form-message">
 									<h2 class="title">我的檔案</h2>
-									<c:if test="<%=memberBean.getStatus() == 1 && memberBean.getReason() ==null %>" >
+									<c:if
+										test="<%=memberBean.getStatus() == 1 && memberBean.getUserprofile() ==null %>">
 										<button type="submit">
 											<a href="becometeacher.controller">申請成為老師</a>
 										</button>
 									</c:if>
-									<c:if test="<%=memberBean.getReason() !=null && memberBean.getStatus() ==1  %>">
+									<c:if
+										test="<%=memberBean.getStatus() == 1  && memberBean.getReason() == null && memberBean.getEducation() !=null%>">
+										<button type="submit">
+											<a href="becometeacher.controller">申請成為老師</a>
+										</button>
+									</c:if>
+									<c:if
+										test="<%=memberBean.getReason() != null && memberBean.getStatus() == 1 && memberBean.getUserprofile() != null%>">
 										<button type="submit">
 											<a href="becometeacher.controller">重新申請為老師</a>
 										</button>
-											<font color=red size=6>原因：<span ><%=memberBean.getReason()%></span></font>
+										<font color=red size=6>原因：<span><%=memberBean.getReason()%></span></font>
 									</c:if>
 									<form action="updateMyUser" method="post"
 										class="teamo-contact-fom us">
@@ -115,7 +123,7 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 												<p>
 													<span class="form-label">密碼 </span><span
 														class="form-control-wrap "><input type="text"
-														title="密碼" name="password" maxlength="30"
+														title="密碼" name="password" id="password" maxlength="30"
 														placeholder="*必填" value='<%=memberBean.getPassword()%>' /></span>
 												</p>
 											</div>
@@ -200,7 +208,9 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 											value="<%=memberBean.getStatus()%>" /> <input title="學歷"
 											id="education" type="hidden" name="education" size="40"
 											placeholder="*必填(請輸入最高學歷)"
-											class="form-control form-control-name">
+											class="form-control form-control-name"> <input
+											type="hidden" name="reason"
+											value="<%=memberBean.getReason()%>" />
 
 
 										<p>
@@ -321,6 +331,7 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 			$('#correct').click(function() {
 				$('#nick').val("小華");
 				$('#account').val("edward");
+				$('#password').val("edward");
 				$('#name').val("愛德華");
 				$('#sex').val("男生");
 				$('#birthday').val("1993-10-02");

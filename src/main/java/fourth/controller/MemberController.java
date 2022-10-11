@@ -42,24 +42,6 @@ public class MemberController {
 	@Autowired
 	private MemberMailService memberMailService;
 
-//	@GetMapping(path = "/forgotpassword/{mail}")
-//	public void forgotPWD(@PathVariable String mail) {
-//		Map<String, String> errors = new HashMap<String, String>();
-//		MemberBean member = memberService.checkRegister(mail);
-//		System.out.println("member: " + member);
-//		if (member != null) {
-//			String pwd = memberMailService.givenUsingJava8_whenGeneratingRandomAlphanumericString_thenCorrect();
-//			System.out.println("pwd:" + pwd);
-//			member.setPassword(pwd);
-//			MemberBean registerUser = memberService.registerUser(member);
-//			System.out.println("registerUser: " + registerUser);
-//			System.out.println("email:" + member.getEmail());
-//			memberMailService.sendMail(member.getEmail(), "好學生-EEIT49  忘記密碼通知信",
-//					"親愛的會員您好:<br><br>您的帳號:" + member.getAccount() + " 申請忘記密碼通知，" + "系統發送新密碼為:" + pwd + "，"
-//							+ "請使用新密碼登入，並至個人資料重新修改密碼。<br> <br> <br>  好學生團隊 敬上");
-//
-//		}
-//	}
 
 	@PostMapping(path = "/forgotpassword")
 	@ResponseBody
@@ -287,22 +269,23 @@ public class MemberController {
 		MemberBean updateUser = memberService.updateUser(memberBean);
 		System.out.println("updateUser: " + updateUser);
 		if (updateUser != null) {
-//			if (updateUser.getName() != null) {
-//				errors = new HashMap<String, String>();
-//				errors.put("name", "1111");
-//			}
-//			if (updateUser.getCellphone() !=null) {
-//				errors = new HashMap<String, String>();
-//				errors.put("cellphone", "1112");
-//			}
-//			if (updateUser.getEducation() !=null) {
-//				errors = new HashMap<String, String>();
-//				errors.put("education", "1113");
-//			}
-//			if (updateUser.getUserprofile() !=null) {
-//				errors = new HashMap<String, String>();
-//				errors.put("userprofile", "1114");
-//			}
+			System.out.println("55688");
+			if ("".equals(updateUser.getName())||updateUser.getName() == null) {
+				errors = new HashMap<String, String>();
+				errors.put("name", "1111");
+			}
+			if (updateUser.getCellphone() ==null) {
+				errors = new HashMap<String, String>();
+				errors.put("cellphone", "1112");
+			}
+			if (updateUser.getEducation() ==null) {
+				errors = new HashMap<String, String>();
+				errors.put("education", "1113");
+			}
+			if (updateUser.getUserprofile() ==null) {
+				errors = new HashMap<String, String>();
+				errors.put("userprofile", "1114");
+			}
 
 		}
 //		if (checkRegisterByAccount != null) {
