@@ -1,4 +1,4 @@
-package fourth.bean;
+package fourth.bean.document;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,13 +23,19 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import fourth.bean.MemberBean;
+import fourth.bean.OrderItem;
+import fourth.bean.OrderStatus;
+import fourth.bean.Voucher;
 
-@Entity
+
+@Document(indexName = "orderuser")
 @Table(name = "order_user")
 public class OrderUser implements Serializable{
 	
 	
 	@Id
+	@org.springframework.data.annotation.Id
 	@Column(name = "order_id")
 	private String orderId;
 	

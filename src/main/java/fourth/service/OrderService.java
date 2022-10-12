@@ -31,6 +31,7 @@ import fourth.bean.Voucher;
 import fourth.dao.CartRepository;
 import fourth.dao.CourseRepository;
 import fourth.dao.MemberRepository;
+//import fourth.dao.OrderElaticSearchRepository;
 import fourth.dao.OrderItemRepository;
 import fourth.dao.OrderRepository;
 import fourth.dao.OrderStatusRepository;
@@ -65,6 +66,9 @@ public class OrderService {
 	
 	@Autowired
 	private VoucherRepository voucherRepository;
+	
+//	@Autowired
+//	private OrderElaticSearchRepository elaticSearchRepository;
 	
 	static AllInOne allInOne = new AllInOne("");
 
@@ -359,11 +363,15 @@ public class OrderService {
 	public List<OrderUser> searchStatust(Integer user ,Integer status) {
 		List<OrderUser> list = null;
 		if(status == 0) {
+			
 			list = orderRepository.findByMemberBean_userId(user);
+//			list = elaticSearchRepository.findByMemberBean_userId(user);
 		}else {
 			
 			list = orderRepository.findUserByStatus_Id(user, status);
+//			list = elaticSearchRepository.findUserByStatus_Id(user, status);
 		}
+		System.out.println("elaticSearch 搜尋!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		return list;
 	}
 
