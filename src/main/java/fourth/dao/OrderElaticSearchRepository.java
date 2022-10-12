@@ -7,7 +7,7 @@
 //
 //import fourth.bean.OrderUser;
 //
-//public interface OrderElaticSearchRepository extends ElasticsearchRepository<fourth.bean.document.OrderUser, String> {
+//public interface OrderElaticSearchRepository extends ElasticsearchRepository<OrderUser, String> {
 //	
 //	@Query(value ="select * from order_user where user_id = ?1 and status = ?2 ",nativeQuery = true)
 //	public List<OrderUser> findUserByStatus_Id(Integer user ,Integer status);

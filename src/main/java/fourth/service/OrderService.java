@@ -371,7 +371,7 @@ public class OrderService {
 			list = orderRepository.findUserByStatus_Id(user, status);
 //			list = elaticSearchRepository.findUserByStatus_Id(user, status);
 		}
-		System.out.println("elaticSearch 搜尋!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//		System.out.println("elaticSearch 搜尋!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		return list;
 	}
 
