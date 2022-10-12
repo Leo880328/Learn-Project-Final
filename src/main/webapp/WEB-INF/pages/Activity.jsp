@@ -71,6 +71,9 @@
 
 	</div>
 	<script src="ActivityResources/js/Activity.js"></script>
+	<script src="ActivityResources/js/GoogleCalendarAPI.js"></script>
+    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
 </body>
 
 </html>

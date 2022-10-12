@@ -6,6 +6,8 @@ const jquery = {
 
 }
 let activitiesId;
+
+let activityBeen;
 $().ready(
     function () {
         let idIndexOf = window.location.href.split("/");
@@ -25,6 +27,7 @@ function requestActivity() {
         method: "POST",
         dataType: "JSON",
         success: function (activity) {
+            activityBeen = activity
             updateView(activity);
         },
         error: function (err) { alert("該活動已失效!") },
@@ -40,10 +43,14 @@ function joinActivity() {
             Swal.fire({
                 icon: 'success',
                 title: '報名成功',
-                html: '報名成功，請去<a href="myActivities">[我的活動]</a>確認',
+                showCancelButton: true,
+                html: '報名成功，是否要加入Google行事曆中',
                 width: "300px",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    handleAuthClick();
+                }
             })
-            console.log(data);
         },
         error: function (err) {
             alert("參加失敗!");
