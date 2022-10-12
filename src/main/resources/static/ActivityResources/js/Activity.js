@@ -44,7 +44,9 @@ function joinActivity() {
                 icon: 'success',
                 title: '報名成功',
                 showCancelButton: true,
-                html: '報名成功，是否要加入Google行事曆中',
+                confirmButtonText: "加入Google行事曆",
+                cancelButtonText: "不用!",
+                html: '報名成功，是否要加入Google行事曆中?',
                 width: "300px",
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -66,9 +68,11 @@ function updateView(activity) {
     if (activity.address) {
         place = `${activity.place} ${activity.address}`;
         $(jquery.activityInformation).html(`
+        <hr>
         可報名人數: ${activity.numberLimit}<br>
         活動時間: ${activity.startTime} ~ ${activity.endTime}<br>
         活動地點: ${place}<br>
+        <br>
         (請已詳細地址為準)
         <iframe width="870" height="250" frameborder="0" class="map"style="border-radius:10px;"
 		    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAebEgcRugex4c_DH0B8HVeB0qwwpuA6DI&q=${place}"

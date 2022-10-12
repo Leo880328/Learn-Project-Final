@@ -17,7 +17,7 @@ let activityBean =
 let jquery = {
     activityId: ".activityId",
     activityTitle: ".activityTitle",
-    activityContent: ".activityContent",
+    activityContent: ".ck-editor__editable",
 
 
     activityPreviewInput: ".activityPreviewInput",
@@ -107,27 +107,17 @@ function listener() {
         activityBean.numberLimit = $(jquery.activityNumberLimit).val();
     })
 
-    $(jquery.activitySelectPlace).change(
-        function () {
-            console.log($(jquery.activitySelectPlace).val())
-            if ($(jquery.activitySelectPlace).val() == "on-line") {
-                activityBean.place = "線上"
-                $(jquery.activityPlaceDiv).css("display", "none")
-            } else {
-                $(jquery.activityPlaceDiv).css("display", "block")
-            }
-        }
-    )
     $(jquery.activityPlace).change(function () {
         activityBean.place = $(jquery.activityPlace).val();
     })
     $(jquery.activityAddress).change(function () {
         activityBean.address = $(jquery.activityAddress).val();
     })
-    $(jquery.saveActivityButton).click(function () {
-        saveActivityBean()
-    })
 
+    $(jquery.saveActivityButton).click(function () {
+        activityBean.content = ckeditor5.getData()
+        chickActivityBean()
+    })
 
 }
 function errSwal(title, text) {
@@ -161,7 +151,7 @@ function changeHtml() {
         $(jquery.activityTitle).val(activityBean.title);
     }
     if (activityBean.content) {
-        $(jquery.activityContent).val(activityBean.content);
+        ckeditor5.setData(activityBean.content)
     }
     if (activityBean.previewImage) {
         $(jquery.activityPreviewImage).attr('src', activityBean.previewImage)
@@ -213,9 +203,8 @@ function selectByID(id) {
         error: function (err) { alert("資料獲取失敗，請刷新網頁!") },
     });
 }
-let placeIsonline = $(jquery.activitySelectPlace).val() == "on-line";
+function chickActivityBean() {
 
-function saveActivityBean() {
     console.log(activityBean);
     if (!activityBean.title) {
         Swal.fire({
@@ -241,7 +230,7 @@ function saveActivityBean() {
             title: '上傳失敗',
             text: "人數"
         })
-    } else if (!activityBean.place && !placeIsonline || !activityBean.address && !placeIsonline) {
+    } else if (!activityBean.place || !activityBean.address) {
         Swal.fire({
             icon: 'error',
             title: '上傳失敗',
@@ -249,33 +238,35 @@ function saveActivityBean() {
         })
 
     } else {
-        console.log(activityBean);
-        let reqMethod = "ManageActivities/insertActivityBean";
-        if (activityBean.id > 0) {
-            reqMethod = "ManageActivities/updateActivityBean";
-        }
+        saveActivityBean()
+    }
+}
+function saveActivityBean() {
 
-        $.ajax({
-            url: reqMethod,
-            method: "POST",
-            dataType: "JSON",
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(activityBean),
-            success: function (res) {
-                $("body").append($(`<form action="ManageActivities" method="GET" id="onlyPost"></form>`))
-                $("#onlyPost").submit()
-            },
-            error: function (err) {
-                Swal.fire({
-                    icon: 'error',
-                    title: '上傳失敗',
-                    text: err
-                })
-            },
-        });
+    console.log(activityBean);
+    let reqMethod = "ManageActivities/insertActivityBean";
+    if (activityBean.id > 0) {
+        reqMethod = "ManageActivities/updateActivityBean";
     }
 
-
+    $.ajax({
+        url: reqMethod,
+        method: "POST",
+        dataType: "JSON",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(activityBean),
+        success: function (res) {
+            $("body").append($(`<form action="ManageActivities" method="GET" id="onlyPost"></form>`))
+            $("#onlyPost").submit()
+        },
+        error: function (err) {
+            Swal.fire({
+                icon: 'error',
+                title: '上傳失敗',
+                text: err
+            })
+        },
+    });
 
 }
 function delectActivity() {
@@ -322,4 +313,10 @@ function delectActivity() {
 
 
 
+}
+
+//一件輸入
+function onePieceOfInput() {
+    activityBean
+    changeHtml()
 }

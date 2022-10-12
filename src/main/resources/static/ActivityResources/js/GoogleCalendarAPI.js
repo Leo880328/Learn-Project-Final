@@ -89,16 +89,18 @@ function handleAuthClick() {
 
 
 async function insertSchoolEventToGoogleCalendar() {
+    console.log(activityBeen.startTime.replace(" ", "T").replaceAll("/", "-"))
+    console.log(activityBeen.endTime.replace(" ", "T").replaceAll("/", "-"))
     const event = {
         'summary': activityBeen.title,
         'location': `${activityBeen.place} ${activityBeen.address}`,
-        'description': '這邊要寫信件的提醒',
+        'description': '來自好學生網站活動。',
         'start': {
-            'dateTime': '2022-11-28T09:00:00+08:00',
+            'dateTime': `${activityBeen.startTime.replace(" ", "T").replaceAll("/", "-")}:00+08:00`,
             'timeZone': 'Asia/Taipei'
         },
         'end': {
-            'dateTime': '2022-11-28T17:00:00+08:00',
+            'dateTime': `${activityBeen.endTime.replace(" ", "T").replaceAll("/", "-")}:00+08:00`,
             'timeZone': 'Asia/Taipei'
         },
         'recurrence': [
@@ -120,5 +122,11 @@ async function insertSchoolEventToGoogleCalendar() {
 
     request.execute(function (resp) {
         console.log(resp);
+        Swal.fire({
+            icon: 'success',
+            title: '加入成功',
+            html: '已將活動加入Google行事曆中',
+            width: "300px",
+        })
     });
 }
