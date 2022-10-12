@@ -50,7 +50,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.failureUrl("/logfail")
 				.and()
 				.authorizeRequests().antMatchers("/","/assets/**","/assets/**","/assets1/**","/backend/**","/backend2/**","/css/**","/fonts/**","/images/**","/js/**","/wayne/**","/xiang/**"
-						,"/coursefront1.list","/coursefront.details")
+						,"/coursefront1.list","/coursefront.details"
+						,"/register.controller","/newRegister","/forgetPassword.controller","/forgotpassword","/becometeacher")
 				.permitAll() // 设置哪些路径可以直接访问，不需要认证
 				// 当前登录用户，只有具有admins权限才可以访问这个路径
 				// 1 hasAuthority方法
