@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class CourseComments {
 	
 	@Id 
-	@Column(name = "COMMENSTID")
+	@Column(name = "COMMENTSID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer commentsId;
 	

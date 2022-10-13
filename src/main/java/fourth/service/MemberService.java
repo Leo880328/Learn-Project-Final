@@ -88,6 +88,11 @@ public class MemberService {
 		return memberRepository.findByAccountLike(account);
 	}
 
+	//查詢待審核會員
+	public List<MemberBean> selectAllCheck(String status) {
+		return memberRepository.findCheckTeacher(status);
+	}
+
 
 
 }

@@ -42,20 +42,28 @@ article {
 								<h2 class="title-login">登入</h2>
 								<div>
 									如果您還沒有註冊，請點擊
-									<button type="button" class="btn btn-info btn--raised">
+									<button type="button" class="btn btn-secondary ">
 										<a href="register.controller">快速註冊</a>
 									</button>
 
 								</div>
-								<form method="post" action="checklogin.controller">
+<!-- <<<<<<< HEAD -->
+<!-- 								<form method="post" action="checklogin.controller"> -->
+<!-- <!-- 																		<div class="social-account"> --> 
+<!-- <!-- 																			<h6 class="title-social">其他登入方式</h6> --> 
+<!-- <!-- 																			<div class="g-signin2" data-onsuccess="onSignIn"></div> --> 
+<!-- <!-- 																		</div> --> 
+<!-- ======= -->
+								<form method="post" action="loginsuccess">
 									<!-- 									<div class="social-account"> -->
 									<!-- 										<h6 class="title-social">其他登入方式</h6> -->
 									<!-- 										<div class="g-signin2" data-onsuccess="onSignIn"></div> -->
 									<!-- 									</div> -->
+
 									<br> <font face="微軟正黑體">使用快樂學習帳號密碼登入</font>
 									<div class=group>
 										<label for="account"><i class="fa-solid fa-user"></i>
-										</label> <input type="text" name="account" id="account"
+										</label> <input type="text" name="username" id="account"
 											placeholder="請輸入帳號" autocomplete="off" value=account>
 									</div>
 									<div class=group>
@@ -69,9 +77,10 @@ article {
 												for="cb1" class="label-text">Remember me</label></span>
 										</p>
 										<p>
-											<input type="text" name="email" id="email"
-												placeholder="請輸入email" autocomplete="off"> <a
-												id="forgot" class="forgot-pw">忘記密碼?</a>
+<!-- 											<input type="text" name="email" id="email" -->
+<!-- 												placeholder="請輸入email" autocomplete="off"> -->
+												 <a href="forgetPassword.controller" class="forgot-pw">忘記密碼?</a>
+<!-- 												 <a id="forgot" class="forgot-pw">忘記密碼?</a> -->
 										</p>
 									</div>
 									<div class="">
@@ -100,7 +109,7 @@ article {
 	$(function() {
 		$('#correct').click(function() {
 			$('#account').val("edward");
-			$('#password').val("test123");
+			$('#password').val("edward");
 		})
 	})
 </script>
@@ -125,13 +134,13 @@ article {
 		console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 	}
 
-	$('#forgot').on("click", function() {
-		let mail = $('#email').val();
-		console.log(mail)
-		fetch("/HappyLearning/forgotpassword/" + mail, {
-			method : 'GET'
-		});
+// 	$('#forgot').on("click", function() {
+// 		let mail = $('#email').val();
+// 		console.log(mail)
+// 		fetch("/HappyLearning/forgotpassword/" + mail, {
+// 			method : 'GET'
+// 		});
 
-	})
+// 	})
 </script>
 </html>

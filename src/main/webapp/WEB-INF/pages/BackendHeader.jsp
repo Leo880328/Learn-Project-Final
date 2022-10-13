@@ -12,6 +12,7 @@
 <!-- Vendor styles -->
 <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet"	href="backend/vendors/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
 <!-- <link rel="stylesheet" href="wayne/dist/css/adminlte.min.css"> -->
 <link rel="stylesheet"
 	href="backend/vendors/animate.css/animate.min.css">
@@ -77,20 +78,21 @@
 
 
 					<div class="user__info" data-toggle="dropdown">
-<%-- 					<img src="${mb.img}" width="150" height="100"> --%>
-						<img class="user__img" src="${sessionScope.user.img }"
-							alt="">
+						<%-- 					<img src="${mb.img}" width="150" height="100"> --%>
+						<img class="user__img" src="${sessionScope.user.img }" alt="">
 
 					</div>
 
 					<div class="dropdown-menu">
+
 						<a class="dropdown-item" href="">${sessionScope.user.name }</a><a class="dropdown-item"
 							href="user.controller">查看個人檔案</a><a class="dropdown-item"
-							href="logout.controller">登出</a>
+							href="logout">登出</a>
+
 					</div>
 
 
-               </li>
+				</li>
 			</ul>
 		</header>
 		<aside class="sidebar">
@@ -101,8 +103,14 @@
 
 					<li class="navigation__active" style="font-size: 1.3em"><a href="Index"><i
 							class="zmdi zmdi-home"></i>前台首頁</a></li>
+
 					<li style="font-size: 1.3em"><a href="memberList"><i
-							class="zmdi zmdi-format-underlined"></i>會員管理</a></li>
+							class="zmdi zmdi-format-underlined"></i>會員管理</a>
+						<ul>
+							<li><a href="memberList">會員資料</a></li>
+							<li><a href="checkteacherlist">待審核會員</a></li>
+						</ul></li>
+
 
 					<li class="navigation__sub" style="font-size: 1.3em"><a href=""><i
 							class="zmdi zmdi-view-week"></i>試卷管理</a>
@@ -112,6 +120,7 @@
 							<li><a href="firstExamController">高中</a></li>
 							<li><a href="firstExamController">成人</a></li>
 						</ul></li>
+
 					<li class="" style="font-size: 1.3em"><a href="course.list"><i
 							class="zmdi zmdi-view-list"></i>課程管理</a>
 						</li>
@@ -124,6 +133,7 @@
 					<li style="font-size: 1.3em"><a href="orderList"><i class="zmdi zmdi-widgets"></i>訂單管理</a></li>
 					
 					<li style="font-size: 1.3em"><a href="chart"><i class="zmdi zmdi-trending-up"></i>營收圖表</a></li>
+
                             
 					<li style="font-size: 1.3em"><a href="backDairy"><i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i>後台日誌</a></li>
 				</ul>
@@ -166,23 +176,24 @@
 	<script src="backend/demo/js/demo.js"></script>
 	<!-- App functions and actions -->
 	<script src="backend/js/app.min.js"></script>
-	<script src="https://kit.fontawesome.com/9d965cf88e.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/9d965cf88e.js"
+		crossorigin="anonymous"></script>
 	<!-- 	dataTable jQuery -->
 	<script type="text/javascript" charset="utf8"
 		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 <script>
-		function previewImg(element) {
+	function previewImg(element) {
 
-			let file = element.files[0];
-			let img = element.parentElement.querySelector("#img");
-			let imgPath = element.parentElement.querySelector("#imgPath");
-			if (file) {
-				img.src = URL.createObjectURL(file);
-				imgPath.value = "images/" + file.name;
-			}
-
+		let file = element.files[0];
+		let img = element.parentElement.querySelector("#img");
+		let imgPath = element.parentElement.querySelector("#imgPath");
+		if (file) {
+			img.src = URL.createObjectURL(file);
+			imgPath.value = "images/" + file.name;
 		}
-	</script>
+
+	}
+</script>
 </html>

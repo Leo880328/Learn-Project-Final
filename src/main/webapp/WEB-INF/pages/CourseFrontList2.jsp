@@ -212,6 +212,7 @@
 										</c:if>
 									</c:forEach>
 								</c:when>
+
 								<c:otherwise>
 											<div>
 												<h3 class="custom_blog_title">待審核課程</h3>
@@ -260,11 +261,11 @@
 																<li class="swatch-color"><c:out
 																		value="${course.enrollment}" /></li>
 
-															</ul>
-															<ul class="attributes-display">
-																<li class="swatch-text-label">上架日期:</li>
-																<li class="swatch-text-label"><c:out
-																		value="${course.course_date}" /></li>
+<!-- 															</ul> -->
+<!-- 															<ul class="attributes-display"> -->
+<!-- 																<li class="swatch-text-label">上架日期:</li> -->
+<%-- 																<li class="swatch-text-label"><c:out --%>
+<%-- 																		value="${course.course_date}" /></li> --%>
 
 															</ul>
 															<ul class="attributes-display">
@@ -520,7 +521,7 @@
 																	</div>
 																	<c:if test="${course.course_status == 2}">
 																	<div>
-																		<a href="coursefront.show?courseId=${course.courseId}"><button >
+																		<a href="course.show?courseId=${course.courseId}"><button >
 																			編輯課程 <i class="fa-solid fa-pen"></i>
 																		</button></a>
 																		</div>

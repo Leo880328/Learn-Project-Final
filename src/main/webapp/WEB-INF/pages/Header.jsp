@@ -42,6 +42,9 @@
 		$.getJSON("cart/cartCount", function(data) {
 			$("#msg").html(data);
 		});
+		if("${sessionScope.user}" == ""){
+			$("#msg").html(0);
+		}
 	}
 </script>
 </head>
@@ -72,7 +75,8 @@
 
 								</c:if>
 								<li  class="font"><a href="#"><b>${sessionScope.user.nick}(審核中)</b></a> |
-									<a href="logout.controller">登出</a></li>
+									<a href="logout">登出</a></li>
+
 								<li></li>
 							</ul>
 						</c:when>
@@ -83,8 +87,10 @@
 								<c:if test="${sessionScope.user.nick == null}">
 
 								</c:if>
+
 								<li  class="font"><a href="#"><b>${sessionScope.user.nick}(學生)</b></a> |
-									<a href="logout.controller">登出</a></li>
+									<a href="logout">登出</a></li>
+
 								<li></li>
 							</ul>
 						</c:when>
@@ -92,8 +98,10 @@
 						<c:when test="${sessionScope.user.status == 2 }">
 
 							<ul class="header-user-links">
+
 								<li  class="font"><a href="#"><b>${sessionScope.user.nick}(老師)</b></a> |
-									<a href="logout.controller">登出</a></li>
+									<a href="logout">登出</a></li>
+
 								<li></li>
 							</ul>
 						</c:when>
@@ -101,8 +109,10 @@
 						<c:otherwise>
 							<c:if test="${sessionScope.user.status == 3}">
 								<ul class="header-user-links">
+
 									<li  class="font"><a href="#"><b>${sessionScope.user.nick}(管理員)</b></a>
-										| <a href="logout.controller">登出</a></li>
+										| <a href="logout">登出</a></li>
+
 									<li></li>
 								</ul>
 

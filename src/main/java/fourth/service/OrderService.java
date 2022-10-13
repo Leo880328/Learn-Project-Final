@@ -31,6 +31,7 @@ import fourth.bean.Voucher;
 import fourth.dao.CartRepository;
 import fourth.dao.CourseRepository;
 import fourth.dao.MemberRepository;
+//import fourth.dao.OrderElaticSearchRepository;
 import fourth.dao.OrderItemRepository;
 import fourth.dao.OrderRepository;
 import fourth.dao.OrderStatusRepository;
@@ -66,6 +67,9 @@ public class OrderService {
 	@Autowired
 	private VoucherRepository voucherRepository;
 	
+//	@Autowired
+//	private OrderElaticSearchRepository elaticSearchRepository;
+	
 	static AllInOne allInOne = new AllInOne("");
 
 	// @Override
@@ -96,7 +100,7 @@ public class OrderService {
 		obj.setMerchantTradeDate(dateToStr);
 		obj.setTotalAmount(String.valueOf(Math.round(total)));
 		obj.setTradeDesc("test Description");
-		obj.setReturnURL("http://211.23.128.214:5000");
+		obj.setReturnURL("http://localhost:8080/HappyLearning/test");
 		obj.setNeedExtraPaidInfo("N");
 		obj.setItemName(itemName);
 		//obj.setReturnURL("https://53b0-61-58-161-201.jp.ngrok.io/SpringMvcHomework/updateOrder/2/"+orderId);
@@ -359,11 +363,15 @@ public class OrderService {
 	public List<OrderUser> searchStatust(Integer user ,Integer status) {
 		List<OrderUser> list = null;
 		if(status == 0) {
+			
 			list = orderRepository.findByMemberBean_userId(user);
+//			list = elaticSearchRepository.findByMemberBean_userId(user);
 		}else {
 			
 			list = orderRepository.findUserByStatus_Id(user, status);
+//			list = elaticSearchRepository.findUserByStatus_Id(user, status);
 		}
+//		System.out.println("elaticSearch 搜尋!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		return list;
 	}
 

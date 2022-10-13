@@ -47,7 +47,7 @@ public class CourseFrontController {
 	public String listCourse2(Model m) {
 		List<CourseBean> list = cService.selectAll();
 		m.addAttribute("list", list);
-		List<CourseBean> list1 = cService.findByLecturerName("%" + "敬評" + "%");
+		List<CourseBean> list1 = cService.findByLecturerName("%" + "溫妮" + "%");
 		m.addAttribute("queryResult5", list1);
 		return "CourseFrontList2";
 

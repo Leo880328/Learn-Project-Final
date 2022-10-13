@@ -40,14 +40,22 @@ function del(id) {
 			)
 
 			$.ajax({
-				async: true,
+				async: false,
 				type: "DELETE",
 				url: "order/" + id,
 				success: function(data) {
-					$(`#${id}`).remove();
-					count = $(`.or`).length;
-					$("#count").html(count);
+					if (pageStatus == 1) {
+						count = statusCount(1);
+						$("#count").html(count);
+						currentpage = $('.current').html();
+						order(pageStatus, currentpage)
 
+					} else {
+//						$(`#${id}`).remove();
+						let table =$('#data-table').DataTable();
+						table.row(`#${id}`).remove().draw(false);
+
+					}
 				}
 			})
 		}
@@ -56,7 +64,14 @@ function del(id) {
 
 
 
-function order(status) {
+function order(status, currentpage) {
+	pageStatus = status;
+	selectPage = currentpage;
+	if (selectStatusFun == "select") {
+		selectStatus(st);
+		return;
+	}
+
 	$.ajax({
 		async: false,
 		type: "GET",
@@ -95,20 +110,95 @@ function order(status) {
 
 				})
 			} else {
+				$("#userbody").empty();
 				console.log("會員訂單");
-				
-				$.each(data, function(i, n) {
-					memberStatus = n.status.id;
-					$("#userbody").append(`<div id="${n.orderId}" class="or">`+orderListUser(n)+`</div>`);
+				userData = data;
+				initpage = (currentpage - 1) * 4;
+				if (currentpage == 1) {
+					initpage = 0;
+				}
+				counti = 1;
+				for (var i = initpage; i < data.length; i++) {
+					memberStatus = data[i].status.id;
+					$("#userbody").append(`<div id="${data[i].orderId}" class="or">` + orderListUser(data[i]) + `</div>`);
+					if (counti == 4) {
+						break;
+					}
+					counti++;
+				}
+				$("#foot").remove();
+				$("#row").append(page(currentpage));
+				if (currentpage == 1) {
+					$(".left").css("visibility", "hidden");
+				} else {
+					$(".left").css("visibility", "visible");
+				}
+				if (currentpage == len) {
+					$(".right").css("visibility", "hidden");
+				} else {
+					$(".right").css("visibility", "visible");
+				}
+				var c = $("#count").html();
+				if (c == "0") {
+					$(".left").css("visibility", "hidden");
+					$(".right").css("visibility", "hidden");
+				}
 
-				})
-				
+
+				//				$.each(data, function(i, n) {
+				//					memberStatus = n.status.id;
+				//					$("#userbody").append(`<div id="${n.orderId}" class="or">` + orderListUser(n) + `</div>`);
+				//					
+				//				})
 			}
 		}
 	})
 
 }
 
+
+function page(currentpage) {
+
+	pagecount = "";
+	len = Math.floor(userData.length / 4);
+	if (userData.length % 4 != 0) {
+		len++;
+	}
+	k = Math.floor(currentpage / 5) * 5 + 1;
+	if (currentpage % 5 == 0) {
+		k = currentpage - 4;
+	}
+	last = k + 4;
+	if (k + 4 >= len) {
+		last = len;
+	}
+	for (i = k; i <= last; i++) {
+		if (i == currentpage) {
+			pagecount += `<a href="javascript:;" class="page-numbers current">` + i + `</a>`
+		} else {
+
+			pagecount += `<a href="javascript:;" class="page-numbers" onclick="order(${pageStatus},${i})">` + i + `</a>`
+		}
+	}
+
+	pagecontent = `<div class="pagination clearfix style2" id="foot" style="margin-bottom: 100px" >
+						<div class="nav-link" style="display: inline-block;">
+					<a href="javascript:;" class="page-numbers left" onclick="order(${pageStatus},${currentpage - 1})"  ><i
+						class="icon fa fa-angle-left" aria-hidden="true" ></i></a>
+						
+						
+						`+ pagecount + `
+						
+						<a href="javascript:;" class="page-numbers right"  onclick="order(${pageStatus},${currentpage + 1})"><i class="icon fa fa-angle-right"
+						aria-hidden="true" ></i></a>
+				</div>
+				<h5 style="display: inline-block;margin-left: 30px">
+				共<span>`+ len + `</span>頁
+			</h5>
+			</div> `
+
+	return pagecontent;
+}
 
 function orderList(order) {
 
@@ -236,7 +326,7 @@ function orderListUser(order) {
 											</div>`;
 
 	} else if (memberStatus == 3) {
-		part=`<form action="orderDetail" method="post" style="display: inline-block;">
+		part = `<form action="orderDetail" method="post" style="display: inline-block;">
 											<input type="hidden" name="cartID" value="${order.orderId}" />
 											<button class="btn btn-primary" style="margin-left: 25px; border-radius: 100px">詳細</button>
 									</form>`;
@@ -246,7 +336,7 @@ function orderListUser(order) {
 											</div>`;
 
 	} else if (memberStatus == 4) {
-		part=`<form action="orderDetail" method="post" style="display: inline-block;">
+		part = `<form action="orderDetail" method="post" style="display: inline-block;">
 											<input type="hidden" name="cartID" value="${order.orderId}" />
 											<button class="btn btn-primary" style="margin-left: 25px; border-radius: 100px">詳細</button>
 									</form>`;
@@ -256,7 +346,7 @@ function orderListUser(order) {
 											</div>`;
 
 	} else if (memberStatus == 5 || memberStatus == 6) {
-		part=`<form action="orderDetail" method="post" style="display: inline-block;">
+		part = `<form action="orderDetail" method="post" style="display: inline-block;">
 											<input type="hidden" name="cartID" value="${order.orderId}" />
 											<button class="btn btn-primary" style="margin-left: 25px; border-radius: 100px">詳細</button>
 									</form>`;
@@ -266,8 +356,8 @@ function orderListUser(order) {
 											</div>`;
 
 	}
-	
-		content = `
+
+	content = `
 					<div style="background-color: #DEFFDE">
 							訂單編號:<span style="padding-left:10px">  ${order.orderId}</span>
 						</div>
@@ -314,14 +404,14 @@ function orderListUser(order) {
 										</div>
 
 										<div class="product-info-right" style="height: 60px;padding-top: 15px;width:200px">`
-										+userStatus+
-										`</div>
+		+ userStatus +
+		`</div>
 									</div>
 									<hr style="border: 1px solid;">
 									<div>
 									`
-									+part+
-									`</div>
+		+ part +
+		`</div>
 									<div style="display: inline-block; margin-left: 650px;">
 										訂單金額：<span class="text-md strongfont text-primary">$${sum}</span>
 									</div>
@@ -330,7 +420,7 @@ function orderListUser(order) {
 						</ul>
 					
             `;
-			
+
 	return content;
 }
 
@@ -361,17 +451,27 @@ function backpay(orderId) {
 				type: "GET",
 				url: "updateOrder/3/" + orderId,
 				success: function(data) {
-					$(`#${orderId}`).empty();
+					//					$(`#${orderId}`).empty();
+					//
+					//					var order = orderUser(orderId);
+					//					var num = '無';
+					//					var sum = order.totoalprice;
+					//					if (order.voucher != null) {
+					//						num = order.voucher.number;
+					//						sum = Math.round(order.totoalprice * order.voucher.discount);
+					//					}
+					//					console.log($(`#${orderId}`));
+					//					$(`#${orderId}`).append(orderListUser(order));
+					//					count = statusCount(2);
+					//					$("#count").html(count);
 
-					var order = orderUser(orderId);
-					var num = '無';
-					var sum = order.totoalprice;
-					if (order.voucher != null) {
-						num = order.voucher.number;
-						sum = Math.round(order.totoalprice * order.voucher.discount);
+					if (pageStatus == 1) {
+						count = statusCount(1);
+						$("#count").html(count);
+						currentpage = $('.current').html();
+						order(pageStatus, currentpage)
+
 					}
-					console.log($(`#${orderId}`));
-					$(`#${orderId}`).append(orderListUser(order));
 
 				}
 			})
@@ -391,7 +491,6 @@ function checkOrder(orderId) {
 	}).then((result) => {
 		/* Read more about isConfirmed, isDenied below */
 		if (result.isConfirmed) {
-			Swal.fire('完成訂單', '', 'success');
 			$.ajax({
 				async: false,
 				type: "GET",
@@ -403,8 +502,8 @@ function checkOrder(orderId) {
 					$(`.${orderId}`).append(bt);
 				}
 			})
+			Swal.fire('完成訂單', '', 'success');
 		} else if (result.isDenied) {
-			Swal.fire('退款成功', '', 'success')
 			$.ajax({
 				async: true,
 				type: "GET",
@@ -416,6 +515,7 @@ function checkOrder(orderId) {
 					$(`.${orderId}`).append(bt);
 				}
 			})
+			Swal.fire('退款成功', '', 'success')
 		}
 	})
 }
@@ -497,7 +597,6 @@ function audit(orderId) {
 	}).then((result) => {
 		/* Read more about isConfirmed, isDenied below */
 		if (result.isConfirmed) {
-			Swal.fire('已退款', '', 'success');
 			$.ajax({
 				async: true,
 				type: "GET",
@@ -509,8 +608,8 @@ function audit(orderId) {
 					$(`.${orderId}`).append(bt);
 				}
 			})
+			Swal.fire('已退款', '', 'success');
 		} else if (result.isDenied) {
-			Swal.fire('已駁回', '', 'success');
 			$.ajax({
 				async: true,
 				type: "GET",
@@ -522,6 +621,7 @@ function audit(orderId) {
 					$(`.${orderId}`).append(bt);
 				}
 			})
+			Swal.fire('已駁回', '', 'success');
 		}
 	})
 
@@ -530,34 +630,88 @@ function audit(orderId) {
 
 function selectStatus(e) {
 
-	let st = $(e).val();
-	console.log(st);
+	selectStatusFun = "select";
+
+	if ($(e).val() != st && typeof ($(e).val()) != "undefined") {
+		st = $(e).val();
+		selectPage = 1;
+	}
 
 	$.ajax({
 		async: false,
 		type: "GET",
 		url: "searchStatus/" + st,
 		success: function(data) {
-
 			count = data.length;
 			$("#count").html(count);
 
 			$("#not").remove();
 			$("#userbody").empty();
 			if (data.length == 0) {
-				console.log($("#userOutBody"));
+
 				$("#userOutBody").append(`<div style="border: 1px solid #ddd" id="not">
 								<div style="width: 100px; margin: auto;" >尚無訂單!!!</div>
 								</div>
 							`);
 			}
-			$.each(data, function(i, n) {
-				memberStatus = n.status.id;
-				$("#userbody").append(`<div id="${n.orderId}" class="or">`+orderListUser(n)+`</div>`);
-			})
+
+			userData = data;
+			initpage = (selectPage - 1) * 4;
+			if (selectPage == 1) {
+				initpage = 0;
+			}
+			counti = 1;
+			for (var i = initpage; i < data.length; i++) {
+				memberStatus = data[i].status.id;
+				$("#userbody").append(`<div id="${data[i].orderId}" class="or">` + orderListUser(data[i]) + `</div>`);
+				if (counti == 4) {
+					break;
+				}
+				counti++;
+			}
+			$("#foot").remove();
+			$("#row").append(page(selectPage));
+			console.log("當前頁面: " + selectPage);
+			console.log("資料長度: " + len);
+			if (selectPage == 1) {
+				$(".left").css("visibility", "hidden");
+			} else {
+				$(".left").css("visibility", "visible");
+			}
+			if (selectPage == len) {
+				$(".right").css("visibility", "hidden");
+			} else {
+				$(".right").css("visibility", "visible");
+			}
+			var c = $("#count").html();
+			if (c == "0") {
+				$(".left").css("visibility", "hidden");
+				$(".right").css("visibility", "hidden");
+			}
+
+			//			$.each(data, function(i, n) {
+			//				memberStatus = n.status.id;
+			//				$("#userbody").append(`<div id="${n.orderId}" class="or">` + orderListUser(n) + `</div>`);
+			//			})
 		}
 	})
 }
+
+function statusCount(status) {
+
+	currentStatus = "";
+
+	$.ajax({
+		async: false,
+		type: "GET",
+		url: "searchStatus/" + status,
+		success: function(data) {
+			currentStatus = data.length;
+		}
+	})
+	return currentStatus;
+}
+
 function htmlToPdf() {
 
 	var doc = new jsPDF('p', 'pt', 'letter');

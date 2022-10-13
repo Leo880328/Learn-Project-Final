@@ -35,41 +35,46 @@ article {
 				<div class="content-area col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="site-main">
 						<div class="login-item">
-							<div class="sign1">
+							<div class="">
 								<h2 class="title">註冊</h2>
-								<form action="newRegister" method="post"
-									modelAttribute="register" class="register-form"
-									id="Register-form" onSubmit="return isValid(this);">
-									<input type="hidden" name="command" value="login">
-									<div class=group>
-										<label for="account"><i class="fa-solid fa-user"></i>
-										</label> <input type="text" name="account" id="account"
-											placeholder="請輸入帳號" autocomplete="off" value="id" required>
-									</div>
-									<div class=group>
-										<label for="password"><i class="fa-solid fa-lock"></i>
-										</label><input type="password" name="password" id="password"
-											placeholder="請輸入密碼(大小寫有別)" autocomplete="off" value="pwd">
-										<span id="message1"
-											style="color: red"> </span>
-									</div>
-									<div class=group>
-										<label for="password"><i class="fa-solid fa-lock"></i>
-										</label><input type="password" name="password1" id="password1"
-											placeholder="重複輸入密碼" autocomplete="off" value="pwd">
-										<span id="message2" style="color: red"> </span>
-									</div>
-									<div >
-										<label for="email"><i class="fa-solid fa-envelope"></i></label><input
-											type="email" name="email" id="email" placeholder="請輸入電子信箱"
-											autocomplete="off" value="email@gmail.com">
-									</div>
-									<p>
-										<span>${errors.RegisterError}</span> <span>${errors.RegisterErrorAccount}</span>
-									</p>
-									<input type="submit" name="signin" id="signin" value="註冊">
-									<button type="button" class="btn btn-primary " id="correct">一鍵輸入</button>
-								</form>
+								<!-- 								<form action="newRegister" method="post" -->
+								<!-- 									modelAttribute="register" class="register-form" -->
+								<!-- 									id="Register-form" onSubmit="return isValid(this);"> -->
+								<input type="hidden" name="command" value="login">
+								<div class=group>
+								
+									<i class="fa-solid fa-user"></i> <input
+										type="text" name="account" id="account" placeholder="請輸入帳號"
+										autocomplete="off" value="id" required><div>
+										 <span
+										style='color: red' ; id='msgAccount'></span></div>
+								</div>
+
+								<div class=group>
+									<label for="password"><i class="fa-solid fa-lock"></i>
+									</label><input type="password" name="password" id="password"
+										placeholder="請輸入密碼(大小寫有別)" autocomplete="off" value="pwd">
+									<span id="" style="color: red"> </span>
+								</div>
+								<div class=group>
+									<label for="password"><i class="fa-solid fa-lock"></i>
+									</label><input type="password" name="password1" id="password1"
+										placeholder="重複輸入密碼" autocomplete="off" value="pwd"> <span
+										id="message2" style="color: red"> </span>
+								</div>
+								<div>
+									<label for="email"><i class="fa-solid fa-envelope"></i></label><input
+										type="email" name="email" id="email" placeholder="請輸入電子信箱"
+										autocomplete="off" value="email@gmail.com"><div><span
+										id="msgEmail" style="color: red"> </span></div>
+								</div>
+								<p>
+									<span>${errors.RegisterError}</span> <span>${errors.RegisterErrorAccount}</span>
+								</p>
+								<button type="button" name="submit" id="checkRegister"
+									onclick="">註冊</button>
+								<button type="button" class="btn btn-primary " id="correct">一鍵輸入</button>
+								<!-- 								</form> -->
 								<div>
 									已有帳號
 									<button type="button" class="btn btn-info btn--raised">
@@ -83,114 +88,59 @@ article {
 			</div>
 		</div>
 	</article>
-	<script language="javascript">
-		function isValid(form) {
-			if (form.account.value == "") {
-				alert("使用者名稱不能為空");
-				return false;
-			}
-			if (form.password.value == "") {
-				alert("密碼不能為空！");
-				return false;
-			} else if (form.password1.value == "") {
-				alert("密碼不能為空！");
-				return false;
-			} else if (form.email.value == "") {
-				alert("電子信箱不能為空！");
-				return false;
-			}
-			return true;
-		}
-	</script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	<!------------------------一鍵輸入---------------------- -->
 	<script>
 		$(function() {
 			$('#correct').click(function() {
 				$('#account').val("edward");
-				$('#password').val("test123");
-				$('#password1').val("test123");
+				$('#password').val("edward");
+				$('#password1').val("edward");
 				$('#email').val("ch570981400@gmail.com");
 			})
 		})
 	</script>
+	<!------------------------判斷是否帳號信箱存在--------------------->
 	<script type="text/javascript">
-		
-        //檢查信箱 非空/不能有中文/序列4以上含有'@' 觸發：onblur onsubmit
-        $('#email').on('blur', function(){
-         checkAccount()
-        })
-        function checkAccount(){
-          let account = $('#email').val()
-                  if(typeof account === "string"){
-                      if (account ==null || account ==""){
-                  var msg = "信箱必須填寫";  
-                  $('#sp4').text(msg);  
-                  return false
-              }else{
-              if (account.indexOf("@") > 4){ 
-                   var eng =new RegExp("[a-zA-z]"); //要改成有中文不行
-                   if(eng.test(account)){
-                      var msg="OK";
-                      $('#sp4').text(msg);  
-                  return true
-                  }else{
-                  var msg ="請輸入英文字母";
-                  $('#sp4').text(msg);  
-                  return false
-              }
-              }else{
-                  var msg ="請輸入有效信箱";
-                  $('#sp4').text(msg);  
-                  return false
-              }
-          }
-      }else{
-          var msg ="請輸入有效信箱";
-          $('#sp4').text(msg);  
-                  return false
-      } 
-      }
-		
-		
-		
-		        //檢查密碼 判斷 非空/不能有中文/須為8-16個字 觸發:onblur onsubmit
-        $('#password').on('blur',
-        function(){
-            checkPassword()
-        }
-        )
-        function checkPassword(){
-            let password = $('#password').val()
-                    if(typeof password === "string"){
-                        if (password ==null || password ==""){
-                    var msg = "密碼必須填寫";  
-                    $('#sp5').text(msg);  
-                    return false
-                }else{
-                     var eng =new RegExp("[a-zA-z]"); //要改成有中文不行
-                     if(eng.test(password)){
-                         if(password.length <=7 || password.length >=17){
-                             var msg="密碼須為6至16字含英文數字";  
-                             $('#sp5').text(msg);  
-                    return false                    
-                            }else{
-                                var msg="OK ";
-                                $('#sp5').text(msg);  
-                    return true
-                            }
-                    }else{
-                    var msg ="密碼須為6至16字含英文數字";
-                    $('#sp5').text(msg);  
-                    return false
-                }
-        
-            }
-        } else{
-            var msg="密碼須為6至16字含英文數字";  
-            $('#sp5').text(msg);  
-                    return false   
-        }
-        }
-        </script>
+		$('#checkRegister').on("click", function() {
+			let account = $('#account').val();
+			let password = $('#password').val();
+			let email = $('#email').val();
+			$('#msgAccount').text("");
+			$('#msgEmail').text("");
+			let member = {
+				account : account,
+				password : password,
+				email : email,
+			}
+			console.log(member)
+			fetch("newRegister",{
+				method:'POST',
+				headers:{
+					'Content-Type':'application/json'
+				},
+				body:JSON.stringify(member) 
+			}).then(resp=>resp.json())
+			.then(res=>{
+				console.log(res)
+				if('1112'==res.account){
+					
+					$('#msgAccount').text('帳號已註冊');
+				}
+				if('1111'==res.email){
+					
+					$('#msgEmail').text('信箱已註冊');
+				}
+				if(res=='2222')
+				  Swal.fire({
+                      icon: 'success',
+                      title: '註冊成功',
+                      text: '註冊成功，即將前往登入畫面',
+                  }).then(function(){
+                	  location.href='login.controller';
+                  })
+			})
+		})
+	</script>
 </body>
-
 </html>

@@ -75,12 +75,7 @@ function del(id) {
 }
 
 function add(id) {
-	Swal.fire({
-		icon: 'success',
-		title: '加入成功!',
-		showConfirmButton: false,
-		timer: 1500
-	})
+	
 	$.ajax({
 		async: false,
 		type: "POST",
@@ -92,7 +87,7 @@ function add(id) {
 					title: '同樣的課程商品已存在購物車!',
 					text: '',
 				})
-			}else{
+			}else if(data == "add Ok"){
 				
 				Swal.fire({
 					icon: 'success',
@@ -100,6 +95,8 @@ function add(id) {
 					showConfirmButton: false,
 					timer: 1500
 				})
+			}else{
+				window.location.href='logout';
 			}
 		}
 	})

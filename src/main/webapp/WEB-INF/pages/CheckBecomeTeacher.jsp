@@ -96,8 +96,8 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label>性別</label><span class="form-control ">${mb.sex}</span>
-										<input type="hidden" name="sex" value="${mb.sex}" />
-										<i class="form-group__bar"></i>
+										<input type="hidden" name="sex" value="${mb.sex}" /> <i
+											class="form-group__bar"></i>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -125,9 +125,8 @@
 											title="身分" id="status">
 											<c:if test="${mb.status==4}">
 												<option>未審核</option>
-												<option value="1">學生</option>
-												<option value="2">老師</option>
-												<option value="3">管理員</option>
+												<option value="1">駁回</option>
+												<option value="2">審核通過</option>
 											</c:if>
 										</select><i class="form-group__bar"></i>
 									</div>
@@ -138,8 +137,15 @@
 											<label>學歷 </label><input type="hidden" name="education"
 												size="50" id="education"
 												value="<c:out value='${mb.education}' />"
-												class="form-control" placeholder=""><span class="form-control ">${mb.education}</span><i
+												class="form-control" placeholder=""><span
+												class="form-control ">${mb.education}</span><i
 												class="form-group__bar"></i>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>駁回原因</label><input
+										type="text"	class="form-control"  name="reason"  />
 										</div>
 									</div>
 								</c:if>
@@ -147,22 +153,21 @@
 							<div class="form-group">
 								<label>加入時間</label><input type="hidden" name="joinDate"
 									id="joinDate" value="<c:out value='${mb.joinDate}' />"
-									class="form-control" placeholder=""><span class="form-control ">${mb.joinDate}</span><i
+									class="form-control" placeholder=""><span
+									class="form-control ">${mb.joinDate}</span><i
 									class="form-group__bar"></i>
 							</div>
 							<div class="form-group">
-								<label>自我介紹</label>
-								<input type="hidden" name="userprofile"
+								<label>自我介紹</label> <input type="hidden" name="userprofile"
 									id="userprofile" value="<c:out value='${mb.userprofile}' />"
-									class="form-control" placeholder=""><span class="form-control ">${mb.userprofile}</span>
-								<i class="form-group__bar"></i>
-								<input type="hidden" title="密碼" name="password" maxlength="20"
-											placeholder="*必填" value='${mb.password}' />
+									class="form-control" placeholder=""><span
+									class="form-control ">${mb.userprofile}</span> <i
+									class="form-group__bar"></i> <input type="hidden" title="密碼"
+									name="password" maxlength="20" placeholder="*必填"
+									value='${mb.password}' />
 							</div>
 							<div class="clearfix"></div>
 							<div class="mt-5 text-center">
-								<a href="" class="btn btn-primary">清空</a>
-								<button type="button" class="btn btn-primary " id="correct">一鍵輸入</button>
 								<a href="memberList"><input type="submit" name="return"
 									value="儲存"></a> <a href="memberList"><input
 									type="button" name="return" class="btn btn-outline-success"
@@ -170,9 +175,7 @@
 							</div>
 				</form>
 				<br>
-				<div></div>
 			</div>
-
 		</section>
 	</main>
 	<script>
@@ -188,120 +191,5 @@
 
 		}
 	</script>
-	<script>
-		$(function() {
-			
-			$('#correct').click(function() {
-				$('#nick').val("smalllucy");
-				$('#account').val("lucy");
-				$('#password').val("lucy");
-				$('#status').val("1");
-				$('#name').val("Lucu Wang");
-				$('#sex').val("女生");
-				$('#birthday').val("1999-03-02");
-				$('#cellphone').val("0922404678");
-				$('#email').val("lucy@gmail.com");
-				$('#joinDate').val("2022-09-27");
-			})
-		})
-	</script>
-
-
-	<script type="text/javascript">
-		function checkNull(form) {
-			if (form.account.value == "") {
-				alert("【 " + form.account.title + " 】" + "不能為空!!!");
-				return false;
-			}
-			if (form.password.value == "") {
-				alert("【 " + form.password.title + " 】" + "不能為空!!!");
-				return false;
-			}
-			if (form.email.value == "") {
-				alert("【 " + form.email.title + " 】" + "不能為空!!!");
-				return false;
-			}
-
-		}
-	</script>
-	<script type="text/javascript">
-		
-        //檢查信箱 非空/不能有中文/序列4以上含有'@' 觸發：onblur onsubmit
-        $('#email').on('blur', function(){
-         checkAccount()
-        })
-        function checkAccount(){
-          let account = $('#account').val()
-                  if(typeof account === "string"){
-                      if (account ==null || account ==""){
-                  var msg = "信箱必須填寫";  
-                  $('#sp4').text(msg);  
-                  return false
-              }else{
-              if (account.indexOf("@") > 4){ 
-                   var eng =new RegExp("[a-zA-z]"); //要改成有中文不行
-                   if(eng.test(account)){
-                      var msg="OK";
-                      $('#sp4').text(msg);  
-                  return true
-                  }else{
-                  var msg ="請輸入英文字母";
-                  $('#sp4').text(msg);  
-                  return false
-              }
-              }else{
-                  var msg ="請輸入有效信箱";
-                  $('#sp4').text(msg);  
-                  return false
-              }
-          }
-      }else{
-          var msg ="請輸入有效信箱";
-          $('#sp4').text(msg);  
-                  return false
-      } 
-      }
-		
-		
-		
-		        //檢查密碼 判斷 非空/不能有中文/須為8-16個字 觸發:onblur onsubmit
-        $('#password').on('blur',
-        function(){
-            checkPassword()
-        }
-        )
-        function checkPassword(){
-            let password = $('#password').val()
-                    if(typeof password === "string"){
-                        if (password ==null || password ==""){
-                    var msg = "密碼必須填寫";  
-                    $('#sp5').text(msg);  
-                    return false
-                }else{
-                     var eng =new RegExp("[a-zA-z]"); //要改成有中文不行
-                     if(eng.test(password)){
-                         if(password.length <=7 || password.length >=17){
-                             var msg="密碼須為6至16字含英文數字";  
-                             $('#sp5').text(msg);  
-                    return false                    
-                            }else{
-                                var msg="OK ";
-                                $('#sp5').text(msg);  
-                    return true
-                            }
-                    }else{
-                    var msg ="密碼須為6至16字含英文數字";
-                    $('#sp5').text(msg);  
-                    return false
-                }
-        
-            }
-        } else{
-            var msg="密碼須為6至16字含英文數字";  
-            $('#sp5').text(msg);  
-                    return false   
-        }
-        }
-        </script>
 </body>
 </html>

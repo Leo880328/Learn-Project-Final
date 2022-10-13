@@ -132,7 +132,7 @@ $(function () {
 		$('#course_price').val("487.00");
 		$('#course_duration').val("36小時8分");
 		$('#course_date').val("2022-11-01");
-		$('#lecturer_name').val("敬評");
+		$('#lecturer_name').val("溫妮");
 		$('#lecturer_email').val("winniepooh@gmail.com");
 
 		if ($("#course_name").val() != "") {
