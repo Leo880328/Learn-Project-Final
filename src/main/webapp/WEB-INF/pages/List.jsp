@@ -41,7 +41,7 @@
 	<jsp:include page="BackendHeader.jsp" />
 	<jsp:include page="Style.jsp" />
 <br><br><br><br>
-	<div align="center">
+	<div align="center" >
 	
          <form action="course.qname" method="post">
 			<label> 課程名稱 : <input type="text" name="keyword" size="9" style="background-color: white">
@@ -58,7 +58,7 @@
 		
 	</div>
 
-	<table class='tb'  border='1'>
+	<table class='tb '  border='1'>
 		<tr>
 			<td align="center">課程編號</td>
 			<td align="center">課程圖片</td>
@@ -78,29 +78,29 @@
 
 		<c:forEach var="course" items="${list}">
 			<tr>
-				<td><h4><center><c:out value="${course.courseId}" /></center></h4></td>
+				<td align="center"><h4><c:out value="${course.courseId}" /></h4></td>
 				<td><img src="<c:out value="${course.course_picture}" />" alt="" title="" width="150" height="150"></td>
 				<td><c:out value="${course.course_name}" /></td>
-				<c:if test="${course.coursesub.subject_id == '1'}"><td><center>數學</center></td></c:if>
-				<c:if test="${course.coursesub.subject_id == '2'}"><td><center>英文</center></td></c:if>
-				<c:if test="${course.coursesub.subject_id == '3'}"><td><center>多益</center></td></c:if>
-				<c:if test="${course.courseedu.education_id == '1'}"><td><center>國中</center></td></c:if>
-				<c:if test="${course.courseedu.education_id == '2'}"><td><center>高中</center></td></c:if>
-				<c:if test="${course.courseedu.education_id == '3'}"><td><center>成人</center></td></c:if>
+				<c:if test="${course.coursesub.subject_id == '1'}"><td align="center">數學</td></c:if>
+				<c:if test="${course.coursesub.subject_id == '2'}"><td align="center">英文</td></c:if>
+				<c:if test="${course.coursesub.subject_id == '3'}"><td align="center">多益</td></c:if>
+				<c:if test="${course.courseedu.education_id == '1'}"><td align="center">國中</td></c:if>
+				<c:if test="${course.courseedu.education_id == '2'}"><td align="center">高中</td></c:if>
+				<c:if test="${course.courseedu.education_id == '3'}"><td align="center">成人</td></c:if>
 <%-- 				<td><c:out value="${course.course_duration}" /></td> --%>
-				<td><center>$<c:out value="${course.course_price}" /></center></td>
-				<td><center><c:out value="${course.enrollment}" /></td>
+				<td align="center">$<c:out value="${course.course_price}" /></td>
+				<td align="center"><c:out value="${course.enrollment}" /></td>
 <%-- 				<td><c:out value="${course.course_date}" /></center></td> --%>
-				<td><center><c:out value="${course.lecturer_name}" /></center></td>
+				<td align="center"><c:out value="${course.lecturer_name}" /></td>
 				<c:if test="${course.course_status == 1}">
-				<td><center><button class="nst"><i class="fa-solid fa-triangle-exclamation"></i>未審核</button></center></td>
+				<td align="center"><button class="nst"><i class="fa-solid fa-triangle-exclamation"></i>未審核</button></td>
 				</c:if>
 				<c:if test="${course.course_status == 2}">
-				<td><center><button class="st">審核完成</button></center></td>
+				<td align="center"><button class="st">審核完成</button></td>
 				</c:if>
 				<c:if test="${course.course_status == 3}">
-				<td><center><button style="background-color:#000000;
-				border-radius: 10px" ><i class="fa-solid fa-reply"></i>已駁回</button></center></td>
+				<td align="center"><button style="background-color:#3C3C3C;
+				border-radius: 10px" ><i class="fa-solid fa-reply"></i>已駁回</button></td>
 				</c:if>
 <!-- 				<td> -->
 <%-- 					request.setAttribute("bean", courseBean); <a --%>
@@ -134,8 +134,8 @@
 	</table>
 	<br><br>
 	<div align="center">
-		<center><a href="course.add"><input type="submit" name="addcourse"
-			value="新增課程"></a></center>
+		<a href="course.add"><input type="submit" name="addcourse"
+			value="新增課程"></a>
 	</div>
 <script src="xiang/courseback.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

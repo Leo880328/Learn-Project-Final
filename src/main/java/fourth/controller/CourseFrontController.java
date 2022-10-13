@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import fourth.bean.CartItem;
 import fourth.bean.CourseBean;
 import fourth.bean.CourseCollect;
+import fourth.bean.CourseComments;
 import fourth.bean.MemberBean;
 import fourth.service.CourseService;
 
@@ -37,6 +38,8 @@ public class CourseFrontController {
 	public String listCourse1(Model m) {
 		List<CourseBean> list = cService.selectAll();
 		m.addAttribute("list", list);
+		List<CourseBean> top = cService.orderByEnrollment();
+		m.addAttribute("top", top);
 		return "CourseFrontList1";
 
 	}
@@ -65,6 +68,8 @@ public class CourseFrontController {
 		cbean.getcourseId();
 		List<CourseBean> list = cService.selectAll();
 		m.addAttribute("list", list);
+		List<CourseComments> comments = cService.findCourseCommentsByCourseBean_CourseId(courseId);
+		m.addAttribute("comments", comments);
 		return "Details";
 	}
 	
@@ -210,4 +215,21 @@ public class CourseFrontController {
 		cService.collectDelete(collectId);
 		return "deleteOK";
 	}
+	
+	@PostMapping(path = "/coursecomments.add")
+	public String addComments(Model m,Integer courseId,@RequestParam("comments") String comments) throws SQLException {
+		MemberBean user = (MemberBean)m.getAttribute("user");
+//		CourseBean bean = cService.findByCourseId(courseID);
+		cService.commentsAdd(user.getuserId(), courseId, comments);
+		return showFrontDetails(courseId,m);
+	}
+	
+	@ResponseBody
+	@DeleteMapping("/coursecomments.del/{id}")
+	public String delComments(@PathVariable("id")int commentsId) {
+		cService.deleteComments(commentsId);
+		return "deleteOK";
+	}
+	
+	
 }

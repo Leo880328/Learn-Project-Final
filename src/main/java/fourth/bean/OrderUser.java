@@ -38,7 +38,6 @@ public class OrderUser implements Serializable{
 	private OrderStatus status;
 	
 	private int totoalcount = 1;
-	private String discount;
 	private double totoalprice;
 	
 	
@@ -47,15 +46,18 @@ public class OrderUser implements Serializable{
 
 	@JsonManagedReference 
 	@OneToMany(mappedBy = "orderUser" ,cascade = CascadeType.ALL)
-	List<OrderItem> orderItems ;
+	private List<OrderItem> orderItems ;
 	
 	
 	
 	@OneToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 			 CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name = "user_id")
-	MemberBean memberBean ;
+	private MemberBean memberBean ;
 	
+	@OneToOne
+	@JoinColumn(name = "discount")
+	private Voucher voucher ;
 	
 	
 	public OrderUser() {
@@ -69,7 +71,6 @@ public class OrderUser implements Serializable{
 		this.date = date;
 		this.status = status;
 		this.totoalcount = totoalcount;
-		this.discount = discount;
 		this.totoalprice = totoalprice;
 	}
 	
@@ -81,7 +82,6 @@ public class OrderUser implements Serializable{
 		this.date = date;
 		this.status = status;
 		this.totoalcount = totoalcount;
-		this.discount = discount;
 		this.totoalprice = totoalprice;
 	}
 	
@@ -94,7 +94,6 @@ public class OrderUser implements Serializable{
 		this.date = date;
 		this.status = status;
 		this.totoalcount = totoalcount;
-		this.discount = discount;
 		this.totoalprice = totoalprice;
 	}
 	
@@ -108,7 +107,6 @@ public class OrderUser implements Serializable{
 		this.date = date;
 		this.status = status;
 		this.totoalcount = totoalcount;
-		this.discount = discount;
 		this.totoalprice = totoalprice;
 		this.orderItems = orderItems;
 		this.memberBean = memberBean;
@@ -149,12 +147,7 @@ public class OrderUser implements Serializable{
 	public void setTotoalcount(int totoalcount) {
 		this.totoalcount = totoalcount;
 	}
-	public String getDiscount() {
-		return discount;
-	}
-	public void setDiscount(String discount) {
-		this.discount = discount;
-	}
+	
 	public double getTotoalprice() {
 		return totoalprice;
 	}
@@ -179,12 +172,27 @@ public class OrderUser implements Serializable{
 
 	public void setorderItems(List<OrderItem> orderItems) {
 		this.orderItems = orderItems;
+
+	}
+
+	
+	
+	
+	public Voucher getVoucher() {
+		return voucher;
+	}
+
+	public void setVoucher(Voucher voucher) {
+		this.voucher = voucher;
+
 	}
 
 	@Override
 	public String toString() {
 		return "OrderUser [orderId=" + orderId  + ", date=" + date + ", status=" + status
-				+ ", totoalcount=" + totoalcount + ", discount=" + discount + ", totoalprice=" + totoalprice + "]" + memberBean;
+
+				+ ", totoalcount=" + totoalcount + ", voucher=" + voucher + ", totoalprice=" + totoalprice + "]" + memberBean;
+
 	}
 	
 	public void addorderItems(OrderItem item) {

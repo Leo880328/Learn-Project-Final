@@ -27,12 +27,14 @@ import fourth.bean.MemberBean;
 import fourth.bean.OrderItem;
 import fourth.bean.OrderStatus;
 import fourth.bean.OrderUser;
+import fourth.bean.Voucher;
 import fourth.dao.CartRepository;
 import fourth.dao.CourseRepository;
 import fourth.dao.MemberRepository;
 import fourth.dao.OrderItemRepository;
 import fourth.dao.OrderRepository;
 import fourth.dao.OrderStatusRepository;
+import fourth.dao.VoucherRepository;
 import fourth.ecpay.payment.integration.AllInOne;
 import fourth.ecpay.payment.integration.domain.AioCheckOutALL;
 import fourth.mail.JavaMail;
@@ -61,11 +63,13 @@ public class OrderService {
 	@Autowired
 	private OrderItemRepository itemRepository;
 	
+	@Autowired
+	private VoucherRepository voucherRepository;
 	
 	static AllInOne allInOne = new AllInOne("");
 
 	// @Override
-	public String ecPay(String orderId, String url, AioCheckOutALL obj) {
+	public String ecPay(String orderId, String url, AioCheckOutALL obj,String number) {
 		OrderUser orderUser = orderRepository.findById(orderId).get();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String dateToStr = dateFormat.format(orderUser.getDate());
@@ -80,16 +84,23 @@ public class OrderService {
 				i++;
 			}
 		}
-
+		
+		double total = orderUser.getTotoalprice();
+		
+		if(number.trim().length() != 0) {
+			Voucher voucher = voucherRepository.findAllByNumber(number);
+			total = total * voucher.getDiscount();
+		}
+		
 		obj.setMerchantTradeNo(orderId + String.valueOf((int) (Math.random() * 10000)));
 		obj.setMerchantTradeDate(dateToStr);
-		obj.setTotalAmount(String.valueOf((int) orderUser.getTotoalprice()));
+		obj.setTotalAmount(String.valueOf(Math.round(total)));
 		obj.setTradeDesc("test Description");
 		obj.setReturnURL("http://211.23.128.214:5000");
 		obj.setNeedExtraPaidInfo("N");
 		obj.setItemName(itemName);
 		//obj.setReturnURL("https://53b0-61-58-161-201.jp.ngrok.io/SpringMvcHomework/updateOrder/2/"+orderId);
-		obj.setClientBackURL(url + "/updateOrder/2/" + orderId);
+		obj.setClientBackURL(url + "/updateOrder/2/" + orderId +"/"+ number);
 		//obj.setClientBackURL(url+"/orderList");
 		String form = allInOne.aioCheckOut(obj, null);
 		return form;
@@ -137,6 +148,11 @@ public class OrderService {
 		OrderUser orderUser = orderRepository.findById(id).get();
 		return orderUser;
 	}
+	
+	public List<OrderUser> orderUserList(Integer userId) {
+		List<OrderUser> list = orderRepository.findByMemberBean_userId(userId);
+		return list;
+	}
 
 	// @Override
 	public void deleteOrder(String id) {
@@ -144,10 +160,21 @@ public class OrderService {
 	}
 
 	// @Override
-	public void updateOrder(int userStatus, int status, String orderId ,String url) throws SQLException {
+
+	public void updateOrder(int userStatus, int status, String orderId ,String url,String number) throws SQLException {
+
 		OrderUser orderUser = orderRepository.findById(orderId).get();
 		OrderStatus orderStatus = orderStatusRepository.findById(status).get();
 		orderUser.setStatus(orderStatus);
+		
+		if(number == null) {
+			
+		}else if(number.trim().length() != 0) {
+			Voucher voucher = voucherRepository.findAllByNumber(number);
+			voucher.setstatus(0);
+			voucherRepository.save(voucher);
+			orderUser.setVoucher(voucher);
+		}
 		
 		//新增課程觀看人數
 		if (userStatus == 3 && status == 4) {
@@ -217,9 +244,17 @@ public class OrderService {
 	}
 
 	public void sendbuyMail(OrderUser orderUser,String url) {
+		
+		double total = orderUser.getTotoalprice();
+		
+		if(orderUser.getVoucher()!= null) {
+			total = Math.round(total * orderUser.getVoucher().getDiscount());
+		}
+		
 		String txt = "<h2>" + "訂單編號: " + orderUser.getOrderId() + "<br>" + "訂單生成日期: " + orderUser.getDate() + "<br>"
 				+ "購買人姓名: " + orderUser.getMemberBean().getName() + "<br>" + "購買人信箱: "
-				+ orderUser.getMemberBean().getEmail() + "<br>" + "總金額: " + orderUser.getTotoalprice() + "<br>"
+				+ orderUser.getMemberBean().getEmail() + "<br>" + "總金額: " + total + "<br>"
+
 				+ "審核結果: 付款完成"+"<br>"
 				+"網站連結: <a href="+url +">EEIT49 好學生</a>"+"<h2>";
 		JavaMail javaMail = new JavaMail();
@@ -229,26 +264,39 @@ public class OrderService {
 		javaMail.sendMail();
 	}
 	public void sendbackMail(OrderUser orderUser,String url) {
+
+		
+		double total = orderUser.getTotoalprice();
+		
+		if(orderUser.getVoucher()!= null) {
+			total = Math.round(total * orderUser.getVoucher().getDiscount());
+		}
 		String txt = "<h2>" + "訂單編號: " + orderUser.getOrderId() + "<br>" + "訂單生成日期: " + orderUser.getDate() + "<br>"
 				+ "購買人姓名: " + orderUser.getMemberBean().getName() + "<br>" + "購買人信箱: "
-				+ orderUser.getMemberBean().getEmail() + "<br>" + "總金額: " + orderUser.getTotoalprice()+"<br>"
+				+ orderUser.getMemberBean().getEmail() + "<br>" + "總金額: " + total +"<br>"
 				+ "審核結果: 已退款"+"<br>"
 				+"網站連結: <a href="+url +">EEIT49 好學生</a>"+"<h2>";
 		JavaMail javaMail = new JavaMail();
 		javaMail.setCustomer("ggyy45529441@gmail.com");
-		javaMail.setSubject("好學生-EEIT49 申請退款已成功!");
+		javaMail.setSubject("好學生-EEIT49");
 		javaMail.setTxt(txt);
 		javaMail.sendMail();
 	}
 	public void sendTurnMail(OrderUser orderUser,String url) {
+
+		double total = orderUser.getTotoalprice();
+		
+		if(orderUser.getVoucher()!= null) {
+			total = Math.round(total * orderUser.getVoucher().getDiscount());
+		}
 		String txt = "<h2>" + "訂單編號: " + orderUser.getOrderId() + "<br>" + "訂單生成日期: " + orderUser.getDate() + "<br>"
 				+ "購買人姓名: " + orderUser.getMemberBean().getName() + "<br>" + "購買人信箱: "
-				+ orderUser.getMemberBean().getEmail() + "<br>" + "總金額: " + orderUser.getTotoalprice() + "<br>"
+				+ orderUser.getMemberBean().getEmail() + "<br>" + "總金額: " + total + "<br>"
 				+"審核結果: 已駁回" +"<br>"
 				+"網站連結: <a href="+url +">EEIT49 好學生</a>"+"<h2>";
 		JavaMail javaMail = new JavaMail();
 		javaMail.setCustomer("ggyy45529441@gmail.com");
-		javaMail.setSubject("好學生-EEIT49 申請退款已駁回!");
+		javaMail.setSubject("好學生-EEIT49");
 		javaMail.setTxt(txt);
 		javaMail.sendMail();
 	}

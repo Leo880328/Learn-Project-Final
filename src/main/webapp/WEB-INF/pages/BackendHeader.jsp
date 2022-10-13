@@ -11,9 +11,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Vendor styles -->
 <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-  
-<link rel="stylesheet"
-	href="backend/vendors/material-design-iconic-font/css/material-design-iconic-font.min.css">
+<link rel="stylesheet"	href="backend/vendors/material-design-iconic-font/css/material-design-iconic-font.min.css">
 <!-- <link rel="stylesheet" href="wayne/dist/css/adminlte.min.css"> -->
 <link rel="stylesheet"
 	href="backend/vendors/animate.css/animate.min.css">
@@ -23,22 +21,12 @@
 	href="backend/vendors/fullcalendar/fullcalendar.min.css">
 <!-- App styles -->
 <link rel="stylesheet" href="backend/css/app.min.css">
+<!-- <link rel="stylesheet" href="backend/css/bootstrap.min.css"> -->
 <title>好學生後台管理首頁</title>
 </head>
 <body data-ma-theme="green">
 	<main class="main">
-		<!-- 
-		<div class="page-loader">
-
-			<div class="page-loader__spinner">
-				<svg viewBox="25 25 50 50">
-                    <circle cx="50" cy="50" r="20" fill="none"
-						stroke-width="2" stroke-miterlimit="10" />
-                </svg>
-			</div>
-		</div>
-		-->
-		<header class="header">
+		<header class="header" >
 			<div class="navigation-trigger hidden-xl-up"
 				data-ma-action="aside-open" data-ma-target=".sidebar">
 				<div class="navigation-trigger__inner">
@@ -47,7 +35,7 @@
 						class="navigation-trigger__line"></i>
 				</div>
 			</div>
-			<div class="header__logo hidden-sm-down">
+			<div class="header__logo hidden-sm-down ">
 				<h1>
 					<a href="backendIndex"><img src="backend/img/logo.png"
 						width="125px"></a>
@@ -85,44 +73,6 @@
 							<div class="p-1"></div>
 						</div>
 					</div></li>
-				<!-- <div class="col-lg-2 col-sm-12 col-md-3 col-xs-12 col-ts-12"> -->
-				<!--                         <div class="header-control"> -->
-				<!--                             <div class="block-minicart teamo-mini-cart block-header teamo-dropdown"><a -->
-				<!--                                     href="javascript:void(0);" class="shopcart-icon" data-teamo="teamo-dropdown">Cart -->
-				<!--                                     <span class="count">0 </span></a> -->
-				<!--                                 <div class="shopcart-description teamo-submenu"> -->
-				<!--                                     <div class="content-wrap"> -->
-
-
-				<!--                                     </div> -->
-				<!--                                 </div> -->
-				<!--                             </div> -->
-
-				<!--                                     </div> -->
-				<!--                                 </div> -->
-				<!--                             </div> -->
-				<!--                 <li class="dropdown hidden-xs-down"><a href="" data-toggle="dropdown"><i -->
-				<!--                             class="zmdi zmdi-more-vert"></i></a> -->
-				<!--                     <div class="dropdown-menu dropdown-menu-right"> -->
-				<!--                         <div class="dropdown-item theme-switch"> 頁面色彩選擇<div -->
-				<!--                                 class="btn-group btn-group-toggle btn-group--colors" data-toggle="buttons"><label -->
-				<!--                                     class="btn bg-green active"><input type="radio" value="green" autocomplete="off" -->
-				<!--                                         checked></label><label class="btn bg-blue"><input type="radio" value="blue" -->
-				<!--                                         autocomplete="off"></label><label class="btn bg-red"><input type="radio" -->
-				<!--                                         value="red" autocomplete="off"></label><label class="btn bg-orange"><input -->
-				<!--                                         type="radio" value="orange" autocomplete="off"></label><label -->
-				<!--                                     class="btn bg-teal"><input type="radio" value="teal" autocomplete="off"></label> -->
-				<!--                                 <div class="clearfix mt-2"></div><label class="btn bg-cyan"><input type="radio" -->
-				<!--                                         value="cyan" autocomplete="off"></label><label class="btn bg-blue-grey"><input -->
-				<!--                                         type="radio" value="blue-grey" autocomplete="off"></label><label -->
-				<!--                                     class="btn bg-purple"><input type="radio" value="purple" -->
-				<!--                                         autocomplete="off"></label><label class="btn bg-indigo"><input type="radio" -->
-				<!--                                         value="indigo" autocomplete="off"></label><label class="btn bg-brown"><input -->
-				<!--                                         type="radio" value="brown" autocomplete="off"></label> -->
-				<!--                             </div> -->
-				<!--                         </div> -->
-				<!--                     </div> -->
-				<!--                 </li> -->
 				<li>
 
 
@@ -149,12 +99,12 @@
 
 				<ul class="navigation">
 
-					<li class="navigation__active"><a href="Index"><i
+					<li class="navigation__active" style="font-size: 1.3em"><a href="Index"><i
 							class="zmdi zmdi-home"></i>前台首頁</a></li>
-					<li><a href="memberList"><i
+					<li style="font-size: 1.3em"><a href="memberList"><i
 							class="zmdi zmdi-format-underlined"></i>會員管理</a></li>
 
-					<li class="navigation__sub"><a href=""><i
+					<li class="navigation__sub" style="font-size: 1.3em"><a href=""><i
 							class="zmdi zmdi-view-week"></i>試卷管理</a>
 						<ul>
 							<li><a href="firstExamController">全部試卷</a></li>
@@ -162,25 +112,20 @@
 							<li><a href="firstExamController">高中</a></li>
 							<li><a href="firstExamController">成人</a></li>
 						</ul></li>
-					<li class=""><a href="course.list"><i
+					<li class="" style="font-size: 1.3em"><a href="course.list"><i
 							class="zmdi zmdi-view-list"></i>課程管理</a>
-<!-- 						<ul> -->
-<!-- 							<li><a href="course.list">全部課程</a></li> -->
-<!-- 							<li><a href="hidden-sidebar.html">國中</a></li> -->
-<!-- 							<li><a href="boxed-layout.html">高中</a></li> -->
-<!-- 							<li><a href="hidden-sidebar-boxed-layout.html">成人</a></li> -->
-<!-- 						</ul> -->
 						</li>
 
 					
-					<li><a href="QueryAll"><i class="zmdi zmdi-collection-text"></i>專欄管理</a></li>
+					<li style="font-size: 1.3em"><a href="QueryAll"><i class="zmdi zmdi-collection-text"></i>專欄管理</a></li>
 					
-					<li><a href="ActivitiesOP"><i class="zmdi zmdi-calendar"></i>活動管理</a></li>
+					<li style="font-size: 1.3em"><a href="ActivitiesOP"><i class="zmdi zmdi-calendar"></i>活動管理</a></li>
 
-					<li><a href="orderList"><i class="zmdi zmdi-widgets"></i>訂單管理</a></li>
+					<li style="font-size: 1.3em"><a href="orderList"><i class="zmdi zmdi-widgets"></i>訂單管理</a></li>
 					
-					<li><a href="chart"><i class="zmdi zmdi-trending-up"></i>營收圖表</a></li>
+					<li style="font-size: 1.3em"><a href="chart"><i class="zmdi zmdi-trending-up"></i>營收圖表</a></li>
                             
+					<li style="font-size: 1.3em"><a href="backDairy"><i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i>後台日誌</a></li>
 				</ul>
 			</div>
 

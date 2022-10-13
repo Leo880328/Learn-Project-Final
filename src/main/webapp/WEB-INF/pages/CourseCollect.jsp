@@ -46,15 +46,12 @@
                     href="#"><span></span><span></span><span></span></a></div>
         </div>
     </div>
+    <br>
     <div class="main-content main-content-product no-sidebar">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-trail breadcrumbs">
-                        <ul class="trail-items breadcrumb">
-                            <li class="trail-item trail-begin"><a href="Index">首頁</a></li>
-                            <li class="trail-item trail-end active">我的收藏 </li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -70,7 +67,8 @@
                                 <div class="product-inner equal-element">
                                     <div class="product-top"></div>
                                     <div class="product-thumb">
-                                        <div class="thumb-inner"><a href="#"><img src="<c:out value="${collect.courseBeans.course_picture}"/>"
+                                        <div class="thumb-inner"><a href="coursefront.details?courseId=${collect.courseBeans.courseId}">
+                                        <img src="<c:out value="${collect.courseBeans.course_picture}"/>"
                                                     alt="img"></a>
 <!--                                             <div class="thumb-group"> -->
 <!--                                                 <div class="yith-wcwl-add-to-wishlist"> -->
@@ -84,7 +82,8 @@
                                         </div>
                                     </div>
                                     <div class="product-info">
-                                        <h5 class="product-name product_title"><a href="#"><c:out value="${collect.collectName}"/></a></h5>
+                                        <h5 class="product-name product_title" style="font-size: 1.5em"><a href="coursefront.details?courseId=${collect.courseBeans.courseId}">
+                                        <c:out value="${collect.collectName}"/></a></h5>
                                         <div class="group-info">
                                             <div class="stars-rating">
                                                 <div class="star-rating"><span class="star-5"></span></div>
@@ -92,7 +91,7 @@
                                             </div>
                                             <div class="price"><ins>$ <c:out value="${collect.courseBeans.course_price}"/> </ins></div>
                                               <div class="bookmark" style="margin-right: -220px" onclick="delCollectById(${collect.id})">
-                                              <i class="fa-solid fa-bookmark" style="font-size:22px"></i>
+                                              <i class="fa-solid fa-bookmark" style="font-size:22px;color:#65a15a"></i>
                                               </div>
                                         </div>
                                     </div>

@@ -85,4 +85,9 @@ public class CartService {
 		}
 		return cartItem;
 	}
+
+	public CartItem findsameCourse(String courseID,Integer userId) {
+			CartItem cartItem = cartRepository.findByCourseBean_CourseIdAndMemberBean_UserId(WebUtils.paseInt(courseID),userId);
+			return cartItem;
+	}
 }

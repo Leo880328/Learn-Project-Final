@@ -13,6 +13,7 @@ function del(id) {
 		if (result.isConfirmed) {
 			Swal.fire({
 				title: '刪除成功!',
+				icon: 'success',
 				willClose: function () {
 					$.ajax({
 						async: true,
@@ -56,12 +57,12 @@ function haveCollect() {
 			if (data) {
 				$(`.collect`).html(`
 				<div class="yith-wcwl-add-button addcollect"onclick="delCollect(${course.courseId})">
-				<i class="fa-solid fa-heart"> 已加入收藏</i></div>
+				<i class="fa-solid fa-heart" style="font-size: 1.5em;color:#FF79BC"> 已加入收藏</i></div>
 				`)
 			} else {
 				$(`.collect`).html(`
 			<div class="yith-wcwl-add-button addcollect"onclick="addcollect(${course.courseId})">
-			<i class=" fa-regular fa-heart"> 加入收藏</i></div>
+			<i class=" fa-regular fa-heart" style="font-size: 1.5em"> 加入收藏</i></div>
 			`)
 
 			}
@@ -85,6 +86,7 @@ function checkUpdate() {
 		if (result.isConfirmed) {
 			Swal.fire({
 				title: '送出成功 ! 請等候管理員審核 ',
+				icon: 'success',
 				willClose: function () {
 					$('.cfu').submit();
 				}
@@ -111,7 +113,7 @@ function addcollect(id) {
 		}
 	}).then(function () {
 		$(".collect").html(`<div class="yith-wcwl-add-button addcollect"onclick="delCollect(${course.courseId})">
-		<i class="fa-solid fa-heart"> 已加入收藏</i></div>`)
+		<i class="fa-solid fa-heart"  style="font-size: 1.5em;color:#FF79BC"> 已加入收藏</i></div>`)
 	})
 }
 
@@ -133,7 +135,7 @@ function delCollect(id) {
 		}
 	}).then(function () {
 		$(".collect").html(`<div class="yith-wcwl-add-button addcollect"onclick="addcollect(${course.courseId})">
-		<i class=" fa-regular fa-heart"> 加入收藏</i></div>`)
+		<i class=" fa-regular fa-heart"  style="font-size: 1.5em"> 加入收藏</i></div>`)
 	})
 }
 
@@ -141,7 +143,7 @@ function delCollectById(id) {
 	console.log(id);
 	Swal.fire({
 
-		//		icon: 'success',
+		icon: 'success',
 		title: '已取消收藏!',
 		//		showConfirmButton: false,
 		//		timer: 1500
@@ -159,5 +161,5 @@ function delCollectById(id) {
 			})
 		}
 	})
-	//	myFunction();
 }
+

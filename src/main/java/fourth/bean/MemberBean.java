@@ -126,6 +126,10 @@ public class MemberBean {
 	@JsonIgnore
 	@OneToMany(mappedBy = "memberBeans", cascade = CascadeType.ALL)
 	private List<CourseCollect> courseCollect;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "memberBean", cascade = CascadeType.ALL)
+	private List<CourseComments> courseComments;
 
 	public MemberBean(Integer userId, String nick, String account, String password, int status, String name, String img,
 			String sex, String birthday, String cellphone, String email, String joinDate) {
@@ -290,6 +294,16 @@ public class MemberBean {
 
 	public void setCourseCollect(List<CourseCollect> courseCollect) {
 		this.courseCollect = courseCollect;
+	}
+	
+	
+
+	public List<CourseComments> getCourseComments() {
+		return courseComments;
+	}
+
+	public void setCourseComments(List<CourseComments> courseComments) {
+		this.courseComments = courseComments;
 	}
 
 	@Override

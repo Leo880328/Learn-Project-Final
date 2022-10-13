@@ -1,23 +1,27 @@
 package fourth.service;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fourth.bean.CartItem;
 import fourth.bean.CourseBean;
 import fourth.bean.CourseCollect;
+import fourth.bean.CourseComments;
 import fourth.bean.CourseEdu;
 import fourth.bean.CourseSub;
 import fourth.bean.MemberBean;
 import fourth.bean.OrderUser;
 import fourth.dao.CourseCollectRepository;
+import fourth.dao.CourseCommentsRepository;
 import fourth.dao.CourseEduRepository;
 import fourth.dao.CourseRepository;
 import fourth.dao.CourseSubRepository;
@@ -42,6 +46,9 @@ public class CourseService {
 	private CourseCollectRepository courseCollectRepository;
 	
 	@Autowired
+	private CourseCommentsRepository courseCommentsRepository;
+	
+	@Autowired
 	private MemberRepository memberRepository;
 
 	public CourseBean insert(CourseBean courseBean, Integer subId, Integer eduId) {
@@ -59,6 +66,10 @@ public class CourseService {
 			return optional.get();
 		}
 		return null;
+	}
+	
+	public List<CourseBean> orderByEnrollment() {
+		return cosRep.orderByEnrollment();
 	}
 
 	public List<CourseBean> findByNameLike(String course_name) {
@@ -133,6 +144,31 @@ public class CourseService {
 		System.err.println(courseId);
 		courseCollectRepository.deleteByMemberBeans_UserIdAndCourseBeans_CourseId(userId, courseId);
 	}
+	
+	public void commentsAdd(int userId, int courseId, String comments) throws SQLException{
+		System.out.println(courseId);
+		CourseBean course = cosRep.findById(courseId).get();
+		MemberBean memberBean = memberRepository.findById(userId).get();
+		CourseComments courseComments = new CourseComments();
+		courseComments.setCourseBean(course);
+		courseComments.setMemberBean(memberBean);
+		courseComments.setComments(comments);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		courseComments.setCommentsDate(simpleDateFormat.format(date));
+		System.err.println(courseComments);
+		courseCommentsRepository.save(courseComments);
+	}
+	
+	public List<CourseComments> findCourseCommentsByCourseBean_CourseId(int courseId) {
+		return courseCommentsRepository.findCourseCommentsByCourseBean_CourseId(courseId);
+	}
+	
+	public void deleteComments(int commentsId) {
+		courseCommentsRepository.deleteById(commentsId);
+		System.err.println(commentsId);
+	}
+
 	
 
 }

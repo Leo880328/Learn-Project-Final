@@ -84,6 +84,7 @@ border-radius: 5px;
                     </div>
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="content-area shop-grid-content no-banner col-lg-9 col-md-9 col-sm-12 col-xs-12">
                     <div class="site-main">
@@ -129,7 +130,9 @@ border-radius: 5px;
 								<c:when test="${queryResult != null }">
 									<c:forEach var="course" items="${queryResult}">
 									  <c:if test="${course.course_status == 2}">
-											<%-- <input type="hidden" name="courseId" value='<c:out value="${course.courseId}"/>'> --%>
+
+											<input type="hidden" name="courseId" value='<c:out value="${course.courseId}"/>'>
+
 											<li
 												class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
 												<div class="product-inner equal-element">
@@ -144,7 +147,7 @@ border-radius: 5px;
 														</div>
 													</div>
 													<div class="product-info">
-														<h5 class="product-name product_title">
+														<h5 class="product-name product_title"  style="font-size:1.2em">
 															<a
 																href="coursefront.details?courseId=${course.courseId}"><c:out
 																	value="${course.course_name}" /></a>
@@ -191,7 +194,7 @@ border-radius: 5px;
 														</div>
 													</div>
 													<div class="product-info">
-														<h5 class="product-name product_title">
+														<h5 class="product-name product_title"  style="font-size:1.2em">
 															<a
 																href="coursefront.details?courseId=${course.courseId}"><c:out
 																	value="${course.course_name}" /></a>
@@ -210,7 +213,9 @@ border-radius: 5px;
 																</ins>
 															</div>
 															<br> 
+
 															<button class="fa-solid fa-cart-shopping" onclick="add(${course.courseId})">加入購物車</button>
+
 														</div>
 													</div>
 												</div>
@@ -244,15 +249,6 @@ border-radius: 5px;
                                     <li><a href="coursefront.qenglish"><button type="submit" class="cb" id="cb1">英文</button></a>
                                     <a href="coursefront.qmath"><button type="submit" class="cb" id="cb2">數學</button></a>
                                     <a href="coursefront.qtoeic"><button type="submit" class="cb" id="cb3">多益</button></a></li>
-<!--                                     <label for="cb1" class="label-text">英文 -->
-<!--                                         </label></li> -->
-<!--                                     <li><input type="checkbox" id="cb1"><label for="cb1" class="label-text">英文 -->
-<!--                                         </label></li> -->
-<!--                                     <li><input type="checkbox" id="cb2"><label for="cb2" class="label-text">數學 -->
-<!--                                         </label></li> -->
-<!--                                     <li><input type="checkbox" id="cb3"><label for="cb3" class="label-text">多益 -->
-<!--                                         </label></li> -->
-
                                 </ul>
                             </div>
 <!--                             <div class="widget widget_filter_price"> -->
@@ -271,17 +267,26 @@ border-radius: 5px;
                                 <li><a href="coursefront.qjunior"><button type="submit" class="cb" id="cb7">國中</button></a>
                                     <a href="coursefront.qsenior"><button type="submit" class="cb" id="cb8">高中</button></a>
                                     <a href="coursefront.qaldult"><button type="submit" class="cb" id="cb9">成人</button></a></li>
-<!--                                     <li><input id="cb7" type="checkbox"><label for="cb7" class="label-text">國中</label> -->
-<!--                                     </li> -->
-<!--                                     <li><input id="cb8" type="checkbox"><label for="cb8" class="label-text">高中</label> -->
-<!--                                     </li> -->
-<!--                                     <li><input id="cb9" type="checkbox"><label for="cb9" class="label-text">成人</label> -->
-<!--                                     </li> -->
-
-
                                 </ul>
                             </div>
-
+                     <div class="widget widget-post">
+                            <h1 class="widgettitle" style="font-size: 1.5em"><i class="fa-solid fa-crown" style="color:#FFD306"></i> 暢銷排行榜</h1>
+                            <ul class="teamo-posts">
+                            <c:forEach var="top" items="${top}">
+                                <li class="widget-post-item">
+                                    <div class="thumb-blog"><a href="coursefront.details?courseId=${top.courseId}">
+                                    <img src="<c:out value="${top.course_picture}"/>" alt="img"></a></div>
+                                    <div class="post-content">
+                                        <h5 class="post-title" style="font-size: 1.2em"><a href="coursefront.details?courseId=${top.courseId}">
+                                        <c:out value="${top.course_name}"/>
+                                                <span>[...]</span></a></h5>
+                                                <div class="cat" style="font-size: 1.1em"><a href="coursefront.details?courseId=${top.courseId}">
+                                                銷售量 : <c:out value="${top.enrollment}"/></a></div>
+                                    </div>
+                                </li>
+                              </c:forEach>
+                            </ul>
+                        </div>
 
                         </div>
 
