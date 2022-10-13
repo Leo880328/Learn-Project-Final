@@ -27,13 +27,13 @@ import fourth.bean.CartItem;
 @Entity
 @Table(name = "course")
 @Component
-public class CourseBean implements Serializable{
+public class CourseBean implements Serializable {
 
 //	private static final long serialVersionUID = 1L;
 	@Id
-	@Column(name = "course_id")
+	@Column(name = "courseId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int course_id;
+	private int courseId;
 	private int user_id;
 	@Transient
 	private int subject_id;
@@ -50,15 +50,13 @@ public class CourseBean implements Serializable{
 	private String lecturer_email;
 	private int course_status;
 	private String course_picture;
-	
-	
 
-	@JsonManagedReference 
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "education_id")
 	private CourseEdu courseedu;
 
-	@JsonManagedReference 
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "subject_id")
 	private CourseSub coursesub;
@@ -67,15 +65,82 @@ public class CourseBean implements Serializable{
 	@OneToMany(mappedBy = "courseBean", cascade = CascadeType.ALL)
 	private List<CartItem> carts;
 
+	@JsonIgnore
+	@OneToMany(mappedBy = "courseBeans", cascade = CascadeType.ALL)
+	private List<CourseCollect> cCollect;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "courseBean", cascade = CascadeType.ALL)
+	private List<CourseComments> cComments;
+
 	public CourseBean() {
 	}
 
-	public CourseBean(int course_id, int user_id, int subject_id, int education_id, String course_name,
+//<<<<<<< HEAD
+////	public CourseBean(int courseId, int user_id, int subject_id, int education_id, String course_name,
+////			String course_introduction, double course_price, String course_duration, int enrollment, String course_date,
+////			String lecturer_name, String lecturer_email, int course_status, String course_picture, CourseEdu courseedu,
+////			CourseSub coursesub, List<CartItem> carts) {
+////		super();
+////		this.courseId = courseId;
+////		this.user_id = user_id;
+////		this.subject_id = subject_id;
+////		this.education_id = education_id;
+////		this.course_name = course_name;
+////		this.course_introduction = course_introduction;
+////		this.course_price = course_price;
+////		this.course_duration = course_duration;
+////		this.enrollment = enrollment;
+////		this.course_date = course_date;
+////		this.lecturer_name = lecturer_name;
+////		this.lecturer_email = lecturer_email;
+////		this.course_status = course_status;
+////		this.course_picture = course_picture;
+////		this.courseedu = courseedu;
+////		this.coursesub = coursesub;
+////		this.carts = carts;
+////	}
+//	
+//	
+//	
+//	
+//
+//	
+//
+//	public int getcourseId() {
+//		return courseId;
+//	}
+//
+//	public CourseBean(int courseId, int user_id, int subject_id, int education_id, String course_name,
+//		String course_introduction, double course_price, String course_duration, int enrollment, String course_date,
+//		String lecturer_name, String lecturer_email, int course_status, String course_picture, CourseEdu courseedu,
+//		CourseSub coursesub, List<CartItem> carts, List<CourseCollect> cCollect) {
+//	super();
+//	this.courseId = courseId;
+//	this.user_id = user_id;
+//	this.subject_id = subject_id;
+//	this.education_id = education_id;
+//	this.course_name = course_name;
+//	this.course_introduction = course_introduction;
+//	this.course_price = course_price;
+//	this.course_duration = course_duration;
+//	this.enrollment = enrollment;
+//	this.course_date = course_date;
+//	this.lecturer_name = lecturer_name;
+//	this.lecturer_email = lecturer_email;
+//	this.course_status = course_status;
+//	this.course_picture = course_picture;
+//	this.courseedu = courseedu;
+//	this.coursesub = coursesub;
+//	this.carts = carts;
+//	this.cCollect = cCollect;
+//}
+	public CourseBean(int courseId, int user_id, int subject_id, int education_id, String course_name,
 			String course_introduction, double course_price, String course_duration, int enrollment, String course_date,
 			String lecturer_name, String lecturer_email, int course_status, String course_picture, CourseEdu courseedu,
 			CourseSub coursesub, List<CartItem> carts) {
 		super();
-		this.course_id = course_id;
+		this.courseId = courseId;
 		this.user_id = user_id;
 		this.subject_id = subject_id;
 		this.education_id = education_id;
@@ -94,12 +159,12 @@ public class CourseBean implements Serializable{
 		this.carts = carts;
 	}
 
-	public int getCourse_id() {
-		return course_id;
+	public int getcourseId() {
+		return courseId;
 	}
 
-	public void setCourse_id(int course_id) {
-		this.course_id = course_id;
+	public void setcourseId(int courseId) {
+		this.courseId = courseId;
 	}
 
 	public int getUser_id() {
@@ -229,10 +294,11 @@ public class CourseBean implements Serializable{
 	public void setCarts(List<CartItem> carts) {
 		this.carts = carts;
 	}
+
 //
 //	@Override
 //	public String toString() {
-//		return "CourseBean [course_id=" + course_id + ", user_id=" + user_id + ", subject_id=" + subject_id
+//		return "CourseBean [courseId=" + courseId + ", user_id=" + user_id + ", subject_id=" + subject_id
 //				+ ", education_id=" + education_id + ", course_name=" + course_name + ", course_introduction="
 //				+ course_introduction + ", course_price=" + course_price + ", course_duration=" + course_duration
 //				+ ", enrollment=" + enrollment + ", course_date=" + course_date + ", lecturer_name=" + lecturer_name
@@ -240,14 +306,36 @@ public class CourseBean implements Serializable{
 //				+ courseedu + ", coursesub=" + coursesub + ", carts=" + carts + "]";
 //	}
 
-	@Override
-	public String toString() {
-		return "CourseBean [course_id=" + course_id + ", user_id=" + user_id + ", subject_id=" + subject_id
-				+ ", education_id=" + education_id + ", course_name=" + course_name + ", course_introduction="
-				+ course_introduction + ", course_price=" + course_price + ", course_duration=" + course_duration
-				+ ", enrollment=" + enrollment + ", course_date=" + course_date + ", lecturer_name=" + lecturer_name
-				+ ", lecturer_email=" + lecturer_email + ", course_status=" + course_status + ", course_picture="
-				+ course_picture + "]";
+	public List<CourseCollect> getcCollect() {
+		return cCollect;
 	}
 
+	public void setcCollect(List<CourseCollect> cCollect) {
+		this.cCollect = cCollect;
+	}
+	
+	
+
+	public List<CourseComments> getcComments() {
+		return cComments;
+	}
+
+	public void setcComments(List<CourseComments> cComments) {
+		this.cComments = cComments;
+	}
+
+	@Override
+	public String toString() {
+//<<<<<<< HEAD
+//		return "CourseBean [courseId=" + courseId + ", user_id=" + user_id + ", subject_id=" + subject_id
+//				+ ", education_id=" + education_id + ", course_name=" + course_name + ", course_introduction="
+//				+ course_introduction + ", course_price=" + course_price + ", course_duration=" + course_duration
+//				+ ", enrollment=" + enrollment + ", course_date=" + course_date + ", lecturer_name=" + lecturer_name
+//				+ ", lecturer_email=" + lecturer_email + ", course_status=" + course_status + ", course_picture="
+//				+ course_picture + "]";
+//=======
+
+		return "CourseBean [courseId=" + courseId + ", user_id=" + user_id + ", subject_id=" + subject_id;
+
+	}
 }

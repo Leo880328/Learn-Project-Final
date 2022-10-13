@@ -12,20 +12,26 @@ function cartList() {
 				$("#cart").append(cart(n))
 				total += n.courseBean.course_price;
 			});
+			totmoney="";
+			if(total != 0){
+				totmoney=` <td colspan="7"></td>
+			            <th id="total" >總金額: $${total}</th>`;
+			}
+			
 			cartTotal();
 			$("#e").append(` 
 			        
 			        <tr>
-			            <td colspan="8" id="clear"></td>
+			            <td colspan="8" id="clear" style="text-align:center;" ></td>
 			
 			        </tr>
 			    
-			        <td colspan="8"><a href="coursefront1.list" style="color: red"><input type="hidden" name="return"
-			                value="前往探索更多課程~">前往探索更多課程~</a></td>
-			        <tr>
-			        
-			        <td colspan="7"></td>
-			            <th id="total">總金額: $${total}</th>
+
+			    	<tr>
+			        <td colspan="8" style="text-align:center;" ><a href="coursefront1.list" style="color: red"><input type="hidden" name="return"
+			                value="前往探索更多課程~">前往探索更多課程~</a></td></tr>
+			        <tr id="moneytext">`+totmoney+`
+
 			        </tr>   `)
 		}
 	})
@@ -33,10 +39,10 @@ function cartList() {
 
 
 function cart(cart) {
-	
+
 	let data = `
-        <tr id="${cart.id}">
-            <td><img src="${cart.courseBean.course_picture}" alt=""
+        <tr id="${cart.id}" >
+            <td style="text-align:center;" ><img src="${cart.courseBean.course_picture}" alt=""
                 title="" width="150" height="100"></td>
             <td style="vertical-align: middle;">${cart.itemName}</td>
             <td style="vertical-align: middle;">${cart.courseBean.coursesub.subject_name}</td>
@@ -45,7 +51,7 @@ function cart(cart) {
             <td style="vertical-align: middle;">${cart.courseBean.enrollment}</td>
             <td style="vertical-align: middle;">$${cart.courseBean.course_price}</td>
             
-            <td class="product-remove" style="vertical-align: middle;"><a
+            <td class="product-remove" style="text-align:center;" ><a
                 href="javascript:;" class="remove" onclick="del(${cart.id})"></a></td>
 
         </tr>
@@ -69,19 +75,29 @@ function del(id) {
 }
 
 function add(id) {
-	Swal.fire({
-
-		icon: 'success',
-		title: '加入成功!',
-		showConfirmButton: false,
-		timer: 1500
-	})
+	
 	$.ajax({
 		async: false,
 		type: "POST",
 		url: "cartadd/" + id,
 		success: function(data) {
-			console.log(data);
+			if (data == "exist") {
+				Swal.fire({
+					icon: 'error',
+					title: '同樣的課程商品已存在購物車!',
+					text: '',
+				})
+			}else if(data == "add Ok"){
+				
+				Swal.fire({
+					icon: 'success',
+					title: '加入成功!',
+					showConfirmButton: false,
+					timer: 1500
+				})
+			}else{
+				window.location.href='logout';
+			}
 		}
 	})
 	myFunction();
@@ -108,7 +124,10 @@ function cartTotal() {
 			$("#buy").empty();
 			if (total != 0) {
 				$("#buy").append(`<button class="btn btn-success" onclick="buyCheck()">確認購買</button>`);
+			}else{
+				$("#moneytext").empty();
 			}
+			
 		}
 	})
 }

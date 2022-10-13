@@ -80,7 +80,7 @@
 	<div class="container ">
 		<div lass="row justify-content-center ">
 			<form class="cart-form" method="post" id="f">
-				<table class="table table-striped " style="text-align: center;"
+				<table class="shop_table " style="text-align: center;"
 					id="e">
 					<thead>
 						<tr>
@@ -95,7 +95,19 @@
 									style="vertical-align: middle;">刪除</div></th>
 						</tr>
 					</thead>
+						<tr style="background-color: #DEFFDE">
+							<th class="table-success">課程照片</th>
+							<th class="table-success">課程名稱</th>
+							<th class="table-success">課程分類</th>
+							<th class="table-success">課程時長</th>
+							<th class="table-success">講師</th>
+							<th class="table-success">購買人數</th>
+							<th class="table-success">價格</th>
+							<th class="table-success"><div
+									style="vertical-align: middle;">刪除</div></th>
 					<tbody id="cart">
+							
+							
 					</tbody>
 
 				</table>
@@ -108,7 +120,7 @@
 				</tr>
 				<tr>
 					<td colspan="10">
-						<button class="btn btn-danger" id="b" onclick="cartClear()">清空購物車</button>
+						<button class="btn btn-danger" id="b" onclick="cartClear()" >清空購物車</button>
 					</td>
 				</tr>
 			</table>

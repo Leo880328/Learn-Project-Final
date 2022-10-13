@@ -5,14 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="shortcut icon" type="image/x-icon"
-	href="images/smalllogo.png" />
-<link
-	href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap"
-	rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="images/smalllogo.png" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <link rel="stylesheet" href="./css/font-awesome.min.css">
 <link rel="stylesheet" href="./css/owl.carousel.min.css">
@@ -34,6 +29,11 @@
 	height: 50px;
 	padding: 50px 0
 }
+
+.font{
+   font-size: 1.2em;
+   font-weight: bold;
+}
 </style>
 <title>Header</title>
 <%request.getServletContext().setAttribute("PATH", request.getContextPath()); %>
@@ -42,6 +42,9 @@
 		$.getJSON("cart/cartCount", function(data) {
 			$("#msg").html(data);
 		});
+		if("${sessionScope.user}" == ""){
+			$("#msg").html(0);
+		}
 	}
 </script>
 </head>
@@ -51,7 +54,7 @@
 		<div class="top-bar">
 			<div class="container">
 				<div class="top-bar-left">
-					<div class="header-message">Welcome!歡迎來到好學生學習平台</div>
+					<div class="header-message font">Welcome ! 歡迎來到好學生學習平台</div>
 				</div>
 				<div class="top-bar-right">
 					<div class="header-language"></div>
@@ -59,7 +62,7 @@
 						<c:when test="${sessionScope.user == null }">
 
 							<ul class="header-user-links">
-								<li><a href="login.controller" id="btn">登入</a> | <a
+								<li class="font"><a href="login.controller" id="btn">登入</a> | <a
 									href="register.controller">註冊</a></li>
 								<li></li>
 							</ul>
@@ -71,8 +74,9 @@
 								<c:if test="${sessionScope.user.nick == null}">
 
 								</c:if>
-								<li><a href="#"><b>${sessionScope.user.nick}(審核中)</b></a> |
-									<a href="logout.controller">登出</a></li>
+								<li  class="font"><a href="#"><b>${sessionScope.user.nick}(審核中)</b></a> |
+									<a href="logout">登出</a></li>
+
 								<li></li>
 							</ul>
 						</c:when>
@@ -83,8 +87,10 @@
 								<c:if test="${sessionScope.user.nick == null}">
 
 								</c:if>
-								<li><a href="#"><b>${sessionScope.user.nick}(學生)</b></a> |
-									<a href="logout.controller">登出</a></li>
+
+								<li  class="font"><a href="#"><b>${sessionScope.user.nick}(學生)</b></a> |
+									<a href="logout">登出</a></li>
+
 								<li></li>
 							</ul>
 						</c:when>
@@ -92,8 +98,10 @@
 						<c:when test="${sessionScope.user.status == 2 }">
 
 							<ul class="header-user-links">
-								<li><a href="#"><b>${sessionScope.user.nick}(老師)</b></a> |
-									<a href="logout.controller">登出</a></li>
+
+								<li  class="font"><a href="#"><b>${sessionScope.user.nick}(老師)</b></a> |
+									<a href="logout">登出</a></li>
+
 								<li></li>
 							</ul>
 						</c:when>
@@ -101,8 +109,10 @@
 						<c:otherwise>
 							<c:if test="${sessionScope.user.status == 3}">
 								<ul class="header-user-links">
-									<li><a href="#"><b>${sessionScope.user.nick}(管理員)</b></a>
-										| <a href="logout.controller">登出</a></li>
+
+									<li  class="font"><a href="#"><b>${sessionScope.user.nick}(管理員)</b></a>
+										| <a href="logout">登出</a></li>
+
 									<li></li>
 								</ul>
 
@@ -169,13 +179,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="header-nav-container rows-space-20">
+		<div class="header-nav-container">
 			<div class="container">
 				<div class="header-nav-wapper main-menu-wapper">
 					<div class="vertical-wapper block-nav-categori">
 						<div class="block-title">
-							<span class="icon-bar"><span></span><span></span><span></span></span><span
-								class="text">全部分類</span>
+							<span class="icon-bar "><span></span><span></span><span></span></span><span
+								class="text font">全部分類</span>
 						</div>
 						<div class="block-content verticalmenu-content">
 							<ul
@@ -187,6 +197,8 @@
 								<li class="menu-item "><a title="Accessories" href="Activities"
 									class="teamo-menu-item-title">我的活動</a><span
 									class="toggle-submenu"></span></li>
+								<li class="menu-item"><a title="Variegated" href="coursefront.collectAll"
+									class="teamo-menu-item-title">我的收藏</a></li>
 								<li class="menu-item"><a title="Variegated" href="cart"
 									class="teamo-menu-item-title">我的購物車</a></li>
 								<li class="menu-item"><a title="Variegated"
@@ -205,17 +217,22 @@
 <!-- 									class="toggle-submenu"></span> -->
 <!-- 								<li class="menu-item "><a href="Exam.jsp" -->
 								<li><a href="coursefront1.list" class="teamo-menu-item-title"
-									title="Home">課程</a><span class="toggle-submenu"></span>
-								<li class="menu-item "><a href="firstExamController"
-									class="teamo-menu-item-title" title="Shop">試卷</a><span
+									title="Home" style="font-size:1.2em">課程</a><span class="toggle-submenu"></span>
+								<li class="menu-item"><a href="firstExamController"
+									class="teamo-menu-item-title" title="Shop" style="font-size:1.2em">試卷</a><span
 									class="toggle-submenu"></span>
 								<li><a href="Activities" class="teamo-menu-item-title"
-									title="Pages">活動</a><span class="toggle-submenu"></span></li>
+
+									title="Pages" style="font-size:1.2em">活動</a><span class="toggle-submenu"></span></li>
+<!-- 								<li><a href="ColumnFrontEnd" -->
+<!-- 									class="teamo-menu-item-title" title="Blogs" style="font-size:1.2em">專欄</a><span -->
+<!-- 									class="toggle-submenu"></span> -->
+<!-- 									<ul class="submenu"> -->
 
 								
 								
 								<li class="menu-item  menu-item-has-children"><a href="ColumnFrontEnd"
-                                        class="teamo-menu-item-title" title="Home">專欄</a><span
+                                        class="teamo-menu-item-title" title="Home" style="font-size:1.2em">專欄</a><span
                                         class="toggle-submenu"></span>
                                     <ul class="submenu">
                                     <c:if test="${sessionScope.user.status == 2}">
@@ -226,21 +243,21 @@
                                     </ul>
                                 </li>
 
-
-								<li class="menu-item"><a href="cart"
-									class="teamo-menu-item-title" title="About">購物車</a></li>
-
+									<li class="menu-item"><a href="cart"
+									class="teamo-menu-item-title" title="About" style="font-size:1.2em">購物車</a></li>
+								
 								<c:if test="${sessionScope.user.status == 3}">
 
 									<li class="menu-item"><a href="backendIndex"
-										class="teamo-menu-item-title" title="About">後台管理</a></li>
+										class="teamo-menu-item-title" title="About" style="font-size:1.2em">後台管理</a></li>
 								</c:if>
 								<c:if test="${sessionScope.user.status == 2}">
 
 									<li class="menu-item"><a href="coursefront2.list"
-										class="teamo-menu-item-title" title="About">講師專區</a></li>
+										class="teamo-menu-item-title" title="About" style="font-size:1.2em">講師專區</a></li>
 								</c:if>
-
+							
+								
 							</ul>
 						</div>
 					</div>
@@ -248,8 +265,6 @@
 			</div>
 		</div>
 	</header>
-
-
 	<script src="./js/jquery-1.12.4.min.js"></script>
 	<script src="./js/jquery.plugin-countdown.min.js"></script>
 	<script src="./js/jquery-countdown.min.js"></script>

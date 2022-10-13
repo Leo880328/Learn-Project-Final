@@ -193,8 +193,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
                                             <div class="category-blog"><a href="#"><c:out value="${c.subject }"></c:out></a></div>
                                             <h3 class="post-title"><a href="details?article_no=<c:out value="${c.article_no }"></c:out>"><c:out value="${c.title}"></c:out> </a></h3>
                                             <div class="main-info-post">
-                                                <p class="des">Phasellus condimentum nulla a arcu lacinia,a venenatis ex
-                                                    congue. Mauris nec ante magna. </p>
+                                                <p class="des"><c:out value="${c.summary}"></c:out>  </p>
                                             </div>
                                             <div class="author-view"  style="float: left;">
                                                 <div class="author">
