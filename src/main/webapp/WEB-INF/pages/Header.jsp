@@ -8,21 +8,21 @@
 <link rel="shortcut icon" type="image/x-icon" href="images/smalllogo.png" />
 <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./css/bootstrap.min.css">
-<link rel="stylesheet" href="./css/font-awesome.min.css">
-<link rel="stylesheet" href="./css/owl.carousel.min.css">
-<link rel="stylesheet" href="./css/animate.min.css">
-<link rel="stylesheet" href="./css/jquery-ui.css">
-<link rel="stylesheet" href="./css/slick.css">
-<link rel="stylesheet" href="./css/chosen.min.css">
-<link rel="stylesheet" href="./css/pe-icon-7-stroke.css">
-<link rel="stylesheet" href="./css/magnific-popup.min.css">
-<link rel="stylesheet" href="./css/lightbox.min.css">
-<link rel="stylesheet" href="./js/fancybox/source/jquery.fancybox.css">
-<link rel="stylesheet" href="./css/jquery.scrollbar.min.css">
-<link rel="stylesheet" href="./css/mobile-menu.css">
-<link rel="stylesheet" href="./fonts/flaticon/flaticon.css">
-<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="assets/css/animate.min.css">
+<link rel="stylesheet" href="assets/css/jquery-ui.css">
+<link rel="stylesheet" href="assets/css/slick.css">
+<link rel="stylesheet" href="assets/css/chosen.min.css">
+<link rel="stylesheet" href="assets/css/pe-icon-7-stroke.css">
+<link rel="stylesheet" href="assets/css/magnific-popup.min.css">
+<link rel="stylesheet" href="assets/css/lightbox.min.css">
+<link rel="stylesheet" href="assets/js/fancybox/source/jquery.fancybox.css">
+<link rel="stylesheet" href="assets/css/jquery.scrollbar.min.css">
+<link rel="stylesheet" href="assets/css/mobile-menu.css">
+<link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css">
+<link rel="stylesheet" href="assets/css/style.css">
 
 <style>
 .main-header1 {
@@ -217,10 +217,13 @@
 <!-- 									class="toggle-submenu"></span> -->
 <!-- 								<li class="menu-item "><a href="Exam.jsp" -->
 								<li><a href="coursefront1.list" class="teamo-menu-item-title"
+
 									title="Home" style="font-size:1.2em">課程</a><span class="toggle-submenu"></span>
-								<li class="menu-item"><a href="firstExamController"
+									
+								<li class="menu-item"><a href="ExamFrontController"
 									class="teamo-menu-item-title" title="Shop" style="font-size:1.2em">試卷</a><span
 									class="toggle-submenu"></span>
+									
 								<li><a href="Activities" class="teamo-menu-item-title"
 
 									title="Pages" style="font-size:1.2em">活動</a><span class="toggle-submenu"></span></li>
@@ -265,27 +268,27 @@
 			</div>
 		</div>
 	</header>
-	<script src="./js/jquery-1.12.4.min.js"></script>
-	<script src="./js/jquery.plugin-countdown.min.js"></script>
-	<script src="./js/jquery-countdown.min.js"></script>
-	<script src="./js/bootstrap.min.js"></script>
-	<script src="./js/owl.carousel.min.js"></script>
-	<script src="./js/magnific-popup.min.js"></script>
-	<script src="./js/isotope.min.js"></script>
-	<script src="./js/jquery.scrollbar.min.js"></script>
-	<script src="./js/jquery-ui.min.js"></script>
-	<script src="./js/mobile-menu.js"></script>
-	<script src="./js/chosen.min.js"></script>
-	<script src="./js/slick.js"></script>
-	<script src="./js/jquery.elevateZoom.min.js"></script>
-	<script src="./js/jquery.actual.min.js"></script>
-	<script src="./js/fancybox/source/jquery.fancybox.js"></script>
-	<script src="./js/lightbox.min.js"></script>
-	<script src="./js/owl.thumbs.min.js"></script>
-	<script src="./js/jquery.scrollbar.min.js"></script>
+	<script src="assets/js/jquery-1.12.4.min.js"></script>
+	<script src="assets/js/jquery.plugin-countdown.min.js"></script>
+	<script src="assets/js/jquery-countdown.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/owl.carousel.min.js"></script>
+	<script src="assets/js/magnific-popup.min.js"></script>
+	<script src="assets/js/isotope.min.js"></script>
+	<script src="assets/js/jquery.scrollbar.min.js"></script>
+	<script src="assets/js/jquery-ui.min.js"></script>
+	<script src="assets/js/mobile-menu.js"></script>
+	<script src="assets/js/chosen.min.js"></script>
+	<script src="assets/js/slick.js"></script>
+	<script src="assets/js/jquery.elevateZoom.min.js"></script>s
+	<script src="assets/js/jquery.actual.min.js"></script>
+	<script src="assets/js/fancybox/source/jquery.fancybox.js"></script>
+	<script src="assets/js/lightbox.min.js"></script>
+	<script src="assets/js/owl.thumbs.min.js"></script>
+	<script src="assets/js/jquery.scrollbar.min.js"></script>
 	<script
 		src='http://www.google.cn/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script>
-	<script src="./js/frontend-plugin.js"></script>
+	<script src="assets/js/frontend-plugin.js"></script>
 	<!-- 	DataTable jQuery -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -293,5 +296,6 @@
 		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 		<script src="https://kit.fontawesome.com/9d965cf88e.js" crossorigin="anonymous"></script>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		
 </body>
 </html>

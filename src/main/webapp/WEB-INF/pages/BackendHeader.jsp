@@ -104,6 +104,7 @@
 					<li class="navigation__active" style="font-size: 1.3em"><a href="Index"><i
 							class="zmdi zmdi-home"></i>前台首頁</a></li>
 
+
 					<li style="font-size: 1.3em"><a href="memberList"><i
 							class="zmdi zmdi-format-underlined"></i>會員管理</a>
 						<ul>
@@ -112,14 +113,7 @@
 						</ul></li>
 
 
-					<li class="navigation__sub" style="font-size: 1.3em"><a href=""><i
-							class="zmdi zmdi-view-week"></i>試卷管理</a>
-						<ul>
-							<li><a href="firstExamController">全部試卷</a></li>
-							<li><a href="firstExamController">國中</a></li>
-							<li><a href="firstExamController">高中</a></li>
-							<li><a href="firstExamController">成人</a></li>
-						</ul></li>
+					<li><a href="ExamBackController"><i class="zmdi zmdi-view-week"></i>試卷管理</a>
 
 					<li class="" style="font-size: 1.3em"><a href="course.list"><i
 							class="zmdi zmdi-view-list"></i>課程管理</a>
