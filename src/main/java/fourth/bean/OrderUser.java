@@ -18,14 +18,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
-import org.springframework.data.elasticsearch.annotations.Document;
+
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-@Indexed
+//@Indexed
 @Entity
 @Table(name = "order_user")
 public class OrderUser implements Serializable{

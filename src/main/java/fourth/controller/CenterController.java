@@ -33,8 +33,8 @@ public class CenterController {
 //	@Autowired
 //	private OrderElaticSearchRepository elaticSearchRepository;
 	
-	@Autowired
-	private ElasticsearchRestTemplate elasticsearchRestTemplate;
+//	@Autowired
+//	private ElasticsearchRestTemplate elasticsearchRestTemplate;
 	
 //	@Autowired
 //	private ElasticsearchTemplate elasticsearchTemplate;
@@ -64,22 +64,22 @@ public class CenterController {
 //		System.out.println(orderUser);
 		return "Index";
 	}
-	
-	public boolean createIndexAndPushMapping() {
-
-	    IndexOperations indexOperations = elasticsearchRestTemplate.indexOps(OrderUser.class);
-	    //创建索引
-	    boolean a = indexOperations.create();
-	    if (a){
-	        //生成映射
-	        org.springframework.data.elasticsearch.core.document.Document mapping = indexOperations.createMapping();
-	        //推送映射
-	        boolean b = indexOperations.putMapping(mapping);
-	        return b;
-	    }else {
-	        return a;
-	    }
-	}
+//	
+//	public boolean createIndexAndPushMapping() {
+//
+//	    IndexOperations indexOperations = elasticsearchRestTemplate.indexOps(OrderUser.class);
+//	    //创建索引
+//	    boolean a = indexOperations.create();
+//	    if (a){
+//	        //生成映射
+//	        org.springframework.data.elasticsearch.core.document.Document mapping = indexOperations.createMapping();
+//	        //推送映射
+//	        boolean b = indexOperations.putMapping(mapping);
+//	        return b;
+//	    }else {
+//	        return a;
+//	    }
+//	}
 
 	
 }

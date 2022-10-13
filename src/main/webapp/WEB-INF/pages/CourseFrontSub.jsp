@@ -56,6 +56,7 @@ border-radius: 5px;
                     href="#"><span></span><span></span><span></span></a></div>
         </div>
     </div>
+    <br>
     <div class="main-content main-content-product left-sidebar">
         <div class="container">
             <div class="row">
@@ -102,7 +103,7 @@ border-radius: 5px;
 													</div>
 												</div>
 												<div class="product-info">
-													<h5 class="product-name product_title">
+													<h5 class="product-name product_title" style="font-size:1.2em">
 														<a
 															href="coursefront.details?courseId=${course.courseId}"><c:out
 																value="${course.course_name}" /></a>
@@ -147,7 +148,7 @@ border-radius: 5px;
 													</div>
 												</div>
 												<div class="product-info">
-													<h5 class="product-name product_title">
+													<h5 class="product-name product_title" style="font-size:1.2em">
 														<a
 															href="coursefront.details?courseId=${course.courseId}"><c:out
 																value="${course.course_name}" /></a>
@@ -193,7 +194,7 @@ border-radius: 5px;
 													</div>
 												</div>
 												<div class="product-info">
-													<h5 class="product-name product_title">
+													<h5 class="product-name product_title" style="font-size:1.2em">
 														<a
 															href="coursefront.details?courseId=${course.courseId}"><c:out
 																value="${course.course_name}" /></a>
@@ -237,7 +238,7 @@ border-radius: 5px;
 												</div>
 											</div>
 											<div class="product-info">
-												<h5 class="product-name product_title">
+												<h5 class="product-name product_title" style="font-size:1.2em">
 													<a href="coursefront.details?courseId=${course.courseId}"><c:out
 															value="${course.course_name}" /></a>
 												</h5>
@@ -281,7 +282,7 @@ border-radius: 5px;
 													</div>
 												</div>
 												<div class="product-info">
-													<h5 class="product-name product_title">
+													<h5 class="product-name product_title" style="font-size:1.2em">
 														<a
 															href="coursefront.details?courseId=${course.courseId}"><c:out
 																value="${course.course_name}" /></a>
@@ -326,7 +327,7 @@ border-radius: 5px;
 												</div>
 											</div>
 											<div class="product-info">
-												<h5 class="product-name product_title">
+												<h5 class="product-name product_title" style="font-size:1.2em">
 													<a href="coursefront.details?courseId=${course.courseId}"><c:out
 															value="${course.course_name}" /></a>
 												</h5>
