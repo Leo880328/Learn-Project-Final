@@ -222,17 +222,30 @@
 									class="teamo-menu-item-title" title="Shop" style="font-size:1.2em">試卷</a><span
 									class="toggle-submenu"></span>
 								<li><a href="Activities" class="teamo-menu-item-title"
+
 									title="Pages" style="font-size:1.2em">活動</a><span class="toggle-submenu"></span></li>
-								<li><a href="ColumnFrontEnd"
-									class="teamo-menu-item-title" title="Blogs" style="font-size:1.2em">專欄</a><span
-									class="toggle-submenu"></span>
-									<ul class="submenu">
+<!-- 								<li><a href="ColumnFrontEnd" -->
+<!-- 									class="teamo-menu-item-title" title="Blogs" style="font-size:1.2em">專欄</a><span -->
+<!-- 									class="toggle-submenu"></span> -->
+<!-- 									<ul class="submenu"> -->
 
-									</ul></li>
+								
+								
+								<li class="menu-item  menu-item-has-children"><a href="ColumnFrontEnd"
+                                        class="teamo-menu-item-title" title="Home" style="font-size:1.2em">專欄</a><span
+                                        class="toggle-submenu"></span>
+                                    <ul class="submenu">
+                                    <c:if test="${sessionScope.user.status == 2}">
+                                        <li class="menu-item"><a href="ColumnTeacherFront">講師專區</a></li>
+                                     </c:if>
+<!--                                         <li class="menu-item"><a href="home2.html">Home 02</a></li> -->
+<!--                                         <li class="menu-item"><a href="home3.html">Home 03</a></li> -->
+                                    </ul>
+                                </li>
 
-								<li class="menu-item"><a href="cart"
+									<li class="menu-item"><a href="cart"
 									class="teamo-menu-item-title" title="About" style="font-size:1.2em">購物車</a></li>
-
+								
 								<c:if test="${sessionScope.user.status == 3}">
 
 									<li class="menu-item"><a href="backendIndex"
@@ -243,7 +256,8 @@
 									<li class="menu-item"><a href="coursefront2.list"
 										class="teamo-menu-item-title" title="About" style="font-size:1.2em">講師專區</a></li>
 								</c:if>
-
+							
+								
 							</ul>
 						</div>
 					</div>

@@ -38,6 +38,12 @@ border-collapse: collapse;
     border-radius: 20px;
    margin-left:280px;
 }
+.btn{
+margin-left: 275px;
+}
+.title{
+margin-left: 750px;
+}
 </style>
 </head>
 
@@ -48,38 +54,36 @@ border-collapse: collapse;
  	<jsp:include page="Style.jsp" /> 
 
 
-		<center>
-		<br><br><br><br>
-			<h1>數學列表</h1>
-		</center>
- <center>		
-			
 		
+		<br><br><br><br>
+<div class="title">
 
+			<h1>數學列表</h1>
+		
 			<form action="searchAction" method="get" enctype="multipart/form-data">
 			<input type="text" name="search"> 
-			<input type="submit" name="searchno" value="查詢">
+			<input style="border-radius: 10px" type="submit" name="searchno" value="查詢">
 	        </form>
             <p>${errors.name }</p>
-   </center>           
+ </div>        
  
-   	<center>
+<div class="btn">
    		<a href="ColumnAdd">
-			<button >新增專欄</button>
+			<button style="border-radius: 10px" >新增專欄</button>
 			</a>
    	
          <form id="id1" action="searchEnglish" method="post">
-         <input type="submit" name="searchEnglish" value="英文">
+         <input style="border-radius: 10px" type="submit" name="searchEnglish" value="英文">
          </form>
          
           <form id="id1" action="searchToeic" method="post">
-         <input type="submit" name="searchToeic" value="多益">
+         <input style="border-radius: 10px" type="submit" name="searchToeic" value="多益">
          </form>
          
           <form id="id1" action="searchMath" method="post">
-         <input type="submit" name="searchMath" value="數學">
+         <input style="border-radius: 10px" type="submit" name="searchMath" value="數學">
          </form>
-   	</center>
+</div>  	
 
 
 		<table class="tb"border="1">
@@ -94,64 +98,45 @@ border-collapse: collapse;
 				<th>權限</th>
 				<th>科目</th>
 				<th>標題</th>
-				<th></th>
-				<th></th>
-				<th></th>
+				<th>編輯</th>
+				<th>細節</th>
+				<th>刪除</th>
 			</tr>
 </thead>
-			<c:choose>
-				<c:when test="${column != null }">
-					<c:set var="col" value="${column }" />
-					<td>${col.article_no }</td>
-					<td>${col.publish_time }</td>
-					<td>${col.user_id}</td>
-					<td>${col.author }</td>
-					<td>${col.role }</td>
-					<td>${col.subject }</td>
-					<td>${col.title }</td>
-					<td>${col.contents }</td>	
-				</c:when>
-
-				<c:otherwise>
-					<%
-					List<ColumnBean> selectAllColumns = (List<ColumnBean>) request.getAttribute("Math");
-
-					for (ColumnBean c : selectAllColumns) {
-					%>
+		<c:forEach var="c" items="${Math}">
 					<tr>
-
-						<td><%=c.getArticle_no()%></td>
-						<td><%=c.getPublish_time()%></td>
-						<td><%=c.getUser_id()%></td>
-						<td><%=c.getAuthor()%></td>
-						<td><%=c.getRole()%></td>
-						<td><%=c.getSubject() %></td>
-						<td><%=c.getTitle() %></td>
+						<td><c:out value="${c.article_no}"></c:out></td>
+						<td><c:out value="${c.publish_time }"></c:out></td>
+						<td><c:out value="${c.user_id}"></c:out></td>
+						<td><c:out value="${c.author}"></c:out></td>
+						<td><c:out value="${c.role}"></c:out></td>
+						<td><c:out value="${c.subject}"></c:out></td>
+						<td><c:out value="${c.title}"></c:out></td>
 						
-						<td>			
-						<a href="Update?article_no=<%=c.getArticle_no()%>&publish_time=<%=c.getPublish_time()%>&user_id=<%=c.getUser_id()%>&author=<%=c.getAuthor()%>&role=<%=c.getRole()%>&subject=<%=c.getSubject()%>&title=<%=c.getTitle()%>&contents=<%=c.getContents()%>"><button
-									name="edit" value="edit">編輯</button></a>
-						</td>
+					
+									
+						<td>
+								<button style="border-radius: 10px;background-color: #0080FF">
+									<a href="more1?article_no=${c.article_no}"> 編輯文章 </a>
+								</button>
+							</td>
 
 
-						<form action="more?article_no=<%=c.getArticle_no()%>"
+						<form action="more?article_no=${c.article_no }"
 							method="get">
-							<td><input type="submit" name="more" value="更多"> <input
-								type="hidden" name="article_no" value="<%=c.getArticle_no()%>"></td>
+							<td><input  style="border-radius:10px;background-color: #5CADAD" type="submit" name="more" value="細節"> <input
+								type="hidden" name="article_no" value="${c.article_no }"></td>
 						</form>
 
-						<form action="ColumnDelete?article_no=<%=c.getArticle_no()%>"
+						<form action="ColumnDelete?article_no=${c.article_no }"
 							method="post" enctype="multipart/form-data">
-							<td><input type="submit" name="delete" value="刪除"></td> <input
-								type="hidden" name="article_no" value="<%=c.getArticle_no()%>">
+							<td><input  style="border-radius:10px;  background-color: #FF0000;" type="submit" name="delete" value="刪除"></td> <input
+								type="hidden" name="article_no" value="${c.article_no }">
 						</form>
 
 					</tr>
-					<%
-					}
-					%>
-				</c:otherwise>
-			</c:choose>
+				</c:forEach>
+
 		</table>
 
 
