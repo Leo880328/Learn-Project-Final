@@ -20,7 +20,7 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 
 	<section class="content">
 		<header class="content__title">
-			<h1>好學生後台管理首頁</h1>
+			<h1 style="font-size: 1.5em;font-weight: bold">好學生後台管理首頁</h1>
 
 		</header>
 		<div class="row quick-stats">

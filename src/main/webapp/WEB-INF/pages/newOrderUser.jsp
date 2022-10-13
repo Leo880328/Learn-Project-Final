@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<br>
 	<div class="sidebar col-lg-3 col-md-3 col-sm-12 col-xs-12"
 		style="width: 200px; margin-left: 100px">
 		<div class="wrapper-sidebar shop-sidebar">
@@ -81,16 +83,16 @@
 	</div>
 	<!---------------------------------------------- sidebar ---------------------------------------------------->
 	<div class="container" style="width: 900px">
-		<div class="row" style="margin-left: 50px; width: 900px;">
-				<h4>
-					共<span id="count">0</span>筆訂單
-				</h4>
-				<div
-					class="content-area  shop-grid-content full-width col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<div class="site-main" id="userOutBody">
-						<div id="userbody"></div>
-					</div>
+		<div class="row" style="margin-left: 50px; width: 900px;" id="row">
+			<h4>
+				共<span id="count">0</span>筆訂單
+			</h4>
+			<div
+				class="content-area  shop-grid-content full-width col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="site-main" id="userOutBody">
+					<div id="userbody"></div>
 				</div>
+			</div>
 
 		</div>
 	</div>

@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" type="image/x-icon"
 	href="assets/images/smalllogo.png" />
-<link
+<link 
 	href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap"
 	rel="stylesheet">
 <link

@@ -1,5 +1,4 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
-<%@ page import="fourth.dao.CourseDao"%>
 <%@ page import="java.util.List"%>
 <%@ page import="fourth.bean.CourseBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
@@ -9,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>查詢結果</title>
+<link rel="shortcut icon" type="image/x-icon" href="images/smalllogo.png" />
 <style>
 .tb{
    	border-collapse: collapse;

@@ -26,66 +26,79 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	text-align: center
 }
 
-#id1{
+#id1 {
 	display: inline;
+
+
 }
 
 .tb {
 	border-collapse: collapse;
 	width: 79%;
-    word-wrap: break-word;
-    table-layout: fixed;
-    background-color: white;
-    border-radius: 20px;
-   margin-left:270px;
+	word-wrap: break-word;
+	table-layout: fixed;
+	background-color: white;
+	border-radius: 20px;
+	margin-left: 270px;
 }
-
+.btn{
+margin-left: 275px;
+}
+.title{
+margin-left: 750px;
+}
 </style>
+
 </head>
 
 
 
 <body>
-<jsp:include page="BackendHeader.jsp" /> 
- 	<jsp:include page="Style.jsp" /> 
-	<br><br><br><br>
+	<jsp:include page="BackendHeader.jsp" />
+	<jsp:include page="Style.jsp" />
+	<br>
+	<br>
+	<br>
+	<br>
 
 
-		<center>
-			<h1>專欄列表</h1>
-		</center>
-		
- <center>		
-			<form action="searchAction" method="get" enctype="multipart/form-data">
-			<input type="text" name="search"> 
-			<input type="submit" name="searchno" value="查詢">
-	        </form>
-            <p>${errors.name }</p>
-   </center>           
- 
-   <center>
-
-   	<a id="id1" href="ColumnAdd">
-			<button >新增專欄</button>
-			</a>
-
-         <form id="id1" action="searchEnglish" method="post">
-         <input type="submit" name="searchEnglish" value="英文">
-         </form>
-         
-          <form id="id1" action="searchToeic" method="post">
-         <input type="submit" name="searchToeic" value="多益">
-         </form>
-         
-          <form id="id1" action="searchMath" method="post">
-         <input type="submit" name="searchMath" value="數學">
-         </form>
-   </center>
+<div class="title">
+		<h1>專欄列表</h1>
+	
+	
+		<form action="searchAction" method="get" enctype="multipart/form-data">
+			<input type="text" name="search"> <input type="submit"
+				name="searchno" value="查詢" style="border-radius: 10px">
+		</form>
+		<p>${errors.name }</p>
+</div>
 
 
-		<table class="tb" border="1" >
 
-<thead>
+<div class="btn">
+
+		<a id="id1" href="ColumnAdd">
+			<button style="border-radius: 10px">新增專欄</button>
+		</a>
+
+		<form id="id1" action="searchEnglish" method="post">
+			<input type="submit" name="searchEnglish" value="英文" style="border-radius: 10px">
+		</form>
+
+		<form id="id1" action="searchToeic" method="post">
+			<input type="submit" name="searchToeic" value="多益" style="border-radius: 10px">
+		</form>
+
+		<form id="id1" action="searchMath" method="post">
+			<input type="submit" name="searchMath" value="數學" style="border-radius: 10px">
+		</form>
+		</div>
+
+
+
+	<table class="tb" border="1">
+
+		<thead>
 			<tr>
 				<th>文章編號</th>
 				<th>發表日期</th>
@@ -94,68 +107,114 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				<th>權限</th>
 				<th>科目</th>
 				<th>標題</th>
-<!-- 				<th></th>	   -->
-<!-- 				<th></th>	   -->
-<!-- 				<th></th>	   -->
+				<th>功能</th>
+				<th>功能</th>
+				<th>功能</th>
+				<th>狀態</th>
 			</tr>
-</thead>
+		</thead>
 
-			<c:choose>
-				<c:when test="${column != null }">
-					<c:set var="col" value="${column }" />
-					<td>${col.article_no }</td>
-					<td>${col.publish_time }</td>
-					<td>${col.user_id}</td>
-					<td>${col.author }</td>
-					<td>${col.role }</td>
-					<td>${col.subject }</td>
-					<td>${col.title }</td>
-<%-- 					<td>${col.contents }</td>	 --%>
-				</c:when>
+		<c:choose>
+			<c:when test="${column != null }">
+				<c:set var="col" value="${column }" />
+				<td>${col.article_no }</td>
+				<td>${col.publish_time }</td>
+				<td>${col.user_id}</td>
+				<td>${col.author }</td>
+				<td>${col.role }</td>
+				<td>${col.subject }</td>
+				<td>${col.title }</td>
+				<%-- 					<td>${col.contents }</td>	 --%>
+			</c:when>
 
-				<c:otherwise>
-					<%
-					List<ColumnBean> selectAllColumns = (List<ColumnBean>) request.getAttribute("queryall");
+			<c:otherwise>
 
-					for (ColumnBean c : selectAllColumns) {
-					%>
+				<c:forEach var="c" items="${queryall}">
 					<tr>
-
-						<td><%=c.getArticle_no()%></td>
-						<td><%=c.getPublish_time()%></td>
-						<td><%=c.getUser_id()%></td>
-						<td><%=c.getAuthor()%></td>
-						<td><%=c.getRole()%></td>
-						<td><%=c.getSubject() %></td>
-						<td><%=c.getTitle() %></td>			
-						<td>							
-						<a href="Update?article_no=<%=c.getArticle_no()%>&publish_time=<%=c.getPublish_time()%>&user_id=<%=c.getUser_id()%>&author=<%=c.getAuthor()%>&role=<%=c.getRole()%>&subject=<%=c.getSubject()%>&title=<%=c.getTitle()%>&contents=<%=c.getContents()%>&picture=<%=c.getPicture()%>"><button
-									name="edit" value="edit">編輯</button></a>
-<!-- 					    </td> -->
+						<td><c:out value="${c.article_no}"></c:out></td>
+						<td><c:out value="${c.publish_time }"></c:out></td>
+						<td><c:out value="${c.user_id}"></c:out></td>
+						<td><c:out value="${c.author}"></c:out></td>
+						<td><c:out value="${c.role}"></c:out></td>
+						<td><c:out value="${c.subject}"></c:out></td>
+						<td><c:out value="${c.title}"></c:out></td>
 
 
-						<form action="more?article_no=<%=c.getArticle_no()%>"
+
+						<c:if test="${c.status==1 }">
+							<td>
+								<button style="border-radius:10px">
+									<a href="more1?article_no=${c.article_no}"> 審核文章 </a>
+								</button>
+							</td>
+						</c:if>
+
+
+
+						<c:if test="${c.status==3 }">
+							<td>
+								<button style="border-radius: 10px;background-color: #0080FF">
+									<a href="more1?article_no=${c.article_no}"> 編輯文章 </a>
+								</button>
+							</td>
+						</c:if>
+
+
+						<form
+							action="more?article_no=<c:out value="${c.article_no}"></c:out>"
 							method="get">
-							<td><input type="submit" name="more" value="細節"> <input
-								type="hidden" name="article_no" value="<%=c.getArticle_no()%>">
-<!-- 							</td> -->
+							<td>
+							<center>
+							<input type="submit" name="more" value="細節" style="border-radius: 10px;background-color: #5CADAD">
+							 <input type="hidden" name="article_no"
+								value="<c:out value="${c.article_no}"></c:out>">
+								</center>
+								</td>
 						</form>
 
-						<form action="ColumnDelete?article_no=<%=c.getArticle_no()%>"
-							method="post" enctype="multipart/form-data">
-							<td><input type="submit" name="delete" value="刪除">
-<!-- 							</td>  -->
-							<input type="hidden" name="article_no" value="<%=c.getArticle_no()%>">
-						</form>
+<!-- 						<form -->
+<%-- 							action="ColumnDelete?article_no=<c:out value="${c.article_no}"></c:out>" --%>
+<!-- 							method="post"> -->
+							
+							<td>
+							<center>
+							<button onclick= "del(${c.article_no})" type="submit" name="delete" value="刪除" style="border-radius: 10px; background-color: #FF0000;">刪除</button>
+							</center>
+							</td> 
+<!-- 							<input type="hidden" name="article_no" -->
+<%-- 								value="<c:out value="${c.article_no}"></c:out>"> --%>
+								
+<!-- 						</form> -->
+						<c:if test="${c.status == 1}">
+							<td><center>
+									<button class="nst" style="border-radius: 10px;background-color: #FF0000;">
+										<i class="fa-solid fa-triangle-exclamation"></i>未審核
+									</button>
+								</center></td>
+						</c:if>
+
+						<c:if test="${c.status == 2}">
+							<td><center>
+									<button style="background-color: #000000; border-radius: 10px">
+										<i class="fa-solid fa-reply"></i>已駁回
+									</button>
+								</center></td>
+						</c:if>
+
+						<c:if test="${c.status == 3}">
+							<td><center>
+									<button class="st" style="border-radius: 10px;background-color: 	#FFD306">核准</button>
+								</center></td>
+						</c:if>
 
 					</tr>
-					<%
-					}
-					%>
-				</c:otherwise>
-			</c:choose>
-		</table>
+				</c:forEach>
 
+			</c:otherwise>
+		</c:choose>
+	</table>
+<script src="howard/columnback.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 </html>

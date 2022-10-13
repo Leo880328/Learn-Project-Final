@@ -9,10 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="question")
@@ -31,6 +34,11 @@ public class ExamQuesBean implements Serializable
 	@ManyToOne
 	@JoinColumn(name="educationlevel")
     private ExamEduBean education;
+	
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name="EXAMID")
+    private ExamBean exam;
 	
 	@Column(name="quescontent")
 	private String quesContent;
@@ -58,7 +66,7 @@ public class ExamQuesBean implements Serializable
 	
 	@Override
 	public String toString() {
-		return "ExamQuesBean [subject=" + subject + ", education=" + education + ", quesContent=" + quesContent
+		return "[subject=" + subject + ", education=" + education + ", quesContent=" + quesContent
 				+ ", optA=" + optA + ", optB=" + optB + ", optC=" + optC + ", optD=" + optD + ", quesAnswer="
 				+ quesAnswer + ", quesScore=" + quesScore + "]";
 	}
@@ -66,12 +74,33 @@ public class ExamQuesBean implements Serializable
 	public ExamQuesBean() {
 		super();
 	}
-
-	public ExamQuesBean(ExamSubBean subject, ExamEduBean education, String quesContent, String optA, String optB,
-			String optC, String optD, String quesAnswer, int quesScore) {
+	
+	
+	
+	public ExamQuesBean(ExamSubBean subject, ExamEduBean education, ExamBean exam, String quesContent, String optA,
+			String optB, String optC, String optD, String quesAnswer, int quesScore) {
 		super();
 		this.subject = subject;
 		this.education = education;
+		this.exam = exam;
+		this.quesContent = quesContent;
+		this.optA = optA;
+		this.optB = optB;
+		this.optC = optC;
+		this.optD = optD;
+		this.quesAnswer = quesAnswer;
+		this.quesScore = quesScore;
+	}
+
+	
+
+	public ExamQuesBean(Integer quesID, ExamSubBean subject, ExamEduBean education, ExamBean exam, String quesContent,
+			String optA, String optB, String optC, String optD, String quesAnswer, int quesScore) {
+		super();
+		this.quesID = quesID;
+		this.subject = subject;
+		this.education = education;
+		this.exam = exam;
 		this.quesContent = quesContent;
 		this.optA = optA;
 		this.optB = optB;
@@ -169,14 +198,16 @@ public class ExamQuesBean implements Serializable
 		this.chooseAns = chooseAns;
 	}
 
-	
-	
-	
+	public ExamBean getExam() {
+		return exam;
+	}
+
+	public void setExam(ExamBean exam) {
+		this.exam = exam;
+	}
 
 	
 	
-	
-	
-	
+
 	
 }

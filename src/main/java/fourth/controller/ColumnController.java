@@ -1,5 +1,4 @@
 package fourth.controller;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,14 +10,18 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import fourth.bean.ColumnBean;
+import fourth.columnmail.JavaMail;
 import fourth.dao.ColumnDAO1;
 import fourth.service.ColumnService;
 
@@ -52,21 +55,49 @@ public class ColumnController {
 		return "ColumnQueryAll";
 	}
 	
-	
-	@PostMapping("/ColumnDelete")
-	public String delete(int article_no) {
+	@ResponseBody
+	@DeleteMapping("/ColumnDelete/{id}")
+	public String delete(@PathVariable("id") int article_no) {
 		columnService.deleteColumnByNo(article_no);
-		return "redirect:QueryAll";
+		return "delete ok";
 	}
 	@GetMapping("/Update")
 	public String update(ColumnBean bean) {
 		return "ColumnUpdate"; 
 	}
 	@PostMapping("/updateAction")
-	public String updateAction(ColumnBean bean) {
+	public String updateAction(@RequestParam("status") int status, ColumnBean bean, int article_no) {
 		//bean.setPicture("images/"+bean.getPicture());
-		columnService.updateColumn(bean);
-		return "redirect:QueryAll";
+		ColumnBean bean1 = columnService.selectByArticleNo(article_no);
+		if(status == bean1.getStatus()) {
+			columnService.updateColumn(bean);
+			return "redirect:QueryAll";		
+		}
+		if(status == 3) {
+			columnService.updateColumn(bean);
+			String txt = "<h2>" + "親愛的 " + bean.getAuthor() + " 您好 :" + "<br>" + "文章編號: "
+					+ bean.getArticle_no() + "<br>" + "文章標題: " + bean.getTitle() + "<br>" + "<br>" + "<br>"
+					+ "審核結果: 通過!!" + "<h2>";
+			JavaMail javaMail = new JavaMail();
+			javaMail.setCustomer("s811026a@hotmail.com");
+			javaMail.setSubject("好學生-EEIT49 文章審核通過!");
+			javaMail.setTxt(txt);
+			javaMail.sendMail();
+			return "redirect:/QueryAll";
+		}else if(status == 2) {
+			columnService.updateColumn(bean);
+			String txt = "<h2>" + "親愛的 " + bean.getAuthor() + " 您好 :" + "<br>" + "文章編號: "
+					+ bean.getArticle_no() + "<br>" + "文章標題: " + bean.getTitle() + "<br>" + "<br>"
+					+ "審核結果: 駁回!!" + "<br>" + "駁回原因: 文章內容帶有不當資訊" + "<h2>";
+			JavaMail javaMail = new JavaMail();
+			javaMail.setCustomer("s811026a@hotmail.com");
+			javaMail.setSubject("好學生-EEIT49 文章駁回通知");
+			javaMail.setTxt(txt);
+			javaMail.sendMail();
+			return "redirect:/QueryAll";
+		}
+		return "redirect:/QueryAll";
+		
 	}
 	@GetMapping("/searchAction")
 	public String search(@RequestParam("search") String article_no, Model m) {
@@ -125,13 +156,68 @@ public class ColumnController {
 //		m.addAttribute("col", col);
 		return "ColumnFrontEndDetails";
 	}
-	@RequestMapping(path="/details", method=RequestMethod.GET)
-	public String frontEndDetails(int article_no, Model m) {
-		ColumnBean col = columnService.selectByArticleNo(article_no);
-		m.addAttribute("col", col);
-		return "ColumnFrontEndDetails";
+//	@RequestMapping(path="/details", method=RequestMethod.GET)
+//	public String frontEndDetails(int article_no, Model m) {
+//		ColumnBean col = columnService.selectByArticleNo(article_no);
+//		m.addAttribute("col", col);
+//		return "ColumnFrontEndDetails";
+//	}
+	@GetMapping(path="/queryEnglish")
+	public String queryByEnglish(String subject, Model m) {
+		List<ColumnBean> list = columnService.findByEnglish("%"+"英文"+"%");
+		m.addAttribute("queryEnglish", list);
+		return "ColumnFrontEndQuery";
+	}
+	@GetMapping(path="/queryToeic")
+	public String queryByToeic(String subject, Model m) {
+		List<ColumnBean> list = columnService.findByEnglish("%"+"多益"+"%");
+		m.addAttribute("queryToeic", list);
+		return "ColumnFrontEndQuery";
+	}
+	@GetMapping(path="/queryMath")
+	public String queryByMath(String subject, Model m) {
+		List<ColumnBean> list = columnService.findByEnglish("%"+"數學"+"%");
+		m.addAttribute("queryMath", list);
+		return "ColumnFrontEndQuery";
 	}
 	
+	@GetMapping("/ColumnFrontAdd")
+	public String columnFrontAdd() {
+		return "ColumnFrontAdd";
+	}
+	@PostMapping("/ColumnAddAction1")
+	public String addAction1(@RequestParam(required = false)String backToQuery , ColumnBean bean){	
+		bean.setPicture("images/"+bean.getPicture());
+		columnService.insertColumn(bean);
+		return "redirect:ColumnTeacherFront";		
+	}
+	@GetMapping("/ColumnTeacherFront")
+	public String findByAuthor(String author,Model m) {
+		List<ColumnBean> list = columnService.findByAuthor("%"+"Winnie"+"%");
+		m.addAttribute("queryAuthor", list);
+		return "ColumnTeacherFront";
+	}
 	
+	@GetMapping("/ColumnDelete1")
+	public String delete1(int article_no) {
+		columnService.deleteColumnByNo(article_no);
+		return "redirect:ColumnTeacherFront";
+	}
+	@GetMapping("/Update1")
+	public String update1(ColumnBean bean) {
+		return "ColumnFrontUpdate"; 
+	}
+	@PostMapping("/updateAction1")
+	public String updateAction1(ColumnBean bean) {
+		//bean.setPicture("images/"+bean.getPicture());
+		columnService.updateColumn(bean);
+		return "redirect:ColumnTeacherFront";
+	}
+	@RequestMapping(path="/more1", method=RequestMethod.GET)
+	public String more1(int article_no, Model m) {
+		ColumnBean col = columnService.selectByArticleNo(article_no);
+		m.addAttribute("col", col);
+		return "ColumnUpdate";
+	}
 	
 }

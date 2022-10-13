@@ -32,6 +32,9 @@ public interface MemberRepository extends JpaRepository<MemberBean, Integer> {
 	public List<MemberBean> findByAccountLike(String account);
 
 	public MemberBean findByEmailAndAccount(String account, String email);
+	
+	@Query(value = "from MemberBean where status like concat('%',?1,'%') ")
+	public List<MemberBean> findCheckTeacher(String status);
 
 
 }

@@ -5,34 +5,34 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="shortcut icon" type="image/x-icon"
-	href="images/smalllogo.png" />
-<link
-	href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet" href="./css/bootstrap.min.css">
-<link rel="stylesheet" href="./css/font-awesome.min.css">
-<link rel="stylesheet" href="./css/owl.carousel.min.css">
-<link rel="stylesheet" href="./css/animate.min.css">
-<link rel="stylesheet" href="./css/jquery-ui.css">
-<link rel="stylesheet" href="./css/slick.css">
-<link rel="stylesheet" href="./css/chosen.min.css">
-<link rel="stylesheet" href="./css/pe-icon-7-stroke.css">
-<link rel="stylesheet" href="./css/magnific-popup.min.css">
-<link rel="stylesheet" href="./css/lightbox.min.css">
-<link rel="stylesheet" href="./js/fancybox/source/jquery.fancybox.css">
-<link rel="stylesheet" href="./css/jquery.scrollbar.min.css">
-<link rel="stylesheet" href="./css/mobile-menu.css">
-<link rel="stylesheet" href="./fonts/flaticon/flaticon.css">
-<link rel="stylesheet" href="./css/style.css">
+<link rel="shortcut icon" type="image/x-icon" href="images/smalllogo.png" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="assets/css/animate.min.css">
+<link rel="stylesheet" href="assets/css/jquery-ui.css">
+<link rel="stylesheet" href="assets/css/slick.css">
+<link rel="stylesheet" href="assets/css/chosen.min.css">
+<link rel="stylesheet" href="assets/css/pe-icon-7-stroke.css">
+<link rel="stylesheet" href="assets/css/magnific-popup.min.css">
+<link rel="stylesheet" href="assets/css/lightbox.min.css">
+<link rel="stylesheet" href="assets/js/fancybox/source/jquery.fancybox.css">
+<link rel="stylesheet" href="assets/css/jquery.scrollbar.min.css">
+<link rel="stylesheet" href="assets/css/mobile-menu.css">
+<link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css">
+<link rel="stylesheet" href="css/style.css">
 
 <style>
 .main-header1 {
 	height: 50px;
 	padding: 50px 0
+}
+
+.font{
+   font-size: 1.2em;
+   font-weight: bold;
 }
 </style>
 <title>Header</title>
@@ -42,6 +42,9 @@
 		$.getJSON("cart/cartCount", function(data) {
 			$("#msg").html(data);
 		});
+		if("${sessionScope.user}" == ""){
+			$("#msg").html(0);
+		}
 	}
 </script>
 </head>
@@ -51,7 +54,7 @@
 		<div class="top-bar">
 			<div class="container">
 				<div class="top-bar-left">
-					<div class="header-message">Welcome!歡迎來到好學生學習平台</div>
+					<div class="header-message font">Welcome ! 歡迎來到好學生學習平台</div>
 				</div>
 				<div class="top-bar-right">
 					<div class="header-language"></div>
@@ -59,7 +62,7 @@
 						<c:when test="${sessionScope.user == null }">
 
 							<ul class="header-user-links">
-								<li><a href="login.controller" id="btn">登入</a> | <a
+								<li class="font"><a href="login.controller" id="btn">登入</a> | <a
 									href="register.controller">註冊</a></li>
 								<li></li>
 							</ul>
@@ -71,8 +74,9 @@
 								<c:if test="${sessionScope.user.nick == null}">
 
 								</c:if>
-								<li><a href="#"><b>${sessionScope.user.nick}(審核中)</b></a> |
-									<a href="logout.controller">登出</a></li>
+								<li  class="font"><a href="#"><b>${sessionScope.user.nick}(審核中)</b></a> |
+									<a href="logout">登出</a></li>
+
 								<li></li>
 							</ul>
 						</c:when>
@@ -83,8 +87,10 @@
 								<c:if test="${sessionScope.user.nick == null}">
 
 								</c:if>
-								<li><a href="#"><b>${sessionScope.user.nick}(學生)</b></a> |
-									<a href="logout.controller">登出</a></li>
+
+								<li  class="font"><a href="#"><b>${sessionScope.user.nick}(學生)</b></a> |
+									<a href="logout">登出</a></li>
+
 								<li></li>
 							</ul>
 						</c:when>
@@ -92,8 +98,10 @@
 						<c:when test="${sessionScope.user.status == 2 }">
 
 							<ul class="header-user-links">
-								<li><a href="#"><b>${sessionScope.user.nick}(老師)</b></a> |
-									<a href="logout.controller">登出</a></li>
+
+								<li  class="font"><a href="#"><b>${sessionScope.user.nick}(老師)</b></a> |
+									<a href="logout">登出</a></li>
+
 								<li></li>
 							</ul>
 						</c:when>
@@ -101,8 +109,10 @@
 						<c:otherwise>
 							<c:if test="${sessionScope.user.status == 3}">
 								<ul class="header-user-links">
-									<li><a href="#"><b>${sessionScope.user.nick}(管理員)</b></a>
-										| <a href="logout.controller">登出</a></li>
+
+									<li  class="font"><a href="#"><b>${sessionScope.user.nick}(管理員)</b></a>
+										| <a href="logout">登出</a></li>
+
 									<li></li>
 								</ul>
 
@@ -169,13 +179,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="header-nav-container rows-space-20">
+		<div class="header-nav-container">
 			<div class="container">
 				<div class="header-nav-wapper main-menu-wapper">
 					<div class="vertical-wapper block-nav-categori">
 						<div class="block-title">
-							<span class="icon-bar"><span></span><span></span><span></span></span><span
-								class="text">全部分類</span>
+							<span class="icon-bar "><span></span><span></span><span></span></span><span
+								class="text font">全部分類</span>
 						</div>
 						<div class="block-content verticalmenu-content">
 							<ul
@@ -184,6 +194,7 @@
 									class="teamo-menu-item-title" title="New Arrivals">我的學習</a></li>
 								<li class="menu-item"><a title="Hot Sale" href="ExamMyMemController"
 									class="teamo-menu-item-title">我的試卷</a></li>
+
 								<li class="menu-item menu-item-has-children">
 									<a href="Activity" class="teamo-menu-item-title" title="Blog Style">活動</a>
 									<span class="toggle-submenu"></span>
@@ -192,6 +203,10 @@
                                        <li class="menu-item"><a href="ManageActivities">管理活動</a></li>
                                     </ul>
                                 </li>
+
+								<li class="menu-item"><a title="Variegated" href="coursefront.collectAll"
+									class="teamo-menu-item-title">我的收藏</a></li>
+
 								<li class="menu-item"><a title="Variegated" href="cart"
 									class="teamo-menu-item-title">我的購物車</a></li>
 								<li class="menu-item"><a title="Variegated"
@@ -210,12 +225,15 @@
 <!-- 									class="toggle-submenu"></span> -->
 <!-- 								<li class="menu-item "><a href="Exam.jsp" -->
 								<li><a href="coursefront1.list" class="teamo-menu-item-title"
-									title="Home">課程</a><span class="toggle-submenu"></span>
-								<li class="menu-item "><a href="firstExamController"
-									class="teamo-menu-item-title" title="Shop">試卷</a><span
+
+									title="Home" style="font-size:1.2em">課程</a><span class="toggle-submenu"></span>
+									
+								<li class="menu-item"><a href="ExamFrontController"
+									class="teamo-menu-item-title" title="Shop" style="font-size:1.2em">試卷</a><span
 									class="toggle-submenu"></span>
+
 								<li class="menu-item menu-item-has-children"><a href="Activity"
-                                        class="teamo-menu-item-title" >活動</a><span
+                                        class="teamo-menu-item-title" style="font-size:1.2em">活動</a><span
                                         class="toggle-submenu"></span>
                                     <ul class="submenu">
                                         <li class="menu-item"><a href="myActivities">我的活動</a></li>
@@ -223,27 +241,35 @@
                                         
                                     </ul>
                                 </li>
-								<li><a href="ColumnFrontEnd"
-									class="teamo-menu-item-title" title="Blogs">專欄</a><span
-									class="toggle-submenu"></span>
-									<ul class="submenu">
 
-									</ul></li>
+								
+								<li class="menu-item  menu-item-has-children"><a href="ColumnFrontEnd"
+                                        class="teamo-menu-item-title" title="Home" style="font-size:1.2em">專欄</a><span
+                                        class="toggle-submenu"></span>
+                                    <ul class="submenu">
+                                    <c:if test="${sessionScope.user.status == 2}">
+                                        <li class="menu-item"><a href="ColumnTeacherFront">講師專區</a></li>
+                                     </c:if>
+<!--                                         <li class="menu-item"><a href="home2.html">Home 02</a></li> -->
+<!--                                         <li class="menu-item"><a href="home3.html">Home 03</a></li> -->
+                                    </ul>
+                                </li>
 
 								<li class="menu-item"><a href="cart"
-									class="teamo-menu-item-title" title="About">購物車</a></li>
-
+									class="teamo-menu-item-title" title="About" style="font-size:1.2em">購物車</a></li>
+								
 								<c:if test="${sessionScope.user.status == 3}">
 
 									<li class="menu-item"><a href="backendIndex"
-										class="teamo-menu-item-title" title="About">後台管理</a></li>
+										class="teamo-menu-item-title" title="About" style="font-size:1.2em">後台管理</a></li>
 								</c:if>
 								<c:if test="${sessionScope.user.status == 2}">
 
 									<li class="menu-item"><a href="coursefront2.list"
-										class="teamo-menu-item-title" title="About">講師專區</a></li>
+										class="teamo-menu-item-title" title="About" style="font-size:1.2em">講師專區</a></li>
 								</c:if>
-
+							
+								
 							</ul>
 						</div>
 					</div>
@@ -251,29 +277,27 @@
 			</div>
 		</div>
 	</header>
-
-
-	<script src="./js/jquery-1.12.4.min.js"></script>
-	<script src="./js/jquery.plugin-countdown.min.js"></script>
-	<script src="./js/jquery-countdown.min.js"></script>
-	<script src="./js/bootstrap.min.js"></script>
-	<script src="./js/owl.carousel.min.js"></script>
-	<script src="./js/magnific-popup.min.js"></script>
-	<script src="./js/isotope.min.js"></script>
-	<script src="./js/jquery.scrollbar.min.js"></script>
-	<script src="./js/jquery-ui.min.js"></script>
-	<script src="./js/mobile-menu.js"></script>
-	<script src="./js/chosen.min.js"></script>
-	<script src="./js/slick.js"></script>
-	<script src="./js/jquery.elevateZoom.min.js"></script>
-	<script src="./js/jquery.actual.min.js"></script>
-	<script src="./js/fancybox/source/jquery.fancybox.js"></script>
-	<script src="./js/lightbox.min.js"></script>
-	<script src="./js/owl.thumbs.min.js"></script>
-	<script src="./js/jquery.scrollbar.min.js"></script>
+	<script src="assets/js/jquery-1.12.4.min.js"></script>
+	<script src="assets/js/jquery.plugin-countdown.min.js"></script>
+	<script src="assets/js/jquery-countdown.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/owl.carousel.min.js"></script>
+	<script src="assets/js/magnific-popup.min.js"></script>
+	<script src="assets/js/isotope.min.js"></script>
+	<script src="assets/js/jquery.scrollbar.min.js"></script>
+	<script src="assets/js/jquery-ui.min.js"></script>
+	<script src="assets/js/mobile-menu.js"></script>
+	<script src="assets/js/chosen.min.js"></script>
+	<script src="assets/js/slick.js"></script>
+	<script src="assets/js/jquery.elevateZoom.min.js"></script>
+	<script src="assets/js/jquery.actual.min.js"></script>
+	<script src="assets/js/fancybox/source/jquery.fancybox.js"></script>
+	<script src="assets/js/lightbox.min.js"></script>
+	<script src="assets/js/owl.thumbs.min.js"></script>
+	<script src="assets/js/jquery.scrollbar.min.js"></script>
 	<script
 		src='http://www.google.cn/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script>
-	<script src="./js/frontend-plugin.js"></script>
+	<script src="assets/js/frontend-plugin.js"></script>
 	<!-- 	DataTable jQuery -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

@@ -40,4 +40,8 @@ public class ColumnService {
 	public List<ColumnBean> findByEnglish(String subject){
 		return columnRepository.findByEnglish(subject);
 	}
+	public List<ColumnBean>findByAuthor(String author){
+		return columnRepository.findByAuthor(author);
+	}
+	
 }
