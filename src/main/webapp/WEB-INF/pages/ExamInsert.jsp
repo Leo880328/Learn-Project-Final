@@ -102,7 +102,6 @@
 <!--                <<button type="button" value="insert" onclick="wrongData()">一鍵錯誤</td> -->
            </tr>
         </table>
-   </form>
    
         <br><br>
         
@@ -112,6 +111,7 @@
         
         
         </div>
+   </form>
         
            
     

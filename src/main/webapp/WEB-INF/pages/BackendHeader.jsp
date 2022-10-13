@@ -113,7 +113,7 @@
 						</ul></li>
 
 
-					<li><a href="ExamBackController"><i class="zmdi zmdi-view-week"></i>試卷管理</a>
+					<li style="font-size: 1.3em"><a href="ExamBackController"><i class="zmdi zmdi-view-week"></i>試卷管理</a>
 
 					<li class="" style="font-size: 1.3em"><a href="course.list"><i
 							class="zmdi zmdi-view-list"></i>課程管理</a>
@@ -121,8 +121,8 @@
 
 					
 					<li style="font-size: 1.3em"><a href="QueryAll"><i class="zmdi zmdi-collection-text"></i>專欄管理</a></li>
-					
-					<li style="font-size: 1.3em"><a href="ActivitiesOP"><i class="zmdi zmdi-calendar"></i>活動管理</a></li>
+
+					<li style="font-size: 1.3em"><a href="ActivityOperator"><i class="zmdi zmdi-calendar"></i>活動管理</a></li>
 
 					<li style="font-size: 1.3em"><a href="orderList"><i class="zmdi zmdi-widgets"></i>訂單管理</a></li>
 					

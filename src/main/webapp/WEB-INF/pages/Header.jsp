@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="assets/css/jquery.scrollbar.min.css">
 <link rel="stylesheet" href="assets/css/mobile-menu.css">
 <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="css/style.css">
 
 <style>
 .main-header1 {
@@ -194,11 +194,19 @@
 									class="teamo-menu-item-title" title="New Arrivals">我的學習</a></li>
 								<li class="menu-item"><a title="Hot Sale" href="ExamMyMemController"
 									class="teamo-menu-item-title">我的試卷</a></li>
-								<li class="menu-item "><a title="Accessories" href="Activities"
-									class="teamo-menu-item-title">我的活動</a><span
-									class="toggle-submenu"></span></li>
+
+								<li class="menu-item menu-item-has-children">
+									<a href="Activity" class="teamo-menu-item-title" title="Blog Style">活動</a>
+									<span class="toggle-submenu"></span>
+                                    <ul class="submenu">
+                                       <li class="menu-item"><a href="myActivities">我的活動</a></li>
+                                       <li class="menu-item"><a href="ManageActivities">管理活動</a></li>
+                                    </ul>
+                                </li>
+
 								<li class="menu-item"><a title="Variegated" href="coursefront.collectAll"
 									class="teamo-menu-item-title">我的收藏</a></li>
+
 								<li class="menu-item"><a title="Variegated" href="cart"
 									class="teamo-menu-item-title">我的購物車</a></li>
 								<li class="menu-item"><a title="Variegated"
@@ -223,16 +231,17 @@
 								<li class="menu-item"><a href="ExamFrontController"
 									class="teamo-menu-item-title" title="Shop" style="font-size:1.2em">試卷</a><span
 									class="toggle-submenu"></span>
-									
-								<li><a href="Activities" class="teamo-menu-item-title"
 
-									title="Pages" style="font-size:1.2em">活動</a><span class="toggle-submenu"></span></li>
-<!-- 								<li><a href="ColumnFrontEnd" -->
-<!-- 									class="teamo-menu-item-title" title="Blogs" style="font-size:1.2em">專欄</a><span -->
-<!-- 									class="toggle-submenu"></span> -->
-<!-- 									<ul class="submenu"> -->
+								<li class="menu-item menu-item-has-children"><a href="Activity"
+                                        class="teamo-menu-item-title" style="font-size:1.2em">活動</a><span
+                                        class="toggle-submenu"></span>
+                                    <ul class="submenu">
+                                        <li class="menu-item"><a href="myActivities">我的活動</a></li>
+                                        <li class="menu-item"><a href="ManageActivities">管理活動</a></li>
+                                        
+                                    </ul>
+                                </li>
 
-								
 								
 								<li class="menu-item  menu-item-has-children"><a href="ColumnFrontEnd"
                                         class="teamo-menu-item-title" title="Home" style="font-size:1.2em">專欄</a><span
@@ -246,7 +255,7 @@
                                     </ul>
                                 </li>
 
-									<li class="menu-item"><a href="cart"
+								<li class="menu-item"><a href="cart"
 									class="teamo-menu-item-title" title="About" style="font-size:1.2em">購物車</a></li>
 								
 								<c:if test="${sessionScope.user.status == 3}">
@@ -280,7 +289,7 @@
 	<script src="assets/js/mobile-menu.js"></script>
 	<script src="assets/js/chosen.min.js"></script>
 	<script src="assets/js/slick.js"></script>
-	<script src="assets/js/jquery.elevateZoom.min.js"></script>s
+	<script src="assets/js/jquery.elevateZoom.min.js"></script>
 	<script src="assets/js/jquery.actual.min.js"></script>
 	<script src="assets/js/fancybox/source/jquery.fancybox.js"></script>
 	<script src="assets/js/lightbox.min.js"></script>
@@ -296,6 +305,6 @@
 		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 		<script src="https://kit.fontawesome.com/9d965cf88e.js" crossorigin="anonymous"></script>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		
+
 </body>
 </html>

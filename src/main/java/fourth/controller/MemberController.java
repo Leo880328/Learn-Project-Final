@@ -139,6 +139,7 @@ public class MemberController {
 //
 //	}
 
+
 //// 登入檢查 //**************************
 @RequestMapping(path = "/checklogin.controller", method = RequestMethod.GET)
 public String processAction(@RequestParam(value = "username",required = false) String account, @RequestParam(value = "password",required = false) String password,
@@ -149,18 +150,7 @@ public String processAction(@RequestParam(value = "username",required = false) S
 	System.out.println("執行user");
 	System.out.println(user);
 	m.addAttribute("user", user);
-//<<<<<<< HEAD
-//	if (user != null && user.getPassword().equals(password)) {
-//		if (user.getStatus() == 3) {
-//
-//			return "redirect:/backendIndex";
-//		} else if (user.getStatus() == 5) {
-//			errors.put("msg", "<font color=red size=6 >帳號有問題!!</font>");
-//			return "Login";
-//		} else {
-//			return "redirect:/Index";
-//		}
-//	}
+
 
 	if (user.getStatus() == 3) {
 		return "redirect:/backendIndex";

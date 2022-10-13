@@ -24,6 +24,7 @@
 </head>
 <body>
 	<jsp:include page="Header.jsp" />
+	<br>
 	<c:if test="${sessionScope.user == null}">
 		<%
 		request.getRequestDispatcher("/Login.jsp").forward(request, response);

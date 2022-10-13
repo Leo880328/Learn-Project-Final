@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<br>
 	<div class="sidebar col-lg-3 col-md-3 col-sm-12 col-xs-12"
 		style="width: 200px; margin-left: 100px">
 		<div class="wrapper-sidebar shop-sidebar">

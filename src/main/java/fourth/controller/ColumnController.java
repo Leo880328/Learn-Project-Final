@@ -79,7 +79,7 @@ public class ColumnController {
 					+ bean.getArticle_no() + "<br>" + "文章標題: " + bean.getTitle() + "<br>" + "<br>" + "<br>"
 					+ "審核結果: 通過!!" + "<h2>";
 			JavaMail javaMail = new JavaMail();
-			javaMail.setCustomer("s811026a@hotmail.com");
+			javaMail.setCustomer("wuyuhsi0422@gmail.com");
 			javaMail.setSubject("好學生-EEIT49 文章審核通過!");
 			javaMail.setTxt(txt);
 			javaMail.sendMail();
@@ -90,7 +90,7 @@ public class ColumnController {
 					+ bean.getArticle_no() + "<br>" + "文章標題: " + bean.getTitle() + "<br>" + "<br>"
 					+ "審核結果: 駁回!!" + "<br>" + "駁回原因: 文章內容帶有不當資訊" + "<h2>";
 			JavaMail javaMail = new JavaMail();
-			javaMail.setCustomer("s811026a@hotmail.com");
+			javaMail.setCustomer("wuyuhsi0422@gmail.com");
 			javaMail.setSubject("好學生-EEIT49 文章駁回通知");
 			javaMail.setTxt(txt);
 			javaMail.sendMail();

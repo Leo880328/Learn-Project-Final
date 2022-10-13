@@ -1,0 +1,12 @@
+.activity {
+    background-color: #fff;
+    border: 2px solid #00000010
+}
+
+.category-blog.activityTime {
+    margin-top: 0px;
+}
+
+.activityContent {
+    height: 100px;
+}

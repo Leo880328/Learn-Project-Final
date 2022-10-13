@@ -77,6 +77,7 @@
 	<c:if test="${sessionScope.pageStatus != '3'}">
 		<jsp:include page="Header.jsp" />
 	</c:if>
+	<br>
 	<div class="container ">
 		<div lass="row justify-content-center ">
 			<form class="cart-form" method="post" id="f">
