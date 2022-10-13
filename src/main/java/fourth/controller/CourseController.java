@@ -83,7 +83,8 @@ public class CourseController {
 					+ courseBean.getLecturer_email() + "<br>" + "課程價格:" + courseBean.getCourse_price() + "<br>" + "<br>"
 					+ "審核結果: 通過!!" + "<h2>";
 			JavaMail javaMail = new JavaMail();
-			javaMail.setCustomer("fock360man@gmail.com");
+//			javaMail.setCustomer("fock360man@gmail.com");
+			javaMail.setCustomer("wuyuhsi0422@gmail.com");
 			javaMail.setSubject("好學生-EEIT49 課程審核通過!");
 			javaMail.setTxt(txt);
 			javaMail.sendMail();
@@ -95,7 +96,8 @@ public class CourseController {
 					+ courseBean.getLecturer_email() + "<br>" + "課程價格:" + courseBean.getCourse_price() + "<br>" + "<br>"
 					+ "審核結果: 駁回!!" + "<br>" + "駁回原因: 請調整課程名稱或圖片" + "<h2>";
 			JavaMail javaMail = new JavaMail();
-			javaMail.setCustomer("fock360man@gmail.com");
+//			javaMail.setCustomer("fock360man@gmail.com");
+			javaMail.setCustomer("wuyuhsi0422@gmail.com");
 			javaMail.setSubject("好學生-EEIT49 課程駁回通知");
 			javaMail.setTxt(txt);
 			javaMail.sendMail();

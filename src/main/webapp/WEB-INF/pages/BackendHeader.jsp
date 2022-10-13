@@ -113,7 +113,7 @@
 						</ul></li>
 
 
-					<li><a href="ExamBackController"><i class="zmdi zmdi-view-week"></i>試卷管理</a>
+					<li style="font-size: 1.3em"><a href="ExamBackController"><i class="zmdi zmdi-view-week"></i>試卷管理</a>
 
 					<li class="" style="font-size: 1.3em"><a href="course.list"><i
 							class="zmdi zmdi-view-list"></i>課程管理</a>

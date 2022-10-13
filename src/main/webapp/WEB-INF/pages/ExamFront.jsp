@@ -31,6 +31,7 @@
 
 <body class="inblog-page">
  	<jsp:include page="Header.jsp" /> 
+ 	<br>
 <!--     <div class="header-device-mobile"> -->
 <!--         <div class="wapper"> -->
 <!--             <div class="item mobile-logo"> -->

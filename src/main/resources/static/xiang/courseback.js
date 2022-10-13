@@ -134,6 +134,7 @@ $(function () {
 		$('#course_date').val("2022-11-01");
 		$('#lecturer_name').val("溫妮");
 		$('#lecturer_email').val("winniepooh@gmail.com");
+		
 
 		if ($("#course_name").val() != "") {
 			$(`.messages1`).html(``)
