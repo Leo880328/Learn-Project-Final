@@ -18,7 +18,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -29,78 +32,93 @@ import fourth.bean.OrderStatus;
 import fourth.bean.Voucher;
 
 
-@Document(indexName = "orderuser")
-@Table(name = "order_user")
+@Document(indexName = "myindex")
 public class OrderUser implements Serializable{
 	
 	
 	@Id
-	@org.springframework.data.annotation.Id
-	@Column(name = "order_id")
 	private String orderId;
 	
+	@Field(type = FieldType.Date,format = DateFormat.custom,pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
 	private Date date;
 
-	@ManyToOne
-	@JoinColumn(name = "status")
+//	@Field(type = FieldType.Object)
+//	@ManyToOne
+//	@JoinColumn(name = "orderStatus")
+	@Field(type = FieldType.Nested, includeInParent = true)
 	private OrderStatus status;
 	
+//	@Field(type = FieldType.Object)
+//	@ManyToOne
+//	@JoinColumn(name = "status")
+//	private Integer status;
+	
+	
 	private int totoalcount = 1;
+	
 	private double totoalprice;
 	
 	
-//	@Transient
+//	@OneToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+//	 CascadeType.DETACH, CascadeType.REFRESH})
+//	@JoinColumn(name = "user_id")
 //	private int user_id;
 
-	@JsonManagedReference 
-	@OneToMany(mappedBy = "orderUser" ,cascade = CascadeType.ALL)
+//	@JsonManagedReference 
+//	@OneToMany(mappedBy = "orderUser" ,cascade = CascadeType.ALL)
+	@Field(type = FieldType.Nested, includeInParent = true)
 	private List<OrderItem> orderItems ;
 	
 	
 	
-	@OneToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-			 CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name = "user_id")
+//	@OneToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+//			 CascadeType.DETACH, CascadeType.REFRESH})
+//	@JoinColumn(name = "user_id")
+	@Field(type = FieldType.Nested, includeInParent = true)
 	private MemberBean memberBean ;
 	
-	@OneToOne
-	@JoinColumn(name = "discount")
+//	@OneToOne
+//	@JoinColumn(name = "discount")
+	@Field(type = FieldType.Nested, includeInParent = true)
 	private Voucher voucher ;
 	
+//	@OneToOne
+//	@JoinColumn(name = "discount")
+//	private Integer discount;
 	
 	public OrderUser() {
 		
 	}
 	
-	public OrderUser(String orderId, int user_id, Date date, OrderStatus status, int totoalcount, String discount,
+	public OrderUser(String orderId, int user_id, Date date, OrderStatus orderStatus, int totoalcount, String discount,
 			double totoalprice) {
 		this.orderId = orderId;
 		//this.user_id = user_id;
 		this.date = date;
-		this.status = status;
+		this.status = orderStatus;
 		this.totoalcount = totoalcount;
 		this.totoalprice = totoalprice;
 	}
 	
-	public OrderUser(String account, String name, String email, String orderId, int user_id, Date date, OrderStatus status,
+	public OrderUser(String account, String name, String email, String orderId, int user_id, Date date, OrderStatus orderStatus,
 			int totoalcount, String discount, double totoalprice) {
 	
 		this.orderId = orderId;
 		//this.user_id = user_id;
 		this.date = date;
-		this.status = status;
+		this.status = orderStatus;
 		this.totoalcount = totoalcount;
 		this.totoalprice = totoalprice;
 	}
 	
 
 	public OrderUser(String account, String name, String email, String cellphone, String orderId, int user_id,
-			Date date, OrderStatus status, int totoalcount, String discount, double totoalprice) {
+			Date date, OrderStatus orderStatus, int totoalcount, String discount, double totoalprice) {
 		
 		this.orderId = orderId;
 		//this.user_id = user_id;
 		this.date = date;
-		this.status = status;
+		this.status = orderStatus;
 		this.totoalcount = totoalcount;
 		this.totoalprice = totoalprice;
 	}
@@ -108,7 +126,7 @@ public class OrderUser implements Serializable{
 	
 	
 	public OrderUser(String account, String name, String email, String cellphone, String orderId, Date date,
-			OrderStatus status, int totoalcount, String discount, double totoalprice, List<OrderItem> orderItems,
+			OrderStatus orderStatus, int totoalcount, String discount, double totoalprice, List<OrderItem> orderItems,
 			MemberBean memberBean) {
 		
 		this.orderId = orderId;
@@ -141,11 +159,11 @@ public class OrderUser implements Serializable{
 		this.date = date;
 	}
 	
-	public OrderStatus getStatus() {
+	public OrderStatus getorderStatus() {
 		return status;
 	}
 
-	public void setStatus(OrderStatus status) {
+	public void status(OrderStatus orderStatus) {
 		this.status = status;
 	}
 
@@ -194,10 +212,36 @@ public class OrderUser implements Serializable{
 		this.voucher = voucher;
 
 	}
+	
+	
+
+//	public Integer getStatus() {
+//		return status;
+//	}
+//
+//	public void setStatus(Integer status) {
+//		this.status = status;
+//	}
+//
+//	public int getUser_id() {
+//		return user_id;
+//	}
+//
+//	public void setUser_id(int user_id) {
+//		this.user_id = user_id;
+//	}
+
+//	public Integer getDiscount() {
+//		return discount;
+//	}
+//
+//	public void setDiscount(Integer discount) {
+//		this.discount = discount;
+//	}
 
 	@Override
 	public String toString() {
-		return "OrderUser [orderId=" + orderId  + ", date=" + date + ", status=" + status
+		return "OrderUser [orderId=" + orderId  + ", date=" + date + ", orderStatus=" + status
 
 				+ ", totoalcount=" + totoalcount + ", voucher=" + voucher + ", totoalprice=" + totoalprice + "]" + memberBean;
 
