@@ -65,7 +65,7 @@ public class VoucherService {
 	}
 
 	public Voucher randomVoucher() {
-		List<Voucher> vouchers = voucherRepository.findAll();
+		List<Voucher> vouchers = voucherRepository.findAllByStatus(1);
 		int ran = (int)(Math.random() * vouchers.size());
 		Voucher voucher = vouchers.get(ran);
 		return voucher;

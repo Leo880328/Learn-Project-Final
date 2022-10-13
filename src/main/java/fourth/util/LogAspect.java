@@ -107,6 +107,7 @@ public class LogAspect {
 	    public void doAfter(JoinPoint joinPoint) throws Exception {
 	        logger.info("進入日誌切面後置通知!!");
 	        MemberBean user = currentUser.get();
+	        
 	        if(user !=null){
 	            String title="";
 	            String type="info";                       //日誌類型(info:入庫,error:錯誤)
@@ -194,10 +195,10 @@ public class LogAspect {
 			 for(Object o : args) {
 				 if(o != null) {
 					 if(o.getClass().getTypeName().equalsIgnoreCase("org.springframework.validation.support.BindingAwareModelMap") || o.getClass().getTypeName().equalsIgnoreCase("org.springframework.security.web.servletapi.HttpServlet3RequestFactory$Servlet3SecurityContextHolderAwareRequestWrapper")) {
-						 length--;
+						 count++;
 						 continue;
 					 }
-					 String param =o.toString()+", ";
+					 String param =o.toString()+",";
 					 if(count == length - 1) {
 						 param = o.toString();
 					 }
@@ -205,7 +206,16 @@ public class LogAspect {
 				 }
 		     	count++;
 		     }
-			 return sb.toString();
+			 String[] split = sb.toString().split(",");
+			 String params="";
+			 for(int i = 0 ; i < split.length; i++) {
+				 if(i == split.length - 1) {
+					 params += split[i];
+				 }else {
+					 params += split[i] + ", ";
+				 }
+			 }
+			 return params;
 		}
 
 //	    @AfterReturning(returning = "res", pointcut = "controllerAspect()")

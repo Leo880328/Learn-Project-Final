@@ -66,9 +66,10 @@
 							</thead>
 							<tbody>
 								<c:forEach items="${logs}" var="log">
-
+									
 									<tr>
-										<td>${log.memberBean.name}</td>
+										
+										<td>${log.memberBean.name}<c:if test="${log.memberBean.status == 3}">(管理員)</c:if></td>
 										<td>${log.logId}</td>
 										<td>${log.type}</td>
 										<td>${log.title }</td>

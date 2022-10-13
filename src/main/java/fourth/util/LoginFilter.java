@@ -21,7 +21,7 @@ import fourth.bean.MemberBean;
  */
 
 //@WebFilter({"/cart","/orderList","/cart.jsp",""})
-@WebFilter({"/cart","/orderList","/searchLearn","/chart","/CartController","/ActivitiesOP"})
+//@WebFilter({"/cart","/orderList","/searchLearn","/chart","/CartController","/ActivitiesOP"})
 public class LoginFilter extends HttpFilter implements Filter {
        
     /**

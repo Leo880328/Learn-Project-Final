@@ -66,7 +66,7 @@
     
 	<div class="divform">
 		<a href="ExamMyMemController"><button type="button" id="query"  onclick="examQuery()" style="font-size:15px">前台</button></a>
-		<a href="ExamAnalyze"><button id="submit" class="" style="font-size:15px;background-color: #111;height: 42px;">後台</button></a>
+		<a href="ExamMyMemAnalyze"><button id="submit" class="" style="font-size:15px;background-color: #111;height: 42px;">後台</button></a>
 	</div>
 	
     <div class="divform">

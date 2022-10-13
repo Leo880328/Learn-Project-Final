@@ -195,8 +195,6 @@ public class OrderController {
 		return searchStatust;
 	}
 
-	
-	
 
 	@ResponseBody
 	@GetMapping(path = "/order/voucher/{number}")
@@ -227,5 +225,7 @@ public class OrderController {
 		m.addAttribute("logs",logs);
 		return "log";
 	}
+	
+	
 
 }
