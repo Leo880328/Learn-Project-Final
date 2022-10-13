@@ -42,7 +42,7 @@
 							<div class="post-item">
 								<div class="post-infor">
 									<div class="post-format" style="height: 450px;">
-										<img class="activityImage" src="assets/images/blog1.jpg" alt="img">
+										<img class="activityImage" src="ActivityResources/images/default-image.jpg" alt="img">
 									</div>
 									<div class="category-blog">活動說明</div>
 									<h3 class="post-title activityTitle" style="text-align:center;">活動標題</h3>
@@ -57,7 +57,7 @@
 						<br>
 						<div class=" justify-content-center"
 							style="display: flex; justify-content: center; align-items: center;">
-							<a class="button btn-view-collection" onclick="joinActivity()">報名活動</a>
+							<button class="button btn-view-collection joinActivity" onclick="joinActivity()">報名活動</button>
 						</div>
 
 					</div>

@@ -36,6 +36,8 @@ public class CenterController {
 	public String Index(HttpServletRequest request,Model m) {
 		request.getSession().setAttribute("pageStatus","1");
 		System.out.println("前台");
+		MemberBean user = (MemberBean)m.getAttribute("user");
+		System.out.println(user);
 		//service.insertVoucher();
 		return "Index";
 	}

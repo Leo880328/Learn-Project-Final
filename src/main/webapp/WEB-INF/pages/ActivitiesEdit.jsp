@@ -106,6 +106,7 @@
                                             class="activityContent"></textarea>
                                     </p>
                                 </div>
+                                <a class="button  " onclick="onePieceOfInput()">一鍵輸入</a>
                             </div>
                         </div><a class="button button-payment saveActivityButton">送出</a>
                     </div>

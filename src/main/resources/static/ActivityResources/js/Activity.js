@@ -16,6 +16,7 @@ $().ready(
         console.log(activitiesId)
         if (activitiesId > 1) {
             requestActivity()
+            inAttended()
         } else {
             alert('錯誤導入方式!')
         }
@@ -40,6 +41,8 @@ function joinActivity() {
         method: "POST",
         dataType: "JSON",
         success: function (data) {
+            $(".joinActivity").html("您已經加入活動")
+            $(".joinActivity").attr("disabled", "disabled")
             Swal.fire({
                 icon: 'success',
                 title: '報名成功',
@@ -87,4 +90,18 @@ function updateView(activity) {
     }
 
 
+}
+function inAttended() {
+    $.ajax({
+        url: `Activity/inAttended/Activity${activitiesId}`,
+        method: "POST",
+        dataType: "JSON",
+        success: function (boolean) {
+            if (boolean) {
+                $(".joinActivity").html("您已經加入活動")
+                $(".joinActivity").attr("disabled", "disabled")
+            }
+        },
+        error: function (err) { alert("該活動已失效!") },
+    })
 }

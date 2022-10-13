@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -88,7 +89,7 @@ public class ActivityService {
 	// ======================================================================================================
 
 	public Page<ActivityBean> selectAllActivityByUserId(Pageable pageable, int userId) {
-		return activityRepository.findAllByUserId(pageable, userId);
+		return activityRepository.findAllByUserIdOrderByIdDesc(pageable, userId);
 	}
 
 	public Page<ActivityBean> selectPublicActivityByUserId(Pageable pageable, int userId) {
@@ -102,6 +103,11 @@ public class ActivityService {
 	
 	public ActivityReviewBean insertActivityReviewBean(ActivityReviewBean activityReviewBean) {
 		return activityReviewRepository.save(activityReviewBean);
+	}
+	
+	//查看參加資格
+	public ActivityAttendeesBean selectActivityAttendeesBean(Integer userId, Integer acticitiesId) {
+		return activityAttendeesRepository.findAllByUserIDAndByActivityId(userId, acticitiesId);
 	}
 
 	// 讀取參加者名單

@@ -103,7 +103,8 @@ public class MemberController {
 		m.addAttribute("user", user);
 		if (user != null && user.getPassword().equals(password)) {
 			if (user.getStatus() == 3) {
-
+				 user = (MemberBean)m.getAttribute("user");
+				System.out.println(user);
 				return "redirect:/backendIndex";
 			} else {
 				return "redirect:/Index";
