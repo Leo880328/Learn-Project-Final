@@ -76,13 +76,19 @@ function examQueryAll() {
 
 function createExam(exam, index) {
 	
+	var testNumber = `${exam.testNumber}`;
+	if( testNumber > "20"){
+		hotTag =`<div class="flash" style="background-color:red"><span class="onnew"><span class="text">熱門</span></span>`;
+	} else {
+		hotTag=`<div class="flash"><span class="onnew"><span class="text">推薦</span></span>`;
+	};
 	
     let examContent = [
         `<li
         class="product-item style-list col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12">
         <div class="product-inner equal-element">
             <div class="product-top">
-                <div class="flash"><span class="onnew"><span class="text">熱門</span></span>
+                ${hotTag}
                 </div>
             </div>
             <div class="products-bottom-content">

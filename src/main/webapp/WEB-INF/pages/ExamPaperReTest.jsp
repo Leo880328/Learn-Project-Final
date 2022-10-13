@@ -53,24 +53,27 @@
     <jsp:include page="Header.jsp" />
 
     <div class="Div1">
-        <form action=ExamTestSubmit method="post" class="tstfrm">
+        <form action=ExamReTestSubmit method="post" class="tstfrm">
             <table class="tb" style="border:solid 1px gray;border-radous:20px;">
-                <tr class="table-light" style="border:solid 1px gray">
-                    <td style="border:solid 1px gray" colspan="4"><label>考卷名稱:  ${testMap.examName}</label></td>
+                <tr class="table-light" style="border:solid 1px gray;">
+                    <td style="border:solid 1px gray" colspan="4"><label>考卷名稱:  ${reTestMap.examBean.examName}</label></td>
                 </tr>
 
-                <c:forEach items="${testMap.examQueList}" var="que" varStatus="loop">
+                <c:forEach items="${reTestMap.examQuList}" var="que" varStatus="loop">
                     <tr class="table-success">
-                        <td style="border:solid 1px gray" colspan="4" >${loop.index+1}. ${que.quesContent}:</td>
+                        <td style="border:solid 1px gray" colspan="4" ><label style="width:900px">${loop.index+1}. ${que.quesContent}:
+                        </label>
+                        <br><button type="button" onclick="reveal(this,'${que.quesAnswer}')" style="padding-left:0px;padding-right:0px;font-size:15px; height: 40px; width:70px; margin:auto;border-radius:10px">顯示答案</button></td>
                     </tr>
+
                     <tr class="table-light">
-                        <td style="border:solid 1px gray" colspan="2"><input type="radio" name="answer${loop.index}" id="" value="A" required> A. ${que.optA}</td>
-                        <td style="border:solid 1px gray" colspan="2"><input type="radio" name="answer${loop.index}" id="" value="B"> B. ${que.optB}</td>
+                        <td style="border:solid 1px gray" colspan="2"><label> A. ${que.optA}</label></td>
+                        <td style="border:solid 1px gray" colspan="2"><label> B. ${que.optB}</label></td>
 
                     </tr>
                     <tr class="table-light">
-                        <td style="border:solid 1px gray" colspan="2"><input type="radio" name="answer${loop.index}" id="" value="C"> C. ${que.optC}</td>
-                        <td style="border:solid 1px gray" colspan="2"><input type="radio" name="answer${loop.index}" id="" value="D"> D. ${que.optD}</td>          
+                        <td style="border:solid 1px gray" colspan="2"><label> C. ${que.optC}</label></td>
+                        <td style="border:solid 1px gray" colspan="2"><label> D. ${que.optD}</label></td>          
                     </tr>
                 </c:forEach>
 			
@@ -78,14 +81,14 @@
      		   
  				<tr class="table-light" style="border:solid 1px gray">
 	                 <td style="text-align: center; border:solid 1px gray;border-radius:10px" colspan="4">
-	                 <button type="button" onclick="update()" value="testSubmit" style="border-radius:10px">testSubmit</button></td>    
+	                 <button type="button" onclick="submit()" value="testSubmit" style="border-radius:10px">testSubmit</button></td>    
             	</tr>
             	
             </table>
     </div>
 
 <script>
-	function update(){
+	function submit(){
 		
 	    Swal.fire({
 	        title: '確認交卷?"',
@@ -106,7 +109,11 @@
 				})
 	        }
 	    })
-		
+	}
+	
+	function reveal(button,ans){
+		console.log(button);
+		$(button).html(ans);
 		
 	}
 </script>

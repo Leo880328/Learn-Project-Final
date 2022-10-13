@@ -21,7 +21,7 @@ import net.bytebuddy.asm.Advice.Return;
 
 
 @Controller
-@SessionAttributes(names = {"testMap","user"})
+@SessionAttributes(names = {"testMap","user","reTestMap"})
 public class ExamTestControllerAjax {
 	
 	@Autowired
@@ -76,6 +76,49 @@ public class ExamTestControllerAjax {
 		if (pageStatus.equals("3") ) {nextPage="Exam";};
 		
 		return nextPage;
+	}
+	
+	@PostMapping(path="/ExamTestStatistic")
+	@ResponseBody
+	public int[] processTestStatisticAction(Model m,HttpServletRequest request) {
+		
+		MemberBean user = (MemberBean)m.getAttribute("user");
+		//保存題目
+		
+		return examTestService.getUserStatistic(user.getuserId());
+	}
+	
+	
+	
+	@PostMapping(path="/ReExam")
+	public String processreExamAction(Model m,@RequestParam(defaultValue = "") String examRecordId) {
+		
+		Map<String, Object> reTestMap = (Map<String, Object>) m.getAttribute("testMap");
+		
+		System.err.println("~~~~~~~~~~~~~~~~~~"+examRecordId);
+		
+		reTestMap = examTestService.reTest(examRecordId);
+		
+		m.addAttribute("reTestMap",reTestMap);
+		
+		return "ExamPaperReTest";
+	}
+	
+	@PostMapping(path="/ExamReTestSubmit")
+	public String processreExamReTestSubmitAction(Model m,@RequestParam(defaultValue = "") String examRecordId,HttpServletRequest request) {
+		
+//		Map<String, Object> reTestMap = (Map<String, Object>) m.getAttribute("reTestMap");
+//		List<ExamQuesBean> examQuList = (List<ExamQuesBean>)reTestMap.get("examQueList");
+//		
+//		////接值: 題目map、chooseAns值
+//		//chooseAns		
+//		for (int i = 0; i < examQuList.size(); i++) {
+//			examQuList.get(i).setChooseAns(request.getParameter("answer"+i));
+//		}
+//		
+//		examTestService.reTestShowScore(reTestMap);
+		
+		return "ExamMyMem";
 	}
 	
 }

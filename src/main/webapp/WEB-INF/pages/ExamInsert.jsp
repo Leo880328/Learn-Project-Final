@@ -40,7 +40,7 @@
 
 	
 
-    <form action="examInsert" method="post" enctype="multipart/form-data" onsubmit="return check()">
+    <form action="examInsert" method="post" class="insfrm" enctype="multipart/form-data">
     
         <table class="tb">
      	     <colgroup>
@@ -88,7 +88,7 @@
                 <td><input style="display:inline;width:200px;" type="file" name="myfile" id="pictureInput"><span class="alert" id="spExamPic"></span></td>
             </tr>
             <tr>
-            	<td style=" margin:auto;text-align:center">
+            	<td style=" margin:auto;text-align:center" colspan="2">
 	            		<img  class="prevw" id="preview_pictureInput_img" src="" />
             	</td>
             </tr>
@@ -96,13 +96,14 @@
             <tr>
 <!--                <td><button type="submit" value="insert" onclick="check()">insert</td> -->
                <td style="text-align:center" colspan="2">
-               		<button type="submit" value="insert" onclick="check()">insert</button>
+               		<button type="submit" value="insert" onclick="subCheck(event)">insert</button>
                		<button type="button" value="insert" onclick="inertData()">一鍵輸入</button>
                </td>		
 <!--                <<button type="button" value="insert" onclick="wrongData()">一鍵錯誤</td> -->
            </tr>
-           
         </table>
+   </form>
+   
         <br><br>
         
         <div id="quArea">
@@ -113,13 +114,14 @@
         </div>
         
            
-    </form>
     
 	
 	<script src="kai/inserttable.js"></script>
 	<script src="kai/imgPreview.js"></script>
 	<script src="kai/ExamFrontCheck.js"></script>
 	<script src="kai/oneClick.js"></script>
+	<script src="kai/ExamInsertAlert.js"></script>
+
 
 </body>
 </html>

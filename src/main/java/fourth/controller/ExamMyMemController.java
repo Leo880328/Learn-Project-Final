@@ -50,7 +50,7 @@ public class ExamMyMemController {
 		return nextPage;
 	}
 	
-	
+	//調出收藏題目
 	@PostMapping("/ExamMyMemSe")
 	@ResponseBody
 	public List<ExamReserve> processActionSe(
@@ -67,12 +67,12 @@ public class ExamMyMemController {
 		return ExamReserves;
 	};
 	
-	
+	//刪除收藏題目
 	@PostMapping("/ExamMyMemDe")
 	@ResponseBody
 	public void processActionDe(@RequestParam(defaultValue = "") String Id ) {
 		
-		System.err.println("收藏刪除ID"+Id);
+		System.err.println("收藏題目刪除ID"+Id);
 		
 //		examMyMemService.delete(Integer.valueOf(Id));
 		
@@ -95,7 +95,7 @@ public class ExamMyMemController {
 	};
 	
 	
-	
+	//刪除考卷
 	@PostMapping("/ExamMyMemRecordDe")
 	@ResponseBody
 	public void processActionReDe(@RequestParam(defaultValue = "") String Id ) {

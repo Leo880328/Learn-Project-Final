@@ -66,7 +66,7 @@ public class ExamQuesBean implements Serializable
 	
 	@Override
 	public String toString() {
-		return "ExamQuesBean [subject=" + subject + ", education=" + education + ", quesContent=" + quesContent
+		return "[subject=" + subject + ", education=" + education + ", quesContent=" + quesContent
 				+ ", optA=" + optA + ", optB=" + optB + ", optC=" + optC + ", optD=" + optD + ", quesAnswer="
 				+ quesAnswer + ", quesScore=" + quesScore + "]";
 	}

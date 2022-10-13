@@ -79,22 +79,43 @@ $('.tb').on('click', '.del', function () {
     var params = { "examId": `${id}` }
     console.log(params)
     console.log($(this).closest("tr"))
-     $.ajax({
-         type: 'post',
-         url: 'ExamDe',
-         data: params,
-         dataType: 'json',
-         success: function (dataDe) {
-             let table = $('.tb').DataTable();
-             table.row().delete();
-         }, error: function (e) {
-             alert(e);
-         }
-     })
-    let table = $('.tb').DataTable();
-    console.log(table)
-    $(this).closest("tr").remove();
+	var tr = $(this).closest("tr");
+
+    Swal.fire({
+        title: '確認刪除考卷?"',
+        text: "",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '確定',
+        cancelButtonText: '取消',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: '刪除成功!',
+                willClose: function () {
+                    $.ajax({
+                        type: 'post',
+                        url: 'ExamDe',
+                        data: params,
+                        dataType: 'json',
+                        success: function (dataDe) {
+                            let table = $('.tb').DataTable();
+                            table.row().remove();
+                        }, error: function (e) {
+                            alert(e);
+                        }
+                    })
+                    let table = $('.tb').DataTable();
+                    table.row(tr).remove().draw(false);
+					
+                }
+            })
+        }
+    })
 });
+
 
 
 

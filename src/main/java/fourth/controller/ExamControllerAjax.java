@@ -121,10 +121,10 @@ public class ExamControllerAjax {
 		) throws IllegalStateException, IOException {
 		
 		
+		System.err.println("考卷插入service~~~~~~~~~~~"+answer.toString());
 		
 		//抓取會員ID
 		MemberBean user = (MemberBean)m.getAttribute("user");
-		
 
 		//處理儲存路徑
 		String saveFileSubPath = "static/images";
@@ -163,8 +163,12 @@ public class ExamControllerAjax {
 		//調考卷有的題目
 		List<ExamQuesBean> examQues = examService.selectQuesByExamId(examId);
 		Integer examQuesNum = examQues.size();
+		
+		
 		m.addAttribute("examQuesNum",examQuesNum);
 		m.addAttribute("examQues",examQues);
+		
+		
 		
 		//考卷的日期型態為data往前端傳時改為字串
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -187,7 +191,8 @@ public class ExamControllerAjax {
 			,@RequestParam(defaultValue = "") String subject,@RequestParam(defaultValue = "") String education
 			,@RequestParam(defaultValue = "") String examName,@RequestParam(defaultValue = "") String examDate
 			,@RequestParam(required = false) MultipartFile myfile,@RequestParam(defaultValue = "") String difficulty
-			,@RequestParam(defaultValue = "") String review
+			,@RequestParam(defaultValue = "") String review,@RequestParam(defaultValue = "") String testNumber
+			,@RequestParam(defaultValue = "") String avgScore
 			
 			//考題Insert
 			,@RequestParam(defaultValue = "") String[] examQuId
@@ -200,10 +205,9 @@ public class ExamControllerAjax {
 		
 		ExamBean upBean = (ExamBean) m.getAttribute("upBean");
 		String fileLocalPath = upBean.getExamPic();
-		
-		System.err.println(fileLocalPath);
-		System.err.println(myfile);
-		System.err.println(review);
+				
+		System.err.println("avgscore"+avgScore);
+		System.err.println("testNumber"+testNumber);
 		
 		if (!myfile.isEmpty()) {
 			String saveFileSubPath = "static/images";
@@ -217,7 +221,7 @@ public class ExamControllerAjax {
 		}
 
 		
-		examService.update(examId,subject, education, examName, examDate,fileLocalPath,Integer.valueOf(userId),difficulty,review,
+		examService.update(examId,subject, education, examName, examDate,fileLocalPath,Integer.valueOf(userId),difficulty,review,testNumber,avgScore,
 							examQuId,content,optA,optB,optC,optD,answer,score);
 		
 		return "Exam";

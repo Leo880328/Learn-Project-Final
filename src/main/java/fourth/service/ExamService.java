@@ -102,7 +102,7 @@ public class ExamService  {
 			
 			, String subString,String eduString,String examName,String examDate,String exampic
 			,Integer userId//原考卷出題者ID
-			,String difficulty,String status
+			,String difficulty,String status,String testNumber,String avgScore
 			
 			//考題
 			,String[] quId
@@ -128,7 +128,8 @@ public class ExamService  {
 			
 			Date tDate = new SimpleDateFormat("yyyy-MM-dd").parse(examDate);
 //			upBean = new ExamBean(upId, subBean, eduBean, examName, tDate, exampic);
-			upBean = new ExamBean(upId,subBean, eduBean, examName, tDate, exampic,memberBean,difficulty,0,0,Integer.valueOf(status)); 
+			upBean = new ExamBean(upId,subBean, eduBean, examName, tDate, exampic,memberBean,difficulty,Integer.valueOf(testNumber),
+					Integer.valueOf(avgScore),Integer.valueOf(status)); 
 			upBean.setExamdate(tDate);
 		} catch (ParseException e) {
 			e.printStackTrace();

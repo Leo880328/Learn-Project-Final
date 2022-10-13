@@ -31,39 +31,37 @@
     </style>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
-    <script type="text/javascript">
-    
-    $(function (){
-		
-		console.log("${sessionScope.upBean}");
-		
-		var subIdx = "${sessionScope.upBean.subject.subjectId}"-1;
-		console.log(subIdx);
-		
-		var eduIdx = "${sessionScope.upBean.education.educationId}"-1;
-		console.log(eduIdx);
-		
-		var diffArray = ["簡單","中等","困難"];
-		var diffIdx = diffArray.indexOf("${sessionScope.upBean.difficulty}")
-		
-    	var oselSub=document.getElementById("choSub"); //得到select的ID
-		var optsSub=oselSub.getElementsByTagName("option");//得到陣列option
-		optsSub[subIdx].selected=true;
-		
-    	var oselEdu=document.getElementById("choEdu"); //得到select的ID
-		var optsEdu=oselEdu.getElementsByTagName("option");//得到陣列option
-		optsEdu[eduIdx].selected=true;
-		
-    	var oselDiff=document.getElementById("choDiff"); //得到select的ID
-		var optsDiff=oselDiff.getElementsByTagName("option");//得到陣列option
-		optsDiff[diffIdx].selected=true;
-		
-    });
-    
-	</script> 
 	
 	
+	
+	<script>
+	
+	$(function () {
+		
+    var subIdx = "${sessionScope.upBean.subject.subjectId}" - 1;
+
+    var eduIdx = "${sessionScope.upBean.education.educationId}" - 1;
+
+    var diffArray = ["簡單", "中等", "困難"];
+    var diffIdx = diffArray.indexOf("${sessionScope.upBean.difficulty}")
+
+    var oselSub = document.getElementById("choSub"); //得到select的ID
+    var optsSub = oselSub.getElementsByTagName("option");//得到陣列option
+    optsSub[subIdx].selected = true;
+
+    var oselEdu = document.getElementById("choEdu"); //得到select的ID
+    var optsEdu = oselEdu.getElementsByTagName("option");//得到陣列option
+    optsEdu[eduIdx].selected = true;
+
+    var oselDiff = document.getElementById("choDiff"); //得到select的ID
+    var optsDiff = oselDiff.getElementsByTagName("option");//得到陣列option
+    optsDiff[diffIdx].selected = true;
+
+
+
+
+	});
+	</script>
 	
 </head>
 
@@ -72,7 +70,7 @@
 
 	<jsp:include page="Header.jsp"/>
 
-    <form action="examUpdateConfirm" method="post" enctype="multipart/form-data" onsubmit="return check()">
+    <form class="upfrm" action="examUpdateConfirm" method="post" enctype="multipart/form-data">
     
         <table class="tb">
             <tr>
@@ -114,8 +112,8 @@
             <tr>
             	<td><label>審查狀態:</label></td>
             	<td><select id="choReview" name="review" size="1">
-                        <option value="0">未通過</option>
-                        <option value="1">通過</option>
+                        <option ${upBean.examStatus== 0 ?"selected":""} value="0">未通過</option>
+                        <option ${upBean.examStatus== 1 ?"selected":""} value="1">通過</option>
                     </select></td>
             </tr>
             <tr>
@@ -155,11 +153,11 @@
 							<tr>
 								<td colspan='3'>
 									<label>答案: 
-										<select name='answer' size='1' style='width: 80px;'>
-											<option value='A'>A</option>
-											<option value='B'>B</option>
-											<option value='C'>C</option>
-											<option value='D'>D</option>
+										<select class="Se"  name='answer' id="D" size='1' style='width: 80px;'>
+											<option ${que.quesAnswer=="A"?"selected":""} value='A'>A</option>
+											<option ${que.quesAnswer=="B"?"selected":""} value='B'>B</option>
+											<option ${que.quesAnswer=="C"?"selected":""} value='C'>C</option>
+											<option ${que.quesAnswer=="D"?"selected":""} value='D'>D</option>
 										</select>
 									</label> 
 									
@@ -177,28 +175,25 @@
 				</table>
 			</c:forEach>
 
+           	<input type="hidden" name="testNumber" value="${upBean.testNumber}"> 
+           	<input type="hidden" name="avgScore" value="${upBean.avgScore}"> 
+           	<input type="hidden" name="examId" value="${upBean.examID}"> 
+           	<input type="hidden" name="userId" value="${upBean.member.userId}">
 		</div>
-		
-            <tr>
-                <td colspan="2">
-                    <center>
-                    	<input type="hidden" name="examId" value="${upBean.examID}"> 
-                    	<input type="hidden" name="userId" value="${upBean.member.userId}">
-                        <input type="submit" onclick="if( !(confirm('確認修改?') ) ) return false">
-                    </center>
-                </td>
-            </tr>
     </form>
-    
-<!-- 	<script type="text/javascript" src="kai/imagpreview.js"></script> -->
+		
+     <tr>
+         <td colspan="2">
+             <center>
+                <input type="submit" onclick="update()">
+             </center>
+         </td>
+     </tr>
+
 	<script src="kai/imgPreview.js"></script>
 	<script type="text/javascript">
-	
-		
+
 	$('.tb').on('click', '.del', function () {
-
-
-	    console.log('進入')
 
 	    $(this).closest('table').remove();
 
@@ -219,40 +214,35 @@
 	        }
 	    })
 
-	    // 	        var tableNum = $('.qutb').length;
-	    // 	        console.log("quTable數量"+tableNum);
-
-	    // 	        $('#quNumber').val(tableNum);
-
 	})
 	
-// 	function del(quId){
+	function update(){
 		
-// 		$(this).closest('table').remove();
+	    Swal.fire({
+	        title: '確認修改考卷?"',
+	        text: "",
+	        icon: 'warning',
+	        showCancelButton: true,
+	        confirmButtonColor: '#3085d6',
+	        cancelButtonColor: '#d33',
+	        confirmButtonText: '確定',
+	        cancelButtonText: '取消',
+	    }).then((result) => {
+	        if (result.isConfirmed) {
+				Swal.fire({
+					title: '修改完成 ',
+					willClose: function () {
+						$('.upfrm').submit();
+					}
+				})
+	        }
+	    })
 		
-// 		console.log($(this).parent());
 		
-// 		var params = { "quId": "" + quId}
+	}
+		
 	
-// 		$.ajax({
-			
-// 			type: 'post',
-// 			url: 'quDe',
-// 			data: params,
-// 			datatype: 'json',
-// 			success: function(data){
-				
-// 			},error:function(e){
-				
-// 			}
-			
-		
-// 		})
-		
-	
-// 	}
-	
-	  </script>
+	</script>
 </body>
 
 </html>
