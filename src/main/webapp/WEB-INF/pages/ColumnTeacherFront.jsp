@@ -100,8 +100,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				<div class="col-lg-12">
 					<div class="breadcrumb-trail breadcrumbs">
 						<ul class="trail-items breadcrumb">
-							<li class="trail-item trail-begin"><a href="index.html">首頁</a></li>
-							<li class="trail-item trail-end active">專欄</li>
+							<li class="trail-item trail-begin"><a href="ColumnFrontEnd">首頁</a></li>
+							<li class="trail-item trail-end active">講師專欄</li>
 						</ul>
 					</div>
 				</div>
@@ -112,71 +112,129 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 					<div class="site-main">
 						
 
-						<div class="custom_blog_title capi" style="float: left;">講師專區</div>
+						<div class="custom_blog_title capi" style="float: left;"></div>
 						<div style="float: right;">
-							<a id="id1" href="ColumnAdd">
+							<a id="id1" href="ColumnFrontAdd">
 								<button>新增專欄</button>
 							</a>
 						</div>
-						<br> <br>
-						<div class="blog-list grid-style">
-							<div class="row">
-								<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-									<div class="blog-item">
-										<div class="post-format">
-											<a href="#"><img src="assets/images/blog2.jpg" alt="img"></a>
-										</div>
-										<div class="post-info">
-											<div class="category-blog">
-												<a href="#">LIFE STYLE</a>
-											</div>
-											<h3 class="post-title">
-												<a href="#">Open The Gates For Lorem </a>
-											</h3>
-											<div class="main-info-post">
-												<p class="des">Phasellus condimentum nulla a arcu
-													lacinia,a venenatis ex congue. Mauris nec ante magna.</p>
-											</div>
-											<div class="author-view">
-												<div class="author">
-													<div class="avt">
-														<img src="assets/images/avt-blog1.png" alt="img">
-													</div>
-													<h3 class="name">Adam Smith</h3>
-												</div>
-												<div class="review">
-													<div class="view">
-														<span class="icon-view"><i class="fa fa-eye"
-															aria-hidden="true"></i></span><span class="count">631 </span>
-													</div>
-													<div class="s-comments">
-														<span class="icon-cmt"><i class="fa fa-commenting"
-															aria-hidden="true"></i></span><span class="count">82 </span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="pagination clearfix style2 grid">
-							<div class="nav-link">
-								<a href="#" class="page-numbers"><i
-									class="icon fa fa-angle-left" aria-hidden="true"></i></a><a
-									href="#" class="page-numbers">1</a><a href="#"
-									class="page-numbers">2</a><a href="#"
-									class="page-numbers current">3</a><a href="#"
-									class="page-numbers"><i class="icon fa fa-angle-right"
-									aria-hidden="true"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+						<br> <br><br> <br>
+						
+								
+<div class="row">
+                <div class="content-area content-blog col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="site-main">
+                        <h3 class="custom_blog_title capi">我的文章</h3>
+                        <div class="blog-list grid-style">
+                            <div class="row">
+                            
+					<c:forEach var="c" items="${queryAuthor }">
+						<c:if test="${c.status==3 }">
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="blog-item">
+                                        <div class="post-format"><a href="details?article_no=<c:out value="${c.article_no }"></c:out>"><img src="${c.picture }"
+                                                    alt="img"></a></div>
+                                        <div class="post-info">
+                                            <div class="category-blog"><a href="#"><c:out value="${c.subject }"></c:out></a></div>
+                                            <h3 class="post-title"><a href="details?article_no=<c:out value="${c.article_no }"></c:out>"><c:out value="${c.title}"></c:out> </a></h3>
+                                            <div class="main-info-post">
+                                                <p class="des"><c:out value="${c.summary }"></c:out> </p>
+                                            </div>
+                                            <div class="author-view"  style="float: left;">
+                                                <div class="author">
+                                                    <div class="avt"><img src="assets/images/avt-blog1.png" alt="img">
+                                                    </div>
+                                                    <h3 class="name"><c:out value="${c.author }"></c:out></h3><h3></h3>
+                                                </div>
+                                                <div class="review">
+                                                    <div class="view"><span class="icon-view"><i class="fa fa-eye"
+                                                                aria-hidden="true"></i></span><span class="count">631
+                                                        </span></div>
+                                                    <div class="s-comments"><span class="icon-cmt"><i
+                                                                class="fa fa-commenting"
+                                                                aria-hidden="true"></i></span><span class="count">82
+                                                        </span></div>
+                                                </div>
+                                            </div>
+                                          
+                                           <div style="float: right;" ><a
+						href="Update1?article_no=<c:out value="${c.article_no}"></c:out>&publish_time=<c:out value="${c.publish_time }"></c:out>&user_id=<c:out value="${c.user_id }"></c:out>&author=<c:out value="${c.author}"></c:out>&role=<c:out value="${c.role}"></c:out>&subject=<c:out value="${c.subject}"></c:out>&title=<c:out value="${c.title}"></c:out>&contents=<c:out value="${c.contents}"></c:out>&picture=<c:out value="${c.picture}"></c:out>&summary=<c:out value="${c.summary}"></c:out>">編輯</a></div><br>
+                                            <div  style="float: right;">
+                                            <a href="ColumnDelete1?article_no=${c.article_no }"> 刪除</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </c:if>
+                             </c:forEach>  
+                                
+                               
+                                     
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
 
+<div class="row">
+                <div class="content-area content-blog col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="site-main">
+                        <h3 class="custom_blog_title capi">審核中</h3>
+                        <div class="blog-list grid-style">
+                            <div class="row">
+                            
+					<c:forEach var="c" items="${queryAuthor }">
+						<c:if test="${c.status==1 }">
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="blog-item">
+                                        <div class="post-format"><a href="#"><img src="${c.picture }"
+                                                    alt="img"></a></div>
+                                        <div class="post-info">
+                                            <div class="category-blog"><a href="#"><c:out value="${c.subject }"></c:out></a></div>
+                                            <h3 class="post-title"><a href="details?article_no=<c:out value="${c.article_no }"></c:out>"><c:out value="${c.title}"></c:out> </a></h3>
+                                            <div class="main-info-post">
+                                                <p class="des">Phasellus condimentum nulla a arcu lacinia,a venenatis ex
+                                                    congue. Mauris nec ante magna. </p>
+                                            </div>
+                                            <div class="author-view"  style="float: left;">
+                                                <div class="author">
+                                                    <div class="avt"><img src="assets/images/avt-blog1.png" alt="img">
+                                                    </div>
+                                                    <h3 class="name"><c:out value="${c.author }"></c:out></h3><h3></h3>
+                                                </div>
+                                                <div class="review">
+                                                    <div class="view"><span class="icon-view"><i class="fa fa-eye"
+                                                                aria-hidden="true"></i></span><span class="count">631
+                                                        </span></div>
+                                                    <div class="s-comments"><span class="icon-cmt"><i
+                                                                class="fa fa-commenting"
+                                                                aria-hidden="true"></i></span><span class="count">82
+                                                        </span></div>
+                                                </div>
+                                            </div>
+                                            <div style="float: right;" ><a
+						href="Update1?article_no=<c:out value="${c.article_no}"></c:out>&publish_time=<c:out value="${c.publish_time }"></c:out>&user_id=<c:out value="${c.user_id }"></c:out>&author=<c:out value="${c.author}"></c:out>&role=<c:out value="${c.role}"></c:out>&subject=<c:out value="${c.subject}"></c:out>&title=<c:out value="${c.title}"></c:out>&contents=<c:out value="${c.contents}"></c:out>&picture=<c:out value="${c.picture}"></c:out>">編輯</a></div><br>
+                                            
+                                            <div  style="float: right;"><a href="ColumnDelete1?article_no=<c:out value="${c.article_no }"></c:out>" >刪除</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </c:if>
+                             </c:forEach>  
+                                
+                               
+                                     
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            
+
+					
+			
 	<div class="footer-device-mobile">
 		<div class="wapper">
 			<div class="footer-device-mobile-item device-home">
@@ -220,6 +278,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	<script
 		src='http://www.google.cn/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script>
 	<script src="assets/js/frontend-plugin.js"></script>
+	<script src="howard/columnback.js"></script>
 </body>
 
 </html>

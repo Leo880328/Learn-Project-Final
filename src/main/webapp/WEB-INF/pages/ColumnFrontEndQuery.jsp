@@ -131,7 +131,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 											</h3>
 											<div class="main-info-post">
 												<p class="des">
-													<c:out value="${c.contents }"></c:out>
+													<c:out value="${c.summary }"></c:out>
 												</p>
 											</div>
 											<div class="author-view">
@@ -176,7 +176,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 											</h3>
 											<div class="main-info-post">
 												<p class="des">
-													<c:out value="${c.contents }"></c:out>
+													<c:out value="${c.summary}"></c:out>
 												</p>
 											</div>
 											<div class="author-view">
@@ -221,7 +221,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 											</h3>
 											<div class="main-info-post">
 												<p class="des">
-													<c:out value="${c.contents }"></c:out>
+													<c:out value="${c.summary}"></c:out>
 												</p>
 											</div>
 											<div class="author-view">

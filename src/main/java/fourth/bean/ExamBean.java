@@ -17,6 +17,9 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 @Table(name="examination")
@@ -37,6 +40,7 @@ public class ExamBean implements Serializable
 	@JoinColumn(name="EDUCATIONLEVEL")
     private ExamEduBean education;
 	
+	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "exam")
     private  List<ExamTest> examTests = new ArrayList<ExamTest>() ;
 	

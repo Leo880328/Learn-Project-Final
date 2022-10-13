@@ -64,24 +64,67 @@
 								<li></li>
 							</ul>
 						</c:when>
+						
+						<c:when test="${sessionScope.user.status == 4 }">
+
+							<ul class="header-user-links">
+								<c:if test="${sessionScope.user.nick == null}">
+
+								</c:if>
+								<li><a href="#"><b>${sessionScope.user.nick}(審核中)</b></a> |
+									<a href="logout.controller">登出</a></li>
+								<li></li>
+							</ul>
+						</c:when>
+
+						<c:when test="${sessionScope.user.status == 1 }">
+
+							<ul class="header-user-links">
+								<c:if test="${sessionScope.user.nick == null}">
+
+								</c:if>
+								<li><a href="#"><b>${sessionScope.user.nick}(學生)</b></a> |
+									<a href="logout.controller">登出</a></li>
+								<li></li>
+							</ul>
+						</c:when>
+						
+						<c:when test="${sessionScope.user.status == 2 }">
+
+							<ul class="header-user-links">
+								<li><a href="#"><b>${sessionScope.user.nick}(老師)</b></a> |
+									<a href="logout.controller">登出</a></li>
+								<li></li>
+							</ul>
+						</c:when>
 
 						<c:otherwise>
 							<c:if test="${sessionScope.user.status == 3}">
 								<ul class="header-user-links">
-									<li><a href="#"><b>${sessionScope.user.name}(管理員)</b></a>
+									<li><a href="#"><b>${sessionScope.user.nick}(管理員)</b></a>
 										| <a href="logout.controller">登出</a></li>
 									<li></li>
 								</ul>
 
 							</c:if>
-							<c:if test="${sessionScope.user.status != 3}">
-								<ul class="header-user-links">
-									<li><a href=""><b>${sessionScope.user.name}</b></a> | <a
-										onclick="if( !(confirm('確認登出?') ) ) return false"
-										href="logout.controller">登出</a></li>
-									<li></li>
-								</ul>
-							</c:if>
+							<%-- 							<c:if test="${sessionScope.user.status != 3}"> --%>
+							<!-- 								<ul class="header-user-links"> -->
+							<%-- 								<c:when test="${sessionScope.user.nick == null}"> --%>
+							<!-- 								<li><a href=""><b>歡迎~</b></a> | <a -->
+							<!-- 										onclick="if( !(confirm('確認登出?') ) ) return false" -->
+							<!-- 										href="logout.controller">登出</a></li> -->
+							<!-- 									<li></li> -->
+
+							<%-- 								</c:when> --%>
+							<%-- 								<c:otherwise> --%>
+
+							<%-- 									<li><a href=""><b>${sessionScope.user.nick}</b></a> | <a --%>
+							<!-- 										onclick="if( !(confirm('確認登出?') ) ) return false" -->
+							<!-- 										href="logout.controller">登出</a></li> -->
+							<!-- 									<li></li> -->
+							<%--        							</c:otherwise> --%>
+							<!-- 								</ul> -->
+							<%-- 							</c:if> --%>
 						</c:otherwise>
 					</c:choose>
 				</div>
@@ -105,9 +148,9 @@
 						<div class="header-control">
 							<div class="block-minicart teamo-mini-cart block-header ">
 
-								<a href="cart" class="shopcart-icon"
-									data-teamo="teamo-dropdown">Cart <span class="count"
-									id="msg"></span></a>
+								<a href="cart" class="shopcart-icon" data-teamo="teamo-dropdown">Cart
+									<span class="count" id="msg"></span>
+								</a>
 								<div class="shopcart-description teamo-submenu">
 									<div class="content-wrap"></div>
 								</div>
@@ -141,7 +184,7 @@
 									class="teamo-menu-item-title" title="New Arrivals">我的學習</a></li>
 								<li class="menu-item"><a title="Hot Sale" href="ExamMyMemController"
 									class="teamo-menu-item-title">我的試卷</a></li>
-								<li class="menu-item "><a title="Accessories" href="#"
+								<li class="menu-item "><a title="Accessories" href="Activities"
 									class="teamo-menu-item-title">我的活動</a><span
 									class="toggle-submenu"></span></li>
 								<li class="menu-item"><a title="Variegated" href="cart"
@@ -157,30 +200,32 @@
 						<div class="container-wapper">
 							<ul class="teamo-clone-mobile-menu teamo-nav main-menu "
 								id="menu-main-menu">
+<!-- 								<li><a href="coursefront1.list" -->
+<!-- 									class="teamo-menu-item-title" title="Home">課程</a><span -->
+<!-- 									class="toggle-submenu"></span> -->
+<!-- 								<li class="menu-item "><a href="Exam.jsp" -->
 								<li><a href="coursefront1.list" class="teamo-menu-item-title"
 									title="Home">課程</a><span class="toggle-submenu"></span>
 								<li class="menu-item "><a href="firstExamController"
 									class="teamo-menu-item-title" title="Shop">試卷</a><span
 									class="toggle-submenu"></span>
-								<li><a href="Activity" class="teamo-menu-item-title"
+								<li><a href="Activities" class="teamo-menu-item-title"
 									title="Pages">活動</a><span class="toggle-submenu"></span></li>
+
 								
-								<li><a href="QueryAll" class="teamo-menu-item-title" title="Blogs">專欄後台</a>
-								<span class="toggle-submenu"></span>
-									<ul class="submenu"></ul>
-								</li>
 								
 								<li class="menu-item  menu-item-has-children"><a href="ColumnFrontEnd"
                                         class="teamo-menu-item-title" title="Home">專欄</a><span
                                         class="toggle-submenu"></span>
                                     <ul class="submenu">
-<%--                                     <c:if test="${sessionScope.user.status == 2}"> --%>
+                                    <c:if test="${sessionScope.user.status == 2}">
                                         <li class="menu-item"><a href="ColumnTeacherFront">講師專區</a></li>
-<%--                                      </c:if> --%>
-                                        <li class="menu-item"><a href="home2.html">Home 02</a></li>
-                                        <li class="menu-item"><a href="home3.html">Home 03</a></li>
+                                     </c:if>
+<!--                                         <li class="menu-item"><a href="home2.html">Home 02</a></li> -->
+<!--                                         <li class="menu-item"><a href="home3.html">Home 03</a></li> -->
                                     </ul>
                                 </li>
+
 
 								<li class="menu-item"><a href="cart"
 									class="teamo-menu-item-title" title="About">購物車</a></li>
@@ -232,5 +277,6 @@
 	<script type="text/javascript" charset="utf8"
 		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 		<script src="https://kit.fontawesome.com/9d965cf88e.js" crossorigin="anonymous"></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

@@ -65,13 +65,13 @@ function order(status) {
 				$(".table-responsive").append(`<table id="data-table" class="table table-bordered">
 					    <thead class="thead-default">
 					        <tr>
+					            <th>訂單編號</th>
 					            <th>會員帳號</th>
 					            <th>會員姓名</th>
 					            <th>會員信箱</th>
-					            <th>訂單編號</th>
 					            <th>訂單生成日期</th>
 					            <th>總數</th>
-					            <th>總價</th>
+					            <th>訂單金額</th>
 					            <th>訂單狀態</th>
 					            <th></th>
 					        </tr>
@@ -94,11 +94,6 @@ function order(status) {
 				$.each(data, function(i, n) {
 					memberStatus = n.status.id;
 					$("#userbody").append(orderListUser(n));
-					if (memberStatus == 1) {
-						$(`#${n.orderId}`).append(`<td ><button onclick="del(${n.orderId})" class="btn btn-danger">刪除</button></td>`);
-					} else {
-						$(`#${n.orderId}`).append(`<td ></td>`);
-					}
 				})
 
 			}
@@ -113,10 +108,10 @@ function orderList(order) {
 
 	let data = `
             <tr id="${order.orderId}">
+                <td>${order.orderId}</td>
                 <td>${order.memberBean.account}</td>
                 <td>${order.memberBean.name}</td>
                 <td>${order.memberBean.email}</td>
-                <td>${order.orderId}</td>
                 <td>${formatDate(new Date(order.date))}</td>
                 <td>${order.totoalcount}</td>
                 <td>$${order.totoalprice}</td>
@@ -159,28 +154,29 @@ function orderButton(order) {
 	//未付款
 	if (order.status.id == 1) {
 		bt = `<span class="badge badge-secondary" >${order.status.status}</span>`
-		$(`#${order.orderId}`).find(".btn-success").attr("disabled", true);
-		$(`#${order.orderId}`).find(".btn-warning").attr("disabled", true);
+		$(`#${order.orderId}`).find(".btn-success").remove();
+//		$(`#${order.orderId}`).find(".btn-warning").attr("disabled", true);
+		$(`#${order.orderId}`).find(".btn-warning").remove();
 	};
 
 	//已付款
 	if (order.status.id == 2) {
 		bt = `<span class="badge badge-success" >${order.status.status}</span>`
-		$(`#${order.orderId}`).find(".btn-warning").attr("disabled", true);
+		$(`#${order.orderId}`).find(".btn-warning").remove();
 	}
 	if (order.status.id == 3) {
 		bt = `<span class="badge badge-warning">${order.status.status}</span>`
-		$(`#${order.orderId}`).find(".btn-success").attr("disabled", true);
+		$(`#${order.orderId}`).find(".btn-success").remove();
 	};
 	if (order.status.id == 4) {
 		bt = `<span class="badge badge-primary">${order.status.status}</span>`
-		$(`#${order.orderId}`).find(".btn-success").attr("disabled", true);
-		$(`#${order.orderId}`).find(".btn-warning").attr("disabled", true);
+		$(`#${order.orderId}`).find(".btn-success").remove();
+		$(`#${order.orderId}`).find(".btn-warning").remove();
 	}
 	if (order.status.id == 5 || order.status.id == 6) {
 		bt = `<span class="badge badge-dark">${order.status.status}</span>`
-		$(`#${order.orderId}`).find(".btn-success").attr("disabled", true);
-		$(`#${order.orderId}`).find(".btn-warning").attr("disabled", true);
+		$(`#${order.orderId}`).find(".btn-success").remove();
+		$(`#${order.orderId}`).find(".btn-warning").remove();
 	}
 }
 function orderListUser(order) {
@@ -193,16 +189,17 @@ function orderListUser(order) {
 							<input type="hidden" name="cartID" value="${order.orderId}" />
 							<button class="btn btn-success">結帳</button>
 						</form>
-				</td>`;
+				</td>
+				<td ><button onclick="del(${order.orderId})" class="btn btn-danger">刪除</button></td>`;
 
 	} else if (memberStatus == 2) {
-		part = `<td><button id="btn" disabled class="btn btn-secondary">已付款</button></td><td><butto  class="btn btn-info" onclick="backpay(${order.orderId})")>退款申請</button></td>">
-	</form>`;
+		part = `<td><button id="btn" disabled class="btn btn-secondary">已付款</button></td>
+				<td><button  class="btn btn-info" onclick="backpay(${order.orderId})">退款申請</button></td>`;
 
 	} else if (memberStatus == 3) {
 		part = `<td >
 					<button type="button" class="btn btn-warning">${order.status.status}</button>
-				</td>`;
+				</td><td ></td>`;
 
 	} else if (memberStatus == 4) {
 		part = `<td>
@@ -210,12 +207,12 @@ function orderListUser(order) {
 							<input type="hidden" name="cartID" value="${order.orderId}" />
 							<button class="btn btn-primary">詳細</button>
 					</form>
-				</td>`;
+				</td><td ></td>`;
 
 	} else if (memberStatus == 5 || memberStatus == 6) {
 		part = `<td>
 					<button type="button" class="btn btn-info">${order.status.status}</button>
-				</td>`;
+				</td><td ></td>`;
 
 	}
 	let data = `
@@ -288,7 +285,6 @@ function checkOrder(orderId) {
 				url: "updateOrder/4/" + orderId,
 				success: function(data) {
 					$(`#${orderId}`).empty();
-					console.log(bt);
 					$(`#${orderId}`).append(orderAdminContent(orderUser(orderId)));
 					orderButton(orderUser(orderId));
 					$(`.${orderId}`).append(bt);
@@ -327,10 +323,10 @@ function orderUser(orderId) {
 
 
 function orderAdminContent(order) {
-	var data = `<td>${order.memberBean.account}</td>
+	var data = `<td>${order.orderId}</td>
+				<td>${order.memberBean.account}</td>
                 <td>${order.memberBean.name}</td>
                 <td>${order.memberBean.email}</td>
-                <td>${order.orderId}</td>
                 <td>${formatDate(new Date(order.date))}</td>
                 <td>${order.totoalcount}</td>
                 <td>$${order.totoalprice}</td>
@@ -429,29 +425,14 @@ function selectStatus(e) {
 			$.each(data, function(i, n) {
 				memberStatus = n.status.id;
 				$("#userbody").append(orderListUser(n));
-				if (memberStatus == 1) {
-					$(`#${n.orderId}`).append(`<td ><button onclick="del(${n.orderId})" class="btn btn-danger">刪除</button></td>`);
-				} else {
-					$(`#${n.orderId}`).append(`<td ></td>`);
-				}
+				
 
 			})
 		}
 	})
 }
 function htmlToPdf() {
-	//	var doc = new jsPDF();
-	//	doc.fromHTML(document.getElementById("pdfTransfer"),
-	//		15,
-	//		15,
-	//		{ 'width': 170 },
-	//		function() {
-	//			doc.addFont('SourceHanSans-Normal.ttf', 'SourceHanSans-Normal', 'normal');
-	//			doc.setFont('SourceHanSans-Normal');
-	//			doc.save("PDF_Documet.pdf");
-	//		});
-//	doc = window.jspdf.jsPDF;
-	//	var doc = new jsPDF();
+	
 	var doc = new jsPDF('p', 'pt', 'letter');
 	var htmlstring = '';
 	var tempVarToCheckPageHeight = 0;
@@ -465,33 +446,42 @@ function htmlToPdf() {
 		}
 	};
 	margins = {
-		top: 150,
+		top: 10,
 		bottom: 60,
 		left: 40,
 		right: 40,
 		width: 600
 	};
 	var y = 20;
+	doc.setFont('SourceHanSansCN-Bold', 'normal');
 	doc.setLineWidth(2);
-	doc.text(200, y = y + 30, "TOTAL MARKS OF STUDENTS");
 	doc.autoTable({
-		html: '#simple_table',
+		html: '#data-table',
 		startY: 70,
 		theme: 'grid',
 		columnStyles: {
 			0: {
-				cellWidth: 180,
+				cellWidth: 110,
 			},
 			1: {
-				cellWidth: 180,
+				cellWidth: 73,
 			},
 			2: {
-				cellWidth: 180,
+				cellWidth: 55,
 			}
 		},
 		styles: {
-			minCellHeight: 40
-		}
+			minCellHeight: 10,
+			font: 'SourceHanSansCN-Bold',
+            fontStyle: 'normal',
+		},
+		headerStyles: {
+				font: 'SourceHanSansCN-Bold',
+				fontStyle: 'normal'
+		},
+		tableWidth: 'wrap',
+		
+		margin: {left:0, right:200}
 	})
-	doc.save('Marks_Of_Students.pdf');
+	doc.save('好學生 訂單資料.pdf');
 }

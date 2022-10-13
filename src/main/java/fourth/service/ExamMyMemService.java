@@ -50,12 +50,30 @@ public class ExamMyMemService  {
 	private ExamReserveRepository examReserveRes;
 	
 	
-	//查詢全部
-	public List<ExamReserve> selectAll(){
+	//收藏查詢全部
+	public List<ExamReserve> resSelectAll(){
 		return examReserveRes.findAll();
 	}
-
 	
-
+	//收藏刪除
+	public void resDelete(Integer examId) {
+		
+		examReserveRes.deleteById(examId);
+		
+	}
+	
+	//考卷查詢
+	public List<ExamRecord> ExamRecordSelectAll(Integer memberId){
+		return examMemRecordRes.findByMember_userId(memberId);
+	}
+	
+	
+	//考試刪除
+	public void ExamRecordDelete(Integer recordId) {
+		
+	
+		examMemRecordRes.deleteById(recordId);
+		
+	}
 	
 }

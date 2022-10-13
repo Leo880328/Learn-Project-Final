@@ -33,22 +33,13 @@ function cartList() {
 
 
 function cart(cart) {
-	let sub;
-	if (cart.courseBean.subject_id == 1) {
-		sub = "數學"
-	}
-	if (cart.courseBean.subject_id == 2) {
-		sub = "英文"
-	}
-	if (cart.courseBean.subject_id == 3) {
-		sub = "多益"
-	}
+	
 	let data = `
         <tr id="${cart.id}">
             <td><img src="${cart.courseBean.course_picture}" alt=""
                 title="" width="150" height="100"></td>
             <td style="vertical-align: middle;">${cart.itemName}</td>
-            <td style="vertical-align: middle;">${sub}</td>
+            <td style="vertical-align: middle;">${cart.courseBean.coursesub.subject_name}</td>
             <td style="vertical-align: middle;">${cart.courseBean.course_duration}</td>
             <td style="vertical-align: middle;">${cart.courseBean.lecturer_name}</td>
             <td style="vertical-align: middle;">${cart.courseBean.enrollment}</td>
@@ -115,9 +106,7 @@ function cartTotal() {
 			$("#clear").html(list);
 			$("#b").val(total);
 			$("#buy").empty();
-			if (total == 0) {
-				$("#buy").append(`<button class="btn btn-success" id="myBtn"  disabled onclick="if( !(confirm('確認購買?') ) ) return false ; alert('生成訂單!!!');">確認購買</button>`);
-			} else {
+			if (total != 0) {
 				$("#buy").append(`<button class="btn btn-success" onclick="buyCheck()">確認購買</button>`);
 			}
 		}

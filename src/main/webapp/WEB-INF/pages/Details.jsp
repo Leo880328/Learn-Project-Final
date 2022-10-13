@@ -296,11 +296,8 @@ CourseBean courseBean = (CourseBean) request.getAttribute("cbean");
 									<!-- 										<div class="quantity"></div> -->
 									<!-- 										<button class="single_add_to_cart_button button">加入購物車</button> -->
 									<!-- 									</div> -->
-									<form action="cartadd" method="post">
-										<input type="hidden" name="courseID"
-											value="${cbean.course_id}">
-										<button class="single_add_to_cart_button button">加入購物車 <i class="fa-solid fa-cart-shopping"></i></button>
-									</form>
+									<button class="single_add_to_cart_button button" onclick="add(${cbean.course_id})">加入購物車</button>
+									
 									<%-- 										<form action="cart/addCart/<%=courseBean.getCourse_id()%>>" method="post"> --%>
 									<!-- 											<input type="hidden" name="courseID" -->
 									<%-- 												value="<%=courseBean.getCourse_id()%>"> --%>
@@ -429,5 +426,7 @@ CourseBean courseBean = (CourseBean) request.getAttribute("cbean");
 <!-- 			src='http://www.google.cn/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script> -->
 <!-- 		<script src="./js/frontend-plugin.js"></script> -->
 <jsp:include page="Footer.jsp"/>
+<script src="wayne/cart.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
