@@ -167,8 +167,8 @@ $(function () {
 	$('#correct').click(function () {
 		$('#date').val("2022-10-14");
 		$('#title').val("My Wonderful Family");
-		$('#user_id').val("1");
-		$('#author').val("Winnie");
+		$('#user_id').val("10");
+		$('#author').val("Andy");
 		$('#role').val("管理者");
 		$('#subject').val("英文");
 		$('#summary').val("A1 Level Simple Present Tense");

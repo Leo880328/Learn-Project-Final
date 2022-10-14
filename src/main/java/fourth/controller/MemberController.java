@@ -352,7 +352,7 @@ public String processAction(@RequestParam(value = "username",required = false) S
 					+ memberBean.getReason() + "<br>" + "<h2>";
 			JavaMail javaMail = new JavaMail();
 //			javaMail.setCustomer("fock360man@gmail.com");
-			javaMail.setCustomer("ch570981400@gmail.com");
+			javaMail.setCustomer("wuyuhsi0422@gmail.com");
 			javaMail.setSubject("好學生-EEIT49 身分審核失敗!");
 			javaMail.setTxt(txt);
 			javaMail.sendMail();
@@ -363,7 +363,7 @@ public String processAction(@RequestParam(value = "username",required = false) S
 					+ "<h2>";
 			JavaMail javaMail = new JavaMail();
 //			javaMail.setCustomer("fock360man@gmail.com");
-			javaMail.setCustomer("ch570981400@gmail.com");
+			javaMail.setCustomer("wuyuhsi0422@gmail.com");
 			javaMail.setSubject("好學生-EEIT49 身分審核通過!");
 			javaMail.setTxt(txt);
 			javaMail.sendMail();

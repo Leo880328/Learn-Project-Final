@@ -96,7 +96,7 @@ article {
 				$('#account').val("edward");
 				$('#password').val("edward");
 				$('#password1').val("edward");
-				$('#email').val("ch570981400@gmail.com");
+				$('#email').val("wuyuhsi0422@gmail.com");
 			})
 		})
 	</script>
