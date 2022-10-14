@@ -1,28 +1,45 @@
 package fourth.controller;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import fourth.bean.CartItem;
 import fourth.bean.CourseBean;
+import fourth.bean.CourseCollect;
+import fourth.bean.CourseComments;
+import fourth.bean.MemberBean;
 import fourth.service.CourseService;
 
 @Controller
+@SessionAttributes(names = {"user"})
 public class CourseFrontController {
 
 	@Autowired
 	private CourseService cService;
+	
 
 	@GetMapping("/coursefront1.list")
 	public String listCourse1(Model m) {
 		List<CourseBean> list = cService.selectAll();
 		m.addAttribute("list", list);
+		List<CourseBean> top = cService.orderByEnrollment();
+		m.addAttribute("top", top);
 		return "CourseFrontList1";
 
 	}
@@ -30,7 +47,7 @@ public class CourseFrontController {
 	public String listCourse2(Model m) {
 		List<CourseBean> list = cService.selectAll();
 		m.addAttribute("list", list);
-		List<CourseBean> list1 = cService.findByLecturerName("%" + "敬評" + "%");
+		List<CourseBean> list1 = cService.findByLecturerName("%" + "溫妮" + "%");
 		m.addAttribute("queryResult5", list1);
 		return "CourseFrontList2";
 
@@ -48,9 +65,20 @@ public class CourseFrontController {
 	public String showFrontDetails(int courseId, Model m) {
 		CourseBean cbean = cService.findByCourseId(courseId);
 		m.addAttribute("cbean", cbean);
+		cbean.getcourseId();
 		List<CourseBean> list = cService.selectAll();
 		m.addAttribute("list", list);
+		List<CourseComments> comments = cService.findCourseCommentsByCourseBean_CourseId(courseId);
+		m.addAttribute("comments", comments);
 		return "Details";
+	}
+	
+	@PostMapping("/haveCollect")
+	@ResponseBody
+	public boolean haveCollect(@RequestBody Map<String, String> map,Model m) {
+		MemberBean user = (MemberBean)m.getAttribute("user");
+		Integer courseId = Integer.valueOf(map.get("courseId")) ;
+		return cService.haveCollect(user.getuserId(), courseId);
 	}
 
 	@PostMapping("/coursefront.qname")
@@ -134,8 +162,8 @@ public class CourseFrontController {
 	}
 
 	@GetMapping("/coursefront.show")
-	public String updateDetails(int course_id, Model m) {
-		CourseBean bean = cService.findByCourseId(course_id);
+	public String updateDetails(int courseId, Model m) {
+		CourseBean bean = cService.findByCourseId(courseId);
 		m.addAttribute("bean", bean);
 		return "UpdateFront";
 	}
@@ -148,8 +176,60 @@ public class CourseFrontController {
 	}
 	
 	@GetMapping("/coursefront.delete")
-	public String delete(int course_id) {
-		cService.deleteOne(course_id);
+	public String delete(int courseId) {
+		cService.deleteOne(courseId);
 		return "redirect:/coursefront2.list";
 	}
+	
+	
+	@ResponseBody
+	@PostMapping(path = "/coursefront.cadd/{id}")
+	public String addCollect(Model m,@PathVariable("id") String courseID) throws SQLException {
+		MemberBean user = (MemberBean)m.getAttribute("user");
+		CourseBean bean = cService.findByCourseId(Integer.parseInt(courseID));
+		String courseName = bean.getCourse_name();
+		cService.collectAdd(courseID, user.getuserId(), courseName);
+		return "add Ok";
+
+	}
+	
+	@GetMapping(path = "/coursefront.collectAll")
+	public String collectList(Model m) {
+		MemberBean user = (MemberBean)m.getAttribute("user");
+		List<CourseCollect> collectList = cService.collectList(user.getuserId());
+		m.addAttribute("cList", collectList);
+		return "CourseCollect";
+	}
+	
+	@ResponseBody
+	@DeleteMapping(path = "/coursefront.cdelete/{id}")
+	public String deleteCollect(@PathVariable("id") Integer courseId, Model m) {
+		MemberBean user = (MemberBean)m.getAttribute("user");
+		cService.deleteByUserIdAndCourseId(user.getuserId(), courseId);
+		return "deleteOK";
+	}
+	
+	@ResponseBody
+	@DeleteMapping(path = "/coursefront.ciddelete/{id}")
+	public String deleteCollectById(@PathVariable("id") String collectId) {
+		cService.collectDelete(collectId);
+		return "deleteOK";
+	}
+	
+	@PostMapping(path = "/coursecomments.add")
+	public String addComments(Model m,Integer courseId,@RequestParam("comments") String comments) throws SQLException {
+		MemberBean user = (MemberBean)m.getAttribute("user");
+//		CourseBean bean = cService.findByCourseId(courseID);
+		cService.commentsAdd(user.getuserId(), courseId, comments);
+		return showFrontDetails(courseId,m);
+	}
+	
+	@ResponseBody
+	@DeleteMapping("/coursecomments.del/{id}")
+	public String delComments(@PathVariable("id")int commentsId) {
+		cService.deleteComments(commentsId);
+		return "deleteOK";
+	}
+	
+	
 }

@@ -51,7 +51,10 @@ function del(id) {
 						order(pageStatus, currentpage)
 
 					} else {
-						$(`#${id}`).remove();
+//						$(`#${id}`).remove();
+						let table =$('#data-table').DataTable();
+						table.row(`#${id}`).remove().draw(false);
+
 					}
 				}
 			})
@@ -488,7 +491,6 @@ function checkOrder(orderId) {
 	}).then((result) => {
 		/* Read more about isConfirmed, isDenied below */
 		if (result.isConfirmed) {
-			Swal.fire('完成訂單', '', 'success');
 			$.ajax({
 				async: false,
 				type: "GET",
@@ -500,8 +502,8 @@ function checkOrder(orderId) {
 					$(`.${orderId}`).append(bt);
 				}
 			})
+			Swal.fire('完成訂單', '', 'success');
 		} else if (result.isDenied) {
-			Swal.fire('退款成功', '', 'success')
 			$.ajax({
 				async: true,
 				type: "GET",
@@ -513,6 +515,7 @@ function checkOrder(orderId) {
 					$(`.${orderId}`).append(bt);
 				}
 			})
+			Swal.fire('退款成功', '', 'success')
 		}
 	})
 }
@@ -594,7 +597,6 @@ function audit(orderId) {
 	}).then((result) => {
 		/* Read more about isConfirmed, isDenied below */
 		if (result.isConfirmed) {
-			Swal.fire('已退款', '', 'success');
 			$.ajax({
 				async: true,
 				type: "GET",
@@ -606,8 +608,8 @@ function audit(orderId) {
 					$(`.${orderId}`).append(bt);
 				}
 			})
+			Swal.fire('已退款', '', 'success');
 		} else if (result.isDenied) {
-			Swal.fire('已駁回', '', 'success');
 			$.ajax({
 				async: true,
 				type: "GET",
@@ -619,6 +621,7 @@ function audit(orderId) {
 					$(`.${orderId}`).append(bt);
 				}
 			})
+			Swal.fire('已駁回', '', 'success');
 		}
 	})
 

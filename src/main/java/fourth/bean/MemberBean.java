@@ -72,20 +72,20 @@ public class MemberBean {
 	@Column(name = "reason")
 	private String reason;
 	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "auth_provider")
-	private AuthenticationProvider authProvider;
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "auth_provider")
+//	private AuthenticationProvider authProvider;
 	
 	
 	
 
-	public AuthenticationProvider getAuthProvider() {
-		return authProvider;
-	}
-
-	public void setAuthProvider(AuthenticationProvider authProvider) {
-		this.authProvider = authProvider;
-	}
+//	public AuthenticationProvider getAuthProvider() {
+//		return authProvider;
+//	}
+//
+//	public void setAuthProvider(AuthenticationProvider authProvider) {
+//		this.authProvider = authProvider;
+//	}
 
 	public String getReason() {
 		return reason;
@@ -165,6 +165,14 @@ public class MemberBean {
 	@JsonIgnore
 	@OneToMany(mappedBy = "memberBean", cascade = CascadeType.ALL)
 	private List<CartItem> cartItems;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "memberBeans", cascade = CascadeType.ALL)
+	private List<CourseCollect> courseCollect;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "memberBean", cascade = CascadeType.ALL)
+	private List<CourseComments> courseComments;
 
 //	public MemberBean(Integer userId, String nick, String account, String password, int status, String name, String img,
 //			String sex, String birthday, String cellphone, String email, String joinDate) {
@@ -319,6 +327,26 @@ public class MemberBean {
 
 	public void setCartItems(List<CartItem> cartItems) {
 		this.cartItems = cartItems;
+	}
+	
+	
+
+	public List<CourseCollect> getCourseCollect() {
+		return courseCollect;
+	}
+
+	public void setCourseCollect(List<CourseCollect> courseCollect) {
+		this.courseCollect = courseCollect;
+	}
+	
+	
+
+	public List<CourseComments> getCourseComments() {
+		return courseComments;
+	}
+
+	public void setCourseComments(List<CourseComments> courseComments) {
+		this.courseComments = courseComments;
 	}
 
 	@Override

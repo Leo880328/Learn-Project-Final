@@ -5,27 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>好學生學習平台</title>
-<link rel="stylesheet" href="./css/style.css">
+<!-- <link rel="stylesheet" href="./css/style.css"> -->
 </head>
 <body>
 <jsp:include page="Header.jsp"/>
-<!--     <div class="banner-wrapp rows-space-65"> -->
-<!--         <div class="container"> -->
-<!--             <div class="banner"> -->
-<!--                 <div class="item-banner style17"> -->
-<!--                     <div class="inner"> -->
-<!--                         <div class="banner-content"> -->
-<!--                             <div class="description">歡迎來到</div> -->
-<!--                             <h3 class="title">好學生學習平台</h3> -->
-<!--                             <div class="banner-price">馬上開始<span class="number-price"></span></div> -->
-<!--                             <a href="#" class="button btn-shop-now">活動</a><a href="#" -->
-<!--                                 class="button btn-view-collection">專欄</a> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--         </div> -->
-<!--     </div> -->
 	<div class="">
 		<div class="fullwidth-template">
 			<div class="home-slider fullwidth rows-space-60">

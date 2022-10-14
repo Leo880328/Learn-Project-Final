@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import fourth.bean.CourseBean;
+import fourth.bean.CourseComments;
 
 public interface CourseRepository extends JpaRepository<CourseBean, Integer> {
 	
@@ -20,6 +21,9 @@ public interface CourseRepository extends JpaRepository<CourseBean, Integer> {
 	
 	@Query(value = "from CourseBean where lecturer_name like concat('%',?1,'%') ")
 	public List<CourseBean> findByLecturerName(String lecturer_name);
+	
+	@Query(value = "select top 4 * from Course order by enrollment desc" ,nativeQuery = true)
+	public List<CourseBean> orderByEnrollment();
 	
 	
 

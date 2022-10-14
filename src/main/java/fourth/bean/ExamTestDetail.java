@@ -39,8 +39,10 @@ public class ExamTestDetail implements Serializable
 	@JoinColumn(name="QUESId")
     private ExamQuesBean examQues;
 	
-	
-	
+	@Column(name="CHOOSEANS")
+	private String chooseAns;
+
+
 	@Override
 	public String toString() {
 		return "ExamTestDetail [examTestDetailId=" + examTestDetailId + ", examTest=" + examTest + ", examQues="
@@ -89,6 +91,14 @@ public class ExamTestDetail implements Serializable
 		this.examQues = examQues;
 	}
 
+	public String getChooseAns() {
+		return chooseAns;
+	}
+
+
+	public void setChooseAns(String chooseAns) {
+		this.chooseAns = chooseAns;
+	}
 
 	
 	

@@ -140,16 +140,17 @@ public class MemberController {
 //
 //	}
 
-//// 登入檢查 //**************************
-	@RequestMapping(path = "/checklogin.controller", method = RequestMethod.GET)
-	public String processAction(@RequestParam(value = "username", required = false) String account,
-			@RequestParam(value = "password", required = false) String password, Model m, SessionStatus status,
-			Authentication authentication) {
 
-		MemberBean user = memberService.checkLogin(authentication.getName());
-		System.out.println("執行user");
-		System.out.println(user);
-		m.addAttribute("user", user);
+//// 登入檢查 //**************************
+//	@RequestMapping(path = "/checklogin.controller", method = RequestMethod.GET)
+//	public String processAction(@RequestParam(value = "username", required = false) String account,
+//			@RequestParam(value = "password", required = false) String password, Model m, SessionStatus status,
+//			Authentication authentication) {
+//
+//		MemberBean user = memberService.checkLogin(authentication.getName());
+//		System.out.println("執行user");
+//		System.out.println(user);
+//		m.addAttribute("user", user);
 //<<<<<<< HEAD
 //	if (user != null && user.getPassword().equals(password)) {
 //		if (user.getStatus() == 3) {
@@ -162,6 +163,16 @@ public class MemberController {
 //			return "redirect:/Index";
 //		}
 //	}
+@RequestMapping(path = "/checklogin.controller", method = RequestMethod.GET)
+public String processAction(@RequestParam(value = "username",required = false) String account, @RequestParam(value = "password",required = false) String password,
+		Model m, SessionStatus status,Authentication authentication) {
+	
+	
+	MemberBean user = memberService.checkLogin(authentication.getName());
+	System.out.println("執行user");
+	System.out.println(user);
+	m.addAttribute("user", user);
+
 
 		if (user.getStatus() == 3) {
 			return "redirect:/backendIndex";

@@ -31,6 +31,7 @@ import fourth.bean.Voucher;
 import fourth.dao.CartRepository;
 import fourth.dao.CourseRepository;
 import fourth.dao.MemberRepository;
+//import fourth.dao.OrderElaticSearchRepository;
 import fourth.dao.OrderItemRepository;
 import fourth.dao.OrderRepository;
 import fourth.dao.OrderStatusRepository;
@@ -65,6 +66,9 @@ public class OrderService {
 	
 	@Autowired
 	private VoucherRepository voucherRepository;
+	
+//	@Autowired
+//	private OrderElaticSearchRepository elaticSearchRepository;
 	
 	static AllInOne allInOne = new AllInOne("");
 
@@ -258,7 +262,8 @@ public class OrderService {
 				+ "審核結果: 付款完成"+"<br>"
 				+"網站連結: <a href="+url +">EEIT49 好學生</a>"+"<h2>";
 		JavaMail javaMail = new JavaMail();
-		javaMail.setCustomer("ggyy45529441@gmail.com");
+//		javaMail.setCustomer("ggyy45529441@gmail.com");
+		javaMail.setCustomer("wuyuhsi0422@gmail.com");
 		javaMail.setSubject("好學生-EEIT49 線上付款成功!");
 		javaMail.setTxt(txt);
 		javaMail.sendMail();
@@ -277,7 +282,8 @@ public class OrderService {
 				+ "審核結果: 已退款"+"<br>"
 				+"網站連結: <a href="+url +">EEIT49 好學生</a>"+"<h2>";
 		JavaMail javaMail = new JavaMail();
-		javaMail.setCustomer("ggyy45529441@gmail.com");
+//		javaMail.setCustomer("ggyy45529441@gmail.com");
+		javaMail.setCustomer("wuyuhsi0422@gmail.com");
 		javaMail.setSubject("好學生-EEIT49");
 		javaMail.setTxt(txt);
 		javaMail.sendMail();
@@ -295,7 +301,8 @@ public class OrderService {
 				+"審核結果: 已駁回" +"<br>"
 				+"網站連結: <a href="+url +">EEIT49 好學生</a>"+"<h2>";
 		JavaMail javaMail = new JavaMail();
-		javaMail.setCustomer("ggyy45529441@gmail.com");
+//		javaMail.setCustomer("ggyy45529441@gmail.com");
+		javaMail.setCustomer("wuyuhsi0422@gmail.com");
 		javaMail.setSubject("好學生-EEIT49");
 		javaMail.setTxt(txt);
 		javaMail.sendMail();
@@ -359,11 +366,15 @@ public class OrderService {
 	public List<OrderUser> searchStatust(Integer user ,Integer status) {
 		List<OrderUser> list = null;
 		if(status == 0) {
+			
 			list = orderRepository.findByMemberBean_userId(user);
+//			list = elaticSearchRepository.findByMemberBean_userId(user);
 		}else {
 			
 			list = orderRepository.findUserByStatus_Id(user, status);
+//			list = elaticSearchRepository.findUserByStatus_Id(user, status);
 		}
+//		System.out.println("elaticSearch 搜尋!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		return list;
 	}
 

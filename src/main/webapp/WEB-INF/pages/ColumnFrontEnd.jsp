@@ -18,26 +18,13 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png" />
-    <link
-        href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/jquery-ui.css">
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <link rel="stylesheet" href="assets/css/chosen.min.css">
-    <link rel="stylesheet" href="assets/css/pe-icon-7-stroke.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.min.css">
-    <link rel="stylesheet" href="assets/css/lightbox.min.css">
-    <link rel="stylesheet" href="assets/js/fancybox/source/jquery.fancybox.css">
-    <link rel="stylesheet" href="assets/css/jquery.scrollbar.min.css">
-    <link rel="stylesheet" href="assets/css/mobile-menu.css">
-    <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <style>
+ .post-format{
+ width: 400px;
+ height: 350px;
+ }
+    </style>
 </head>
 
 <body class="inblog-page">
@@ -97,16 +84,17 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
                         <h3 class="custom_blog_title">專欄 </h3>
                         
         <c:forEach var="c" items="${queryall }">
+        <c:if test="${c.status ==3 }">
                         <div class="blog-list list-style">              
                             <div class="blog-item">
-                                <div class="post-format"><a href="#"><img src="<c:out value="${c.picture}"></c:out>"
+                                <div class="post-format"><a href="details?article_no=<c:out value="${c.article_no }"></c:out>"><img src="<c:out value="${c.picture}"></c:out>"
                                             alt="img"></a></div>
                                 <div class="post-info">
                                     
                                     <h3 class="post-title"><a href="details?article_no=<c:out value="${c.article_no }"></c:out>"><c:out value="${c.title }"></c:out></span></a>
                                     </h3>
                                     <div class="main-info-post">
-                                        <p class="des"><c:out value="${c.contents }"></c:out> </p>
+                                        <p class="des"><c:out value="${c.summary }"></c:out> </p>
                                     </div>
                                     <div class="author-view">
                                         <div class="author">
@@ -131,7 +119,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
                             
                             
                         </div>
-
+	                            </c:if>
                             </c:forEach>	
                     </div>
                 </div>
@@ -150,12 +138,17 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
                         <div class="widget widget-categories">
                             <h3 class="widgettitle">Categories</h3>
                             <ul class="list-categories">
-                                <li><input type="checkbox" id="cb1"><label for="cb1" class="label-text">英文
-                                    </label></li>
-                                <li><input type="checkbox" id="cb2"><label for="cb2" class="label-text">多益</label>
-                                </li>
-                                <li><input type="checkbox" id="cb3"><label for="cb3" class="label-text">數學
-                                    </label></li>
+                            
+                          
+                            
+                            
+                                <li><a href="queryEnglish?subject="英文""><h6>英文</h6></a>
+                                    </li>
+                                    <li><h6><a href="queryToeic">多益</a></h6>
+                                    </li>
+                                    <li><h6><a href="queryMath">數學</a></h6>
+                                    </li>
+                          
                             </ul>
                         </div>
 
@@ -182,26 +175,6 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
     </div><a href="#" class="backtotop"><i class="fa fa-angle-double-up"></i></a>
 
 
-    <script src="assets/js/jquery-1.12.4.min.js"></script>
-    <script src="assets/js/jquery.plugin-countdown.min.js"></script>
-    <script src="assets/js/jquery-countdown.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/magnific-popup.min.js"></script>
-    <script src="assets/js/isotope.min.js"></script>
-    <script src="assets/js/jquery.scrollbar.min.js"></script>
-    <script src="assets/js/jquery-ui.min.js"></script>
-    <script src="assets/js/mobile-menu.js"></script>
-    <script src="assets/js/chosen.min.js"></script>
-    <script src="assets/js/slick.js"></script>
-    <script src="assets/js/jquery.elevateZoom.min.js"></script>
-    <script src="assets/js/jquery.actual.min.js"></script>
-    <script src="assets/js/fancybox/source/jquery.fancybox.js"></script>
-    <script src="assets/js/lightbox.min.js"></script>
-    <script src="assets/js/owl.thumbs.min.js"></script>
-    <script src="assets/js/jquery.scrollbar.min.js"></script>
-    <script src='http://www.google.cn/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script>
-    <script src="assets/js/frontend-plugin.js"></script>
 </body>
 
 </html>
