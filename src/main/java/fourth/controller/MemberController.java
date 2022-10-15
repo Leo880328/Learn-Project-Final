@@ -90,7 +90,6 @@ public class MemberController {
 	// 登入
 	@RequestMapping(path = "/login.controller", method = RequestMethod.GET)
 	public String loginController() {
-		System.out.println("98777");
 		
 		return "Login";
 	}

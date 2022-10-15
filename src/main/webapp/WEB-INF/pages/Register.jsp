@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>會員註冊</title>
 <link rel="stylesheet" href="css/style.css">
+	<!-- recaptcha -->
+	<script src="http://www.google.com/recaptcha/api.js" async defer></script>
 <script src="https://kit.fontawesome.com/6cda0c2d7d.js"
 	crossorigin="anonymous"></script>
 
@@ -14,10 +16,10 @@
 	href="assets/images/smalllogo.png" />
 <style>
 article {
-	/* background-color: yellow; */
+/* 	background-color: yellow; */
 	border: 2px solid gray;
-	padding: 5px 50px 5px 50px;
-	margin: 20px 400px 10px 400px;
+	padding: 5px 50px 200px 50px;
+	margin: 20px 300px 600px 300px;
 	line-height: 1.7;
 	box-shadow: 5px 5px 5px gray;
 }
@@ -42,12 +44,13 @@ article {
 								<!-- 									id="Register-form" onSubmit="return isValid(this);"> -->
 								<input type="hidden" name="command" value="login">
 								<div class=group>
-								
-									<i class="fa-solid fa-user"></i> <input
-										type="text" name="account" id="account" placeholder="請輸入帳號"
-										autocomplete="off" value="id" required><div>
-										 <span
-										style='color: red' ; id='msgAccount'></span></div>
+
+									<i class="fa-solid fa-user"></i> <input type="text"
+										name="account" id="account" placeholder="請輸入帳號"
+										autocomplete="off" value="id" required>
+									<div>
+										<span style='color: red'  id='msgAccount'></span>
+									</div>
 								</div>
 
 								<div class=group>
@@ -65,23 +68,30 @@ article {
 								<div>
 									<label for="email"><i class="fa-solid fa-envelope"></i></label><input
 										type="email" name="email" id="email" placeholder="請輸入電子信箱"
-										autocomplete="off" value="email@gmail.com"><div><span
-										id="msgEmail" style="color: red"> </span></div>
+										autocomplete="off" value="email@gmail.com">
+									<div>
+										<span id="msgEmail" style="color: red"> </span>
+									</div>
 								</div>
 								<p>
 									<span>${errors.RegisterError}</span> <span>${errors.RegisterErrorAccount}</span>
 								</p>
-								<button type="button" name="submit" id="checkRegister"
-									onclick="">註冊</button>
-								<button type="button" class="btn btn-primary " id="correct">一鍵輸入</button>
-								<!-- 								</form> -->
 								<div>
-									已有帳號
-									<button type="button" class="btn btn-info btn--raised">
-										<a href="login.controller">登入</a>
-									</button>
+<div>
+							<button type="button" name="submit" id="checkRegister" onclick="">註冊</button>
+							<button type="button" class="btn btn-primary " id="correct">一鍵輸入</button>
+							<div>
+								已有帳號
+								<button type="button"  class="btn btn-info btn--raised">
+									<a href="login.controller">登入</a>
+								</button>
 								</div>
+								<div class="g-recaptcha"
+									data-sitekey="6Ld6D4EiAAAAABFTs8XiNm90Ezn_sK2lyuQ_20Cl"
+									></div>
 							</div>
+							</div>
+</div>
 						</div>
 					</div>
 				</div>

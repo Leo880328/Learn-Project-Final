@@ -107,11 +107,11 @@
 			</tbody>
 		</c:forEach>
 	</table>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#member').DataTable();
-		});
-	</script>
+<!-- 	<script type="text/javascript"> -->
+<!-- // 		$(document).ready(function() { -->
+<!-- // 			$('#member').DataTable(); -->
+<!-- // 		}); -->
+<!-- 	</script> -->
 
 
 	<script type="text/javascript">
