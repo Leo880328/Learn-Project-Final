@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import fourth.security.oauth.CustomOAuth2UserService;
 import fourth.service.AuthUserDetailsService;
 
 //import fourth.service.AuthUserDetailsService;
@@ -18,6 +19,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private AuthUserDetailsService auDetailService;
+	
+	@Autowired
+	private CustomOAuth2UserService oAuth2UserService;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -33,16 +37,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-//		 http.cors().and().csrf().disable();
-			
-//		 http.exceptionHandling().accessDeniedPage("/unauth.html");
-		
+		 http.exceptionHandling().accessDeniedPage("/404NotFound");
 		
 		 http.logout().logoutUrl("/logout").
          logoutSuccessUrl("/logout.controller").permitAll();
 		
 		
-		 http
+		 http	
+		 		.authorizeRequests()
+		 		.antMatchers("/oauth2/**").permitAll()
+		 		.and()
 				.formLogin() // 自定义自己编写的登录页面
 				.loginPage("/login.controller")// 登录页面设置
 				.loginProcessingUrl("/loginsuccess") // 登录访问路径
@@ -60,8 +64,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// .antMatchers("/test/index").hasAnyAuthority("admins,manager")
 				// 3 hasRole方法 ROLE_sale
 //				.antMatchers("/wayne/**").hasRole("sale")
-
 				.anyRequest().authenticated()
+				.and()
+				.oauth2Login()
+				.loginPage("/login.controller")
+				.userInfoEndpoint().userService(oAuth2UserService)
+				.and()
 //				.and().rememberMe().tokenRepository(persistentTokenRepository())
 //				.tokenValiditySeconds(60)// 设置有效时长，单位秒
 //				.userDetailsService(userDetailsService);
