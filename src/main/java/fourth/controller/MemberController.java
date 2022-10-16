@@ -45,7 +45,6 @@ public class MemberController {
 	@Autowired
 	private MemberMailService memberMailService;
 
-
 	@PostMapping(path = "/forgotpassword")
 	@ResponseBody
 	public String forgotPWD(@RequestBody MemberBean memberBean) {
@@ -91,6 +90,7 @@ public class MemberController {
 	// 登入
 	@RequestMapping(path = "/login.controller", method = RequestMethod.GET)
 	public String loginController() {
+		
 		return "Login";
 	}
 
@@ -141,6 +141,27 @@ public class MemberController {
 
 
 //// 登入檢查 //**************************
+//	@RequestMapping(path = "/checklogin.controller", method = RequestMethod.GET)
+//	public String processAction(@RequestParam(value = "username", required = false) String account,
+//			@RequestParam(value = "password", required = false) String password, Model m, SessionStatus status,
+//			Authentication authentication) {
+//
+//		MemberBean user = memberService.checkLogin(authentication.getName());
+//		System.out.println("執行user");
+//		System.out.println(user);
+//		m.addAttribute("user", user);
+//<<<<<<< HEAD
+//	if (user != null && user.getPassword().equals(password)) {
+//		if (user.getStatus() == 3) {
+//
+//			return "redirect:/backendIndex";
+//		} else if (user.getStatus() == 5) {
+//			errors.put("msg", "<font color=red size=6 >帳號有問題!!</font>");
+//			return "Login";
+//		} else {
+//			return "redirect:/Index";
+//		}
+//	}
 @RequestMapping(path = "/checklogin.controller", method = RequestMethod.GET)
 public String processAction(@RequestParam(value = "username",required = false) String account, @RequestParam(value = "password",required = false) String password,
 		Model m, SessionStatus status,Authentication authentication) {
@@ -152,14 +173,14 @@ public String processAction(@RequestParam(value = "username",required = false) S
 	m.addAttribute("user", user);
 
 
-	if (user.getStatus() == 3) {
-		return "redirect:/backendIndex";
+		if (user.getStatus() == 3) {
+			return "redirect:/backendIndex";
 
-	} else {
-		return "redirect:/Index";
+		} else {
+			return "redirect:/Index";
+		}
+
 	}
-
-}
 
 	// 帳號密碼錯誤頁面
 	@RequestMapping(path = "/logfail", method = RequestMethod.GET)
@@ -169,7 +190,7 @@ public String processAction(@RequestParam(value = "username",required = false) S
 		m.addAttribute("errors", errors);
 		return "Login";
 	}
-	
+
 	// 切入註冊畫面
 	@RequestMapping(path = "/register.controller", method = RequestMethod.GET)
 	public String registerController() {
@@ -244,6 +265,13 @@ public String processAction(@RequestParam(value = "username",required = false) S
 		return "CheckTeacherList";
 
 	}
+	
+	// 進入新增畫面
+	@GetMapping("/404NotFound")
+	public String notFound() {
+		return "404NotFound";
+	}
+	
 
 	// 進入新增畫面
 	@GetMapping("/addNewUser")
@@ -297,7 +325,7 @@ public String processAction(@RequestParam(value = "username",required = false) S
 //		MemberBean user = (MemberBean) m.getAttribute("user");
 //		MemberBean mem = memberService.checkLogin(memberBean.getAccount());
 		System.out.println("memberBean: " + memberBean);
-		memberBean.setStatus(4);
+
 //		m.addAttribute("user", mem);
 //		System.out.println("user: "+user);
 //		System.out.println("mem: " + mem);
@@ -305,39 +333,26 @@ public String processAction(@RequestParam(value = "username",required = false) S
 		System.out.println("updateUser: " + updateUser);
 		if (updateUser != null) {
 			System.out.println("55688");
-			if ("".equals(updateUser.getName())||updateUser.getName() == null) {
-				errors = new HashMap<String, String>();
+			errors = new HashMap<String, String>();
+			if ("".equals(updateUser.getName()) || updateUser.getName() == null) {
 				errors.put("name", "1111");
 			}
-			if (updateUser.getCellphone() ==null) {
-				errors = new HashMap<String, String>();
+			if ("".equals(updateUser.getCellphone()) || updateUser.getCellphone() == null) {
 				errors.put("cellphone", "1112");
 			}
-			if (updateUser.getEducation() ==null) {
-				errors = new HashMap<String, String>();
+			if ("".equals(updateUser.getEducation()) || updateUser.getEducation() == null) {
 				errors.put("education", "1113");
 			}
-			if (updateUser.getUserprofile() ==null) {
-				errors = new HashMap<String, String>();
-				errors.put("userprofile", "1114");
-			}
-
 		}
-//		if (checkRegisterByAccount != null) {
-//			if (checkRegisterByAccount.getAccount() != null) {
-//				if (errors == null) {
-//					errors = new HashMap<String, String>();
-//				}
-//				errors.put("account", "1112");
-//
-//			}
-//		}
-		if (errors != null) {
+		if (errors !=null && errors.keySet().size() >0 ) {
 			Gson gson = new Gson();
-
+			System.out.println(errors);
+			System.out.println("331331");
 			return gson.toJson(errors);
 		}
-
+		System.out.println("349349349");
+		memberBean.setStatus(4);
+		memberService.updateUser(memberBean);
 		return "3000";
 	}
 
