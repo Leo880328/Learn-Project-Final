@@ -42,7 +42,7 @@ function commentsDel(id) {
 					$.ajax({
 						async: true,
 						type: "DELETE",
-						url: "coursecomments.del/" + id,
+						url: "http://localhost:8080/HappyLearning/coursecomments.del/" + id,
 						success: function (data) {
 							$(`#${id}`).remove();
 //							window.location.assign(window.location.href);
