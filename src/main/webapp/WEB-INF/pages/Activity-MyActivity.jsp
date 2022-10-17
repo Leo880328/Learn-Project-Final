@@ -34,6 +34,7 @@
 
 <body class="home" style="margin-top: 100px;">
 <jsp:include page="Header.jsp"/>
+<br>
     <div>
         <div class="fullwidth-template">
 

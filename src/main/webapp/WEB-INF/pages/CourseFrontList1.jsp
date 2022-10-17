@@ -89,24 +89,7 @@ border-radius: 5px;
                 <div class="content-area shop-grid-content no-banner col-lg-9 col-md-9 col-sm-12 col-xs-12">
                     <div class="site-main">
 
-<!--                         <h3 class="custom_blog_title">所有課程 </h3> -->
                         <div class="shop-top-control">
-<!--                             <form class="select-item select-form"><span class="title">Sort</span><select title="sort" -->
-<!--                                     data-placeholder="12 Products/Page" class="chosen-select"> -->
-<!--                                     <option value="1">12 Products/Page</option> -->
-<!--                                     <option value="2">9 Products/Page</option> -->
-<!--                                     <option value="3">10 Products/Page</option> -->
-<!--                                     <option value="4">8 Products/Page</option> -->
-<!--                                     <option value="5">6 Products/Page</option> -->
-<!--                                 </select></form> -->
-<!--                             <form class="filter-choice select-form">s <span class="title">Sort by</span><select -->
-<!--                                     title="sort-by" data-placeholder="Price: Low to High" class="chosen-select"> -->
-<!--                                     <option value="1">Price:Low to High</option> -->
-<!--                                     <option value="2">Sort by popularity</option> -->
-<!--                                     <option value="3">Sort by average rating</option> -->
-<!--                                     <option value="4">Sort by newness</option> -->
-<!--                                     <option value="5">Sort by price:low to high</option> -->
-<!--                                 </select></form> -->
                                <form action="coursefront.qname" method="post">
                                 <div class="form-content">
                                     <div class="inner"><input type="text" class="input" name="keyword" value=""
@@ -116,9 +99,7 @@ border-radius: 5px;
                                 </form><p>${errorMsgMap.QueryError}</p>
                             <div class="grid-view-mode">
                                 <div class="inner">
-<!--                                 <a href="coursefront2.list" class="modes-mode mode-list"> -->
                                 <span></span><span></span></a>
-<!--                                         <a href="coursefront1.list" class="modes-mode mode-grid  active"> -->
                                         <span></span><span></span><span></span><span></span></a>
                                 </div>
                             </div>

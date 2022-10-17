@@ -34,6 +34,7 @@
 
 	<body class="home" style="margin-top: 100px;">
 		<jsp:include page="Header.jsp" />
+		<br>
 		<div>
 			<div class="container" style="width: 870px; padding-bottom: 200px;">
 				<div class="row ">
