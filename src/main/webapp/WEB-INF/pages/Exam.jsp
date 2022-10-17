@@ -16,7 +16,7 @@
 			.divform{
 				
 				width:1200px;
-				margin: auto;
+				margin-left: 18%;
 				background-color:white;
 				padding:50px
 			}

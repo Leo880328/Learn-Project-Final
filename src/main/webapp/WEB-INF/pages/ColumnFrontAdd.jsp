@@ -101,6 +101,7 @@ border-radius: 10px;
 		</fieldset>
 		<center>
 		<input type="hidden" name="status" id="status" size="3" title="文章狀態"  value="1">
+		<input type="hidden" name="pin" id="pin" size="3" title="置頂狀態"  value="1">
 				<input id="send" type="submit"  value="送出"> 
 				</form>
 				

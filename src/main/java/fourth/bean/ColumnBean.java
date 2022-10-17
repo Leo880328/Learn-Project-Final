@@ -37,7 +37,8 @@ public class ColumnBean implements Serializable {
 	private int status;
 	@Column(name="summary")
 	private String summary;
-	
+	@Column(name="pin")
+	private int pin;
 	
 	
 	
@@ -47,8 +48,9 @@ public class ColumnBean implements Serializable {
 	
 	
 
+
 	public ColumnBean(int article_no, String publish_time, int user_id, String author, String role, String contents,
-			String picture, String title, String subject, int status, String summary) {
+			String picture, String title, String subject, int status, String summary, int pin) {
 		super();
 		this.article_no = article_no;
 		this.publish_time = publish_time;
@@ -61,7 +63,10 @@ public class ColumnBean implements Serializable {
 		this.subject = subject;
 		this.status = status;
 		this.summary = summary;
+		this.pin = pin;
 	}
+
+
 
 
 	public int getArticle_no() {
@@ -181,10 +186,28 @@ public class ColumnBean implements Serializable {
 		this.summary = summary;
 	}
 	
+	
+	public int getPin() {
+		return pin;
+	}
+
+
+
+
+	public void setPin(int pin) {
+		this.pin = pin;
+	}
+
+
+
+
 	@Override
 	public String toString() {
 		return "ColumnBean [article_no=" + article_no + ", publish_time=" + publish_time + ", user_id=" + user_id
 				+ ", author=" + author + ", role=" + role + ", contents=" + contents + ", picture=" + picture
-				+ ", title=" + title + ", subject=" + subject + ", status=" + status + ", summary=" + summary + "]";
+				+ ", title=" + title + ", subject=" + subject + ", status=" + status + ", summary=" + summary + ", pin="
+				+ pin + "]";
 	}
+
+	
 }
