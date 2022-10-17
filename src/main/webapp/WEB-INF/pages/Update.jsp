@@ -12,6 +12,7 @@
 <style>
 .tb {
 	border-collapse: collapse;
+	margin-left:250px;
 	width: 850px;
 	word-wrap: break-word;
 	table-layout: fixed;

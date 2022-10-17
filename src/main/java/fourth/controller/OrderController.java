@@ -221,7 +221,6 @@ public class OrderController {
 	@GetMapping(path = "/backDairy")
 	public String log(Model m) {
 		List<Log> logs = logService.findAll();
-		System.out.println(logs);
 		m.addAttribute("logs",logs);
 		return "log";
 	}

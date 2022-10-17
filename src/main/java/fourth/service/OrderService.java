@@ -262,8 +262,8 @@ public class OrderService {
 				+ "審核結果: 付款完成"+"<br>"
 				+"網站連結: <a href="+url +">EEIT49 好學生</a>"+"<h2>";
 		JavaMail javaMail = new JavaMail();
-//		javaMail.setCustomer("ggyy45529441@gmail.com");
-		javaMail.setCustomer("wuyuhsi0422@gmail.com");
+		javaMail.setCustomer("ggyy45529441@gmail.com");
+//		javaMail.setCustomer("wuyuhsi0422@gmail.com");
 		javaMail.setSubject("好學生-EEIT49 線上付款成功!");
 		javaMail.setTxt(txt);
 		javaMail.sendMail();
@@ -282,8 +282,8 @@ public class OrderService {
 				+ "審核結果: 已退款"+"<br>"
 				+"網站連結: <a href="+url +">EEIT49 好學生</a>"+"<h2>";
 		JavaMail javaMail = new JavaMail();
-//		javaMail.setCustomer("ggyy45529441@gmail.com");
-		javaMail.setCustomer("wuyuhsi0422@gmail.com");
+		javaMail.setCustomer("ggyy45529441@gmail.com");
+//		javaMail.setCustomer("wuyuhsi0422@gmail.com");
 		javaMail.setSubject("好學生-EEIT49");
 		javaMail.setTxt(txt);
 		javaMail.sendMail();
@@ -301,8 +301,8 @@ public class OrderService {
 				+"審核結果: 已駁回" +"<br>"
 				+"網站連結: <a href="+url +">EEIT49 好學生</a>"+"<h2>";
 		JavaMail javaMail = new JavaMail();
-//		javaMail.setCustomer("ggyy45529441@gmail.com");
-		javaMail.setCustomer("wuyuhsi0422@gmail.com");
+		javaMail.setCustomer("ggyy45529441@gmail.com");
+//		javaMail.setCustomer("wuyuhsi0422@gmail.com");
 		javaMail.setSubject("好學生-EEIT49");
 		javaMail.setTxt(txt);
 		javaMail.sendMail();

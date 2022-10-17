@@ -9,13 +9,13 @@ import javax.mail.internet.MimeMessage.RecipientType;
 import javax.mail.*;
 public class JavaMail {
 //	private String userName="fock360man@gmail.com";
-	private String userName="ch570991400@gmail.com";
-//	private String userName="chengkung0131@gmail.com";
+//	private String userName="ch570991400@gmail.com";
+	private String userName="chengkung0131@gmail.com";
 	//private String password="ihlwavbwwwhgxcuo";
 	//private String password="nqvaybltaybedklf";
 //	private String password="rwzgvzouoxtqemik";
-//	private String password="fvterzcvzuhnggsn";
-	private String password="ruvotguhuyntpvjg";//會員
+	private String password="fvterzcvzuhnggsn";//成功
+//	private String password="ruvotguhuyntpvjg";//會員
 	
 	//private String password="wayne85423";
 //	private String customer="fock360man@gmail.com";

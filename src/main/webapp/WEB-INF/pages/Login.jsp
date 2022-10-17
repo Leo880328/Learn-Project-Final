@@ -80,8 +80,8 @@ article {
 										<input type="submit" class="btn btn-success" name="signin"
 											id="signin" value="登入">
 										<button type="button" class="btn btn-primary " id="correct">新會員登入</button>
-<!-- 										<button type="button" class="btn btn-primary " id="winnie">老師登入</button> -->
-<!-- 										<button type="button" class="btn btn-primary " id="tony">學生登入</button> -->
+										<button type="button" class="btn btn-primary " id="winnie">老師登入</button>
+										<button type="button" class="btn btn-primary " id="tony">學生登入</button>
 
 
 									</div>

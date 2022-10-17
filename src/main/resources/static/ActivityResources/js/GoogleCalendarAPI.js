@@ -33,8 +33,6 @@ async function initializeGapiClient() {
         apiKey: API_KEY,
         discoveryDocs: [DISCOVERY_DOC],
     });
-    gapiInited = true;
-    maybeEnableButtons();
 }
 
 /**
@@ -46,8 +44,6 @@ function gisLoaded() {
         scope: SCOPES,
         callback: '', // defined later
     });
-    gisInited = true;
-    maybeEnableButtons();
 }
 
 /**

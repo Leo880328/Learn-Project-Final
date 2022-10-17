@@ -22,7 +22,7 @@ public class LogService {
 	}
 
 	public List<Log> findAll() {
-		List<Log> logList = logRepository.findAll();
+		List<Log> logList = logRepository.findAllByOrderByOperateDateDesc();
 		return logList;
 	}
 }

@@ -96,6 +96,8 @@ public class CourseFrontController {
 			return listCourse1(m);
 		}
 		m.addAttribute("queryResult", list);
+		List<CourseBean> top = cService.orderByEnrollment();
+		m.addAttribute("top", top);
 		return "CourseFrontList1";
 
 	}

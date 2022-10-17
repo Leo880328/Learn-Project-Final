@@ -291,8 +291,8 @@ public String processAction(@RequestParam(value = "username",required = false) S
 			String txt = "<h2>" + "親愛的 " + memberBean.getNick() + " 您好 :" + "<br>" + "審核結果: 失敗!! 失敗原因： "
 					+ memberBean.getReason() + "<br>" + "<h2>";
 			JavaMail javaMail = new JavaMail();
-//			javaMail.setCustomer("wuyuhsi0422@gmail.com");
-			javaMail.setCustomer("ch570981400@gmail.com");
+//			javaMail.setCustomer("ch570981400@gmail.com");
+			javaMail.setCustomer("wuyuhsi0422@gmail.com");
 			javaMail.setSubject("好學生-EEIT49 身分審核失敗!");
 			javaMail.setTxt(txt);
 			javaMail.sendMail();
@@ -302,8 +302,8 @@ public String processAction(@RequestParam(value = "username",required = false) S
 			String txt = "<h2>" + "親愛的 " + memberBean.getNick() + " 您好 :" + "<br>" + "審核結果: 通過!! 恭喜你成為老師" + "<br>"
 					+ "<h2>";
 			JavaMail javaMail = new JavaMail();
-//			javaMail.setCustomer("fwuyuhsi0422@gmail.com");
-			javaMail.setCustomer("ch570981400@gmail.com");
+//			javaMail.setCustomer("ch570981400@gmail.com");
+			javaMail.setCustomer("wuyuhsi0422@gmail.com");
 			javaMail.setSubject("好學生-EEIT49 身分審核通過!");
 			javaMail.setTxt(txt);
 			javaMail.sendMail();

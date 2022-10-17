@@ -82,7 +82,7 @@ article {
 	<script>
 		$(function() {
 			$('#correct').click(function() {
-				$('#email').val("ch570981400@gmail.com");
+				$('#email').val("wuyuhsi0422@gmail.com");
 			})
 		})
 		$(function() {

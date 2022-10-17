@@ -31,7 +31,7 @@ function requestReviewingActivities() {
             $('.table').DataTable().clear()
             reviewingArray.content.forEach(function (attendees, index, array) {
                 let table = $('.table').DataTable();
-                table.row.add(createReviewingActivityInformation(attendees)).draw();
+                table.row.add(createReviewingActivityInformation(attendees));
                 // $(jquery.reviewingActivity).append(createReviewingActivityInformation(activity))
             });
 
@@ -41,6 +41,7 @@ function requestReviewingActivities() {
             } else {
                 $(jquery.readMoreReviewingButton).css('visibility', 'hidden')
             }
+            $('.table').DataTable().draw()
         },
         error: function (err) { alert("資料獲取失敗，請刷新網頁!") },
     })

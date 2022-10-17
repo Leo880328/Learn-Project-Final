@@ -17,7 +17,10 @@ let activityBean =
 let jquery = {
     activityId: ".activityId",
     activityTitle: ".activityTitle",
+    activityTitleError: ".activityTitleError",
+
     activityContent: ".ck-editor__editable",
+    activityContentError: ".activityContentError",
 
 
     activityPreviewInput: ".activityPreviewInput",
@@ -27,18 +30,24 @@ let jquery = {
     activityActivityImage: ".activityActivityImage",
 
     activityStartTime: ".activityStartTime",
+    activityStartTimeError: ".activityStartTimeError",
     activityEndTime: ".activityEndTime",
+    activityEndTimeError: ".activityEndTimeError",
 
     activityNumberLimit: ".activityNumberLimit",
+    activityNumberLimitError: ".activityNumberLimitError",
 
     activitySelectPlace: ".activitySelectPlace",
 
     activityPlace: ".activityPlace",
+    activityPlaceError: ".activityPlaceError",
     activityAddress: ".activityAddress",
 
 
     activityPlaceDiv: ".activityPlaceDiv",
-    saveActivityButton: ".saveActivityButton"
+    saveActivityButton: ".saveActivityButton",
+
+    error: ".error"
 }
 
 let imgBase64 = null
@@ -57,6 +66,7 @@ $().ready(
 function listener() {
     $(jquery.activityTitle).change(function () {
         activityBean.title = $(jquery.activityTitle).val();
+        $(jquery.activityTitleError).html("")
 
     })
     $(jquery.activityContent).change(function () {
@@ -90,28 +100,33 @@ function listener() {
     //時間min
     let today = new Date().toISOString().split("T")[0];
     $(jquery.activityStartTime).attr("min", today + " 00:00")
+
     $(jquery.activityStartTime).change(function (e) {
         activityBean.startTime = $(jquery.activityStartTime).val().replace('T', " ").replaceAll('-', "/");
         $(jquery.activityEndTime).val(null);
         activityBean.endTime = null;
         $(jquery.activityEndTime).attr("min", $(jquery.activityStartTime).val());
         console.log($(jquery.activityEndTime))
-
+        $(jquery.activityStartTimeError).html("")
     })
     $(jquery.activityEndTime).change(function (e) {
         activityBean.endTime = $(jquery.activityEndTime).val().replace('T', " ").replaceAll('-', "/");
+        $(jquery.activityStartTimeError).html("")
     })
 
     $(jquery.activityNumberLimit).attr("min", 0)
     $(jquery.activityNumberLimit).change(function () {
         activityBean.numberLimit = $(jquery.activityNumberLimit).val();
+        $(jquery.activityNumberLimitError).html("")
     })
 
     $(jquery.activityPlace).change(function () {
         activityBean.place = $(jquery.activityPlace).val();
+        $(jquery.activityPlaceError).html("")
     })
     $(jquery.activityAddress).change(function () {
         activityBean.address = $(jquery.activityAddress).val();
+        $(jquery.activityPlaceError).html("")
     })
 
     $(jquery.saveActivityButton).click(function () {
@@ -204,53 +219,44 @@ function selectByID(id) {
     });
 }
 function chickActivityBean() {
+    let chickError = null;
 
     console.log(activityBean);
-    if (!activityBean.title) {
-        Swal.fire({
-            icon: 'error',
-            title: '上傳失敗',
-            text: "標題為空"
-        })
-    } else if (!activityBean.previewImage) {
-        Swal.fire({
-            icon: 'error',
-            title: '上傳失敗',
-            text: "預覽圖片為空"
-        })
-    } else if (!activityBean.activityImage) {
-        Swal.fire({
-            icon: 'error',
-            title: '上傳失敗',
-            text: "圖片為空"
-        })
-    } else if (!activityBean.content) {
-        Swal.fire({
-            icon: 'error',
-            title: '上傳失敗',
-            text: "內容為空"
-        })
-    } else if (!activityBean.startTime || !activityBean.endTime) {
-        Swal.fire({
-            icon: 'error',
-            title: '上傳失敗',
-            text: "時間為空"
-        })
-    } else if (!activityBean.numberLimit) {
-        Swal.fire({
-            icon: 'error',
-            title: '上傳失敗',
-            text: "人數"
-        })
-    } else if (!activityBean.place || !activityBean.address) {
-        Swal.fire({
-            icon: 'error',
-            title: '上傳失敗',
-            text: "地區為空"
-        })
 
+    if (!activityBean.previewImage) {
+
+        chickError = "請選擇預覽圖片!"
+    }
+    if (!activityBean.activityImage) {
+        chickError = "請選擇圖片!"
+    }
+    if (!activityBean.content) {
+        chickError = "請輸入內容!"
+    }
+    if (!activityBean.startTime || !activityBean.endTime) {
+        $(jquery.activityStartTimeError).html("請輸入時間!")
+        chickError = "請輸入時間!"
+    }
+    if (!activityBean.numberLimit) {
+        $(jquery.activityNumberLimitError).html("請輸入人數!")
+        chickError = "請輸入人數!"
+    }
+    if (!activityBean.place || !activityBean.address) {
+        $(jquery.activityPlaceError).html("請輸入地址!")
+        chickError = "請輸入地區!"
+    }
+    if (!activityBean.title) {
+        $(jquery.activityTitleError).html("請輸入標題")
+        chickError = "請輸入標題!"
+    }
+    if (chickError) {
+        Swal.fire({
+            icon: 'error',
+            title: '上傳失敗',
+            text: chickError
+        })
     } else {
-        saveActivityBean()
+        // saveActivityBean()
     }
 }
 function saveActivityBean() {
@@ -329,6 +335,7 @@ function delectActivity() {
 
 //一件輸入
 function onePieceOfInput() {
+    $(jquery.error).html("")
     activityBean =
     {
         title: "讀書馬拉松",
