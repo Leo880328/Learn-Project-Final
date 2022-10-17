@@ -267,7 +267,7 @@
 <body onload="loadChart()">
 
 	<main
-		class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+		class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3" style="margin-left: 13%;">
 		<br /> <br /> <br /> <br />
 		<div class="main-content-container container-fluid px-4">
 

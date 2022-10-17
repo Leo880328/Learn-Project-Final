@@ -32,14 +32,10 @@
 </head>
 <body>
 <br><br><br><br>
-<<<<<<< HEAD
-<br><br>
-	<div class="container">
-=======
+
 	<br>
 	<br>
 	<div class="container" style="margin-left: 10%;">
->>>>>>> 78e78a7295c1bb780c4fa075ae4eafeed1acfbe2
 		<div class="row justify-content-center">
 			<div class="col-8">
 				<c:set value="${order}" var="order" />
