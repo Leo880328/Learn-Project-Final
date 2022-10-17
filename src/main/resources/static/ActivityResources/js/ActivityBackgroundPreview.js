@@ -49,8 +49,9 @@ function updateView(activity) {
   }
   $(jquery.activityInformation).html(`
   可報名人數: ${activity.numberLimit}<br>
-  活動時間: ${activity.startTime} ~ ${activity.endTime}<br>
+  活動時間: ${activity.startTime} ~ ${activity.endTime}<a>加入行事曆</a><br>
   活動地點: ${place}
+  
   `)
 }
 function creatActivity(activityBean) {

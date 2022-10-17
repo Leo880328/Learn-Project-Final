@@ -162,7 +162,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
                             <div class="row">
                             
 					<c:forEach var="c" items="${queryAuthor }">
-						<c:if test="${c.status==1 }">
+						<c:if test="${c.status==1 || c.status==2 }">
                                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                     <div class="blog-item">
                                         <div class="post-format"><a href="#"><img src="${c.picture }"
