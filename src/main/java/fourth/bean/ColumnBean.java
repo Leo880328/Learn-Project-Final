@@ -1,15 +1,17 @@
 package fourth.bean;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
 @Entity
 @Table(name="article")
+@Component
 public class ColumnBean implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,14 +33,24 @@ public class ColumnBean implements Serializable {
 	private String title; 
 	@Column(name="subject")
 	private String subject;
+	@Column(name="status")
+	private int status;
+	@Column(name="summary")
+	private String summary;
+	@Column(name="pin")
+	private int pin;
+	
+	
 	
 	public ColumnBean() {
 		
 	}
 	
+	
+
 
 	public ColumnBean(int article_no, String publish_time, int user_id, String author, String role, String contents,
-			String picture, String title, String subject) {
+			String picture, String title, String subject, int status, String summary, int pin) {
 		super();
 		this.article_no = article_no;
 		this.publish_time = publish_time;
@@ -49,7 +61,14 @@ public class ColumnBean implements Serializable {
 		this.picture = picture;
 		this.title = title;
 		this.subject = subject;
-	}	
+		this.status = status;
+		this.summary = summary;
+		this.pin = pin;
+	}
+
+
+
+
 	public int getArticle_no() {
 		return article_no;
 	}
@@ -142,12 +161,53 @@ public class ColumnBean implements Serializable {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
+	
+
+
+	public int getStatus() {
+		return status;
+	}
+
+
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+
+
+	public String getSummary() {
+		return summary;
+	}
+
+
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+	
+	
+	public int getPin() {
+		return pin;
+	}
+
+
+
+
+	public void setPin(int pin) {
+		this.pin = pin;
+	}
+
+
 
 
 	@Override
 	public String toString() {
 		return "ColumnBean [article_no=" + article_no + ", publish_time=" + publish_time + ", user_id=" + user_id
 				+ ", author=" + author + ", role=" + role + ", contents=" + contents + ", picture=" + picture
-				+ ", title=" + title + ", subject=" + subject + "]";
+				+ ", title=" + title + ", subject=" + subject + ", status=" + status + ", summary=" + summary + ", pin="
+				+ pin + "]";
 	}
+
+	
 }

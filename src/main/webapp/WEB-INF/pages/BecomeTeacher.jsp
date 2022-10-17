@@ -49,14 +49,14 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 											class="form-control-wrap your-name"><input
 											placeholder="*必填" title="姓名" type="text" name="name"
 											id="name" size="40" class="form-control form-control-name"></span>
-											<span
-										id="msgName" style="color: red"> </span>
+											<span id="msgName" style="color: red"> </span>
 									</p>
 									<p>
 										<span class="form-label">電話 *</span><span
 											class="form-control-wrap your-phone"><input
 											id="cellphone" title="電話" type="text" name="cellphone"
 											placeholder="*必填" class="form-control form-control-phone"></span>
+											<span id="msgCellphone" style="color: red"> </span>
 									</p>
 									<p>
 										<span class="form-label">學歷 *</span><span
@@ -64,6 +64,7 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 											id="education" type="text" name="education" size="40"
 											placeholder="*必填(請輸入最高學歷)"
 											class="form-control form-control-name"></span>
+											<span id="msgEducation" style="color: red"> </span>
 									</p>
 									<p>
 										<span class="form-label">自我介紹 * </span><span
@@ -93,7 +94,7 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 									name="joinDate" id="joinDate"
 									value="<%=memberBean.getJoinDate()%>" /> <input type="hidden"
 									name="sex" id="sex" value="<%=memberBean.getSex()%>" /> <input
-									type="hidden" name="status" id="status" value="4" />
+									type="hidden" name="status" id="status" value="<%=memberBean.getStatus()%>" />
 									<input type="hidden" name="reason" id="reason" value="<%=memberBean.getReason()%>"  />
 									
 							</div>
@@ -150,8 +151,9 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 			console.log(education)
 			console.log(userprofile)
 			console.log(reason)
-// 			$('#msgName').text("");
-// 			$('#msgCellphone').text("");
+			$('#msgName').text("");
+			$('#msgCellphone').text("");
+			$('#msgEducation').text("");
 			let member = {
 					userId : userId,
 					nick : nick,
@@ -193,10 +195,10 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 					$('#msgEducation').text('請填入學歷');
 					 
 				}
-				if('1114'==res.userProfile){
+// 				if('1114'==res.userProfile){
 					
-					$('#msgUserProfile').text('請簡單描述一下自己');
-				}
+// 					$('#msgUserProfile').text('請簡單描述一下自己');
+// 				}
 				if(res=='3000')
 				  Swal.fire({
                       icon: 'success',

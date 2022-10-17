@@ -1,0 +1,111 @@
+<div class="container">
+    <div class="tab-head">
+        <ul class="tab-link">
+            <li class="active">
+                <a data-toggle="tab" aria-expanded="true" href="#bestseller">上架活動</a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" aria-expanded="true" href="#top-rated">所有活動</a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-container">
+        <div id="bestseller" class="tab-panel active">
+            <div class="teamo-product">
+                <table class="u-table-entity">
+                    <colgroup>
+                        <col width="45.0%">
+                        <col width="30.0%">
+                        <col width="15.0%">
+                        <col width="10.0%">
+                    </colgroup>
+                    <thead class="u-align-center u-grey-50 u-table-header u-table-header-1">
+                        <tr style="height: 35px;">
+                            <th class="u-border-1 u-border-grey-50 u-table-cell u-table-cell-1">
+                                <h5>活動名稱</h5>
+                            </th>
+                            <th class="u-border-1 u-border-grey-50 u-table-cell u-table-cell-1">
+                                <h5>活動時間</h5>
+                            </th>
+                            <th class="u-border-1 u-border-grey-50 u-table-cell u-table-cell-1">
+                                <h5>人數限制</h5>
+                            </th>
+                            <th class="u-border-1 u-border-grey-50 u-table-cell u-table-cell-1">
+                                <h5>活動地點</h5>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="u-align-center u-table-body publicActivity">
+
+                        <!-- ============================================================================================ -->
+
+                    </tbody>
+                </table>
+                <div class="banner-wrapp rows-space-65">
+                    <div class="container">
+                        <div class="banner">
+                            <div class="item-banner style17">
+                                <div>
+                                    <div class=" justify-content-center" style="display: flex;
+                                        justify-content: center; 
+                                        align-items: center; ">
+                                        <a class="button btn-view-collection"
+                                            onclick="readMorePublicActivities()">查看更多活動</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="top-rated" class="tab-panel">
+            <div class="teamo-product">
+                <table class="u-table-entity">
+                    <colgroup>
+                        <col width="45.0%">
+                        <col width="30.0%">
+                        <col width="15.0%">
+                        <col width="10.0%">
+                    </colgroup>
+                    <thead class="u-align-center u-grey-50 u-table-header u-table-header-1">
+                        <tr style="height: 35px;">
+                            <th class="u-border-1 u-border-grey-50 u-table-cell u-table-cell-1">
+                                <h5>活動名稱</h5>
+                            </th>
+                            <th class="u-border-1 u-border-grey-50 u-table-cell u-table-cell-1">
+                                <h5>活動時間</h5>
+                            </th>
+                            <th class="u-border-1 u-border-grey-50 u-table-cell u-table-cell-1">
+                                <h5>活動狀態</h5>
+                            </th>
+                            <th class="u-border-1 u-border-grey-50 u-table-cell u-table-cell-1">
+                                <h5>活動地點</h5>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="u-align-center u-table-body allActivity">
+                        <!-- ============================================================================================ -->
+
+                    </tbody>
+                </table>
+                <div class="banner-wrapp rows-space-65">
+                    <div class="container">
+                        <div class="banner">
+                            <div class="item-banner style17">
+                                <div>
+                                    <div class=" justify-content-center" style="display: flex;
+                                        justify-content: center; 
+                                        align-items: center; ">
+                                        <a class="button btn-view-collection readMoreAllButton"
+                                            onclick="readMoreAllActivities()">查看更多活動</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

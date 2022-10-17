@@ -23,6 +23,17 @@
 <jsp:include page="BackendHeader2.jsp" />
 
 <script type="text/javascript">
+	$(function(){
+		
+// 		table = $('#data-table').DataTable();
+		   
+		 
+// 		table.destroy();
+		 
+// 		table = $('#data-table').DataTable( {
+// 			 order: [[9, 'desc']],
+// 		} );
+	})
 	
 </script>
 </head>

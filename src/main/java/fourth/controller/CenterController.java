@@ -51,12 +51,17 @@ public class CenterController {
 	public String Index(HttpServletRequest request,Model m) {
 		request.getSession().setAttribute("pageStatus","1");
 		System.out.println("前台");
+
+		MemberBean user = (MemberBean)m.getAttribute("user");
+		System.out.println(user);
+
 //		fourth.bean.document.OrderUser orderUser = elaticSearchRepository.findById("16643041920600").get();
 //		System.out.println(orderUser);
 //		fourth.bean.document.OrderUser orderUser = elasticsearchRestTemplate.get("16643041920600", fourth.bean.document.OrderUser.class);
 //		System.out.println(orderUser);
 //		boolean createIndexAndPushMapping = createIndexAndPushMapping();
 //		System.out.println(createIndexAndPushMapping);
+
 		//service.insertVoucher();
 //		elasticsearchTemplate.createIndex(fourth.bean.OrderUser.class);
 //		elasticsearchTemplate.putMapping(fourth.bean.OrderUser.class);

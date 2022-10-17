@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import fourth.bean.MemberBean;
 
+//@WebFilter({ "/backendIndex","/ActivitiesOP" })
 //@WebFilter({ "/backendIndex" })
 public class AuthMember extends HttpFilter implements Filter {
 

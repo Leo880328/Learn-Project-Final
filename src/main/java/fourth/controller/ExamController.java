@@ -3,6 +3,7 @@ package fourth.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -17,12 +18,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import fourth.bean.ExamBean;
+import fourth.bean.ExamEduBean;
 import fourth.bean.ExamQuesBean;
+import fourth.bean.ExamSubBean;
 import fourth.bean.MemberBean;
+import fourth.bean.OrderUser;
 import fourth.dao.ExamDaoInterface;
 import fourth.service.ExamService;
 import fourth.service.ExamTestService;
@@ -60,6 +65,7 @@ public class ExamController {
 		return nextPage;
 	}
 	
+
 	
 	@PostMapping("/ExamController")
 	public String processAction(@RequestParam("todo") String todo, Model m
@@ -71,6 +77,7 @@ public class ExamController {
 			,@RequestParam(defaultValue = "") String subject,@RequestParam(defaultValue = "") String education
 			,@RequestParam(defaultValue = "") String examName,@RequestParam(defaultValue = "") String examDate
 			,@RequestParam(defaultValue = "") String examID,@RequestParam(defaultValue = "") String examPic
+			,@RequestParam(defaultValue = "") String difficulty
 			
 			//考試答題答案
 			,@RequestParam(defaultValue = "") List<String> answerList, HttpServletRequest request
@@ -127,6 +134,7 @@ public class ExamController {
 		}else if (todo.equals("queryAll")) {
 			
 			theExamTable = examService.selectAll();
+			System.err.println(theExamQuTable);
 			m.addAttribute("examTable", theExamTable);
 			
 			nextPage = nextPageFunction(pageStatus);
@@ -148,9 +156,9 @@ public class ExamController {
 			Map<String, Object> testMap = (Map<String, Object>) m.getAttribute("testMap");
 			List<ExamQuesBean> examQuList = (List<ExamQuesBean>)testMap.get("examQueList");
 			List<String> chooseList = new ArrayList<String>();
-			////接值: 題目map、chooseAns值
 		
 			
+			////接值: 題目map、chooseAns值
 			//chooseAns		
 			for (int i = 0; i < examQuList.size(); i++) {
 //				chooseList.add(request.getParameter("answer"+i));
@@ -188,13 +196,22 @@ public class ExamController {
 	
 	@PostMapping("/InsUpController")
 	public String processAction2(@RequestParam("todo") String todo,Model m
+			
+			//Insert參數
 			,@RequestParam(defaultValue = "") String subject,@RequestParam(defaultValue = "") String education
 			,@RequestParam(defaultValue = "") String examName,@RequestParam(defaultValue = "") String examDate
 			,@RequestParam(defaultValue = "") String examID,@RequestParam("myfile") MultipartFile myfile
+			,@RequestParam(defaultValue = "") String difficulty
+//			,ExamBean examBean,@RequestParam("myfile") MultipartFile myfile
+			
+			
 			,HttpServletRequest request) throws IllegalStateException, IOException {
 		
 		
 		List<ExamBean> theExamTable= new ArrayList<ExamBean>();
+		
+		//抓取會員ID
+		MemberBean user = (MemberBean)m.getAttribute("user");
 		
 		//處理分派頁面的相關參數
 		String nextPage="";
@@ -212,40 +229,42 @@ public class ExamController {
 		
 		if (todo.equals("insert")) {
 			
-			if (!ExamUtil.datacheck(examDate)){
-				
-				String warn = "資料錯誤";
-				m.addAttribute("warn", warn);
-				nextPage = "ExamInsert";
-				
-			}else {
+//			if (!ExamUtil.datacheck(examDate)){
+//				
+//				String warn = "資料錯誤";
+//				m.addAttribute("warn", warn);
+//				nextPage = "ExamInsert";
+//				
+//			}else {
 				
 //				this.getClass().getClassLoader().
-				examService.insert(subject, education, examName, examDate, fileLocalPath);
+
+//				examService.insert(subject, education, examName, examDate, fileLocalPath,user.getuserId(),difficulty);
+				
 				
 				nextPage = nextPageFunction(pageStatus);
 				
-			}		
+//			}		
 			
 			
 		}else if (todo.equals("update")) {
 			
 			System.err.println("InsUpController內examID="+examID);
 			
-			if (!ExamUtil.datacheck(examDate)){
-				
-				String warn = "資料錯誤";
-				m.addAttribute("warn", warn);
-				nextPage = "ExamUpdate";
-				
-			}else {
+//			if (!ExamUtil.datacheck(examDate)){
+//				
+//				String warn = "資料錯誤";
+//				m.addAttribute("warn", warn);
+//				nextPage = "ExamUpdate";
+//				
+//			}else {
 				
 				System.err.println(examID+subject+education+examName+examDate);
-				examService.update(examID, subject, education, examName, examDate,fileLocalPath);
+//				examService.update(examID, subject, education, examName, examDate,fileLocalPath);
 				
 				nextPage = nextPageFunction(pageStatus);
 				
-			}	
+//			}	
 			
 		}
 		

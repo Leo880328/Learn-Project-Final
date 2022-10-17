@@ -35,6 +35,32 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
     <link rel="stylesheet" href="assets/css/mobile-menu.css">
     <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css">
     <link rel="stylesheet" href="assets/css/style.css">
+<style>
+.btn{
+width: 67px;
+height:42px;
+background-color: #66B3FF;
+
+}
+.swal-popup-changeVal{
+
+}
+.swal-textarea-1{
+
+}
+#deletebtn{
+border-radius: 10px;
+font-size: 100%
+}
+#updatesec{
+height: 100px;
+font-size: 18px;
+}
+.swal2-popup {
+  font-size: 1.5rem !important;
+  font-family: Georgia, serif;
+}
+</style>
 </head>
 
 <body class="inblog-page">
@@ -98,23 +124,80 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
                                 <div class="category-blog"><a href="#"><c:out value="${col.subject }"></c:out></a></div>
                                 <h3 class="post-title"><a href="#"><c:out value="${col.title }"></c:out></a></h3>
                                 <div class="main-info-post">
-                                    <p><c:out value="${col.contents }"></c:out> </p>
+                                    <p>${col.contents }</p>
                                     
                                     <blockquote>
                                         <p>加入好學生，學習好棒棒 </p>
-                                        <div class="author"><span class="name">Howard Chen</span><span
+                                        <div class="author"><span class="name">Winnie</span><span
                                                 class="desc">Creative Writer </span></div>
                                     </blockquote>
                                 </div>
                             </div>
                         </div>
+    
+<!--     留言板                     -->
+                        <div class="comments-area" >
+                            <h3 >留言區 <span class="count"></span></h3>
+                            
+                            <form action="insert" class="comment-form" method="post">
+                            <input type="hidden" name="article_no" value="${col.article_no }"> 
+                                <p class="comment-reply-content"><textarea rows="5" placeholder="Write your comment"
+                                        class="input-form"  name="comments" ></textarea></p>
+                                <p class="form-submit"><span class="controll"><button class="submit button  postacomment">貼文</button></span></p>
+                            </form>
+ 										 
 
+					<c:forEach var="c" items="${all}">		
+                            <ul class="comment-list">
+                                <li class="comment">
+                                    <div class="comment-item">
+                                        <div class="author-view">
+                                            <div class="author">
+<!--                                                 <div class="avt"><img src="assets/images/avt-blog1.png" alt="img"></div> -->
+                                                <h4><c:out value="${c.author}"></c:out></h4>
+                                            </div>
+                                            <div class="date-reply-comment"><span class="date-comment"><c:out value="${c.time}"></c:out>
+                                                </span></div>
+                                        </div>
+                                        <div class="comment-body">
+                                            <div class="comment-content">
+                                                <div id="updatesec" class="updatearea${c.commentid }">${c.comments}
+                                                </div>
+                                            </div>
+                                            <div class="comment-reply-link"><span class="Comment"><i
+                                                        class="icon fa fa-commenting" aria-hidden="true"></i>Comment
+                                                </span>
+                                                
+                                                	<form action="updatecomment?commentid=<c:out value="${c.commentid }"></c:out>" method="post">
+                                                         <input type="hidden" name="article_no" value="${col.article_no }"> 
+                                                         </form>
+                                                         
+         
+                                                        <c:if test="${sessionScope.user.userId == c.user_id}"> 
+                                                         <button class="btn" style="color:white; border-radius: 10px" onclick="changeVal('${c.commentid }')" >編輯</button>
+                                                                                             
+                                                         <form action="deletecomment?commentid=<c:out value="${c.commentid }"></c:out>" method="post">
+                                                         <input type="hidden" name="article_no" value="${col.article_no }"> 
+                                                         <button id="deletebtn">刪除</button>
+                                                        </form>
+                                                       
+                                                        </c:if>
+                                                      
+                             
+                                            </div>
+                                        </div>
+                                    </div>                            
+                                </li>
+                            </ul>
+					</c:forEach>		
+                        </div>
+	 
 
                         <div class="view-share">
                             <div class="author-view">
                                 <div class="author">
                                     <div class="avt" ><img src="assets/images/avt-blog1.png" alt="img"></div>
-                                    <h3 class="name">Howard Chen </h3>
+                                    <h3 class="name">Winnie </h3>
                                 </div>
                                 <div class="review">
                                     <div class="view"><span class="icon-view"><i class="fa fa-eye"
@@ -136,7 +219,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
                 <div class="sidebar sidebar-single-blog col-lg-3 col-md-4 col-sm-12 col-xs-12">
                     <div class="wrapper-sidebar">
                         <div class="widget widget-socials">
-                            <h3 class="widgettitle">Follow us </h3>
+                            <h3 class="widgettitle">追蹤我們</h3>
                             <div class="content-socials">
                                 <div class="social-list"><a href="#" target="_blank" class="social-item"><i
                                             class="fa fa-facebook-square" aria-hidden="true"></i></a><a href="#"
@@ -146,6 +229,51 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
                             </div>
                         </div>
                     </div>
+                    <br><br>
+                    <div class="widget widget-post">
+       <h3 class="widgettitle">精選文章</h3>
+       <ul class="teamo-posts">
+        <li class="widget-post-item">
+         <div class="thumb-blog">
+          <img src="assets/images/sidebar-post1.jpg" alt="img">
+         </div>
+         <div class="post-content">
+          <div class="cat">
+           <a href="#">英文</a>
+          </div>
+          <h5 class="post-title">
+           <a href="#">改變英語學習的壞習慣 <span>[...]</span></a>
+          </h5>
+         </div>
+        </li>
+        <li class="widget-post-item">
+         <div class="thumb-blog">
+          <img src="assets/images/sidebar-post2.jpg" alt="img">
+         </div>
+         <div class="post-content">
+          <div class="cat">
+           <a href="#">多益</a>
+          </div>
+          <h5 class="post-title">
+           <a href="#">高效情境單字 <span>[...]</span></a>
+          </h5>
+         </div>
+        </li>
+        <li class="widget-post-item">
+         <div class="thumb-blog">
+          <img src="assets/images/sidebar-post3.jpg" alt="img">
+         </div>
+         <div class="post-content">
+          <div class="cat">
+           <a href="#">英文</a>
+          </div>
+          <h5 class="post-title">
+           <a href="#">這些日常用品怎麼說? <span>[...]</span></a>
+          </h5>
+         </div>
+        </li>
+       </ul>
+      </div>
                 </div>
             </div>
         </div>
@@ -183,6 +311,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
     <script src="assets/js/jquery.scrollbar.min.js"></script>
     <script src='http://www.google.cn/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script>
     <script src="assets/js/frontend-plugin.js"></script>
+    <script src="howard/columnback.js"></script>
 </body>
 
 </html>

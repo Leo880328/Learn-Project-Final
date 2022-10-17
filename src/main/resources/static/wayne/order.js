@@ -358,8 +358,8 @@ function orderListUser(order) {
 	}
 
 	content = `
-					<div style="background-color: #DEFFDE">
-							訂單編號:<span style="padding-left:10px">  ${order.orderId}</span>
+					<div style="background-color: #65a15a;color:#FAFAFA;">
+							訂單編號:<span style="padding-left:10px; color:#FAFAFA;">  ${order.orderId}</span>
 						</div>
 						<ul
 							class="row list-products auto-clear equal-container product-list">
@@ -734,7 +734,9 @@ function htmlToPdf() {
 		width: 600
 	};
 	var y = 20;
+	doc.addFont('SourceHanSansCN-Bold-bold.ttf','SourceHanSansCN-Bold', 'normal');
 	doc.setFont('SourceHanSansCN-Bold', 'normal');
+	doc.text(270, 40, "訂單資料");
 	doc.setLineWidth(2);
 	doc.autoTable({
 		html: '#data-table',

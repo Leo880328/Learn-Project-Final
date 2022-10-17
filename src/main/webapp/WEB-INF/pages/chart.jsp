@@ -273,7 +273,7 @@
 
 			<!-- <!-- 			End Page Header  -->
 			<!-- <!-- 			Small Stats Blocks  -->
-			<div class="row" style="margin-left:100px">
+			<div class="row" style="margin-left:7%;">
 				<!-- 				<div class="col-lg-3 col-6"> -->
 				<!-- 					small box -->
 				<!-- 				</div> -->
@@ -283,7 +283,7 @@
 				<!-- 				</div> -->
 				
 
-				<div style="width:400px" >
+				<div style="width:300px;margin-left:15%" >
 <!-- 					<div class="stats-small stats-small--1 card card-small"> -->
 						<div class="small-box bg-warning" style="border-radius:10px ;">
 							<div class="inner">
@@ -312,7 +312,7 @@
 						<!-- 						</div> -->
 <!-- 					</div> -->
 				</div>
-				<div style="width:400px; margin-left:250px" >
+				<div style="width:300px; margin-left:25%" >
 <!-- 					<div class="stats-small stats-small--1 card card-small"> -->
 						<div class="small-box bg-info" style="border-radius:10px ;">
 							<div class="inner">
@@ -394,7 +394,7 @@
 				<!-- 				</div> -->
 			</div>
 			<!-- <!-- 			End Small Stats Blocks  -->
-			<div class="row">
+			<div class="row" style="margin-left: 5%;">
 				<!-- 				Users Stats -->
 				<div class="col-lg-8 col-md-12 col-sm-12 mb-4">
 					<div class="card card-small">
@@ -425,7 +425,7 @@
 							</div>
 							<br>
 							<div>
-								<div style="display: inline-block; width: 450px;">
+								<div style="display: inline-block; width: 250px;">
 									<span class="sm-st-icon st-blue"><i class="fa fa-dollar"></i></span>
 									<div class="sm-st-info">
 										<span id="rangeMoney">0</span> 營業額
@@ -448,30 +448,30 @@
 				</div>
 				<!-- End Users Stats -->
 				<!-- Users By Device Stats -->
-				<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+				<div class="col-lg-4 col-md-6 col-sm-12 mb-4" style="height:400px;">
 					<div class="card card-small h-100">
 						<div class="card-header border-bottom">
 							<h6 class="m-0">訂單狀態占比圖</h6>
 						</div>
 						<div class="card-body d-flex py-0">
-							<canvas height="220" class="blog-users-by-device m-auto"></canvas>
+							<canvas  height = "300" class="blog-users-by-device m-auto"></canvas>
 						</div>
-						<div class="card-footer border-top">
-							<div class="row">
-								<div class="col">
-									<select class="custom-select custom-select-sm"
-										style="max-width: 130px;">
-										<option selected>Last Week</option>
-										<option value="1">Today</option>
-										<option value="2">Last Month</option>
-										<option value="3">Last Year</option>
-									</select>
-								</div>
-								<div class="col text-right view-report">
-									<a href="#">Full report &rarr;</a>
-								</div>
-							</div>
-						</div>
+<!-- 						<div class="card-footer border-top"> -->
+<!-- 							<div class="row"> -->
+<!-- 								<div class="col"> -->
+<!-- 									<select class="custom-select custom-select-sm" -->
+<!-- 										style="max-width: 130px;"> -->
+<!-- 										<option selected>Last Week</option> -->
+<!-- 										<option value="1">Today</option> -->
+<!-- 										<option value="2">Last Month</option> -->
+<!-- 										<option value="3">Last Year</option> -->
+<!-- 									</select> -->
+<!-- 								</div> -->
+<!-- 								<div class="col text-right view-report"> -->
+<!-- 									<a href="#">Full report &rarr;</a> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 					</div>
 				</div>
 				<!-- 				End Users By Device Stats -->
