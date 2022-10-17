@@ -44,7 +44,7 @@
                             <div class="post-item">
                                 <div class="post-infor">
                                     <div class="post-format" style="height: 450px;"><img class="activityImage"
-                                            src="assets/images/blog1.jpg" alt="img"></div>
+                                            src="ActivityResources/images/default-image.jpg" alt="img"></div>
                                     <div class="category-blog">活動說明</div>
                                     <h3 class="post-title activityTitle">活動標題</h3>
                                     <div class="main-info-post activityContent">

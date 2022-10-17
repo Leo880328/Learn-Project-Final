@@ -69,7 +69,7 @@
 <body>
 
 	<jsp:include page="Header.jsp"/>
-
+	<br>
     <form class="upfrm" action="examUpdateConfirm" method="post" enctype="multipart/form-data">
     
         <table class="tb">
@@ -117,8 +117,7 @@
                     </select></td>
             </tr>
             <tr>
-<!--                 <td><label>圖片:</label></td> -->
-<%-- <%--                 <td><img src="${upBean.examPic}" id ="img" alt="" title="" width="200" height="150"> --%> --%>
+<%-- <%--                 <td><img src="${upBean.examPic}" id ="img" alt="" title="" width="200" height="150"> --%>
 <%-- 			    <td><img src="${upBean.examPic}" id ="img" alt="" title="" width="200" height="150"> --%>
 <%-- 			    <input id="imgPath" type="hidden" name="myfile" title="考卷封面圖片" value="${upBean.examPic}"> --%>
 <!-- 			    <input onchange="previewImg(this)" type="file" title="考卷封面圖片"></td> -->

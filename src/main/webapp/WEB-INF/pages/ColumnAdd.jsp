@@ -101,6 +101,7 @@ My family is very important to me. We do lots of things together. My brothers an
 			
 		</fieldset>
 			<input type="hidden" name="status" id="status" size="3" title="文章狀態"  value="3">
+			<input type="hidden" name="pin" id="pin" size="3" title="置頂狀態"  value="0">
 				</form>
 		<center>
 				<button id="send" onclick="checkAdd()" type="submit"  value="送出" >送出</button> 

@@ -38,7 +38,7 @@
 
 		<jsp:include page="Header.jsp" />
 
-	
+	<br>	
 
     <form action="examInsert" method="post" class="insfrm" enctype="multipart/form-data">
     

@@ -78,27 +78,33 @@
                                     <br>
                                     <p class="form-row "><label class="text ">活動標題</label>
                                         <input type="text" class="input-text activityTitle">
+                                        <span><font class="activityTitleError error" color="red"></font></span>
                                     </p>
                                     <p class="form-row  "><label class="text">可參加人數</label>
-                                        <input style="width: 15%" type="number" class="input-text activityNumberLimit">
-
+                                        <input style="width: 15%" type="number" class="input-text activityNumberLimit"><br>
+										<span><font class="activityNumberLimitError error" color="red"></font></span>
                                     </p>
 
                                     <p class="form-row form-row-first"><label class="text">活動開始時間</label><input
                                             type="datetime-local" class="input-text activityStartTime">
+                                            <span><font class="activityStartTimeError error" color="red"></font></span>
                                     </p>
                                     <p class="form-row form-row-last"><label class="text">活動結束時間</label><input
                                             type="datetime-local" class="input-text activityEndTime">
+                                            <span><font class="activityEndTimeError error" color="red"></font></span>
                                     </p>
                                     <div class="activityPlaceDiv">
                                         <p class="form-row form-row-first" style="width: 27%;"><label
                                                 class="text">縣市</label>
                                             <input type="text" class="input-text activityPlace">
+                                            <span><font class="activityPlaceError error" color="red"></font></span>
                                         </p>
                                         <p class="form-row  form-row-last" style="width: 70%;"><label
                                                 class="text">地址</label>
                                             <input type="text" class="input-text activityAddress">
                                         </p>
+                                
+                                        
                                     </div>
                                     <p class="form-row ">
                                         <label class="text">活動內容</label>

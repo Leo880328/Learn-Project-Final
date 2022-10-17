@@ -219,7 +219,7 @@ font-size: 18px;
                 <div class="sidebar sidebar-single-blog col-lg-3 col-md-4 col-sm-12 col-xs-12">
                     <div class="wrapper-sidebar">
                         <div class="widget widget-socials">
-                            <h3 class="widgettitle">Follow us </h3>
+                            <h3 class="widgettitle">追蹤我們</h3>
                             <div class="content-socials">
                                 <div class="social-list"><a href="#" target="_blank" class="social-item"><i
                                             class="fa fa-facebook-square" aria-hidden="true"></i></a><a href="#"
@@ -229,6 +229,51 @@ font-size: 18px;
                             </div>
                         </div>
                     </div>
+                    <br><br>
+                    <div class="widget widget-post">
+       <h3 class="widgettitle">精選文章</h3>
+       <ul class="teamo-posts">
+        <li class="widget-post-item">
+         <div class="thumb-blog">
+          <img src="assets/images/sidebar-post1.jpg" alt="img">
+         </div>
+         <div class="post-content">
+          <div class="cat">
+           <a href="#">英文</a>
+          </div>
+          <h5 class="post-title">
+           <a href="#">改變英語學習的壞習慣 <span>[...]</span></a>
+          </h5>
+         </div>
+        </li>
+        <li class="widget-post-item">
+         <div class="thumb-blog">
+          <img src="assets/images/sidebar-post2.jpg" alt="img">
+         </div>
+         <div class="post-content">
+          <div class="cat">
+           <a href="#">多益</a>
+          </div>
+          <h5 class="post-title">
+           <a href="#">高效情境單字 <span>[...]</span></a>
+          </h5>
+         </div>
+        </li>
+        <li class="widget-post-item">
+         <div class="thumb-blog">
+          <img src="assets/images/sidebar-post3.jpg" alt="img">
+         </div>
+         <div class="post-content">
+          <div class="cat">
+           <a href="#">英文</a>
+          </div>
+          <h5 class="post-title">
+           <a href="#">這些日常用品怎麼說? <span>[...]</span></a>
+          </h5>
+         </div>
+        </li>
+       </ul>
+      </div>
                 </div>
             </div>
         </div>
