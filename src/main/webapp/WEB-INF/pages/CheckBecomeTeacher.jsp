@@ -145,7 +145,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>駁回原因</label><input
-										type="text"	class="form-control"  name="reason"  />
+										type="text"	class="form-control" id="reason" name="reason"  />
 										</div>
 									</div>
 								</c:if>
@@ -168,6 +168,7 @@
 							</div>
 							<div class="clearfix"></div>
 							<div class="mt-5 text-center">
+							<button type="button" class="btn btn-primary " id="correct">一鍵輸入</button>
 								<a href="memberList"><input type="submit" name="return"
 									value="儲存"></a> <a href="memberList"><input
 									type="button" name="return" class="btn btn-outline-success"
@@ -190,6 +191,13 @@
 			}
 
 		}
+	</script>
+		<script>
+		$(function() {
+			$('#correct').click(function() {
+				$('#reason').val("資料不完整，請放入正確的大頭貼");
+			})
+		})
 	</script>
 </body>
 </html>

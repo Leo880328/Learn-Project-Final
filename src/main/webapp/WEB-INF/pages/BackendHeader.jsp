@@ -11,7 +11,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Vendor styles -->
 <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet"	href="backend/vendors/material-design-iconic-font/css/material-design-iconic-font.min.css">
+<link rel="stylesheet"
+	href="backend/vendors/material-design-iconic-font/css/material-design-iconic-font.min.css">
 
 <!-- <link rel="stylesheet" href="wayne/dist/css/adminlte.min.css"> -->
 <link rel="stylesheet"
@@ -27,7 +28,7 @@
 </head>
 <body data-ma-theme="green">
 	<main class="main">
-		<header class="header" >
+		<header class="header">
 			<div class="navigation-trigger hidden-xl-up"
 				data-ma-action="aside-open" data-ma-target=".sidebar">
 				<div class="navigation-trigger__inner">
@@ -85,9 +86,9 @@
 
 					<div class="dropdown-menu">
 
-						<a class="dropdown-item" href="">${sessionScope.user.name }</a><a class="dropdown-item"
-							href="user.controller">查看個人檔案</a><a class="dropdown-item"
-							href="logout">登出</a>
+						<a class="dropdown-item" href="">${sessionScope.user.name }</a><a
+							class="dropdown-item" href="user.controller">查看個人檔案</a><a
+							class="dropdown-item" href="logout">登出</a>
 
 					</div>
 
@@ -101,11 +102,18 @@
 
 				<ul class="navigation">
 
-					<li class="navigation__active" style="font-size: 1.3em"><a href="Index"><i
-							class="zmdi zmdi-home"></i>前台首頁</a></li>
+					<li class="navigation__active" style="font-size: 1.3em"><a
+						href="Index"><i class="zmdi zmdi-home"></i>前台首頁</a></li>
 
 
-					<li style="font-size: 1.3em"><a href="memberList"><i
+<!-- 					<li style="font-size: 1.3em"><a href="memberList"><i -->
+<!-- 							class="zmdi zmdi-format-underlined"></i>會員管理</a> -->
+<!-- 						<ul> -->
+<!-- 							<li><a href="memberList">會員資料</a></li> -->
+<!-- 							<li><a href="checkteacherlist">待審核會員</a></li> -->
+<!-- 						</ul></li> -->
+
+					<li style="font-size: 1.3em" class="navigation__sub"><a href="memberList"><i
 							class="zmdi zmdi-format-underlined"></i>會員管理</a>
 						<ul>
 							<li><a href="memberList">會員資料</a></li>
@@ -113,23 +121,27 @@
 						</ul></li>
 
 
-					<li style="font-size: 1.3em"><a href="ExamBackController"><i class="zmdi zmdi-view-week"></i>試卷管理</a>
-
+					<li style="font-size: 1.3em"><a href="ExamBackController"><i
+							class="zmdi zmdi-view-week"></i>試卷管理</a>
 					<li class="" style="font-size: 1.3em"><a href="course.list"><i
-							class="zmdi zmdi-view-list"></i>課程管理</a>
-						</li>
+							class="zmdi zmdi-view-list"></i>課程管理</a></li>
 
-					
-					<li style="font-size: 1.3em"><a href="QueryAll"><i class="zmdi zmdi-collection-text"></i>專欄管理</a></li>
 
-					<li style="font-size: 1.3em"><a href="ActivityOperator"><i class="zmdi zmdi-calendar"></i>活動管理</a></li>
+					<li style="font-size: 1.3em"><a href="QueryAll"><i
+							class="zmdi zmdi-collection-text"></i>專欄管理</a></li>
 
-					<li style="font-size: 1.3em"><a href="orderList"><i class="zmdi zmdi-widgets"></i>訂單管理</a></li>
-					
-					<li style="font-size: 1.3em"><a href="chart"><i class="zmdi zmdi-trending-up"></i>營收圖表</a></li>
+					<li style="font-size: 1.3em"><a href="ActivityOperator"><i
+							class="zmdi zmdi-calendar"></i>活動管理</a></li>
 
-                            
-					<li style="font-size: 1.3em"><a href="backDairy"><i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i>後台日誌</a></li>
+					<li style="font-size: 1.3em"><a href="orderList"><i
+							class="zmdi zmdi-widgets"></i>訂單管理</a></li>
+
+					<li style="font-size: 1.3em"><a href="chart"><i
+							class="zmdi zmdi-trending-up"></i>營收圖表</a></li>
+
+
+					<li style="font-size: 1.3em"><a href="backDairy"><i
+							class="zmdi zmdi-assignment-o zmdi-hc-fw"></i>後台日誌</a></li>
 				</ul>
 			</div>
 

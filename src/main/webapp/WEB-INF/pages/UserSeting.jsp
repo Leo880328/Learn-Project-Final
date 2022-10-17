@@ -80,7 +80,7 @@ MemberBean memberBean = (MemberBean) request.getAttribute("user");
 										<button type="submit">
 											<a href="becometeacher.controller">重新申請為老師</a>
 										</button>
-										<font color=red size=6>原因：<span><%=memberBean.getReason()%></span></font>
+										<font color=red size=5>原因：<span><%=memberBean.getReason()%></span></font>
 									</c:if>
 									<form action="updateMyUser" method="post"
 										class="teamo-contact-fom us">
