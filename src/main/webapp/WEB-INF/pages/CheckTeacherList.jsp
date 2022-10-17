@@ -48,7 +48,7 @@
 <!-- 	</div> -->
 	<hr>
 	<div>
-		<h3>會員清單</h3>
+		<h3 align="center">待審核會員</h3>
 	</div>
 	<table style="background-color: white;" class='tb' border='1' id="member">
 		<thead>
@@ -107,11 +107,11 @@
 			</tbody>
 		</c:forEach>
 	</table>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#member').DataTable();
-		});
-	</script>
+<!-- 	<script type="text/javascript"> -->
+<!-- // 		$(document).ready(function() { -->
+<!-- // 			$('#member').DataTable(); -->
+<!-- // 		}); -->
+<!-- 	</script> -->
 
 
 	<script type="text/javascript">
