@@ -103,65 +103,6 @@ public class MemberController {
 		return "Login";
 	}
 
-	// 登入檢查 //**************************
-//	@RequestMapping(path = "/checklogin.controller", method = RequestMethod.POST)
-//	public String processAction(@RequestParam("account") String account, @RequestParam("password") String password,
-//			Model m, SessionStatus status) {
-//		Map<String, String> errors = new HashMap<String, String>();
-//
-//		m.addAttribute("errors", errors);
-//		if (account == null || account.length() == 0) {
-//		}
-//		if (password == null || password.length() == 0) {
-//		}
-//		if (errors != null && !errors.isEmpty()) {
-//			return "Login";
-//		}
-//		MemberBean user = memberService.checkLogin(account);
-//		System.out.println("執行user");
-//		System.out.println(user);
-//		m.addAttribute("user", user);
-//		if (user != null && user.getPassword().equals(password)) {
-//			if (user.getStatus() == 3) {
-//
-//				return "redirect:/backendIndex";
-//			} else if (user.getStatus() == 5) {
-//				errors.put("msg", "<font color=red size=6 >帳號有問題!!</font>");
-//				return "Login";
-//			} else {
-//				return "redirect:/Index";
-//			}
-//
-//		} else {
-//			errors.put("msg", "<font color=red size=6 >帳號或密碼有誤!!</font>");
-//			return "Login";
-//		}
-//
-//	}
-
-
-//// 登入檢查 //**************************
-//	@RequestMapping(path = "/checklogin.controller", method = RequestMethod.GET)
-//	public String processAction(@RequestParam(value = "username", required = false) String account,
-//			@RequestParam(value = "password", required = false) String password, Model m, SessionStatus status,
-//			Authentication authentication) {
-//
-//		MemberBean user = memberService.checkLogin(authentication.getName());
-//		System.out.println("執行user");
-//		System.out.println(user);
-//		m.addAttribute("user", user);
-//<<<<<<< HEAD
-//	if (user != null && user.getPassword().equals(password)) {
-//		if (user.getStatus() == 3) {
-//
-//			return "redirect:/backendIndex";
-//		} else if (user.getStatus() == 5) {
-//			errors.put("msg", "<font color=red size=6 >帳號有問題!!</font>");
-//			return "Login";
-//		} else {
-//			return "redirect:/Index";
-//		}
-//	}
 @RequestMapping(path = "/checklogin.controller", method = RequestMethod.GET)
 public String processAction(@RequestParam(value = "username",required = false) String account, @RequestParam(value = "password",required = false) String password,
 		Model m, SessionStatus status,Authentication authentication) {
@@ -201,7 +142,6 @@ public String processAction(@RequestParam(value = "username",required = false) S
 	@PostMapping(path = "/newRegister")
 	@ResponseBody
 	public String newRegister(@RequestBody MemberBean memberBean, BindingResult result, Model m, Object mb) {
-		System.out.println("進入註冊controller");
 		HashMap<String, String> errors = null;
 
 		String timeStamp = new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime());
@@ -214,10 +154,6 @@ public String processAction(@RequestParam(value = "username",required = false) S
 
 		MemberBean checkRegisterByEmail = memberService.checkRegister(memberBean.getEmail());
 		MemberBean checkRegisterByAccount = memberService.checkLogin(memberBean.getAccount());
-		System.out.println(checkRegisterByAccount);
-		System.out.println(checkRegisterByEmail);
-
-		System.out.println("進入完service");
 
 		if (checkRegisterByEmail != null) {
 			if (checkRegisterByEmail.getEmail() != null) {
@@ -320,15 +256,7 @@ public String processAction(@RequestParam(value = "username",required = false) S
 	@PostMapping("/becometeacher")
 	@ResponseBody
 	public String becomeTeacher(@RequestBody MemberBean memberBean, Model m) {
-		System.out.println("//////////////////////執行成為老師");
 		HashMap<String, String> errors = null;
-//		MemberBean user = (MemberBean) m.getAttribute("user");
-//		MemberBean mem = memberService.checkLogin(memberBean.getAccount());
-		System.out.println("memberBean: " + memberBean);
-
-//		m.addAttribute("user", mem);
-//		System.out.println("user: "+user);
-//		System.out.println("mem: " + mem);
 		MemberBean updateUser = memberService.updateUser(memberBean);
 		System.out.println("updateUser: " + updateUser);
 		if (updateUser != null) {
@@ -346,11 +274,8 @@ public String processAction(@RequestParam(value = "username",required = false) S
 		}
 		if (errors !=null && errors.keySet().size() >0 ) {
 			Gson gson = new Gson();
-			System.out.println(errors);
-			System.out.println("331331");
 			return gson.toJson(errors);
 		}
-		System.out.println("349349349");
 		memberBean.setStatus(4);
 		memberService.updateUser(memberBean);
 		return "3000";
@@ -366,7 +291,7 @@ public String processAction(@RequestParam(value = "username",required = false) S
 			String txt = "<h2>" + "親愛的 " + memberBean.getNick() + " 您好 :" + "<br>" + "審核結果: 失敗!! 失敗原因： "
 					+ memberBean.getReason() + "<br>" + "<h2>";
 			JavaMail javaMail = new JavaMail();
-//			javaMail.setCustomer("fock360man@gmail.com");
+//			javaMail.setCustomer("wuyuhsi0422@gmail.com");
 			javaMail.setCustomer("ch570981400@gmail.com");
 			javaMail.setSubject("好學生-EEIT49 身分審核失敗!");
 			javaMail.setTxt(txt);
@@ -377,7 +302,7 @@ public String processAction(@RequestParam(value = "username",required = false) S
 			String txt = "<h2>" + "親愛的 " + memberBean.getNick() + " 您好 :" + "<br>" + "審核結果: 通過!! 恭喜你成為老師" + "<br>"
 					+ "<h2>";
 			JavaMail javaMail = new JavaMail();
-//			javaMail.setCustomer("fock360man@gmail.com");
+//			javaMail.setCustomer("fwuyuhsi0422@gmail.com");
 			javaMail.setCustomer("ch570981400@gmail.com");
 			javaMail.setSubject("好學生-EEIT49 身分審核通過!");
 			javaMail.setTxt(txt);
