@@ -72,7 +72,7 @@
 			type: "GET",
 			url: "order/voucher" ,
 			success: function(data) {
-				$(".coupon").find("input").val(data.number);
+				$(".coupon").find("input").val('a31wudFmZPI5');
 			}
 		})
 	}

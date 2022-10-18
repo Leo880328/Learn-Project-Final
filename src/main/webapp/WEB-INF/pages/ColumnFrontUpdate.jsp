@@ -134,7 +134,7 @@ margin:auto;
 			</div>
 		</center>
 		 <input type="hidden" name="status" value="1">
-		
+		 <input type="hidden" name="pin" value="1">
 	</form>
 	
 	<script>

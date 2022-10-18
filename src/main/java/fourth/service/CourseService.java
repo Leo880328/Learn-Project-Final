@@ -71,6 +71,10 @@ public class CourseService {
 	public List<CourseBean> orderByEnrollment() {
 		return cosRep.orderByEnrollment();
 	}
+	
+	public List<CourseBean> listByCourseDate(){
+		return cosRep.listByCourseDate();
+	}
 
 	public List<CourseBean> findByNameLike(String course_name) {
 		return cosRep.findByNameLike(course_name);
