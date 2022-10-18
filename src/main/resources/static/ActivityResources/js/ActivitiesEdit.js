@@ -256,7 +256,7 @@ function chickActivityBean() {
             text: chickError
         })
     } else {
-        // saveActivityBean()
+        saveActivityBean()
     }
 }
 function saveActivityBean() {
