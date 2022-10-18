@@ -14,6 +14,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <html>
 <head>
 <meta charset="UTF-8">
+<base href="<%=request.getContextPath()%>/">
 <link rel="shortcut icon" type="image/x-icon" href="backend/img/smalllogo.png" />
 <title>課程詳情</title>
 <style type="text/css">
